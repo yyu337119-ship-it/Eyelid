@@ -164,6 +164,7 @@ function PhenotypeAppInner() {
     setIntro,
     dirty,
     hasLegacyEdits,
+    exportJson,
     updateCategory,
     updateSectionTitle,
     updateTopicTitle,
@@ -195,8 +196,8 @@ function PhenotypeAppInner() {
           <EditToolbar />
         </div>
           <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-stone-600 sm:px-6">
-            每张图下方可「替换图片」。改文字请点「编辑正文」。这两项只保存在你自己的浏览器里；公开网址显示的是仓库里这一版。
-            {dirty ? " 当前这个浏览器里有未写进仓库的本地修改。" : ""}
+            本页只含两篇文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。这是后续三篇加进来之前的网页版总结。
+            {dirty ? " 当前浏览器里有未写进仓库的本地修改。" : ""}
           </p>
           {hasLegacyEdits ? (
             <div className="mx-auto mb-3 max-w-7xl px-4 sm:px-6">
@@ -326,7 +327,7 @@ function PhenotypeAppInner() {
           <section id="refs" className="scroll-mt-40 rounded-2xl border border-stone-200 bg-white p-5 sm:p-6">
             <h2 className="text-xl font-semibold text-stone-900">参考文献</h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
-              编号【1】～【5】与汇报 PPT 首页一致。本页正文来自你导出的手册修改。
+              本页为后续三篇文献加入前的版本。编号对应两篇核心文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。
             </p>
             <Separator className="my-4" />
             <div className="grid gap-4">

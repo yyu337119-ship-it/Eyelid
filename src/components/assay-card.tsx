@@ -37,7 +37,7 @@ export function AssayCard({
   path: AssayPath
   parentSources: SourceId[]
 }) {
-  const { editMode, updateAssay } = useHandbook()
+  const { editMode, updateAssay, restoreFigure } = useHandbook()
   const markers = assay.markers ?? []
   const pending = assay.pending ?? []
   const stains = assay.stains ?? []
@@ -202,12 +202,68 @@ export function AssayCard({
                 <FigureBlock
                   key={figure.id ?? figure.paperFig + (figure.src ?? "") + index}
                   figure={figure}
+                  onPaperFigChange={
+                    editMode
+                      ? (paperFig) =>
+                          patch((current) => {
+                            const figures = [...current.figures]
+                            figures[index] = { ...figures[index], paperFig }
+                            return { ...current, figures }
+                          })
+                      : undefined
+                  }
+                  onCaptionChange={
+                    editMode
+                      ? (caption) =>
+                          patch((current) => {
+                            const figures = [...current.figures]
+                            figures[index] = { ...figures[index], caption }
+                            return { ...current, figures }
+                          })
+                      : undefined
+                  }
+                  onRemove={
+                    editMode
+                      ? () => {
+                          if (figure.id) void restoreFigure(figure.id)
+                          patch((current) => ({
+                            ...current,
+                            figures: current.figures.filter((_, currentIndex) => currentIndex !== index),
+                          }))
+                        }
+                      : undefined
+                  }
                 />
               ))}
             </div>
           ) : (
-            <p className="text-sm text-stone-500">尚未贴图。</p>
+            <p className="text-sm text-stone-500">{editMode ? "尚未贴图，可在下方添加。" : "尚未贴图。"}</p>
           )}
+          {editMode ? (
+            <button
+              type="button"
+              onClick={() =>
+                patch((current) => ({
+                  ...current,
+                  figures: [
+                    ...current.figures,
+                    {
+                      id:
+                        typeof crypto !== "undefined" && crypto.randomUUID
+                          ? crypto.randomUUID()
+                          : `${current.id}-fig-${current.figures.length}-${Date.now()}`,
+                      paperFig: "新图",
+                      caption: "",
+                    },
+                  ],
+                }))
+              }
+              className="mt-3 inline-flex items-center gap-1 rounded-md bg-[#1f4b3a] px-3 py-1.5 text-sm text-white hover:bg-[#17382c]"
+            >
+              <Plus className="size-3.5" />
+              添加图表
+            </button>
+          ) : null}
         </Field>
       </div>
     </article>

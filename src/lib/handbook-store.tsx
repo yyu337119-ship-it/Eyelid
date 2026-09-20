@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react"
@@ -14,6 +15,7 @@ import {
   withFigureIds,
   type Assay,
   type Category,
+  type Figure,
 } from "@/data/content"
 import {
   blobToDataUrl,
@@ -24,26 +26,23 @@ import {
   loadAllFigureBlobs,
   putFigureBlob,
 } from "@/lib/figure-db"
+import {
+  clearGithubToken,
+  getGithubToken,
+  liveFigurePublicSrc,
+  liveFigureRepoPath,
+  publishHandbookFiles,
+  setGithubToken,
+} from "@/lib/github-publish"
+import { publicPath } from "@/lib/public-path"
 
 export const HANDBOOK_INTRO =
   "按解剖部位系统评价小鼠眼表异常。一级为四大分类；其下再分「1、2、」二级和「①②」三级。每一级分支标题后直接标注【1】或【2】。每张卡片写出检测手段/仪器、分子标志物、观察结果和原文图表。"
 
 export const PUBLIC_SITE_URL = "https://yyu337119-ship-it.github.io/Eyelid/"
 
-const STORAGE_KEY = "eyelid-handbook-edits-v10"
-
-function readLegacyRaw() {
-  if (typeof window === "undefined") return null
-  const found: { key: string; raw: string }[] = []
-  for (let i = 0; i < window.localStorage.length; i++) {
-    const key = window.localStorage.key(i)
-    if (!key || !key.startsWith("eyelid-handbook-edits-") || key === STORAGE_KEY) continue
-    const raw = window.localStorage.getItem(key)
-    if (raw) found.push({ key, raw })
-  }
-  found.sort((a, b) => b.key.localeCompare(a.key, undefined, { numeric: true }))
-  return found[0] ?? null
-}
+/** Unsaved in-browser draft only. Never auto-load eyelid-handbook-edits-v1…v10. */
+const DRAFT_KEY = "eyelid-handbook-unsaved-draft-v13"
 
 export type AssayPath = {
   categoryId: string
@@ -52,16 +51,33 @@ export type AssayPath = {
   assayId: string
 }
 
+export type PublishState = {
+  status: "idle" | "saving" | "ok" | "error"
+  detail: string
+}
+
+type PublishedSnapshot = {
+  intro: string
+  categories: Category[]
+}
+
 type HandbookContextValue = {
   editMode: boolean
   setEditMode: (value: boolean) => void
   dirty: boolean
-  hasLegacyEdits: boolean
+  hasLocalDraft: boolean
+  loadedLive: boolean
   intro: string
   setIntro: (value: string) => void
   categories: Category[]
   figureUrls: Record<string, string>
-  loadLegacyEdits: () => void
+  hasGithubToken: boolean
+  publishState: PublishState
+  saveGithubToken: (token: string) => void
+  clearStoredToken: () => void
+  publishToGithub: () => Promise<boolean>
+  /** Alias used by the header toolbar. Same as publishToGithub. */
+  publishToPublic: () => Promise<boolean>
   updateCategory: (categoryId: string, patch: Partial<Pick<Category, "title" | "question" | "summary">>) => void
   updateSectionTitle: (categoryId: string, sectionId: string, title: string) => void
   updateTopicTitle: (categoryId: string, sectionId: string, topicId: string, title: string) => void
@@ -83,29 +99,172 @@ function revokeAll(urls: Record<string, string>) {
   Object.values(urls).forEach((url) => URL.revokeObjectURL(url))
 }
 
+function walkFigures(categories: Category[], visit: (figure: Figure) => void) {
+  for (const category of categories) {
+    for (const section of category.sections) {
+      for (const topic of section.topics) {
+        for (const assay of topic.assays) {
+          for (const figure of assay.figures) visit(figure)
+        }
+      }
+    }
+  }
+}
+
+async function fetchPublishedLive(): Promise<{ intro?: string; categories?: Category[] } | null> {
+  const path = publicPath("/live.json")
+  if (!path) return null
+  try {
+    const response = await fetch(`${path}?t=${Date.now()}`, { cache: "no-store" })
+    if (!response.ok) return null
+    const data = (await response.json()) as { intro?: string; categories?: Category[] }
+    if (!data || typeof data !== "object") return null
+    return data
+  } catch {
+    return null
+  }
+}
+
+async function collectPublishPayload(
+  intro: string,
+  categories: Category[],
+  figureUrls: Record<string, string>
+) {
+  const next = withFigureIds(structuredClone(categories))
+  const images: { path: string; blob: Blob }[] = []
+  const uploaded = new Set<string>()
+
+  async function attach(figure: Figure) {
+    const id = figure.id
+    if (!id || !figureUrls[id] || uploaded.has(id)) return
+    uploaded.add(id)
+    const blob = await fetch(figureUrls[id]).then((response) => response.blob())
+    images.push({ path: liveFigureRepoPath(id), blob })
+    figure.src = liveFigurePublicSrc(id)
+  }
+
+  for (const category of next) {
+    for (const section of category.sections) {
+      for (const topic of section.topics) {
+        for (const assay of topic.assays) {
+          for (const figure of assay.figures) {
+            await attach(figure)
+          }
+        }
+      }
+    }
+  }
+
+  walkFigures(next, (figure) => {
+    const id = figure.id
+    if (id && figureUrls[id]) figure.src = liveFigurePublicSrc(id)
+  })
+
+  return {
+    liveJson: JSON.stringify({ intro, categories: next }, null, 2),
+    categories: next,
+    images,
+  }
+}
+
 export function HandbookProvider({ children }: { children: ReactNode }) {
   const [editMode, setEditMode] = useState(false)
   const [intro, setIntroState] = useState(HANDBOOK_INTRO)
   const [categories, setCategories] = useState<Category[]>(cloneCategories)
   const [textDirty, setTextDirty] = useState(false)
+  const [figuresSynced, setFiguresSynced] = useState(true)
   const [figureUrls, setFigureUrls] = useState<Record<string, string>>({})
   const [ready, setReady] = useState(false)
-  const [hasLegacyEdits, setHasLegacyEdits] = useState(false)
+  const [loadedLive, setLoadedLive] = useState(false)
+  const [hasLocalDraft, setHasLocalDraft] = useState(false)
+  const [hasGithubToken, setHasGithubToken] = useState(false)
+  const [publishState, setPublishState] = useState<PublishState>({ status: "idle", detail: "" })
+  const publishedRef = useRef<PublishedSnapshot>({
+    intro: HANDBOOK_INTRO,
+    categories: cloneCategories(),
+  })
 
   useEffect(() => {
-    setReady(true)
+    let cancelled = false
+    async function hydrate() {
+      setHasGithubToken(Boolean(getGithubToken()))
+      const live = await fetchPublishedLive()
+      if (cancelled) return
+      if (live) {
+        if (typeof live.intro === "string") setIntroState(live.intro)
+        if (Array.isArray(live.categories) && live.categories.length) {
+          const next = withFigureIds(live.categories)
+          setCategories(next)
+          publishedRef.current = {
+            intro: typeof live.intro === "string" ? live.intro : HANDBOOK_INTRO,
+            categories: next,
+          }
+        } else if (typeof live.intro === "string") {
+          publishedRef.current = { intro: live.intro, categories: cloneCategories() }
+        }
+        setLoadedLive(true)
+      }
+
+      const draftRaw = window.localStorage.getItem(DRAFT_KEY)
+      if (draftRaw) {
+        try {
+          const parsed = JSON.parse(draftRaw) as { intro?: string; categories?: Category[] }
+          if (typeof parsed.intro === "string") setIntroState(parsed.intro)
+          if (Array.isArray(parsed.categories) && parsed.categories.length) {
+            setCategories(withFigureIds(parsed.categories))
+          }
+          setTextDirty(true)
+          setHasLocalDraft(true)
+        } catch {
+          window.localStorage.removeItem(DRAFT_KEY)
+        }
+      }
+
+      try {
+        const blobs = await loadAllFigureBlobs()
+        if (cancelled) return
+        const urls: Record<string, string> = {}
+        for (const [id, blob] of Object.entries(blobs)) {
+          urls[id] = URL.createObjectURL(blob)
+        }
+        if (Object.keys(urls).length) {
+          setFigureUrls(urls)
+          setFiguresSynced(false)
+          setHasLocalDraft(true)
+        }
+      } catch {
+        /* IndexedDB unavailable: text edits still work */
+      }
+      if (!cancelled) setReady(true)
+    }
+    void hydrate()
+    return () => {
+      cancelled = true
+    }
   }, [])
 
-  const dirty = textDirty || Object.keys(figureUrls).length > 0
+  useEffect(() => {
+    if (!ready) return
+    if (!textDirty) {
+      window.localStorage.removeItem(DRAFT_KEY)
+      return
+    }
+    window.localStorage.setItem(DRAFT_KEY, JSON.stringify({ intro, categories }))
+    setHasLocalDraft(true)
+  }, [ready, textDirty, intro, categories])
+
+  const dirty = textDirty || !figuresSynced
 
   const setIntro = useCallback((value: string) => {
     setIntroState(value)
     setTextDirty(true)
+    setPublishState({ status: "idle", detail: "" })
   }, [])
 
   const commit = useCallback((recipe: (prev: Category[]) => Category[]) => {
     setCategories((prev) => recipe(prev))
     setTextDirty(true)
+    setPublishState({ status: "idle", detail: "" })
   }, [])
 
   const updateCategory = useCallback(
@@ -199,6 +358,9 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       if (prev[id]) URL.revokeObjectURL(prev[id])
       return { ...prev, [id]: URL.createObjectURL(blob) }
     })
+    setFiguresSynced(false)
+    setHasLocalDraft(true)
+    setPublishState({ status: "idle", detail: "" })
   }, [])
 
   const restoreFigure = useCallback(async (id: string) => {
@@ -207,8 +369,10 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       if (prev[id]) URL.revokeObjectURL(prev[id])
       const next = { ...prev }
       delete next[id]
+      if (Object.keys(next).length === 0) setFiguresSynced(true)
       return next
     })
+    setPublishState({ status: "idle", detail: "" })
   }, [])
 
   const reset = useCallback(async () => {
@@ -217,27 +381,57 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       revokeAll(prev)
       return {}
     })
-    setIntroState(HANDBOOK_INTRO)
-    setCategories(cloneCategories())
+    setIntroState(publishedRef.current.intro)
+    setCategories(structuredClone(publishedRef.current.categories))
     setTextDirty(false)
+    setFiguresSynced(true)
+    setHasLocalDraft(false)
+    window.localStorage.removeItem(DRAFT_KEY)
+    setPublishState({ status: "idle", detail: "" })
   }, [])
 
-  const loadLegacyEdits = useCallback(() => {
-    const legacy = readLegacyRaw()
-    if (!legacy) return
-    try {
-      const parsed = JSON.parse(legacy.raw) as { intro?: string; categories?: Category[] }
-      if (typeof parsed.intro === "string") setIntroState(parsed.intro)
-      if (Array.isArray(parsed.categories) && parsed.categories.length) {
-        setCategories(withFigureIds(parsed.categories))
-        setTextDirty(true)
-      }
-      setHasLegacyEdits(false)
-    } catch {
-      window.localStorage.removeItem(legacy.key)
-      setHasLegacyEdits(false)
-    }
+  const saveGithubToken = useCallback((token: string) => {
+    setGithubToken(token)
+    setHasGithubToken(Boolean(token.trim()))
   }, [])
+
+  const clearStoredToken = useCallback(() => {
+    clearGithubToken()
+    setHasGithubToken(false)
+  }, [])
+
+  const publishToGithub = useCallback(async () => {
+    const token = getGithubToken()
+    if (!token) {
+      setPublishState({ status: "error", detail: "NEED_TOKEN" })
+      throw new Error("NEED_TOKEN")
+    }
+    setPublishState({ status: "saving", detail: "正在保存到 GitHub…" })
+    try {
+      const payload = await collectPublishPayload(intro, categories, figureUrls)
+      await publishHandbookFiles({
+        token,
+        liveJson: payload.liveJson,
+        images: payload.images,
+      })
+      publishedRef.current = { intro, categories: payload.categories }
+      setCategories(payload.categories)
+      setTextDirty(false)
+      setFiguresSynced(true)
+      setHasLocalDraft(false)
+      window.localStorage.removeItem(DRAFT_KEY)
+      await clearFigureBlobs()
+      setPublishState({
+        status: "ok",
+        detail: "已提交到 GitHub。GitHub Actions 约 1 分钟后重建公开页，刷新即可看到。",
+      })
+      return true
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : "保存失败"
+      setPublishState({ status: "error", detail })
+      throw error instanceof Error ? error : new Error(detail)
+    }
+  }, [intro, categories, figureUrls])
 
   const exportJson = useCallback(async () => {
     const figures: Record<string, string> = {}
@@ -266,6 +460,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       setCategories(withFigureIds(parsed.categories))
     }
     setTextDirty(true)
+    setHasLocalDraft(true)
     if (parsed.figures && typeof parsed.figures === "object") {
       await clearFigureBlobs()
       setFigureUrls((prev) => {
@@ -279,6 +474,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
         next[id] = URL.createObjectURL(blob)
       }
       setFigureUrls(next)
+      setFiguresSynced(Object.keys(next).length === 0)
     }
   }, [])
 
@@ -287,11 +483,18 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       editMode,
       setEditMode,
       dirty,
-      hasLegacyEdits,
+      hasLocalDraft,
+      loadedLive,
       intro,
       setIntro,
       categories,
       figureUrls,
+      hasGithubToken,
+      publishState,
+      saveGithubToken,
+      clearStoredToken,
+      publishToGithub,
+      publishToPublic: publishToGithub,
       updateCategory,
       updateSectionTitle,
       updateTopicTitle,
@@ -301,16 +504,21 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       reset,
       exportJson,
       importJson,
-      loadLegacyEdits,
     }),
     [
       editMode,
       dirty,
-      hasLegacyEdits,
+      hasLocalDraft,
+      loadedLive,
       intro,
       setIntro,
       categories,
       figureUrls,
+      hasGithubToken,
+      publishState,
+      saveGithubToken,
+      clearStoredToken,
+      publishToGithub,
       updateCategory,
       updateSectionTitle,
       updateTopicTitle,
@@ -320,7 +528,6 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       reset,
       exportJson,
       importJson,
-      loadLegacyEdits,
     ]
   )
 

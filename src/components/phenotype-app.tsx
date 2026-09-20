@@ -3,12 +3,14 @@
 import { useState, type ReactNode } from "react"
 import { BookOpen, Menu } from "lucide-react"
 import { AssayCard } from "@/components/assay-card"
+import { EditToolbar } from "@/components/edit-toolbar"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { abbreviations, sameSources, sectionSources, sources, topicSources } from "@/data/content"
 import { SourceCite } from "@/components/source-badge"
-import { HandbookProvider, useHandbook } from "@/lib/handbook-store"
+import { EditableText } from "@/components/editable-text"
+import { HandbookProvider, PUBLIC_SITE_URL, useHandbook } from "@/lib/handbook-store"
 
 function scrollToId(id: string, onNavigate?: () => void) {
   const target = document.getElementById(id)
@@ -103,38 +105,55 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 
 function PhenotypeAppInner() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const { categories, intro } = useHandbook()
+  const {
+    categories,
+    intro,
+    setIntro,
+    dirty,
+    updateCategory,
+    updateSectionTitle,
+    updateTopicTitle,
+  } = useHandbook()
 
   return (
     <div className="min-h-screen bg-[#f6f1e7] text-stone-800">
       <header className="sticky top-0 z-40 border-b border-stone-200/80 bg-[#f6f1e7]/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-start justify-between gap-3 px-4 py-3 sm:px-6">
-          <div className="min-w-0">
-            <p className="text-[11px] font-semibold tracking-[0.18em] text-[#1f4b3a] uppercase">
-              小鼠眼部表型评价手册
-            </p>
-            <h1 className="truncate text-lg font-semibold text-stone-900 sm:text-xl">
-              如何系统评价小鼠眼睑异常表型
-            </h1>
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold tracking-[0.18em] text-[#1f4b3a] uppercase">
+                小鼠眼部表型评价手册
+              </p>
+              <h1 className="truncate text-lg font-semibold text-stone-900 sm:text-xl">
+                如何系统评价小鼠眼睑异常表型
+              </h1>
+            </div>
+            <Button
+              variant="outline"
+              size="icon"
+              className="lg:hidden"
+              onClick={() => setMenuOpen(true)}
+              aria-label="打开目录"
+            >
+              <Menu className="size-4" />
+            </Button>
           </div>
-          <Button
-            variant="outline"
-            size="icon"
-            className="lg:hidden"
-            onClick={() => setMenuOpen(true)}
-            aria-label="打开目录"
-          >
-            <Menu className="size-4" />
-          </Button>
+          <EditToolbar />
         </div>
         <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-stone-600 sm:px-6">
-          本页只含两篇文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。后续三篇加进来之前的网页版总结，点击图表可放大。要改正文直接说，改完会发布到这个公开地址。
+          本页两篇文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。点「编辑正文」改字换图，再点绿色「保存到公开页」。「退出编辑」不会发布。第一次会要求粘贴
+          GitHub 令牌；保存后约 1 分钟，别人刷新{" "}
+          <a className="underline underline-offset-2" href={PUBLIC_SITE_URL} target="_blank" rel="noreferrer">
+            {PUBLIC_SITE_URL}
+          </a>{" "}
+          就能看到。
+          {dirty ? " 当前有未保存到公开页的修改。" : ""}
         </p>
       </header>
 
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)]">
         <aside className="hidden lg:block">
-          <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pr-2">
+          <div className="sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
             <p className="mb-3 flex items-center gap-2 text-xs font-semibold tracking-wide text-stone-500 uppercase">
               <BookOpen className="size-3.5" />
               目录
@@ -145,7 +164,12 @@ function PhenotypeAppInner() {
 
         <main className="space-y-10 pb-16">
           <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6">
-            <p className="text-sm leading-7 text-stone-700">{intro}</p>
+            <EditableText
+              value={intro}
+              onChange={setIntro}
+              multiline
+              className="text-sm leading-7 text-stone-700"
+            />
             <dl className="mt-5 grid gap-3 sm:grid-cols-2">
               {abbreviations.map((item) => (
                 <div key={item.abbr} className="rounded-lg bg-stone-50 px-3 py-2">
@@ -162,55 +186,82 @@ function PhenotypeAppInner() {
                 <p className="text-xs tracking-[0.2em] uppercase opacity-80">{category.roman}</p>
                 <h2 className="flex flex-wrap items-baseline gap-1 text-2xl font-semibold">
                   <span>{category.roman}、</span>
-                  <span className="text-2xl font-semibold">{category.title}</span>
+                  <EditableText
+                    value={category.title}
+                    onChange={(title) => updateCategory(category.id, { title })}
+                    className="text-2xl font-semibold"
+                  />
                 </h2>
-                <p className="mt-2 text-sm leading-6 text-emerald-50">{category.question}</p>
-                <p className="mt-2 text-sm leading-6 text-emerald-100/90">{category.summary}</p>
+                <div className="mt-2 text-sm leading-6 text-emerald-50">
+                  <EditableText
+                    value={category.question}
+                    onChange={(question) => updateCategory(category.id, { question })}
+                    multiline
+                  />
+                </div>
+                <div className="mt-2 text-sm leading-6 text-emerald-100/90">
+                  <EditableText
+                    value={category.summary}
+                    onChange={(summary) => updateCategory(category.id, { summary })}
+                    multiline
+                  />
+                </div>
               </div>
 
               {category.sections.map((section) => {
                 const sectionIds = sectionSources(section)
                 return (
-                <div key={section.id} id={section.id} className="scroll-mt-40 space-y-5">
-                  <h3 className="flex flex-wrap items-baseline gap-x-2 border-b border-stone-300 pb-2 text-xl font-semibold text-stone-900">
-                    <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-2">
-                      {section.index}、{section.title}
-                    </span>
-                    <SourceCite ids={sectionIds} className="font-normal" />
-                  </h3>
-                  {section.topics.map((topic) => {
-                    const topicIds = topicSources(topic)
-                    return (
-                    <div key={topic.id} id={topic.id} className="scroll-mt-40 space-y-3">
-                      <h4 className="flex flex-wrap items-baseline gap-x-2 text-base font-semibold text-stone-800">
-                        <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-1 text-[#1f4b3a]">
-                          {topic.mark}
-                          {topic.title}
-                        </span>
-                        <SourceCite
-                          ids={sameSources(topicIds, sectionIds) ? [] : topicIds}
-                          className="font-normal"
+                  <div key={section.id} id={section.id} className="scroll-mt-40 space-y-5">
+                    <h3 className="flex flex-wrap items-baseline gap-x-2 border-b border-stone-300 pb-2 text-xl font-semibold text-stone-900">
+                      <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-2">
+                        {section.index}、
+                        <EditableText
+                          value={section.title}
+                          onChange={(title) => updateSectionTitle(category.id, section.id, title)}
+                          className="font-semibold"
                         />
-                      </h4>
-                      <div className="space-y-4">
-                        {topic.assays.map((assay) => (
-                          <AssayCard
-                            key={assay.id}
-                            assay={assay}
-                            parentSources={topicIds}
-                            path={{
-                              categoryId: category.id,
-                              sectionId: section.id,
-                              topicId: topic.id,
-                              assayId: assay.id,
-                            }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    )
-                  })}
-                </div>
+                      </span>
+                      <SourceCite ids={sectionIds} className="font-normal" />
+                    </h3>
+                    {section.topics.map((topic) => {
+                      const topicIds = topicSources(topic)
+                      return (
+                        <div key={topic.id} id={topic.id} className="scroll-mt-40 space-y-3">
+                          <h4 className="flex flex-wrap items-baseline gap-x-2 text-base font-semibold text-stone-800">
+                            <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-1 text-[#1f4b3a]">
+                              {topic.mark}
+                              <EditableText
+                                value={topic.title}
+                                onChange={(title) =>
+                                  updateTopicTitle(category.id, section.id, topic.id, title)
+                                }
+                                className="font-semibold text-[#1f4b3a]"
+                              />
+                            </span>
+                            <SourceCite
+                              ids={sameSources(topicIds, sectionIds) ? [] : topicIds}
+                              className="font-normal"
+                            />
+                          </h4>
+                          <div className="space-y-4">
+                            {topic.assays.map((assay) => (
+                              <AssayCard
+                                key={assay.id}
+                                assay={assay}
+                                parentSources={topicIds}
+                                path={{
+                                  categoryId: category.id,
+                                  sectionId: section.id,
+                                  topicId: topic.id,
+                                  assayId: assay.id,
+                                }}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
                 )
               })}
             </section>

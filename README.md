@@ -4,7 +4,22 @@
 
 公开阅读：**https://yyu337119-ship-it.github.io/Eyelid/**
 
-这是定稿阅读页。要改正文或换图，直接说明即可，改完会发布到上述地址。
+## 在网页上改完怎么保存，别人才能看到
+
+「编辑正文」只是打开编辑；「退出编辑」**不会**发布。必须点右上角绿色的 **保存到公开页**，别人刷新公开页才能看到。
+
+1. 打开 https://yyu337119-ship-it.github.io/Eyelid/
+2. 点 **编辑正文**，改字或换图。
+3. 点绿色 **保存到公开页**。
+4. 第一次会弹出令牌框。到 [新建 fine-grained token](https://github.com/settings/personal-access-tokens/new) 创建：
+   - Resource owner：`yyu337119-ship-it`
+   - 只勾仓库 **Eyelid**
+   - Repository permissions → **Contents: Read and write**
+   - Generate 后复制，粘贴进网页，点 **保存令牌并发布**
+5. 令牌只存在你这个浏览器里，不会写进网页源码。换电脑或清站点数据后要再贴一次。
+6. GitHub Actions 大约 1 分钟重建公开页。刷新后别人就能看到这次修改。
+
+未点保存的修改只会留在当前浏览器的未保存草稿里。
 
 ## 文献
 

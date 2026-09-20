@@ -11,11 +11,14 @@
 1. 打开 https://yyu337119-ship-it.github.io/Eyelid/
 2. 点 **编辑正文**，改字或换图。
 3. 点绿色 **保存到公开页**。
-4. 第一次会弹出令牌框。到 [新建 fine-grained token](https://github.com/settings/personal-access-tokens/new) 创建：
-   - Resource owner：`yyu337119-ship-it`
-   - 只勾仓库 **Eyelid**
-   - Repository permissions → **Contents: Read and write**
+4. 第一次会弹出令牌框。必须用账号 **yyu337119-ship-it** 登录。GitHub **没有**一条叫「Repository permissions → Contents：Read and write」的选项。那是：
+   - 打开[预填好 Contents 的新建页](https://github.com/settings/personal-access-tokens/new?name=Eyelid%20handbook%20save&description=Commit%20live.json%20to%20the%20public%20handbook&target_name=yyu337119-ship-it&contents=write)
+   - Resource owner 选 `yyu337119-ship-it`
+   - Repository access 选 **Only select repositories**，再选 **Eyelid**
+   - 往下滚到 **Permissions**（中文：「权限」），点开 **Repository permissions**（「存储库权限」）
+   - 找到 **Contents**（「内容」）这一行，右侧下拉从 No access 改成 **Read and write**（「读取和写入」）
    - Generate 后复制，粘贴进网页，点 **保存令牌并发布**
+   - 如果还是没有 Contents 这一行：改用 [经典令牌](https://github.com/settings/tokens/new?description=Eyelid%20handbook%20save&scopes=public_repo)，勾选 **public_repo** 即可
 5. 令牌只存在你这个浏览器里，不会写进网页源码。换电脑或清站点数据后要再贴一次。
 6. GitHub Actions 大约 1 分钟重建公开页。刷新后别人就能看到这次修改。
 

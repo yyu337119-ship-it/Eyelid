@@ -2,8 +2,13 @@ const TOKEN_KEY = "eyelid-github-token"
 export const GITHUB_REPO = "yyu337119-ship-it/Eyelid"
 export const GITHUB_BRANCH = "main"
 
+/** Pre-fills Contents = write for the Eyelid repo owner. */
 export const TOKEN_HELP_URL =
-  "https://github.com/settings/personal-access-tokens/new"
+  "https://github.com/settings/personal-access-tokens/new?name=Eyelid%20handbook%20save&description=Commit%20live.json%20to%20the%20public%20handbook&target_name=yyu337119-ship-it&contents=write"
+
+/** Classic PAT: check public_repo. Easier if the fine-grained permission list is missing. */
+export const CLASSIC_TOKEN_HELP_URL =
+  "https://github.com/settings/tokens/new?description=Eyelid%20handbook%20save&scopes=public_repo"
 
 export function liveImagePaths(figureId: string) {
   const safe = figureId.replace(/[^a-zA-Z0-9_-]/g, "-")

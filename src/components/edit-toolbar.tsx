@@ -12,7 +12,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { PUBLIC_SITE_URL, useHandbook } from "@/lib/handbook-store"
-import { getGithubToken, GITHUB_REPO, TOKEN_HELP_URL } from "@/lib/github-publish"
+import {
+  CLASSIC_TOKEN_HELP_URL,
+  getGithubToken,
+  GITHUB_REPO,
+  TOKEN_HELP_URL,
+} from "@/lib/github-publish"
 
 export function EditToolbar() {
   const {
@@ -145,30 +150,54 @@ export function EditToolbar() {
       </div>
 
       <Dialog open={tokenOpen} onOpenChange={setTokenOpen}>
-        <DialogContent className="sm:max-w-lg" showCloseButton>
+        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-xl" showCloseButton>
           <DialogHeader>
             <DialogTitle>保存到公开页需要 GitHub 令牌</DialogTitle>
             <DialogDescription>
-              静态网页不能代你登录。把 fine-grained PAT 粘贴到下面，只存在这个浏览器里，用来把改动提交到{" "}
-              <span className="font-medium text-stone-800">{GITHUB_REPO}</span>。约 1
-              分钟后{" "}
+              必须用账号 <span className="font-medium text-stone-800">yyu337119-ship-it</span>{" "}
+              登录。令牌只存在这个浏览器，用来把改动提交到 {GITHUB_REPO}。约 1 分钟后{" "}
               <a className="underline" href={PUBLIC_SITE_URL} target="_blank" rel="noreferrer">
                 公开页
               </a>{" "}
               会更新。
             </DialogDescription>
           </DialogHeader>
-          <ol className="list-decimal space-y-1 pl-5 text-sm leading-6 text-stone-700">
+          <p className="text-sm leading-6 text-stone-700">
+            GitHub 没有一条叫「Repository permissions → Contents：Read and write」的菜单。那是两步：先展开
+            Permissions 列表，再把 Contents 这一行右边的下拉从 No access 改成 Read and write。
+          </p>
+          <ol className="list-decimal space-y-1.5 pl-5 text-sm leading-6 text-stone-700">
             <li>
-              打开{" "}
-              <a className="underline" href={TOKEN_HELP_URL} target="_blank" rel="noreferrer">
-                新建 fine-grained token
+              用这个{" "}
+              <a className="font-medium underline" href={TOKEN_HELP_URL} target="_blank" rel="noreferrer">
+                预填好 Contents 的链接
               </a>
+              打开新建页（Contents 应已是 Read and write）。
             </li>
-            <li>Resource owner 选 yyu337119-ship-it，只勾仓库 Eyelid</li>
-            <li>Repository permissions → Contents：Read and write</li>
-            <li>Generate 后复制，粘贴到下面</li>
+            <li>
+              Resource owner 选 <span className="font-medium">yyu337119-ship-it</span>（必须是这个账号）。
+            </li>
+            <li>
+              Repository access 选 <span className="font-medium">Only select repositories</span>
+              ，再选仓库 <span className="font-medium">Eyelid</span>。
+            </li>
+            <li>
+              往下滚到 <span className="font-medium">Permissions</span>（中文界面叫「权限」），点开{" "}
+              <span className="font-medium">Repository permissions</span>（「存储库权限」）。
+            </li>
+            <li>
+              找到 <span className="font-medium">Contents</span>（「内容」）这一行，右侧下拉选{" "}
+              <span className="font-medium">Read and write</span>（「读取和写入」）。默认是 No access。
+            </li>
+            <li>Generate token，复制后粘贴到下面。</li>
           </ol>
+          <p className="text-sm leading-6 text-stone-600">
+            还是没有 Contents 这一行，改用更简单的经典令牌：打开{" "}
+            <a className="underline" href={CLASSIC_TOKEN_HELP_URL} target="_blank" rel="noreferrer">
+              新建 classic token
+            </a>
+            ，勾选 <span className="font-medium">public_repo</span>，Generate 后同样粘贴到下面。
+          </p>
           <label className="block text-sm font-medium text-stone-800">
             令牌
             <input
@@ -176,7 +205,7 @@ export function EditToolbar() {
               autoComplete="off"
               value={token}
               onChange={(event) => setToken(event.target.value)}
-              placeholder="github_pat_…"
+              placeholder="github_pat_… 或 ghp_…"
               className="mt-1 w-full rounded-md border border-stone-300 bg-white px-3 py-2 font-mono text-sm"
             />
           </label>

@@ -89,6 +89,21 @@ export function formatCites(ids: SourceId[]) {
   return ids.map((id) => sources[id].cite).join("；")
 }
 
+export function uniqueSources(ids: SourceId[]): SourceId[] {
+  const order: SourceId[] = ["paper1", "paper2"]
+  return order.filter((id) => ids.includes(id))
+}
+
+export function topicSources(topic: Topic): SourceId[] {
+  return uniqueSources(topic.assays.flatMap((assay) => assay.sources))
+}
+
+export function sectionSources(section: Section): SourceId[] {
+  return uniqueSources(
+    section.topics.flatMap((topic) => topic.assays.flatMap((assay) => assay.sources))
+  )
+}
+
 export const abbreviations = [
   { abbr: "MG", full: "睑板腺 Meibomian gland" },
   { abbr: "MCJ", full: "皮肤黏膜交界 mucocutaneous junction" },

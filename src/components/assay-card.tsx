@@ -27,9 +27,11 @@ function Field({
 export function AssayCard({ assay }: { assay: Assay }) {
   return (
     <article id={assay.id} className="scroll-mt-28 rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-5">
-      <header className="mb-4 space-y-1">
-        <h4 className="text-lg font-semibold leading-snug text-stone-900">{assay.title}</h4>
-        <SourceCite ids={assay.sources} />
+      <header className="mb-4">
+        <h4 className="flex flex-wrap items-baseline gap-x-2 text-lg font-semibold leading-snug text-stone-900">
+          <span>{assay.title}</span>
+          <SourceCite ids={assay.sources} className="font-normal" />
+        </h4>
       </header>
 
       <div className="space-y-4">

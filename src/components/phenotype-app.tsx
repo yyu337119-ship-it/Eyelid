@@ -6,7 +6,14 @@ import { AssayCard } from "@/components/assay-card"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { abbreviations, categories, sources } from "@/data/content"
+import {
+  abbreviations,
+  categories,
+  sectionSources,
+  sources,
+  topicSources,
+} from "@/data/content"
+import { SourceCite } from "@/components/source-badge"
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   return (
@@ -38,8 +45,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
                         onClick={onNavigate}
                         className="block leading-5 text-stone-600 hover:text-stone-900 hover:underline"
                       >
-                        {topic.mark}
-                        {topic.title}
+                        {`${topic.mark}${topic.title}`}
                       </a>
                     </li>
                   ))}
@@ -97,8 +103,8 @@ export function PhenotypeApp() {
         <main className="space-y-10 pb-16">
           <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6">
             <p className="text-sm leading-7 text-stone-700">
-              按解剖部位系统评价小鼠眼表异常。一级为四大分类；其下再分「1、2、」二级和「①②」三级。每个检测分支标题后标注文献
-              【1】或【2】。每张卡片仍固定写出检测手段/仪器、分子标志物、观察结果和原文图表。
+              按解剖部位系统评价小鼠眼表异常。一级为四大分类；其下再分「1、2、」二级和「①②」三级。每一级分支标题后直接标注文献
+              【1】或【2】，不再用红字、黄字区分来源。每张卡片仍固定写出检测手段/仪器、分子标志物、观察结果和原文图表。
             </p>
             <dl className="mt-5 grid gap-3 sm:grid-cols-2">
               {abbreviations.map((item) => (
@@ -123,16 +129,17 @@ export function PhenotypeApp() {
 
               {category.sections.map((section) => (
                 <div key={section.id} id={section.id} className="scroll-mt-24 space-y-5">
-                  <h3 className="border-b border-stone-300 pb-2 text-xl font-semibold text-stone-900">
-                    {section.index}、{section.title}
+                  <h3 className="flex flex-wrap items-baseline gap-x-2 border-b border-stone-300 pb-2 text-xl font-semibold text-stone-900">
+                    <span>
+                      {section.index}、{section.title}
+                    </span>
+                    <SourceCite ids={sectionSources(section)} className="font-normal" />
                   </h3>
                   {section.topics.map((topic) => (
                     <div key={topic.id} id={topic.id} className="scroll-mt-24 space-y-3">
-                      <h4 className="flex items-center gap-2 text-base font-semibold text-stone-800">
-                        <span className="text-[#1f4b3a]">
-                          {topic.mark}
-                          {topic.title}
-                        </span>
+                      <h4 className="flex flex-wrap items-baseline gap-x-2 text-base font-semibold text-stone-800">
+                        <span className="text-[#1f4b3a]">{`${topic.mark}${topic.title}`}</span>
+                        <SourceCite ids={topicSources(topic)} className="font-normal" />
                       </h4>
                       <div className="space-y-4">
                         {topic.assays.map((assay) => (

@@ -43,7 +43,7 @@ export function FigureBlock({
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const fileRef = useRef<HTMLInputElement>(null)
-  const { editMode, figureUrls, replaceFigure, restoreFigure } = useHandbook()
+  const { figureUrls, replaceFigure, restoreFigure } = useHandbook()
   const figureId = figure.id
   const replaced = Boolean(figureId && figureUrls[figureId])
   const displaySrc = (figureId && figureUrls[figureId]) || figure.src
@@ -110,48 +110,46 @@ export function FigureBlock({
         </div>
       )}
 
-      {editMode ? (
-        <div className="flex flex-wrap gap-2 border-t border-stone-100 px-3 py-2">
+      <div className="flex flex-wrap items-center gap-2 border-t border-stone-100 bg-[#f6f1e7] px-3 py-2.5">
+        <button
+          type="button"
+          onClick={() => fileRef.current?.click()}
+          className="inline-flex items-center gap-1.5 rounded-md bg-[#1f4b3a] px-3 py-1.5 text-sm text-white hover:bg-[#17382c]"
+        >
+          <ImagePlus className="size-3.5" />
+          {displaySrc ? "替换图片" : "上传图片"}
+        </button>
+        {replaced ? (
           <button
             type="button"
-            onClick={() => fileRef.current?.click()}
-            className="inline-flex items-center gap-1 rounded-md border border-stone-200 bg-white px-2 py-1 text-xs text-stone-700 hover:bg-stone-50"
+            onClick={() => figureId && void restoreFigure(figureId)}
+            className="inline-flex items-center gap-1 rounded-md border border-stone-300 bg-white px-2.5 py-1.5 text-sm text-stone-700 hover:bg-stone-50"
           >
-            <ImagePlus className="size-3.5" />
-            {displaySrc ? "替换图片" : "上传图片"}
+            <RotateCcw className="size-3.5" />
+            恢复原图
           </button>
-          {replaced ? (
-            <button
-              type="button"
-              onClick={() => figureId && void restoreFigure(figureId)}
-              className="inline-flex items-center gap-1 rounded-md border border-stone-200 bg-white px-2 py-1 text-xs text-stone-700 hover:bg-stone-50"
-            >
-              <RotateCcw className="size-3.5" />
-              恢复原图
-            </button>
-          ) : null}
-          {onRemove ? (
-            <button
-              type="button"
-              onClick={onRemove}
-              className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-stone-500 hover:text-stone-900"
-            >
-              删除此图
-            </button>
-          ) : null}
-          <input
-            ref={fileRef}
-            type="file"
-            accept="image/png,image/jpeg,image/webp,image/gif"
-            className="hidden"
-            onChange={(event) => {
-              const file = event.target.files?.[0]
-              void onFile(file)
-              event.target.value = ""
-            }}
-          />
-        </div>
-      ) : null}
+        ) : null}
+        {onRemove ? (
+          <button
+            type="button"
+            onClick={onRemove}
+            className="inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-sm text-stone-500 hover:text-stone-900"
+          >
+            删除此图
+          </button>
+        ) : null}
+        <input
+          ref={fileRef}
+          type="file"
+          accept="image/png,image/jpeg,image/webp,image/gif"
+          className="hidden"
+          onChange={(event) => {
+            const file = event.target.files?.[0]
+            void onFile(file)
+            event.target.value = ""
+          }}
+        />
+      </div>
 
       <div className="space-y-1.5 border-t border-stone-100 px-3 py-2.5">
         <p className="text-sm font-medium text-stone-800">

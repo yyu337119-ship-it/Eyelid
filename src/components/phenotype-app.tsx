@@ -145,12 +145,10 @@ function PhenotypeAppInner() {
           </div>
           <EditToolbar />
         </div>
-        {editMode ? (
-          <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-emerald-900 sm:px-6">
-            虚线框内的文字可直接改；每张图下方可「替换图片」或「添加图表」。修改只保存在这台电脑的浏览器里。可用导出备份。
+          <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-stone-600 sm:px-6">
+            每张图下方都有绿色的「替换图片」。改文字请点右上角「编辑正文」。修改保存在本机浏览器。
             {dirty ? " 当前有未恢复的本地修改。" : ""}
           </p>
-        ) : null}
       </header>
 
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)]">

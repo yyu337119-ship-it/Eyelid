@@ -206,48 +206,42 @@ export function AssayCard({ assay, path }: { assay: Assay; path: AssayPath }) {
                       return { ...current, figures }
                     })
                   }
-                  onRemove={
-                    editMode
-                      ? () => {
-                          if (figure.id) void restoreFigure(figure.id)
-                          patch((current) => ({
-                            ...current,
-                            figures: current.figures.filter((_, currentIndex) => currentIndex !== index),
-                          }))
-                        }
-                      : undefined
-                  }
+                  onRemove={() => {
+                    if (figure.id) void restoreFigure(figure.id)
+                    patch((current) => ({
+                      ...current,
+                      figures: current.figures.filter((_, currentIndex) => currentIndex !== index),
+                    }))
+                  }}
                 />
               ))}
             </div>
           ) : (
-            <p className="text-sm text-stone-500">尚未贴图。打开「编辑正文」后可上传。</p>
+            <p className="text-sm text-stone-500">尚未贴图，可在下方添加。</p>
           )}
-          {editMode ? (
-            <button
-              type="button"
-              onClick={() =>
-                patch((current) => ({
-                  ...current,
-                  figures: [
-                    ...current.figures,
-                    {
-                      id:
-                        typeof crypto !== "undefined" && crypto.randomUUID
-                          ? crypto.randomUUID()
-                          : `${current.id}-fig-${current.figures.length}-${Date.now()}`,
-                      paperFig: "新图",
-                      caption: "",
-                    },
-                  ],
-                }))
-              }
-              className="mt-3 inline-flex items-center gap-1 text-sm text-[#1f4b3a] hover:underline"
-            >
-              <Plus className="size-3.5" />
-              添加图表
-            </button>
-          ) : null}
+          <button
+            type="button"
+            onClick={() =>
+              patch((current) => ({
+                ...current,
+                figures: [
+                  ...current.figures,
+                  {
+                    id:
+                      typeof crypto !== "undefined" && crypto.randomUUID
+                        ? crypto.randomUUID()
+                        : `${current.id}-fig-${current.figures.length}-${Date.now()}`,
+                    paperFig: "新图",
+                    caption: "",
+                  },
+                ],
+              }))
+            }
+            className="mt-3 inline-flex items-center gap-1 rounded-md bg-[#1f4b3a] px-3 py-1.5 text-sm text-white hover:bg-[#17382c]"
+          >
+            <Plus className="size-3.5" />
+            添加图表
+          </button>
         </Field>
       </div>
     </article>

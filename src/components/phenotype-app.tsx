@@ -9,7 +9,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sh
 import { abbreviations, sameSources, sectionSources, sources, topicSources } from "@/data/content"
 import { SourceCite } from "@/components/source-badge"
 import { EditableText } from "@/components/editable-text"
-import { HandbookProvider, PUBLIC_SITE_URL, useHandbook } from "@/lib/handbook-store"
+import { HandbookProvider, useHandbook } from "@/lib/handbook-store"
 
 function scrollToId(id: string, onNavigate?: () => void) {
   const target = document.getElementById(id)
@@ -164,7 +164,6 @@ function PhenotypeAppInner() {
     setIntro,
     dirty,
     hasLegacyEdits,
-    exportJson,
     updateCategory,
     updateSectionTitle,
     updateTopicTitle,
@@ -196,32 +195,16 @@ function PhenotypeAppInner() {
           <EditToolbar />
         </div>
           <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-stone-600 sm:px-6">
-            两篇文献版上的改动已经在当前这一页里。看不到「取出本机旧修改」是正常的，那个按钮只在五篇文献的旧存档还在时才出现。要把本页发到公开网址，请点右上角绿色的「导出本机修改」，把下载的
-            JSON 发回来。公开页现在仍是仓库原文：{" "}
-            <a className="underline underline-offset-2" href={PUBLIC_SITE_URL} target="_blank" rel="noreferrer">
-              {PUBLIC_SITE_URL}
-            </a>
-            {dirty ? " 当前这个浏览器里有未发布的本地修改。" : ""}
+            每张图下方可「替换图片」。改文字请点「编辑正文」。这两项只保存在你自己的浏览器里；公开网址显示的是仓库里这一版。
+            {dirty ? " 当前这个浏览器里有未写进仓库的本地修改。" : ""}
           </p>
           {hasLegacyEdits ? (
             <div className="mx-auto mb-3 max-w-7xl px-4 sm:px-6">
               <div className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-950">
-                这个浏览器里还存着另一套旧存档。若当前页不是你要的版本，先点「取出本机旧修改」，再点「导出本机修改」。
+                这个浏览器里还有另一套旧存档。若当前页不是你要的版本，可点「取出本机旧修改」。
               </div>
             </div>
           ) : null}
-          <div className="mx-auto mb-3 max-w-7xl px-4 sm:px-6">
-            <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-emerald-300 bg-emerald-50 px-3 py-2 text-xs leading-5 text-emerald-950">
-              <span>
-                请在 <strong>http://127.0.0.1:43127</strong>{" "}
-                这一页点「导出本机修改」，不要用五篇文献版导出的文件。收到 JSON 后我会写入公开网页。
-              </span>
-              <Button size="sm" onClick={() => void exportJson()}>
-                <Download className="size-3.5" />
-                导出本机修改
-              </Button>
-            </div>
-          </div>
       </header>
 
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)]">
@@ -343,7 +326,7 @@ function PhenotypeAppInner() {
           <section id="refs" className="scroll-mt-40 rounded-2xl border border-stone-200 bg-white p-5 sm:p-6">
             <h2 className="text-xl font-semibold text-stone-900">参考文献</h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
-              本页为后续三篇文献加入前的版本。编号对应两篇核心文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。
+              编号【1】～【5】与汇报 PPT 首页一致。本页正文来自你导出的手册修改。
             </p>
             <Separator className="my-4" />
             <div className="grid gap-4">

@@ -113,7 +113,6 @@ function PhenotypeAppInner() {
     categories,
     intro,
     setIntro,
-    editMode,
     dirty,
     updateCategory,
     updateSectionTitle,
@@ -260,11 +259,11 @@ function PhenotypeAppInner() {
           <section id="refs" className="scroll-mt-24 rounded-2xl border border-stone-200 bg-white p-5 sm:p-6">
             <h2 className="text-xl font-semibold text-stone-900">参考文献</h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
-              分支后的【1】【2】对应下列两篇。原笔记 PDF 中分别为文献 [2] 与 [5]。
+              编号按汇报 PPT 首页【1】～【5】。原笔记 PDF 中的 Widjaja 与 Dong 分别对应现【2】与【5】。
             </p>
             <Separator className="my-4" />
             <div className="grid gap-4">
-              {(["paper1", "paper2"] as const).map((id) => {
+              {(Object.keys(sources) as Array<keyof typeof sources>).map((id) => {
                 const paper = sources[id]
                 return (
                   <article key={id} className="rounded-xl border border-stone-100 bg-stone-50 p-4">

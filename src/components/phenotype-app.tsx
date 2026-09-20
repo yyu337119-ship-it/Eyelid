@@ -9,7 +9,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sh
 import { abbreviations, sameSources, sectionSources, sources, topicSources } from "@/data/content"
 import { SourceCite } from "@/components/source-badge"
 import { EditableText } from "@/components/editable-text"
-import { HandbookProvider, useHandbook } from "@/lib/handbook-store"
+import { HandbookProvider, PUBLIC_SITE_URL, useHandbook } from "@/lib/handbook-store"
 
 function scrollToId(id: string, onNavigate?: () => void) {
   const target = document.getElementById(id)
@@ -103,7 +103,8 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 }
 
 function EditToolbar() {
-  const { editMode, setEditMode, dirty, reset, exportJson, importJson } = useHandbook()
+  const { editMode, setEditMode, dirty, hasLegacyEdits, reset, exportJson, importJson, loadLegacyEdits } =
+    useHandbook()
   const fileRef = useRef<HTMLInputElement>(null)
 
   return (
@@ -116,6 +117,11 @@ function EditToolbar() {
         <Pencil className="size-3.5" />
         {editMode ? "完成编辑" : "编辑正文"}
       </Button>
+      {hasLegacyEdits ? (
+        <Button variant="outline" size="sm" onClick={loadLegacyEdits}>
+          取出本机旧修改
+        </Button>
+      ) : null}
       <Button
         variant="outline"
         size="sm"
@@ -157,6 +163,8 @@ function PhenotypeAppInner() {
     intro,
     setIntro,
     dirty,
+    hasLegacyEdits,
+    exportJson,
     updateCategory,
     updateSectionTitle,
     updateTopicTitle,
@@ -188,9 +196,31 @@ function PhenotypeAppInner() {
           <EditToolbar />
         </div>
           <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-stone-600 sm:px-6">
-            每张图下方都有绿色的「替换图片」。改文字请点右上角「编辑正文」。修改保存在本机浏览器。
-            {dirty ? " 当前有未恢复的本地修改。" : ""}
+            公开网页显示的是仓库原文，地址是{" "}
+            <a className="underline underline-offset-2" href={PUBLIC_SITE_URL} target="_blank" rel="noreferrer">
+              {PUBLIC_SITE_URL}
+            </a>
+            。在页面上改字、换图只保存在当前浏览器，别人打开公开地址看不到。要把修改发布出去，请点「导出」，把 JSON 发回来写入仓库。
+            {dirty ? " 当前这个浏览器里有未发布的本地修改。" : ""}
           </p>
+          {hasLegacyEdits ? (
+            <div className="mx-auto mb-3 max-w-7xl px-4 sm:px-6">
+              <div className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-950">
+                这个浏览器里还存着旧版页面的修改。公开网页不会自动带上它们。请先点「取出本机旧修改」，再点「导出」。
+              </div>
+            </div>
+          ) : null}
+          {dirty ? (
+            <div className="mx-auto mb-3 max-w-7xl px-4 sm:px-6">
+              <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-emerald-300 bg-emerald-50 px-3 py-2 text-xs leading-5 text-emerald-950">
+                <span>本机修改还没有写进公开网页。导出 JSON 后发给我，我可以更新 GitHub Pages。</span>
+                <Button size="sm" onClick={() => void exportJson()}>
+                  <Download className="size-3.5" />
+                  导出本机修改
+                </Button>
+              </div>
+            </div>
+          ) : null}
       </header>
 
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)]">

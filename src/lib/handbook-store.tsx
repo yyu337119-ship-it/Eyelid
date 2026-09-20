@@ -26,9 +26,27 @@ import {
 } from "@/lib/figure-db"
 
 export const HANDBOOK_INTRO =
-  "本页是后续三篇文献加入前的网页版总结，只收录两篇核心文献。一级为四大分类；其下再分「1、2、」二级和「①②」三级。每一级分支标题后直接标注【1】或【2】，不再用红字、黄字区分来源。每张卡片仍固定写出检测手段/仪器、分子标志物、观察结果和原文图表。打开「编辑正文」可改文字；每张图下方可「替换图片」。修改保存在本机浏览器。"
+  "本页是后续三篇文献加入前的网页版总结，只收录两篇核心文献。一级为四大分类；其下再分「1、2、」二级和「①②」三级。每一级分支标题后直接标注【1】或【2】，不再用红字、黄字区分来源。每张卡片仍固定写出检测手段/仪器、分子标志物、观察结果和原文图表。打开「编辑正文」可改文字；每张图下方可「替换图片」。这些修改只存在当前浏览器，不会出现在公开网页上。"
+
+export const PUBLIC_SITE_URL = "https://yyu337119-ship-it.github.io/Eyelid/"
 
 const STORAGE_KEY = "eyelid-handbook-edits-v7"
+const LEGACY_KEYS = [
+  "eyelid-handbook-edits-v6",
+  "eyelid-handbook-edits-v5",
+  "eyelid-handbook-edits-v4",
+  "eyelid-handbook-edits-v3",
+  "eyelid-handbook-edits-v2",
+  "eyelid-handbook-edits-v1",
+]
+
+function readLegacyRaw() {
+  for (const key of LEGACY_KEYS) {
+    const raw = window.localStorage.getItem(key)
+    if (raw) return { key, raw }
+  }
+  return null
+}
 
 export type AssayPath = {
   categoryId: string
@@ -41,10 +59,12 @@ type HandbookContextValue = {
   editMode: boolean
   setEditMode: (value: boolean) => void
   dirty: boolean
+  hasLegacyEdits: boolean
   intro: string
   setIntro: (value: string) => void
   categories: Category[]
   figureUrls: Record<string, string>
+  loadLegacyEdits: () => void
   updateCategory: (categoryId: string, patch: Partial<Pick<Category, "title" | "question" | "summary">>) => void
   updateSectionTitle: (categoryId: string, sectionId: string, title: string) => void
   updateTopicTitle: (categoryId: string, sectionId: string, topicId: string, title: string) => void
@@ -73,11 +93,14 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const [textDirty, setTextDirty] = useState(false)
   const [figureUrls, setFigureUrls] = useState<Record<string, string>>({})
   const [ready, setReady] = useState(false)
+  const [hasLegacyEdits, setHasLegacyEdits] = useState(false)
 
   useEffect(() => {
     let cancelled = false
     async function hydrate() {
       const raw = window.localStorage.getItem(STORAGE_KEY)
+      const legacy = readLegacyRaw()
+      if (legacy) setHasLegacyEdits(true)
       if (raw) {
         try {
           const parsed = JSON.parse(raw) as { intro?: string; categories?: Category[] }
@@ -244,6 +267,23 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     setTextDirty(false)
   }, [])
 
+  const loadLegacyEdits = useCallback(() => {
+    const legacy = readLegacyRaw()
+    if (!legacy) return
+    try {
+      const parsed = JSON.parse(legacy.raw) as { intro?: string; categories?: Category[] }
+      if (typeof parsed.intro === "string") setIntroState(parsed.intro)
+      if (Array.isArray(parsed.categories) && parsed.categories.length) {
+        setCategories(withFigureIds(parsed.categories))
+        setTextDirty(true)
+      }
+      setHasLegacyEdits(false)
+    } catch {
+      window.localStorage.removeItem(legacy.key)
+      setHasLegacyEdits(false)
+    }
+  }, [])
+
   const exportJson = useCallback(async () => {
     const figures: Record<string, string> = {}
     for (const [id, url] of Object.entries(figureUrls)) {
@@ -292,6 +332,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       editMode,
       setEditMode,
       dirty,
+      hasLegacyEdits,
       intro,
       setIntro,
       categories,
@@ -305,10 +346,12 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       reset,
       exportJson,
       importJson,
+      loadLegacyEdits,
     }),
     [
       editMode,
       dirty,
+      hasLegacyEdits,
       intro,
       setIntro,
       categories,
@@ -322,6 +365,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       reset,
       exportJson,
       importJson,
+      loadLegacyEdits,
     ]
   )
 

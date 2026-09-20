@@ -33,4 +33,4 @@ npm run dev
 
 仓库需为 **Public**。推送到 `main` 后 GitHub Actions 会自动构建。首次如未上线，到仓库 **Settings → Pages**，Build and deployment 选 **GitHub Actions**。
 
-访客打开链接即可阅读。「编辑正文 / 替换图片」只保存在每位访客自己的浏览器里。
+访客打开链接即可阅读。页面上的「编辑正文 / 替换图片」只保存在每位访客自己的浏览器里，**不会**写进公开网页。要把本机修改变成所有人都能看到的内容，请点「导出」，把 `eyelid-handbook-edits.json` 发回来写入仓库后再部署。

@@ -31,21 +31,18 @@ export const HANDBOOK_INTRO =
 export const PUBLIC_SITE_URL = "https://yyu337119-ship-it.github.io/Eyelid/"
 
 const STORAGE_KEY = "eyelid-handbook-edits-v7"
-const LEGACY_KEYS = [
-  "eyelid-handbook-edits-v6",
-  "eyelid-handbook-edits-v5",
-  "eyelid-handbook-edits-v4",
-  "eyelid-handbook-edits-v3",
-  "eyelid-handbook-edits-v2",
-  "eyelid-handbook-edits-v1",
-]
 
 function readLegacyRaw() {
-  for (const key of LEGACY_KEYS) {
+  if (typeof window === "undefined") return null
+  const found: { key: string; raw: string }[] = []
+  for (let i = 0; i < window.localStorage.length; i++) {
+    const key = window.localStorage.key(i)
+    if (!key || !key.startsWith("eyelid-handbook-edits-") || key === STORAGE_KEY) continue
     const raw = window.localStorage.getItem(key)
-    if (raw) return { key, raw }
+    if (raw) found.push({ key, raw })
   }
-  return null
+  found.sort((a, b) => b.key.localeCompare(a.key, undefined, { numeric: true }))
+  return found[0] ?? null
 }
 
 export type AssayPath = {

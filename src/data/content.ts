@@ -7,6 +7,7 @@ export type Marker = {
 }
 
 export type Figure = {
+  id?: string
   src?: string
   paperFig: string
   caption: string
@@ -1057,6 +1058,25 @@ export const categories: Category[] = [
     ],
   },
 ]
+
+export function withFigureIds(tree: Category[]): Category[] {
+  return tree.map((category) => ({
+    ...category,
+    sections: category.sections.map((section) => ({
+      ...section,
+      topics: section.topics.map((topic) => ({
+        ...topic,
+        assays: topic.assays.map((assay) => ({
+          ...assay,
+          figures: assay.figures.map((figure, index) => ({
+            ...figure,
+            id: figure.id ?? `${assay.id}-fig-${index}`,
+          })),
+        })),
+      })),
+    })),
+  }))
+}
 
 export function allAssays() {
   return categories.flatMap((category) =>

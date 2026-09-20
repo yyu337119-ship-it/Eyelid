@@ -29,7 +29,7 @@ function Field({
 }
 
 export function AssayCard({ assay, path }: { assay: Assay; path: AssayPath }) {
-  const { editMode, updateAssay } = useHandbook()
+  const { editMode, updateAssay, restoreFigure } = useHandbook()
   const markers = assay.markers ?? []
   const pending = assay.pending ?? []
   const stains = assay.stains ?? []
@@ -189,7 +189,7 @@ export function AssayCard({ assay, path }: { assay: Assay; path: AssayPath }) {
             <div className="grid gap-3">
               {assay.figures.map((figure, index) => (
                 <FigureBlock
-                  key={figure.paperFig + (figure.src ?? "") + index}
+                  key={figure.id ?? figure.paperFig + (figure.src ?? "") + index}
                   figure={figure}
                   sources={assay.sources}
                   onPaperFigChange={(paperFig) =>
@@ -206,12 +206,48 @@ export function AssayCard({ assay, path }: { assay: Assay; path: AssayPath }) {
                       return { ...current, figures }
                     })
                   }
+                  onRemove={
+                    editMode
+                      ? () => {
+                          if (figure.id) void restoreFigure(figure.id)
+                          patch((current) => ({
+                            ...current,
+                            figures: current.figures.filter((_, currentIndex) => currentIndex !== index),
+                          }))
+                        }
+                      : undefined
+                  }
                 />
               ))}
             </div>
           ) : (
-            <p className="text-sm text-stone-500">笔记尚未对应到具体图号；待补原文图。</p>
+            <p className="text-sm text-stone-500">尚未贴图。打开「编辑正文」后可上传。</p>
           )}
+          {editMode ? (
+            <button
+              type="button"
+              onClick={() =>
+                patch((current) => ({
+                  ...current,
+                  figures: [
+                    ...current.figures,
+                    {
+                      id:
+                        typeof crypto !== "undefined" && crypto.randomUUID
+                          ? crypto.randomUUID()
+                          : `${current.id}-fig-${current.figures.length}-${Date.now()}`,
+                      paperFig: "新图",
+                      caption: "",
+                    },
+                  ],
+                }))
+              }
+              className="mt-3 inline-flex items-center gap-1 text-sm text-[#1f4b3a] hover:underline"
+            >
+              <Plus className="size-3.5" />
+              添加图表
+            </button>
+          ) : null}
         </Field>
       </div>
     </article>

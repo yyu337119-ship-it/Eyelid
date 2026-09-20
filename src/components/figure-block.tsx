@@ -2,24 +2,51 @@
 
 import { useRef } from "react"
 import Image from "next/image"
-import { Expand, ExternalLink, ImageOff, X } from "lucide-react"
+import { Expand, ExternalLink, ImageOff, ImagePlus, RotateCcw, X } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { formatCites, type Figure, type SourceId } from "@/data/content"
 import { cn } from "@/lib/utils"
 import { EditableText } from "@/components/editable-text"
+import { useHandbook } from "@/lib/handbook-store"
+
+function FigureImage({
+  src,
+  alt,
+  className,
+  width,
+  height,
+}: {
+  src: string
+  alt: string
+  className?: string
+  width: number
+  height: number
+}) {
+  if (src.startsWith("blob:") || src.startsWith("data:")) {
+    return <img src={src} alt={alt} className={className} />
+  }
+  return <Image src={src} alt={alt} width={width} height={height} className={className} />
+}
 
 export function FigureBlock({
   figure,
   sources,
   onPaperFigChange,
   onCaptionChange,
+  onRemove,
 }: {
   figure: Figure
   sources: SourceId[]
   onPaperFigChange?: (value: string) => void
   onCaptionChange?: (value: string) => void
+  onRemove?: () => void
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const fileRef = useRef<HTMLInputElement>(null)
+  const { editMode, figureUrls, replaceFigure, restoreFigure } = useHandbook()
+  const figureId = figure.id
+  const replaced = Boolean(figureId && figureUrls[figureId])
+  const displaySrc = (figureId && figureUrls[figureId]) || figure.src
 
   function openLightbox() {
     dialogRef.current?.showModal()
@@ -29,16 +56,25 @@ export function FigureBlock({
     dialogRef.current?.close()
   }
 
+  async function onFile(file?: File) {
+    if (!file || !figureId) return
+    try {
+      await replaceFigure(figureId, file)
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : "替换图片失败")
+    }
+  }
+
   return (
     <div className="overflow-hidden rounded-lg border border-stone-200 bg-white">
-      {figure.src ? (
+      {displaySrc ? (
         <button
           type="button"
           onClick={openLightbox}
           className="relative block w-full cursor-zoom-in bg-stone-50"
         >
-          <Image
-            src={figure.src}
+          <FigureImage
+            src={displaySrc}
             alt={figure.paperFig}
             width={1400}
             height={900}
@@ -48,12 +84,17 @@ export function FigureBlock({
             <Expand className="size-3" />
             点击放大
           </span>
+          {replaced ? (
+            <span className="absolute top-2 left-2 rounded-md bg-[#1f4b3a] px-2 py-0.5 text-[11px] text-white">
+              已替换
+            </span>
+          ) : null}
         </button>
       ) : (
         <div className="flex flex-col items-start gap-3 bg-stone-50 px-4 py-5">
           <div className="flex items-center gap-2 text-stone-500">
             <ImageOff className="size-4" />
-            <span className="text-sm">笔记 PDF 未贴此原图</span>
+            <span className="text-sm">尚未贴图</span>
           </div>
           {figure.pmcUrl ? (
             <a
@@ -68,6 +109,50 @@ export function FigureBlock({
           ) : null}
         </div>
       )}
+
+      {editMode ? (
+        <div className="flex flex-wrap gap-2 border-t border-stone-100 px-3 py-2">
+          <button
+            type="button"
+            onClick={() => fileRef.current?.click()}
+            className="inline-flex items-center gap-1 rounded-md border border-stone-200 bg-white px-2 py-1 text-xs text-stone-700 hover:bg-stone-50"
+          >
+            <ImagePlus className="size-3.5" />
+            {displaySrc ? "替换图片" : "上传图片"}
+          </button>
+          {replaced ? (
+            <button
+              type="button"
+              onClick={() => figureId && void restoreFigure(figureId)}
+              className="inline-flex items-center gap-1 rounded-md border border-stone-200 bg-white px-2 py-1 text-xs text-stone-700 hover:bg-stone-50"
+            >
+              <RotateCcw className="size-3.5" />
+              恢复原图
+            </button>
+          ) : null}
+          {onRemove ? (
+            <button
+              type="button"
+              onClick={onRemove}
+              className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-stone-500 hover:text-stone-900"
+            >
+              删除此图
+            </button>
+          ) : null}
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/png,image/jpeg,image/webp,image/gif"
+            className="hidden"
+            onChange={(event) => {
+              const file = event.target.files?.[0]
+              void onFile(file)
+              event.target.value = ""
+            }}
+          />
+        </div>
+      ) : null}
+
       <div className="space-y-1.5 border-t border-stone-100 px-3 py-2.5">
         <p className="text-sm font-medium text-stone-800">
           {onPaperFigChange ? (
@@ -93,7 +178,7 @@ export function FigureBlock({
         )}
       </div>
 
-      {figure.src ? (
+      {displaySrc ? (
         <dialog
           ref={dialogRef}
           className="relative w-[min(100%,72rem)] max-h-[92vh] overflow-auto rounded-xl bg-white p-4 shadow-xl backdrop:bg-black/70"
@@ -110,8 +195,8 @@ export function FigureBlock({
             <X className="size-4" />
           </button>
           <p className="pr-10 text-sm font-medium text-stone-800">{figure.paperFig}</p>
-          <Image
-            src={figure.src}
+          <FigureImage
+            src={displaySrc}
             alt={figure.paperFig}
             width={1800}
             height={1200}

@@ -11,12 +11,22 @@ import {
 } from "react"
 import {
   categories as defaultCategories,
+  withFigureIds,
   type Assay,
   type Category,
 } from "@/data/content"
+import {
+  blobToDataUrl,
+  clearFigureBlobs,
+  dataUrlToBlob,
+  deleteFigureBlob,
+  fileToJpegBlob,
+  loadAllFigureBlobs,
+  putFigureBlob,
+} from "@/lib/figure-db"
 
 export const HANDBOOK_INTRO =
-  "按解剖部位系统评价小鼠眼表异常。一级为四大分类；其下再分「1、2、」二级和「①②」三级。每一级分支标题后直接标注文献【1】或【2】，不再用红字、黄字区分来源。每张卡片仍固定写出检测手段/仪器、分子标志物、观察结果和原文图表。打开「编辑正文」可直接改文字，修改保存在本机浏览器。"
+  "按解剖部位系统评价小鼠眼表异常。一级为四大分类；其下再分「1、2、」二级和「①②」三级。每一级分支标题后直接标注文献【1】或【2】，不再用红字、黄字区分来源。每张卡片仍固定写出检测手段/仪器、分子标志物、观察结果和原文图表。打开「编辑正文」可改文字并替换图表，修改保存在本机浏览器。"
 
 const STORAGE_KEY = "eyelid-handbook-edits-v1"
 
@@ -34,62 +44,90 @@ type HandbookContextValue = {
   intro: string
   setIntro: (value: string) => void
   categories: Category[]
+  figureUrls: Record<string, string>
   updateCategory: (categoryId: string, patch: Partial<Pick<Category, "title" | "question" | "summary">>) => void
   updateSectionTitle: (categoryId: string, sectionId: string, title: string) => void
   updateTopicTitle: (categoryId: string, sectionId: string, topicId: string, title: string) => void
   updateAssay: (path: AssayPath, updater: (assay: Assay) => Assay) => void
-  reset: () => void
-  exportJson: () => void
+  replaceFigure: (id: string, file: File) => Promise<void>
+  restoreFigure: (id: string) => Promise<void>
+  reset: () => Promise<void>
+  exportJson: () => Promise<void>
   importJson: (file: File) => Promise<void>
 }
 
 const HandbookContext = createContext<HandbookContextValue | null>(null)
 
 function cloneCategories() {
-  return structuredClone(defaultCategories)
+  return withFigureIds(structuredClone(defaultCategories))
+}
+
+function revokeAll(urls: Record<string, string>) {
+  Object.values(urls).forEach((url) => URL.revokeObjectURL(url))
 }
 
 export function HandbookProvider({ children }: { children: ReactNode }) {
   const [editMode, setEditMode] = useState(false)
   const [intro, setIntroState] = useState(HANDBOOK_INTRO)
   const [categories, setCategories] = useState<Category[]>(cloneCategories)
-  const [dirty, setDirty] = useState(false)
+  const [textDirty, setTextDirty] = useState(false)
+  const [figureUrls, setFigureUrls] = useState<Record<string, string>>({})
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const raw = window.localStorage.getItem(STORAGE_KEY)
-    if (raw) {
-      try {
-        const parsed = JSON.parse(raw) as { intro?: string; categories?: Category[] }
-        if (typeof parsed.intro === "string") setIntroState(parsed.intro)
-        if (Array.isArray(parsed.categories) && parsed.categories.length) {
-          setCategories(parsed.categories)
-          setDirty(true)
+    let cancelled = false
+    async function hydrate() {
+      const raw = window.localStorage.getItem(STORAGE_KEY)
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw) as { intro?: string; categories?: Category[] }
+          if (typeof parsed.intro === "string") setIntroState(parsed.intro)
+          if (Array.isArray(parsed.categories) && parsed.categories.length) {
+            setCategories(withFigureIds(parsed.categories))
+            setTextDirty(true)
+          }
+        } catch {
+          window.localStorage.removeItem(STORAGE_KEY)
         }
-      } catch {
-        window.localStorage.removeItem(STORAGE_KEY)
       }
+      try {
+        const blobs = await loadAllFigureBlobs()
+        if (cancelled) return
+        const urls: Record<string, string> = {}
+        for (const [id, blob] of Object.entries(blobs)) {
+          urls[id] = URL.createObjectURL(blob)
+        }
+        setFigureUrls(urls)
+      } catch {
+        /* IndexedDB unavailable: text edits still work */
+      }
+      if (!cancelled) setReady(true)
     }
-    setReady(true)
+    void hydrate()
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   useEffect(() => {
     if (!ready) return
-    if (!dirty) {
+    if (!textDirty) {
       window.localStorage.removeItem(STORAGE_KEY)
       return
     }
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ intro, categories }))
-  }, [ready, dirty, intro, categories])
+  }, [ready, textDirty, intro, categories])
+
+  const dirty = textDirty || Object.keys(figureUrls).length > 0
 
   const setIntro = useCallback((value: string) => {
     setIntroState(value)
-    setDirty(true)
+    setTextDirty(true)
   }, [])
 
   const commit = useCallback((recipe: (prev: Category[]) => Category[]) => {
     setCategories((prev) => recipe(prev))
-    setDirty(true)
+    setTextDirty(true)
   }, [])
 
   const updateCategory = useCallback(
@@ -176,29 +214,77 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     [commit]
   )
 
-  const reset = useCallback(() => {
-    setIntroState(HANDBOOK_INTRO)
-    setCategories(cloneCategories())
-    setDirty(false)
+  const replaceFigure = useCallback(async (id: string, file: File) => {
+    const blob = await fileToJpegBlob(file)
+    await putFigureBlob(id, blob)
+    setFigureUrls((prev) => {
+      if (prev[id]) URL.revokeObjectURL(prev[id])
+      return { ...prev, [id]: URL.createObjectURL(blob) }
+    })
   }, [])
 
-  const exportJson = useCallback(() => {
-    const blob = new Blob([JSON.stringify({ intro, categories }, null, 2)], {
-      type: "application/json",
+  const restoreFigure = useCallback(async (id: string) => {
+    await deleteFigureBlob(id)
+    setFigureUrls((prev) => {
+      if (prev[id]) URL.revokeObjectURL(prev[id])
+      const next = { ...prev }
+      delete next[id]
+      return next
     })
+  }, [])
+
+  const reset = useCallback(async () => {
+    await clearFigureBlobs()
+    setFigureUrls((prev) => {
+      revokeAll(prev)
+      return {}
+    })
+    setIntroState(HANDBOOK_INTRO)
+    setCategories(cloneCategories())
+    setTextDirty(false)
+  }, [])
+
+  const exportJson = useCallback(async () => {
+    const figures: Record<string, string> = {}
+    for (const [id, url] of Object.entries(figureUrls)) {
+      const blob = await fetch(url).then((response) => response.blob())
+      figures[id] = await blobToDataUrl(blob)
+    }
+    const payload = JSON.stringify({ intro, categories, figures }, null, 2)
+    const blob = new Blob([payload], { type: "application/json" })
     const url = URL.createObjectURL(blob)
     const link = document.createElement("a")
     link.href = url
     link.download = "eyelid-handbook-edits.json"
     link.click()
     URL.revokeObjectURL(url)
-  }, [intro, categories])
+  }, [intro, categories, figureUrls])
 
   const importJson = useCallback(async (file: File) => {
-    const parsed = JSON.parse(await file.text()) as { intro?: string; categories?: Category[] }
+    const parsed = JSON.parse(await file.text()) as {
+      intro?: string
+      categories?: Category[]
+      figures?: Record<string, string>
+    }
     if (typeof parsed.intro === "string") setIntroState(parsed.intro)
-    if (Array.isArray(parsed.categories) && parsed.categories.length) setCategories(parsed.categories)
-    setDirty(true)
+    if (Array.isArray(parsed.categories) && parsed.categories.length) {
+      setCategories(withFigureIds(parsed.categories))
+    }
+    setTextDirty(true)
+    if (parsed.figures && typeof parsed.figures === "object") {
+      await clearFigureBlobs()
+      setFigureUrls((prev) => {
+        revokeAll(prev)
+        return {}
+      })
+      const next: Record<string, string> = {}
+      for (const [id, dataUrl] of Object.entries(parsed.figures)) {
+        const blob = await dataUrlToBlob(dataUrl)
+        await putFigureBlob(id, blob)
+        next[id] = URL.createObjectURL(blob)
+      }
+      setFigureUrls(next)
+    }
   }, [])
 
   const value = useMemo(
@@ -209,10 +295,13 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       intro,
       setIntro,
       categories,
+      figureUrls,
       updateCategory,
       updateSectionTitle,
       updateTopicTitle,
       updateAssay,
+      replaceFigure,
+      restoreFigure,
       reset,
       exportJson,
       importJson,
@@ -223,10 +312,13 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       intro,
       setIntro,
       categories,
+      figureUrls,
       updateCategory,
       updateSectionTitle,
       updateTopicTitle,
       updateAssay,
+      replaceFigure,
+      restoreFigure,
       reset,
       exportJson,
       importJson,

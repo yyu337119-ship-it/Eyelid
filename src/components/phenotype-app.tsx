@@ -77,7 +77,7 @@ function EditToolbar() {
         variant="outline"
         size="sm"
         onClick={() => {
-          if (window.confirm("恢复为仓库中的原文，并清除本机保存的修改？")) reset()
+          if (window.confirm("恢复为仓库中的原文，并清除本机保存的文字和替换图片？")) void reset()
         }}
         disabled={!dirty}
       >
@@ -147,7 +147,7 @@ function PhenotypeAppInner() {
         </div>
         {editMode ? (
           <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-emerald-900 sm:px-6">
-            虚线框内的文字可直接改。修改只保存在这台电脑的浏览器里，不会写回服务器。可用导出备份。
+            虚线框内的文字可直接改；每张图下方可「替换图片」或「添加图表」。修改只保存在这台电脑的浏览器里。可用导出备份。
             {dirty ? " 当前有未恢复的本地修改。" : ""}
           </p>
         ) : null}

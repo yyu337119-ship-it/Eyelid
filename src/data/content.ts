@@ -1,4 +1,4 @@
-export type SourceId = "paper1" | "paper2" | "paper3" | "paper4" | "paper5"
+export type SourceId = "paper1" | "paper2"
 
 export type Marker = {
   name: string
@@ -53,24 +53,7 @@ export const sources = {
   paper1: {
     id: "paper1" as const,
     n: 1,
-    cite: "【1】Gardon DJ, et al. Dev Biol, 2026",
-    short: "Gardon DJ, et al. Dev Biol, 2026",
-    title:
-      "A mouse model of meibomian gland hyperkeratinization-induced dry eye",
-    authors: "Gardon DJ, Liu CJ, Veniaminova NA, et al.",
-    journal: "Developmental Biology",
-    year: "2026",
-    volume: "534: 209–214",
-    doi: "10.1016/j.ydbio.2026.03.010",
-    doiUrl: "https://doi.org/10.1016/j.ydbio.2026.03.010",
-    noteMap: "副本1本首页 [1]",
-    model:
-      "Krt6a-iCreERT2;Abca12-flox;YFP：他莫昔芬诱导，在 K6⁺ 中央导管分化细胞中敲除 Abca12",
-  },
-  paper2: {
-    id: "paper2" as const,
-    n: 2,
-    cite: "【2】Widjaja-Adhi MAK, et al. IOVS, 2026",
+    cite: "【1】Widjaja-Adhi MAK, et al. IOVS, 2026",
     short: "Widjaja-Adhi MAK, et al. IOVS, 2026",
     title:
       "Pharmacologic Alteration of Meibum Lipid Composition Alleviates Dry Eye Phenotype in Awat2−/− Mice",
@@ -80,46 +63,13 @@ export const sources = {
     volume: "67(6): 34",
     doi: "10.1167/iovs.67.6.34",
     doiUrl: "https://doi.org/10.1167/iovs.67.6.34",
-    noteMap: "副本1本首页 [2]；原笔记文献 [2]",
+    noteMap: "对应原笔记文献 [2]",
     model: "Awat2−/− 蒸发性干眼模型；ATR101（nevanimibe）抑制 SOAT1 / 胆固醇酯合成",
   },
-  paper3: {
-    id: "paper3" as const,
-    n: 3,
-    cite: "【3】Tchegnon E, et al. JCI Insight, 2021",
-    short: "Tchegnon E, et al. JCI Insight, 2021",
-    title:
-      "Epithelial stem cell homeostasis in Meibomian gland development, dysfunction, and dry eye disease",
-    authors: "Tchegnon E, Liao CP, Ghotbi E, et al.",
-    journal: "JCI Insight",
-    year: "2021",
-    volume: "6(20): e151078",
-    doi: "10.1172/jci.insight.151078",
-    doiUrl: "https://doi.org/10.1172/jci.insight.151078",
-    noteMap: "副本1本首页 [3]",
-    model:
-      "K14-Cre 介导上皮谱系敲除 Krox20；Krox20-Cre 谱系示踪；Krox20-DTA 发育期/成年期清除；与 Krox24 双敲比较",
-  },
-  paper4: {
-    id: "paper4" as const,
-    n: 4,
-    cite: "【4】Zhu X, et al. Nat Commun, 2025",
-    short: "Zhu X, et al. Nat Commun, 2025",
-    title: "Identification of Meibomian gland stem cell populations and mechanisms of aging",
-    authors: "Zhu X, Xu M, Portal C, et al.",
-    journal: "Nature Communications",
-    year: "2025",
-    volume: "16: 1663",
-    doi: "10.1038/s41467-025-56907-6",
-    doiUrl: "https://doi.org/10.1038/s41467-025-56907-6",
-    noteMap: "副本1本首页 [4]",
-    model:
-      "成年睑板腺干细胞谱系（Lrig1 / Lgr6 / Axin2 / Slc1a3 / Gli2）；Smo 敲除抑制 Hh；GLI2ΔN 激活 Hh；8 周 vs 21 月龄衰老比较",
-  },
-  paper5: {
-    id: "paper5" as const,
-    n: 5,
-    cite: "【5】Dong F, et al. Dev Biol, 2015",
+  paper2: {
+    id: "paper2" as const,
+    n: 2,
+    cite: "【2】Dong F, et al. Dev Biol, 2015",
     short: "Dong F, et al. Dev Biol, 2015",
     title:
       "Perturbed meibomian gland and tarsal plate morphogenesis by excess TGFα in eyelid stroma",
@@ -130,7 +80,7 @@ export const sources = {
     doi: "10.1016/j.ydbio.2015.09.003",
     doiUrl: "https://doi.org/10.1016/j.ydbio.2015.09.003",
     pmcUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
-    noteMap: "副本1本首页 [5]；原笔记文献 [5]",
+    noteMap: "对应原笔记文献 [5]",
     model:
       "Kera-rtTA/tetO-TGFα（KR/TG）双转基因小鼠，P0–P15 多西环素诱导眼睑基质过表达 TGFα",
   },
@@ -141,7 +91,7 @@ export function formatCites(ids: SourceId[]) {
 }
 
 export function uniqueSources(ids: SourceId[]): SourceId[] {
-  const order: SourceId[] = ["paper1", "paper2", "paper3", "paper4", "paper5"]
+  const order: SourceId[] = ["paper1", "paper2"]
   return order.filter((id) => ids.includes(id))
 }
 
@@ -170,11 +120,6 @@ export const abbreviations = [
   { abbr: "OO", full: "眼轮匝肌 orbicularis oculi" },
   { abbr: "CE / FA", full: "胆固醇酯 / 脂肪酸" },
   { abbr: "TBUT / NIBUT", full: "荧光素泪膜破裂时间 / 非侵入性泪膜破裂时间" },
-  { abbr: "K6 / Krt6a", full: "角蛋白 6，MG 中央导管分化细胞" },
-  { abbr: "ABCA12", full: "ATP 结合盒脂质转运蛋白，维持导管脱屑" },
-  { abbr: "KROX20 / EGR2", full: "锌指转录因子，标记 MG 上皮干/祖细胞" },
-  { abbr: "Hh / GLI2 / Smo", full: "刺猬信号及其受体、转录因子" },
-  { abbr: "PLIN2", full: "脂滴包被蛋白，睑脂细胞分化标志" },
 ]
 
 export const categories: Category[] = [
@@ -184,7 +129,7 @@ export const categories: Category[] = [
     title: "MG 及其分泌物",
     question: "腺体形态是否完整？导管是否阻塞？睑脂能否排出、成分是否异常？",
     summary:
-      "先看活体/大体和切片：腺体是否存在、导管是否角化阻塞。Oil Red O 只放在组织学里，用来看脂质在腺泡还是潴留在导管。裂隙灯看挤出睑脂的外观和排出；CE / FA / 熔点才算组分。分子层用 K6/K14/Abca12、KROX20/PPARγ、Slc1a3/Lrig1、Ki-67 等判断角化、干细胞和产脂程序。",
+      "先看活体/大体形态，再落到切片与三维重建量化导管，最后用分子标志物判断角化、分化与脂质合成，并以裂隙灯观察睑脂外观与排出是否通畅。",
     sections: [
       {
         id: "mg-gland",
@@ -197,90 +142,9 @@ export const categories: Category[] = [
         title: "腺体形态与组织学",
         assays: [
           {
-            id: "mg-abca12-duct",
-            title: "Abca12 导管敲除：眼睑大体、HE 导管阻塞与 Oil Red O 脂质潴留",
-            sources: ["paper1"],
-            instruments: [
-              "Krt6a-iCreERT2;Abca12-flox;YFP 小鼠腹腔注射他莫昔芬，在 K6⁺ 中央导管分化细胞中敲除 Abca12",
-              "活体大体观察眼睑干燥与结痂",
-              "石蜡切片 H&E：导管是否被角化物堵塞、管腔是否扩张",
-              "冰冻切片 Oil Red O：脂质在腺泡还是潴留在扩张导管",
-            ],
-            stains: ["H&E", "Oil Red O"],
-            observations: [
-              "TAM 10 天 cKO：眼睑干燥、结痂（B）。HE 显示中央导管阻塞并扩张（D 黑箭头）。",
-              "Oil Red O：对照脂质主要在腺泡；cKO 扩张导管内大片红染，是脱屑失败后睑脂排不出，不是腺泡不产脂。",
-              "TAM 14 天：角化栓可从导管脱落（F）。不直接靶向腺泡，仅破坏导管脱屑即可造成阻塞。K6/K14/YFP 定位见 ②。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper1-fig-phenotype.jpg",
-                paperFig: "Fig. B / D / E",
-                caption:
-                  "B：对照 vs cKO 眼睑结痂。D：HE 导管阻塞扩张。E：Oil Red O，cKO 导管内脂质潴留。A/C/F 的 IF 见分子标志物。",
-              },
-            ],
-          },
-          {
-            id: "mg-ly6g-exclude",
-            title: "Ly6G：排除 MG 腺体中性粒细胞性炎症堵塞",
-            sources: ["paper1"],
-            instruments: [
-              "免疫荧光：Ly6G 标中性粒细胞，K14 勾勒 MG 导管、腺泡和睑缘上皮",
-              "分别计数紧贴腺体的 Ly6G⁺ 细胞，以及选定视野内总数",
-            ],
-            markers: [
-              {
-                name: "Ly6G",
-                role: "中性粒细胞",
-                change: "Abca12 cKO 与对照无显著差异，MG 导管堵塞不是腺体中性粒细胞浸润造成的",
-              },
-            ],
-            observations: [
-              "读片焦点在腺体：中央导管（MD）、腺泡（Ac）及其紧邻间质，而不是结膜充血。",
-              "对照和 cKO 紧贴腺体的 Ly6G⁺ 细胞都很少，选定视野内总数也不升高。",
-              "因此本模型的导管阻塞应归为角化栓 / 脂质潴留，而不是 MG 腺体化脓性炎症堵塞。评价腺体阻塞时要把炎症、角化、脂质作为竞争机制分开记录。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper1-fig-ly6g.jpg",
-                paperFig: "Fig. Ly6G / 细胞计数",
-                caption:
-                  "A：绿=Ly6G，红=K14，标注 Epi / MD / Ac / Conj。计数分 Contacting gland 与 boxed area。cKO 不高于对照。",
-              },
-            ],
-          },
-          {
-            id: "mg-oro-krox20",
-            title: "Oil Red O：切片上判断腺泡是否含睑脂",
-            sources: ["paper3"],
-            instruments: [
-              "冰冻切片 Oil Red O 染睑板腺区域",
-              "Krox20-cKO 或发育期 DTA 清除 vs 对照",
-            ],
-            stains: ["Oil Red O"],
-            observations: [
-              "这是组织切片上的脂质定位，不是裂隙灯下的睑脂外观。",
-              "对照腺泡强红染，说明有睑脂。Krox20-cKO 和发育期 DTA 清除后红染消失，是腺体未形成、无脂可分泌，不是排出障碍。",
-              "与 Abca12 模型对照：一个是导管内潴留，一个是腺泡脂质缺失。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper3-fig2-mg.jpg",
-                paperFig: "Fig. 2G",
-                caption: "Oil Red O。上：cKO 无红染；下：对照腺泡充满睑脂。",
-              },
-              {
-                src: "/figures/paper3-fig5-dta.jpg",
-                paperFig: "Fig. 5D",
-                caption: "发育期清除 KROX20⁺ 细胞后切片上 Oil Red O 信号缺失。",
-              },
-            ],
-          },
-          {
             id: "mg-gross-he",
             title: "新鲜睑板纵切面大体成像联合 HE",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: [
               "Leica M205 C 体视显微镜：新鲜睑板纵切面大体宏观成像",
               "光学显微镜：睑板横切面 HE 染色",
@@ -293,7 +157,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig7-mg.jpg",
+                src: "/figures/paper1-fig7-mg.jpg",
                 paperFig: "Fig. 7A",
                 caption:
                   "上排 Awat2−/−/DMSO，下排 Awat2−/−/ATR101。左列纵切大体，右列 HE。红线标中央导管，绿箭头标开口堵塞。原图亦含 7B 核数与 7C RT-qPCR。",
@@ -303,7 +167,7 @@ export const categories: Category[] = [
           {
             id: "mg-nuclei-count",
             title: "连续 HE 横切面统计腺泡细胞核数",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: [
               "连续多张睑板横切面 HE 染色",
               "每只小鼠统计 32 张切片的腺泡细胞平均核数",
@@ -315,7 +179,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig7-mg.jpg",
+                src: "/figures/paper1-fig7-mg.jpg",
                 paperFig: "Fig. 7B",
                 caption:
                   "Average meibocyte nuclei count。Awat2−/−/DMSO < ATR101 < WT。",
@@ -325,7 +189,7 @@ export const categories: Category[] = [
           {
             id: "mg-stereo-close",
             title: "体视显微镜观察眼睑闭合与 MG 大体形态",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: [
               "体视显微镜：活体/离体翻转眼睑，暴露结膜面观察 MG 排列",
             ],
@@ -335,13 +199,13 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig2-eyelid.jpg",
+                src: "/figures/paper2-fig2-eyelid.jpg",
                 paperFig: "Fig. 2A–D",
                 caption:
                   "P11。A：对照眼睑仍闭合；B：KR/TG 过早睁眼，上下睑肿胀，下睑更明显。C/D：HE 确认开睑与肿胀。",
               },
               {
-                src: "/figures/paper5-fig3-mg.jpg",
+                src: "/figures/paper2-fig3-mg.jpg",
                 paperFig: "Fig. 3A–C",
                 caption:
                   "P15 结膜面大体。对照 MG 平行排列完整；重症腺体部分缺失、畸形；轻症大体接近对照。",
@@ -351,7 +215,7 @@ export const categories: Category[] = [
           {
             id: "mg-he-acini",
             title: "眼球 HE：腺泡结构、导管扩张、开口位置与间充质",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: ["石蜡切片 HE，光学显微镜"],
             stains: ["H&E"],
             observations: [
@@ -362,7 +226,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig3-mg.jpg",
+                src: "/figures/paper2-fig3-mg.jpg",
                 paperFig: "Fig. 3D–I",
                 caption:
                   "HE：对照腺泡成簇、开口在 MCJ 前方；重症导管扩张、开口异位到皮肤侧、间充质堆积；轻症大体接近对照但间充质仍增多。",
@@ -372,7 +236,7 @@ export const categories: Category[] = [
           {
             id: "mg-3d-duct",
             title: "三维虚拟组织学重建测量中央导管最大直径",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: [
               "连续组织切片重新上色，模拟上眼睑 H&E",
               "Amira 软件三维重建：导管标红、腺泡标绿",
@@ -386,7 +250,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig6-3d.jpg",
+                src: "/figures/paper1-fig6-3d.jpg",
                 paperFig: "Fig. 6A–C",
                 caption:
                   "A：不同 Z 深度切片，黑箭头标导管。B：三维渲染，红=导管、绿=腺泡。C：中央导管最大直径箱线图。",
@@ -396,7 +260,7 @@ export const categories: Category[] = [
           {
             id: "mg-terminal-duct",
             title: "裂隙灯图像测量末端导管厚度",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: [
               "裂隙灯导出带比例尺照片",
               "ImageJ：沿垂直于导管长轴方向，测外部可视横向宽度（导管 + 管腔内淤积脂质的整体外观厚度）",
@@ -407,7 +271,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig5-mg-duct.jpg",
+                src: "/figures/paper1-fig5-mg-duct.jpg",
                 paperFig: "Fig. 5B",
                 caption:
                   "B：MG terminal duct thickness (Dx−Do)/Do。ATR101 组在 Day 10、Day 14 均低于溶剂对照。A 为同一批裂隙灯导管图像。",
@@ -422,347 +286,9 @@ export const categories: Category[] = [
         title: "分子标志物",
         assays: [
           {
-            id: "mg-abca12-markers",
-            title: "K6 / K14 / Abca12 / YFP：中央导管分化细胞定位与重组",
-            sources: ["paper1"],
-            instruments: [
-              "免疫荧光：K14 勾勒表皮、结膜、中央导管和腺泡",
-              "YFP 追踪 Krt6a-iCreERT2 重组的 K6⁺ 导管分化细胞",
-            ],
-            markers: [
-              {
-                name: "K6 / YFP",
-                role: "中央导管分化细胞及其重组标记",
-                change: "TAM 10 天：YFP⁺ K6⁺ 过度角化细胞填充导管；14 天：过度角化细胞脱落",
-              },
-              {
-                name: "K14",
-                role: "眼睑上皮 / MG 导管与腺泡轮廓",
-                change: "用于把表皮、结膜、中央导管（MD）和腺泡（Ac）分开",
-              },
-              {
-                name: "Abca12",
-                role: "导管脱屑所需的脂质转运蛋白",
-                change: "在 K6⁺ 导管细胞中敲除后脱屑失败、角化物堆积",
-              },
-            ],
-            observations: [
-              "先建立正常 marker 地图：目标蛋白在眼睑表皮、结膜、MG 导管还是腺泡。",
-              "对照：K14 勾勒完整中央导管与腺泡，管腔通畅（A）。cKO：导管被 YFP⁺ 角化细胞填充（C 白箭头）。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper1-fig-phenotype.jpg",
-                paperFig: "Fig. A / C / F",
-                caption:
-                  "A：绿=YFP，红=K14，正常解剖。C：cKO 导管被 YFP⁺ 角化细胞填充。F：14 天角化细胞脱落。大体/HE/ORO 见 ①。",
-              },
-            ],
-          },
-          {
-            id: "mg-krox20-lineage",
-            title: "KROX20 定位、发育时间窗与谱系示踪",
-            sources: ["paper3"],
-            instruments: [
-              "Krox20-GFP 敲入报告小鼠：GFP 指示正在表达 Krox20 的细胞",
-              "Krox20-Cre;R26-tdTomato：永久标记表达过 Krox20 的细胞及其后代",
-              "时间点：P1–P15、1.5–10 月龄",
-              "免疫荧光共染 K14、PPARγ、KROX20",
-            ],
-            markers: [
-              {
-                name: "KROX20 / GFP",
-                role: "当前表达的 MG 干/祖细胞",
-                change:
-                  "P3–P6 在腺泡形成前的上皮索；P11 后集中于导管上基底层，持续至成年。与 PPARγ⁺ 腺泡细胞基本不共定位",
-              },
-              {
-                name: "tdTomato（Krox20 谱系）",
-                role: "KROX20⁺ 细胞及其后代",
-                change: "从发育早期铺满整个睑板腺，与 K14、PPARγ 重叠，说明谱系可形成导管和腺泡",
-              },
-              {
-                name: "PPARγ",
-                role: "腺泡睑脂细胞",
-                change: "局限于腺泡区，用于和导管区 KROX20 对照",
-              },
-            ],
-            observations: [
-              "先看当前表达（GFP/KROX20），再看谱系（tdTomato）。前者告诉干细胞住在导管上基底层，后者证明它们能生成完整腺体。",
-              "角膜和 K15⁺ 角膜缘无 tdTomato（Fig. 2A–D），支持角膜病变是睑板腺缺失的继发后果，而不是角膜自身敲除。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper3-fig3-krox20.jpg",
-                paperFig: "Fig. 3",
-                caption:
-                  "A：P3 至 9 月龄 KROX20（绿）与 K14（红）。成熟后 KROX20 在导管上基底层。B：KROX20 与 PPARγ 分区，几乎不重叠。",
-              },
-              {
-                src: "/figures/paper3-fig4-lineage.jpg",
-                paperFig: "Fig. 4",
-                caption:
-                  "A：P1–10 月龄 tdTomato 铺满腺体。B：与 K14 重叠。C：与 PPARγ 重叠，谱系可生成腺泡细胞。",
-              },
-              {
-                src: "/figures/paper3-fig2-mg.jpg",
-                paperFig: "Fig. 2A–D",
-                caption:
-                  "Krox20-Cre;R26-tdTomato。角膜和 K15⁺ 角膜缘无 Tom 信号（白/绿箭头），用于把角膜病变判为继发。",
-              },
-            ],
-          },
-          {
-            id: "mg-krox20-absent",
-            title: "Krox20 缺失或谱系清除后睑板腺是否存在",
-            sources: ["paper3"],
-            instruments: [
-              "Krox20fl/fl;K14-Cre（Krox20-cKO）vs Krox20fl/fl 对照",
-              "Krox20-DTA;K14-Cre：P6 清除 K14 谱系中的 KROX20⁺ 细胞",
-              "Krox20-Cre;R26-rtTA;Tet-DTA：P20 起多西环素诱导，成年期清除已形成腺体中的谱系细胞",
-              "石蜡切片 H&E；免疫荧光 K14 / PPARγ / KROX20",
-            ],
-            stains: ["H&E"],
-            markers: [
-              {
-                name: "K14",
-                role: "MG 导管和腺泡上皮轮廓",
-                change: "cKO、发育期 DTA、成年期清除后腺体结构信号缺失",
-              },
-              {
-                name: "PPARγ",
-                role: "腺泡睑脂细胞分化",
-                change: "腺体缺失时 PPARγ 信号消失",
-              },
-              {
-                name: "KROX20",
-                role: "MG 干/祖细胞标志",
-                change: "cKO 和 DTA 清除后信号消失，证实靶细胞被去掉",
-              },
-            ],
-            observations: [
-              "Fig. 2E：2.5 月龄 Krox20-cKO 睑板腺结构完全缺失（虚线区空），对照腺体完整。所有 cKO 小鼠均缺腺体。",
-              "Fig. 5：P6 DTA 清除后 KROX20⁺ 细胞消失，H&E 无腺体，K14/PPARγ 缺失。",
-              "Fig. 6：成年期清除已形成的腺体，H&E 显示腺体丢失，并继发角膜病变。",
-              "Fig. 8：Krox24 单敲保留正常腺体；Krox20-cKO 和双敲均无腺体。Krox20 而非 Krox24 决定腺体结构形成。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper3-fig2-mg.jpg",
-                paperFig: "Fig. 2E–J",
-                caption:
-                  "E：H&E，cKO 睑板腺缺失。F：K14/PPARγ 腺体标志消失。H–J：KROX20 与 K14 共染确认靶蛋白丢失。A–D 为角膜缘谱系，见角膜分支。",
-              },
-              {
-                src: "/figures/paper3-fig5-dta.jpg",
-                paperFig: "Fig. 5",
-                caption:
-                  "P6 清除 KROX20⁺ 上皮谱系。A：KROX20 消失。B：H&E 无腺体。C：K14/PPARγ 缺失。D：Oil Red O 无睑脂。",
-              },
-              {
-                src: "/figures/paper3-fig6-adult.jpg",
-                paperFig: "Fig. 6C–E",
-                caption:
-                  "成年期诱导清除。C：H&E 已形成腺体丢失。D：K14/PPARγ 缺失。E：KROX20 信号消失。A–B 为继发角膜病变。",
-              },
-              {
-                src: "/figures/paper3-fig8-mg.jpg",
-                paperFig: "Fig. 8B–F",
-                caption:
-                  "WT / Krox24-KO 保留腺体；Krox20-cKO 与双敲腺体缺失。E–F：Krox24-KO 仍表达 KROX20。",
-              },
-            ],
-          },
-          {
-            id: "mg-zhu-stem",
-            title: "snRNA-seq + RNAscope + 谱系追踪鉴定 MG 干细胞群",
-            sources: ["paper4"],
-            instruments: [
-              "单细胞核 RNA-seq 和 RNA velocity / 拟时序，预测导管与腺泡分化轨迹",
-              "RNAscope 原位验证候选干细胞基因的空间位置",
-              "P50 他莫昔芬诱导：Lrig1 / Lgr6 / Axin2 / Slc1a3 / Gli2-CreERT2;Rosa26mTmG，2 天看标记位置，90–120 天看克隆扩展",
-              "PLIN2 免疫荧光标记已分化睑脂细胞",
-            ],
-            markers: [
-              {
-                name: "Slc1a3",
-                role: "腺泡干细胞",
-                change: "谱系主要补充腺泡 / PLIN2⁺ 睑脂细胞，不广泛标记导管",
-              },
-              {
-                name: "Lrig1、Lgr6、Axin2",
-                role: "导管小管 / 导管基底干细胞",
-                change: "2 天标记导管；长期可同时贡献导管和腺泡，支持导管小管是干细胞储库",
-              },
-              {
-                name: "Gli2",
-                role: "Hh 通路转录因子，标记有 Hh 活性的干细胞",
-                change: "2 天可见于导管和腺泡基底；长期形成扩增克隆",
-              },
-              {
-                name: "PLIN2",
-                role: "分化睑脂细胞脂滴包被蛋白",
-                change: "用于判断谱系细胞是否进入产脂分化；癌组织中 PLIN2 可缺失",
-              },
-            ],
-            observations: [
-              "UMAP 把 MG 分成开口细胞、导管上基底、导管基底、导管细胞、腺泡基底、分化中/已分化睑脂细胞，并与结膜、毛囊、骨骼肌/平滑肌分开。",
-              "评价时成对看：短时间标记回答“干细胞住在哪”，长时间克隆回答“它补充谁”。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper4-fig1-umap.jpg",
-                paperFig: "Fig. 1",
-                caption:
-                  "a：UMAP 细胞分群。b：导管–腺泡结构示意图。c–d：RNA velocity 与拟时序，导管基底和腺泡基底走向分化睑脂细胞。",
-              },
-              {
-                src: "/figures/paper4-fig2-lineage.jpg",
-                paperFig: "Fig. 2",
-                caption:
-                  "a：P50 诱导、2 天 vs 90/120 天。b–d：Lrig1/Lgr6/Axin2 从导管扩展。e：Gli2。f：Slc1a3 偏腺泡。绿/品红=谱系，红=PLIN2。",
-              },
-            ],
-          },
-          {
-            id: "mg-zhu-morphology",
-            title: "离体睑板腺形态与基底细胞 Ki-67 增殖",
-            sources: ["paper4"],
-            instruments: [
-              "分离眼睑后观察整根 MG 形态（中央导管 CD、腺泡簇、睑缘开口）",
-              "KRT14-CreERT2;Smofl/fl 抑制 Hh，或 Krt5-rtTA;tetO-GLI2ΔN 激活 Hh",
-              "免疫组化：Ki-67 计数腺泡和导管基底细胞增殖比例",
-            ],
-            stains: ["IHC（Ki-67、PPARγ、FASN）"],
-            markers: [
-              {
-                name: "Ki-67",
-                role: "腺泡 / 导管基底细胞增殖",
-                change: "Smo 敲除后腺泡和导管 Ki-67⁺ 比例显著下降；GLI2 激活后增殖升高",
-              },
-            ],
-            observations: [
-              "对照整腺：腺泡簇沿中央导管排列，开口朝向睑缘。",
-              "抑制 Hh（Smo cKO）：腺体缩小、部分腺泡脱落（黄星），Ki-67⁺ 腺泡和导管基底细胞减少。",
-              "评价衰老或干预时，要同时看腺体是否变小、腺泡是否脱落，以及基底增殖是否下降，避免只报一个形态指标。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper4-fig3-smo.jpg",
-                paperFig: "Fig. 3",
-                caption:
-                  "a–c：整腺形态，CD=中央导管，黄星=脱落腺泡。d–k：PPARγ、FASN、Ki-67。l–m：腺泡与导管基底 Ki-67⁺ 比例下降。",
-              },
-              {
-                src: "/figures/paper4-fig4-gli2.jpg",
-                paperFig: "Fig. 4",
-                caption:
-                  "激活 Hh / GLI2 后腺体增大、基底细胞扩增，与 Smo 敲除方向相反，构成双向遗传学证据。",
-              },
-            ],
-          },
-          {
-            id: "mg-gli2-lipid",
-            title: "GLI2 激活后脂质代谢基因与 PLIN2",
-            sources: ["paper4"],
-            instruments: [
-              "激光捕获睑板腺 bulk RNA-seq，看脂质代谢 / 睑脂分化基因",
-              "免疫荧光 PLIN2 判断产脂分化是否被抑制",
-            ],
-            markers: [
-              {
-                name: "脂质代谢 / 睑脂分化基因",
-                role: "产脂程序的分子读出，不是挤出睑脂的物理组分",
-                change: "GLI2 激活后下调",
-              },
-              {
-                name: "PLIN2",
-                role: "分化睑脂细胞脂滴包被蛋白",
-                change: "干细胞扩增同时分化受抑；人睑板腺癌中 PLIN2 缺失",
-              },
-            ],
-            observations: [
-              "Hh 过激活让腺体看起来变大，但转录组显示产脂程序被压下去，属于增殖↑、分化↓，不能当成睑脂功能恢复。",
-              "挤出睑脂的 CE / FA / 熔点见「2、睑脂 ②组分与物理性状」。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper4-fig5-gli2-rna.jpg",
-                paperFig: "Fig. 5C",
-                caption: "GLI2 激活：Hh 与增殖相关基因上调，脂质代谢和睑脂分化相关基因下调。",
-              },
-            ],
-          },
-          {
-            id: "mg-zhu-hh-aging",
-            title: "Hh / HBEGF–EGFR 与衰老微环境",
-            sources: ["paper4"],
-            instruments: [
-              "诱导 GLI2ΔN 后激光捕获 MG，bulk RNA-seq + GO",
-              "人正常睑板腺 vs 睑板腺癌：RNAscope GLI1/Ptch1，IF Ki-67 / 干细胞标志 / PLIN2",
-              "8 周龄 vs 21 月龄小鼠：Ptch1、Gli2、GLI2 乙酰化相关 PLA",
-              "CellChat；IHC p-ERK1/2；IF PGP9.5 神经纤维",
-            ],
-            markers: [
-              {
-                name: "GLI1 / Ptch1",
-                role: "Hh 通路活性读出",
-                change: "癌组织增强；老年小鼠减弱",
-              },
-              {
-                name: "Ki-67 / PLIN2",
-                role: "增殖 vs 睑脂分化",
-                change: "癌：Ki-67↑、PLIN2 缺失；衰老：增殖不足",
-              },
-              {
-                name: "Hbegf、p-ERK1/2",
-                role: "HBEGF–EGFR 生长信号",
-                change: "老年 Hbegf↓，p-ERK1/2↓，总 ERK 相近",
-              },
-              {
-                name: "PGP9.5",
-                role: "腺泡周围神经纤维",
-                change: "老年腺泡周围神经减少，同时 I 型胶原相关表达降低",
-              },
-            ],
-            observations: [
-              "GLI2 激活：Hh 和增殖基因↑，脂质代谢/睑脂分化基因↓；Lrig1⁺、Lgr6⁺、Axin2⁺ 克隆扩增。",
-              "腺体变小要拆成两问：是基底补充不足，还是产脂分化异常。衰老同时有 Hh 减弱、EGFR 信号减弱、神经和基质支持减少。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper4-fig5-gli2-rna.jpg",
-                paperFig: "Fig. 5",
-                caption:
-                  "GLI2 激活后转录组：增殖↑、脂质分化↓；Lrig1/Lgr6/Axin2 谱系参与腺体过生长。",
-              },
-              {
-                src: "/figures/paper4-fig6-carcinoma.jpg",
-                paperFig: "Fig. 6",
-                caption: "人睑板腺癌：GLI1 增强，干细胞标志扩增，Ki-67↑、PLIN2 缺失。",
-              },
-              {
-                src: "/figures/paper4-fig7-aging-hh.jpg",
-                paperFig: "Fig. 7",
-                caption: "21 月龄 vs 8 周：Ptch1⁺、Gli2⁺ 细胞减少，GLI2 乙酰化相关信号增强。",
-              },
-              {
-                src: "/figures/paper4-fig8-egf.jpg",
-                paperFig: "Fig. 8",
-                caption:
-                  "CellChat 显示老年 EGF 信息流下降。d–f：Hbegf 表达降低，p-ERK1/2 减少、总 ERK 相近。",
-              },
-              {
-                src: "/figures/paper4-fig9-niche.jpg",
-                paperFig: "Fig. 9",
-                caption: "老年腺泡周围 PGP9.5⁺ 神经纤维减少，基质支持相关表达下降。",
-              },
-            ],
-          },
-          {
             id: "mg-rtqpcr",
             title: "睑板腺标志物基因 RT-qPCR",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: ["RT-qPCR，睑板组织 mRNA 定量"],
             markers: [
               {
@@ -787,7 +313,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig7-mg.jpg",
+                src: "/figures/paper1-fig7-mg.jpg",
                 paperFig: "Fig. 7C",
                 caption:
                   "睑板组织 RT-qPCR：Aldh1a3、Rarb、Rbp1、Sprr1a、Pparg、Krt14（相对 Gapdh）。ATR101 后角化/修复轴下降，Pparg 回升。",
@@ -797,7 +323,7 @@ export const categories: Category[] = [
           {
             id: "mg-pparg-pcna",
             title: "MG 腺泡分化、增殖与凋亡（PPARγ / PCNA / TUNEL）",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: [
               "石蜡切片免疫荧光",
               "TUNEL 凋亡检测",
@@ -826,17 +352,17 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig8-pcna.jpg",
+                src: "/figures/paper2-fig8-pcna.jpg",
                 paperFig: "Fig. 8Aa vs Ba",
                 caption: "PCNA：两组阳性细胞均在 MG 基底层，分布模式相似。",
               },
               {
-                src: "/figures/paper5-fig9-tunel.jpg",
+                src: "/figures/paper2-fig9-tunel.jpg",
                 paperFig: "Fig. 9Aa vs Ba",
                 caption: "TUNEL：两组腺泡内阳性细胞均很少。",
               },
               {
-                src: "/figures/paper5-fig10-pparg-collagen.jpg",
+                src: "/figures/paper2-fig10-pparg-collagen.jpg",
                 paperFig: "Fig. 10A–B",
                 caption: "PPARγ：对照与 KR/TG 腺泡均阳性，过表达组仍保留分化标记。",
               },
@@ -859,7 +385,7 @@ export const categories: Category[] = [
           {
             id: "meibum-appearance",
             title: "裂隙灯生物显微镜观察睑脂大体外观",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: [
               "裂隙灯生物显微镜约 40 倍：观察挤出睑脂的透明度、形态和粘稠外观",
             ],
@@ -869,7 +395,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig2-meibum.jpg",
+                src: "/figures/paper1-fig2-meibum.jpg",
                 paperFig: "Fig. 2D",
                 caption:
                   "黄圈标挤出的睑脂。左：Awat2−/−/DMSO 蜡样不透明；右：ATR101 后更透明、体积更小。同图 B/C/E 为 CE、FA 与熔融温度。",
@@ -879,7 +405,7 @@ export const categories: Category[] = [
           {
             id: "meibum-expressibility",
             title: "裂隙灯下观察开口并挤压评估排出是否通畅",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: [
               "裂隙灯直接观察睑缘开口",
               "轻压睑板，比较挤压前后开口处脂质排出",
@@ -890,7 +416,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig5-mg-duct.jpg",
+                src: "/figures/paper1-fig5-mg-duct.jpg",
                 paperFig: "Fig. 5A",
                 caption:
                   "裂隙灯观察上睑末端导管。Day 0 先挤出堵塞物，随后随访 Day 10 / 14。ATR101 组导管更清晰、阻塞减轻。",
@@ -907,7 +433,7 @@ export const categories: Category[] = [
           {
             id: "meibum-biophysics",
             title: "睑脂熔融温度与 CE / FA 组分",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: [
               "LC-MS：睑脂胆固醇酯（CE）定量",
               "脂肪酸组成分析：饱和 / 单不饱和 FA 链长分布",
@@ -924,7 +450,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig2-meibum.jpg",
+                src: "/figures/paper1-fig2-meibum.jpg",
                 paperFig: "Fig. 2B、2C、2E",
                 caption:
                   "B：CE 含量。C：饱和与单不饱和 FA。E：熔融温度重复测量。A 为给药方案，D 为大体外观。",
@@ -943,7 +469,7 @@ export const categories: Category[] = [
     title: "角膜和泪膜、泪液",
     question: "角膜屏障是否破损？上皮是否应激修复？泪膜是否稳定？",
     summary:
-      "角膜先用大体和荧光素看破损与混浊，再用 HE 看上皮增厚、炎症和新生血管，最后用 K12 / K14 / K15 / K1 / loricrin 判断是否鳞状化生。泪膜用镜面光反射和 TBUT；泪液量、泪河仍待补。读片时先排除角膜本身是否表达致病基因，再判断是否继发于睑板腺缺失。",
+      "角膜先用荧光素看破损范围，再用在体共聚焦看表层/翼状/基底细胞形态，最后用 Krt14 / Krt12 / Sprr1a 判断分化与鳞状化生。泪膜用镜面光反射环评价完整性；泪液量、泪河和 TBUT/NIBUT 仍待补。",
     sections: [
       {
         id: "cornea",
@@ -956,45 +482,9 @@ export const categories: Category[] = [
             title: "形态与完整性",
             assays: [
           {
-            id: "cornea-krox20-gross",
-            title: "大体 + HE：干眼介导的角膜鳞状化生",
-            sources: ["paper3"],
-            instruments: [
-              "活体眼表大体观察（1、3、6、12 月龄）",
-              "离体眼球大体",
-              "全眼球石蜡切片 H&E，观察上皮、基质、炎症和新生血管",
-            ],
-            stains: ["H&E"],
-            observations: [
-              "Krox20-cKO：眼表粗糙、角膜混浊；1–3 月龄出现，随年龄加重，发生率 100%。对照角膜透明。",
-              "HE：上皮显著增厚并过度角化，基质增厚、疏松紊乱，散在深染炎症细胞核，可见管腔内含红细胞的新生血管。",
-              "Krox24 单敲眼表正常；与 Krox20 双敲则病变更早、更快。先确认角膜本身无 Krox20 谱系标记，再把本表型记为睑板腺缺失的继发后果。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper3-fig1-cornea.jpg",
-                paperFig: "Fig. 1A–E",
-                caption:
-                  "A–B：活体和离体角膜混浊。C–D：HE 全层。E：1–12 月龄进展。F–I 标志物见下一分支。",
-              },
-              {
-                src: "/figures/paper3-fig1-he-zoom.jpg",
-                paperFig: "Fig. 1D 放大",
-                caption:
-                  "上：cKO 上皮增厚、过度角化，基质炎症和新生血管。下：对照薄而规则的角膜上皮。",
-              },
-              {
-                src: "/figures/paper3-fig7-krox24.jpg",
-                paperFig: "Fig. 7A–C",
-                caption:
-                  "WT 与 Krox24-KO 眼表正常；Krox20-cKO 和双敲出现炎症、过度角化和鳞状化生。",
-              },
-            ],
-          },
-          {
             id: "cornea-fluorescein",
             title: "荧光素染色裂隙灯评估角膜完整性",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: [
               "角膜荧光素染色",
               "裂隙灯钴蓝光采集代表性图像（双眼 OD/OS，Day 0 / 10 / 14）",
@@ -1006,7 +496,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig3-tear-cornea.jpg",
+                src: "/figures/paper1-fig3-tear-cornea.jpg",
                 paperFig: "Fig. 3C–D",
                 caption:
                   "C：钴蓝光下荧光素着染，Day 0 / 10 / 14。D：着染积分密度，ATR101 组显著低于 DMSO。",
@@ -1016,7 +506,7 @@ export const categories: Category[] = [
           {
             id: "cornea-confocal",
             title: "在体共聚焦显微镜观察角膜上皮各层",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: ["在体共聚焦显微镜，分层采集表层、翼状、基底上皮细胞"],
             observations: [
               "看三点：细胞是否肥大、固缩核数量、是否出现鳞状化生和表层脱落。",
@@ -1025,7 +515,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig4-cornea.jpg",
+                src: "/figures/paper1-fig4-cornea.jpg",
                 paperFig: "Fig. 4A",
                 caption:
                   "列：表层 / 翼状 / 基底上皮。行：WT、Awat2−/−/DMSO、Awat2−/−/ATR101。黄箭头脱落/鳞状化生，红箭头固缩核。",
@@ -1040,54 +530,9 @@ export const categories: Category[] = [
             title: "分子标志物",
             assays: [
           {
-            id: "cornea-krox20-markers",
-            title: "角膜分化标志：K12 vs 表皮样 K14 / K15 / K1 / loricrin",
-            sources: ["paper3"],
-            instruments: [
-              "角膜切片免疫荧光共染色",
-              "比较 Krox20-cKO、Krox24-KO、双敲与 WT",
-            ],
-            markers: [
-              {
-                name: "K12",
-                role: "正常角膜上皮终末分化",
-                change: "cKO 和双敲中缺失，被表皮样上皮取代",
-              },
-              {
-                name: "K14",
-                role: "基底/应激上皮；在本模型中与表皮化并存",
-                change: "cKO 角膜异常表达，对照浅表以 K12 为主",
-              },
-              {
-                name: "K15、K1、loricrin",
-                role: "复层鳞状角化 / 表皮终末分化",
-                change: "cKO 和双敲异位出现在角膜表面",
-              },
-            ],
-            observations: [
-              "正常：浅表 K12⁺，无 K1 / loricrin。鳞状化生：K12↓，K15 / K1 / loricrin↑。",
-              "Krox24 单敲这些标志仍接近 WT；双敲与 Krox20-cKO 方向相同但出现更早。",
-              "系统评价时把 K12 丢失和表皮标志出现绑在一起看，不要只报一个角蛋白。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper3-fig1-cornea.jpg",
-                paperFig: "Fig. 1F–I",
-                caption:
-                  "F：K14/K12，cKO 丢失 K12。G：K15。H：K1。I：loricrin。下排对照。",
-              },
-              {
-                src: "/figures/paper3-fig7-krox24.jpg",
-                paperFig: "Fig. 7D–G",
-                caption:
-                  "K12⁺ 角膜上皮被 K14、K15、K1 和 loricrin⁺ 角化表皮样上皮取代。",
-              },
-            ],
-          },
-          {
             id: "cornea-markers",
             title: "角膜上皮标志物：免疫荧光 + RT-qPCR",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: [
               "角膜切片免疫荧光（IF）",
               "RT-qPCR 定量标志物基因 mRNA",
@@ -1117,7 +562,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig4-cornea.jpg",
+                src: "/figures/paper1-fig4-cornea.jpg",
                 paperFig: "Fig. 4B–C",
                 caption:
                   "B：红=Krt14，绿=Krt12。DMSO 组浅表 Krt14 异位。C：Krt14、Sprr1a 相对 Gapdh 的 RT-qPCR。",
@@ -1141,7 +586,7 @@ export const categories: Category[] = [
           {
             id: "tear-specular",
             title: "镜面光反射法评估泪膜完整性",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: [
               "体视显微镜：观察圆形 LED 光环在眼表的反射模式",
             ],
@@ -1152,7 +597,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig3-tear-cornea.jpg",
+                src: "/figures/paper1-fig3-tear-cornea.jpg",
                 paperFig: "Fig. 3A",
                 caption:
                   "镜面光反射。DMSO 组环形反光碎裂、扭曲；ATR101 组恢复较完整圆环。标尺 200 μm。",
@@ -1169,7 +614,7 @@ export const categories: Category[] = [
           {
             id: "tear-tbut",
             title: "泪膜破裂时间（TBUT）",
-            sources: ["paper2"],
+            sources: ["paper1"],
             instruments: [
               "泪膜破裂时间定量（原文 Fig. 3B）：比较 Awat2−/−/DMSO、ATR101 与 WT",
             ],
@@ -1185,7 +630,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper2-fig3-tear-cornea.jpg",
+                src: "/figures/paper1-fig3-tear-cornea.jpg",
                 paperFig: "Fig. 3B",
                 caption:
                   "Tear film break-up time。Awat2−/−/DMSO < ATR101 < WT。",
@@ -1202,9 +647,9 @@ export const categories: Category[] = [
     id: "conjunctiva",
     roman: "三",
     title: "结膜",
-    question: "结膜上皮是否增生？杯状细胞是否改变？MCJ 分化边界是否错位？",
+    question: "结膜上皮是否增生？杯状细胞和黏蛋白是否改变？MCJ 分化边界是否错位？",
     summary:
-      "结膜评价分三层：HE 看睑缘/结膜上皮厚度，PAS 看穹窿杯状细胞，免疫荧光用 Krt4（黏膜）和 Krt10（表皮）判断 MCJ 是否被表皮化。",
+      "结膜评价分三层：HE 看睑缘/结膜上皮厚度，PAS 看穹窿杯状细胞，免疫荧光用 Krt4（黏膜）和 Krt10（表皮）判断 MCJ 是否被表皮化。充血和黏蛋白监测在笔记中仍是待补项。",
     sections: [
       {
         id: "conj-structure",
@@ -1219,7 +664,7 @@ export const categories: Category[] = [
           {
             id: "conj-he",
             title: "睑板上皮 HE：结膜、皮肤黏膜移行上皮增厚",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: ["石蜡切片 HE"],
             stains: ["H&E"],
             observations: [
@@ -1228,7 +673,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig5-conjunctiva.jpg",
+                src: "/figures/paper2-fig5-conjunctiva.jpg",
                 paperFig: "Fig. 5A–D",
                 caption:
                   "HE：对照 A、C vs 转基因 B、D。结膜上皮与皮肤黏膜移行上皮增厚。",
@@ -1245,7 +690,7 @@ export const categories: Category[] = [
           {
             id: "conj-pas",
             title: "结膜 PAS 染色评估穹窿杯状细胞",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: ["PAS 染色，观察结膜穹窿"],
             stains: ["PAS"],
             markers: [
@@ -1261,7 +706,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig5-conjunctiva.jpg",
+                src: "/figures/paper2-fig5-conjunctiva.jpg",
                 paperFig: "Fig. 5E–F",
                 caption: "PAS：对照 vs TGFα 过表达 15 天，焦点在穹窿杯状细胞密度。",
               },
@@ -1284,7 +729,7 @@ export const categories: Category[] = [
           {
             id: "conj-krt4",
             title: "Krt4：皮肤黏膜交界区黏膜上皮分化",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: ["免疫荧光"],
             markers: [
               {
@@ -1298,7 +743,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig5-conjunctiva.jpg",
+                src: "/figures/paper2-fig5-conjunctiva.jpg",
                 paperFig: "Fig. 5G–H",
                 caption: "免疫荧光：对照 MCJ 黏膜侧 Krt4 阳性，转基因鼠该信号消失。",
               },
@@ -1307,7 +752,7 @@ export const categories: Category[] = [
           {
             id: "conj-krt10",
             title: "Krt10：表皮分化标志越过 MCJ 进入结膜",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: ["免疫荧光"],
             markers: [
               {
@@ -1322,11 +767,38 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig5-conjunctiva.jpg",
+                src: "/figures/paper2-fig5-conjunctiva.jpg",
                 paperFig: "Fig. 5I–J",
                 caption: "Krt10 信号是否跨越 MCJ 进入结膜侧。",
               },
             ],
+          },
+            ],
+          },
+          {
+            id: "conj-pending-topic",
+            mark: "②",
+            title: "充血与黏蛋白",
+            assays: [
+          {
+            id: "conj-pending",
+            title: "结膜充血与黏蛋白监测（笔记待补）",
+            sources: ["paper2"],
+            instruments: ["笔记仅列出监测方向，未给出仪器和结果"],
+            markers: [
+              {
+                name: "结膜黏蛋白（如 Muc5ac 等）",
+                role: "泪膜黏液层 / 杯状细胞功能",
+              },
+            ],
+            observations: [
+              "目前可落地的是 PAS 杯状细胞计数；充血评分和黏蛋白分子检测仍缺方案。",
+            ],
+            pending: [
+              "结膜充血的活体评分或裂隙灯标准",
+              "结膜黏蛋白的免疫组化 / ELISA / qPCR 面板",
+            ],
+            figures: [],
           },
             ],
           },
@@ -1356,7 +828,7 @@ export const categories: Category[] = [
           {
             id: "muscle-sma-myosin",
             title: "α-SMA 与骨骼肌肌球蛋白：睑板肌 / 眼轮匝肌",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: ["免疫荧光"],
             markers: [
               {
@@ -1376,7 +848,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-suppl-fig1-sma-myosin.jpg",
+                src: "/figures/paper2-suppl-fig1-sma-myosin.jpg",
                 paperFig: "补充图 1A、1B",
                 caption:
                   "P15。红=α-SMA（TM），绿=骨骼肌肌球蛋白（OO），蓝=DAPI。KR 与 KR/TG 总体相似；远端可因囊肿局部中断。",
@@ -1400,7 +872,7 @@ export const categories: Category[] = [
           {
             id: "muscle-lineage-trace",
             title: "Wnt1Cre / Rosa26mTmG 谱系追踪",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: [
               "KR/TG 与 Wnt1Cre/Rosa26mTmG 杂交",
               "冰冻切片 DAPI，绿色荧光=神经嵴来源",
@@ -1419,13 +891,13 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig6-lineage.jpg",
+                src: "/figures/paper2-fig6-lineage.jpg",
                 paperFig: "Fig. 6A–G、A′–G′",
                 caption:
                   "下睑。绿=神经嵴来源。对照 CPF/TP 为绿色；KR/TG 后 CPF、TP 明显增厚，TM 相对不受累。",
               },
               {
-                src: "/figures/paper5-suppl-fig2-upper-lid.jpg",
+                src: "/figures/paper2-suppl-fig2-upper-lid.jpg",
                 paperFig: "补充 Fig. 2",
                 caption:
                   "上睑 P15。神经嵴来源细胞（绿）在上睑肌腱贡献少，可解释下睑表型更重。",
@@ -1442,7 +914,7 @@ export const categories: Category[] = [
           {
             id: "muscle-masson-adult",
             title: "马松三色：肌腱与睑板细胞 vs 胶原",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: [
               "眼睑石蜡切片马松三色",
               "红色=细胞质/细胞，蓝色=胶原",
@@ -1455,7 +927,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig4-masson.jpg",
+                src: "/figures/paper2-fig4-masson.jpg",
                 paperFig: "Fig. 4",
                 caption:
                   "P0–P15 诱导后 P15 取材。对照胶原丰富、细胞稀少；转基因细胞增多、胶原下降，睑板区可见囊肿。",
@@ -1465,7 +937,7 @@ export const categories: Category[] = [
           {
             id: "muscle-masson-time",
             title: "马松三色时间序列：对照 vs TGFα 过表达",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: ["P0、P5、P8、P11 眼睑石蜡切片马松三色"],
             stains: ["Masson 三色"],
             observations: [
@@ -1475,7 +947,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig7-time.jpg",
+                src: "/figures/paper2-fig7-time.jpg",
                 paperFig: "Fig. 7A–G",
                 caption:
                   "对照 A/B/D/F，转基因 C/E/G。P0–P11 马松三色。同一时间点左右对照，避免把发育阶段差异当成表型。",
@@ -1492,7 +964,7 @@ export const categories: Category[] = [
           {
             id: "muscle-pcna-tunel",
             title: "PCNA 与 TUNEL：CPF / TP 增殖和凋亡",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: ["免疫荧光 PCNA；TUNEL"],
             markers: [
               {
@@ -1512,12 +984,12 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig8-pcna.jpg",
+                src: "/figures/paper2-fig8-pcna.jpg",
                 paperFig: "Fig. 8Ab–Ac vs Bb–Bc",
                 caption: "PCNA：过表达组 CPF、TP 阳性细胞增多；MG 基底层模式相对不变。",
               },
               {
-                src: "/figures/paper5-fig9-tunel.jpg",
+                src: "/figures/paper2-fig9-tunel.jpg",
                 paperFig: "Fig. 9Ab–Ac vs Bb–Bc",
                 caption: "TUNEL：过表达组 CPF、TP 凋亡增多，与 MG 腺泡内很少形成对照。",
               },
@@ -1526,7 +998,7 @@ export const categories: Category[] = [
           {
             id: "muscle-collagen",
             title: "I / III 型胶原：睑板基质是否形成",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: ["免疫荧光"],
             markers: [
               {
@@ -1545,7 +1017,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig10-pparg-collagen.jpg",
+                src: "/figures/paper2-fig10-pparg-collagen.jpg",
                 paperFig: "Fig. 10C–F",
                 caption: "C–D 为 I 型胶原，E–F 为 III 型胶原。对照丰富，转基因 CPF/TP 明显减弱。",
               },
@@ -1554,7 +1026,7 @@ export const categories: Category[] = [
           {
             id: "muscle-egfr",
             title: "EGFR / β-catenin / N-cadherin：CPF 细胞增殖与黏附",
-            sources: ["paper5"],
+            sources: ["paper2"],
             instruments: ["免疫荧光"],
             markers: [
               {
@@ -1579,7 +1051,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/paper5-fig11-egfr.jpg",
+                src: "/figures/paper2-fig11-egfr.jpg",
                 paperFig: "Fig. 11A–F",
                 caption: "A–B EGFR，C–D β-catenin，E–F N-cadherin。焦点在 CPF 而非 MG。",
               },

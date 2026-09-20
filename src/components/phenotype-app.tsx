@@ -312,7 +312,7 @@ function PhenotypeAppInner() {
           <section id="refs" className="scroll-mt-40 rounded-2xl border border-stone-200 bg-white p-5 sm:p-6">
             <h2 className="text-xl font-semibold text-stone-900">参考文献</h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
-              编号按汇报 PPT 首页【1】～【5】。原笔记 PDF 中的 Widjaja 与 Dong 分别对应现【2】与【5】。
+              本页为后续三篇文献加入前的版本。编号对应两篇核心文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。
             </p>
             <Separator className="my-4" />
             <div className="grid gap-4">

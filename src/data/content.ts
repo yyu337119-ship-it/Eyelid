@@ -178,7 +178,7 @@ export const categories: Category[] = [
     title: "MG 及其分泌物",
     question: "腺体形态是否完整？导管是否阻塞？睑脂能否排出、成分是否异常？",
     summary:
-      "先看活体/大体：腺体是否存在、导管是否被角化物或脂质堵塞。再落到 HE、Oil Red O 和三维重建量化导管。分子层先画 K6/K14/Abca12、KROX20/PPARγ、Slc1a3/Lrig1 等定位图，再判断角化、干细胞更新与脂质合成。裂隙灯看睑脂外观与排出。",
+      "先看活体/大体：腺体是否存在、导管是否被角化物或脂质堵塞。用 Ly6G 排除腺体本身的中性粒细胞性炎症堵塞。再落到 HE、Oil Red O 和三维重建量化导管。分子层先画 K6/K14/Abca12、KROX20/PPARγ、Slc1a3/Lrig1 等定位图，再判断角化、干细胞更新与脂质合成。裂隙灯看睑脂外观与排出。",
     sections: [
       {
         id: "mg-gland",
@@ -230,6 +230,35 @@ export const categories: Category[] = [
                 paperFig: "Fig. 表型组合（大体 / IF / HE / ORO）",
                 caption:
                   "A：正常解剖，绿=YFP，红=K14。B：对照 vs cKO 眼睑结痂。C：YFP/K14，cKO 导管被角化细胞填充。D：HE 导管阻塞扩张。E：Oil Red O 脂质潴留。F：14 天角化栓脱落。",
+              },
+            ],
+          },
+          {
+            id: "mg-ly6g-exclude",
+            title: "Ly6G：排除 MG 腺体中性粒细胞性炎症堵塞",
+            sources: ["paper1"],
+            instruments: [
+              "免疫荧光：Ly6G 标中性粒细胞，K14 勾勒 MG 导管、腺泡和睑缘上皮",
+              "分别计数紧贴腺体的 Ly6G⁺ 细胞，以及选定视野内总数",
+            ],
+            markers: [
+              {
+                name: "Ly6G",
+                role: "中性粒细胞",
+                change: "Abca12 cKO 与对照无显著差异，MG 导管堵塞不是腺体中性粒细胞浸润造成的",
+              },
+            ],
+            observations: [
+              "读片焦点在腺体：中央导管（MD）、腺泡（Ac）及其紧邻间质，而不是结膜充血。",
+              "对照和 cKO 紧贴腺体的 Ly6G⁺ 细胞都很少，选定视野内总数也不升高。",
+              "因此本模型的导管阻塞应归为角化栓 / 脂质潴留，而不是 MG 腺体化脓性炎症堵塞。评价腺体阻塞时要把炎症、角化、脂质作为竞争机制分开记录。",
+            ],
+            figures: [
+              {
+                src: "/figures/paper1-fig-ly6g.jpg",
+                paperFig: "Fig. Ly6G / 细胞计数",
+                caption:
+                  "A：绿=Ly6G，红=K14，标注 Epi / MD / Ac / Conj。计数分 Contacting gland 与 boxed area。cKO 不高于对照。",
               },
             ],
           },
@@ -1163,7 +1192,7 @@ export const categories: Category[] = [
     title: "结膜",
     question: "结膜上皮是否增生？杯状细胞和黏蛋白是否改变？MCJ 分化边界是否错位？",
     summary:
-      "结膜评价分三层：HE 看睑缘/结膜上皮厚度，PAS 看穹窿杯状细胞，免疫荧光用 Krt4（黏膜）和 Krt10（表皮）判断 MCJ 是否被表皮化。炎症排除用 Ly6G 数中性粒细胞，避免把导管堵塞误判成化脓性炎症。充血评分和黏蛋白分子检测仍待补。",
+      "结膜评价分三层：HE 看睑缘/结膜上皮厚度，PAS 看穹窿杯状细胞，免疫荧光用 Krt4（黏膜）和 Krt10（表皮）判断 MCJ 是否被表皮化。充血评分和黏蛋白分子检测仍待补。",
     sections: [
       {
         id: "conj-structure",
@@ -1295,34 +1324,6 @@ export const categories: Category[] = [
             title: "充血与黏蛋白",
             assays: [
           {
-            id: "conj-ly6g",
-            title: "Ly6G：排除中性粒细胞性炎症堵塞",
-            sources: ["paper1"],
-            instruments: [
-              "免疫荧光：Ly6G 标中性粒细胞，K14 标上皮轮廓",
-              "分别计数紧贴腺体的 Ly6G⁺ 细胞，以及选定视野内总数",
-            ],
-            markers: [
-              {
-                name: "Ly6G",
-                role: "中性粒细胞",
-                change: "Abca12 cKO 与对照无显著差异，导管堵塞不是化脓性炎症造成的",
-              },
-            ],
-            observations: [
-              "对照和 cKO 的 Ly6G⁺ 细胞都很少，定量柱状图无升高。",
-              "评价导管阻塞时要同步做炎症排除：角化栓、脂质潴留和中性粒细胞浸润是不同机制。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper1-fig-ly6g.jpg",
-                paperFig: "Fig. Ly6G / 细胞计数",
-                caption:
-                  "A：绿=Ly6G，红=K14。B：Contacting gland 与 boxed area 计数，cKO 不高于对照。",
-              },
-            ],
-          },
-          {
             id: "conj-pending",
             title: "结膜充血与黏蛋白监测（笔记待补）",
             sources: ["paper5"],
@@ -1334,7 +1335,7 @@ export const categories: Category[] = [
               },
             ],
             observations: [
-              "目前可落地的是 PAS 杯状细胞计数，以及 Ly6G 炎症排除；充血评分和黏蛋白分子检测仍缺方案。",
+              "目前可落地的是 PAS 杯状细胞计数；充血评分和黏蛋白分子检测仍缺方案。",
             ],
             pending: [
               "结膜充血的活体评分或裂隙灯标准",

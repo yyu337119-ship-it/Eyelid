@@ -1,0 +1,1057 @@
+{
+  "intro": "",
+  "categories": [
+    {
+      "id": "mg",
+      "roman": "一",
+      "title": "MG 及其分泌物",
+      "question": "腺体形态是否完整？导管是否阻塞？睑脂能否排出、成分是否异常？",
+      "summary": "先看活体/大体形态，再落到切片与三维重建量化导管，最后用分子标志物判断角化、分化与脂质合成，并以裂隙灯观察睑脂外观与排出是否通畅。",
+      "sections": [
+        {
+          "id": "mg-gland",
+          "index": "1",
+          "title": "MG",
+          "topics": [
+            {
+              "id": "mg-morphology",
+              "mark": "①",
+              "title": "腺体形态与组织学",
+              "assays": [
+                {
+                  "id": "mg-gross-he",
+                  "title": "新鲜睑板纵切面大体成像联合 HE",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "Leica M205 C 体视显微镜：新鲜睑板纵切面大体宏观成像",
+                    "光学显微镜：睑板横切面 HE 染色"
+                  ],
+                  "stains": [
+                    "H&E"
+                  ],
+                  "markers": [],
+                  "observations": [
+                    "大体：\n红线标中央导管，绿箭头标开口堵塞。\nDMSO 组中央导管扩张、管腔内脂质淤积，开口处可见堵塞物；\nATR101 组导管轮廓更规整、开口堵塞减轻。",
+                    "HE：\nDMSO 组导管上皮角化、管腔扩大（黑箭头），周围腺泡稀疏；\nATR101 组角化与扩张减轻、腺泡更密。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/live/mg-gross-he-fig-0.jpg",
+                      "paperFig": "Fig. 7A",
+                      "caption": "上排 Awat2−/−/DMSO，下排 Awat2−/−/ATR101。\n左列纵切大体，右列 HE。",
+                      "id": "mg-gross-he-fig-0"
+                    }
+                  ]
+                },
+                {
+                  "id": "mg-nuclei-count",
+                  "title": "连续 HE 横切面统计腺泡细胞核数",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "连续多张睑板横切面 HE 染色",
+                    "每只小鼠统计 32 张切片的腺泡细胞平均核数"
+                  ],
+                  "stains": [
+                    "H&E"
+                  ],
+                  "observations": [
+                    "腺泡细胞核数：Awat2−/−/DMSO 最低，ATR101 治疗后回升，仍低于野生型。",
+                    "核数下降反映腺泡萎缩/丢失；回升提示腺体实质部分恢复。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/live/mg-nuclei-count-fig-0.jpg",
+                      "paperFig": "Fig. 7B",
+                      "caption": "Average meibocyte nuclei count。Awat2−/−/DMSO < ATR101 < WT。",
+                      "id": "mg-nuclei-count-fig-0"
+                    }
+                  ]
+                },
+                {
+                  "id": "mg-stereo-close",
+                  "title": "体视显微镜观察眼睑闭合与 MG 大体形态",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "体视显微镜：活体/离体翻转眼睑，暴露结膜面观察 MG 排列"
+                  ],
+                  "observations": [
+                    "Fig. 2A：对照 P11 眼睑仍闭合、外形正常；KR/TG 小鼠过早睁眼，上下睑肿胀，下睑更明显（Fig. 2B）。",
+                    "Fig. 3A–C：对照 MG 沿睑板平行排列、腺泡簇完整；重症转基因鼠腺体部分缺失、畸形/弯曲/缺损，下睑重于上睑；轻症大体差别小，但仍需切片确认间充质堆积。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/live/mg-stereo-close-fig-0.jpg",
+                      "paperFig": "Fig. 2A–D",
+                      "caption": "P11。A：对照眼睑仍闭合；B：KR/TG 过早睁眼，上下睑肿胀，下睑更明显。C/D：HE 确认开睑与肿胀。",
+                      "id": "mg-stereo-close-fig-0"
+                    },
+                    {
+                      "src": "/figures/live/mg-stereo-close-fig-1.jpg",
+                      "paperFig": "Fig. 3A–C",
+                      "caption": "P15 结膜面大体。对照 MG 平行排列完整；重症腺体部分缺失、畸形；轻症大体接近对照。",
+                      "id": "mg-stereo-close-fig-1"
+                    }
+                  ]
+                },
+                {
+                  "id": "mg-he-acini",
+                  "title": "眼球 HE：腺泡结构、导管扩张、开口位置与间充质",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "石蜡切片 HE，光学显微镜"
+                  ],
+                  "stains": [
+                    "H&E"
+                  ],
+                  "observations": [
+                    "对照（3D、3G）：腺泡沿中央导管成簇，开口位于 MCJ 前方。",
+                    "重症（3E、3H）：腺泡紊乱、导管明显扩张、开口异位到皮肤侧，腺体周围大量间充质细胞堆积。",
+                    "轻症（3F、3I）：大体接近对照，切片仍可见腺体周围间充质增多。",
+                    "2B 同时记录上下睑肿胀。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/live/mg-he-acini-fig-0.jpg",
+                      "paperFig": "Fig. 3D–I",
+                      "caption": "HE：对照腺泡成簇、开口在 MCJ 前方；重症导管扩张、开口异位到皮肤侧、间充质堆积；轻症大体接近对照但间充质仍增多。",
+                      "id": "mg-he-acini-fig-0"
+                    }
+                  ]
+                },
+                {
+                  "id": "mg-3d-duct",
+                  "title": "三维虚拟组织学重建测量中央导管最大直径",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "连续组织切片重新上色，模拟上眼睑 H&E",
+                    "Amira 软件三维重建：导管标红、腺泡标绿",
+                    "以结膜表面为 Z 轴零点，测量每根中央导管最大直径"
+                  ],
+                  "stains": [
+                    "H&E（虚拟上色）"
+                  ],
+                  "observations": [
+                    "DMSO 组中央导管明显增粗、管腔扩张；ATR101 组最大直径显著小于溶剂对照，仍大于野生型。",
+                    "样本量：WT 3 只小鼠共 3 个眼睑；Awat2−/−/DMSO 4 只共 8 个眼睑；Awat2−/−/ATR101 5 只共 10 个眼睑。",
+                    "三维容积重建与二维测量方向一致：抑制 CE 合成后导管扩张减轻。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper1-fig6-3d.jpg",
+                      "paperFig": "Fig. 6A–C",
+                      "caption": "A：不同 Z 深度切片，黑箭头标导管。B：三维渲染，红=导管、绿=腺泡。C：中央导管最大直径箱线图。",
+                      "id": "mg-3d-duct-fig-0"
+                    }
+                  ]
+                },
+                {
+                  "id": "mg-terminal-duct",
+                  "title": "裂隙灯图像测量末端导管厚度",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "裂隙灯导出带比例尺照片",
+                    "ImageJ：沿垂直于导管长轴方向，测外部可视横向宽度（导管 + 管腔内淤积脂质的整体外观厚度）"
+                  ],
+                  "observations": [
+                    "治疗 10 天和 14 天，ATR101 组末端导管厚度均显著下降。",
+                    "厚度下降反映开口附近阻塞缓解，腺体形态部分恢复。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper1-fig5-mg-duct.jpg",
+                      "paperFig": "Fig. 5B",
+                      "caption": "B：MG terminal duct thickness (Dx−Do)/Do。ATR101 组在 Day 10、Day 14 均低于溶剂对照。A 为同一批裂隙灯导管图像。",
+                      "id": "mg-terminal-duct-fig-0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "mg-markers",
+              "mark": "②",
+              "title": "分子标志物",
+              "assays": [
+                {
+                  "id": "mg-rtqpcr",
+                  "title": "睑板腺标志物基因 RT-qPCR",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "RT-qPCR，睑板组织 mRNA 定量"
+                  ],
+                  "markers": [
+                    {
+                      "name": "Aldh1a3、Rarb、Rbp1",
+                      "role": "视黄酸信号通路",
+                      "change": "Aldh1a3、Rarb 表达下降"
+                    },
+                    {
+                      "name": "Sprr1a、Krt14",
+                      "role": "导管上皮角化 / 病理修复与过度增殖",
+                      "change": "↓，提示过度角化与增殖通路活化程度下降"
+                    },
+                    {
+                      "name": "Pparg",
+                      "role": "腺细胞从基底祖细胞分化、脂质合成的核心转录因子",
+                      "change": "↑，提示腺细胞成熟与脂质合成能力改善"
+                    }
+                  ],
+                  "observations": [
+                    "将形态学上的导管阻塞缓解，落到角化、修复和分化三条分子轴上解读。",
+                    "Pparg 上调与腺泡核数回升方向一致，支持腺体功能而非仅管径变化。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper1-fig7-mg.jpg",
+                      "paperFig": "Fig. 7C",
+                      "caption": "睑板组织 RT-qPCR：Aldh1a3、Rarb、Rbp1、Sprr1a、Pparg、Krt14（相对 Gapdh）。ATR101 后角化/修复轴下降，Pparg 回升。",
+                      "id": "mg-rtqpcr-fig-0"
+                    }
+                  ]
+                },
+                {
+                  "id": "mg-pparg-pcna",
+                  "title": "MG 腺泡分化、增殖与凋亡（PPARγ / PCNA / TUNEL）",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "石蜡切片免疫荧光",
+                    "TUNEL 凋亡检测",
+                    "P15 对照 vs KR/TG"
+                  ],
+                  "markers": [
+                    {
+                      "name": "PPARγ",
+                      "role": "睑板腺腺泡分化 / 脂质代谢标志",
+                      "change": "两组腺泡均阳性，过表达组仍保留分化标记"
+                    },
+                    {
+                      "name": "PCNA",
+                      "role": "增殖",
+                      "change": "两组阳性细胞均在基底层，分布模式相似"
+                    },
+                    {
+                      "name": "TUNEL",
+                      "role": "凋亡",
+                      "change": "两组腺泡内阳性细胞均很少"
+                    }
+                  ],
+                  "observations": [
+                    "过量 TGFα 不直接改变睑板腺细胞的增殖、凋亡和分化。",
+                    "MG 形态异常主要来自睑板/肌腱微环境破坏，而不是腺细胞本身失分化。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/live/mg-pparg-pcna-fig-0.jpg",
+                      "paperFig": "Fig. 8Aa vs Ba",
+                      "caption": "PCNA：两组阳性细胞均在 MG 基底层，分布模式相似。",
+                      "id": "mg-pparg-pcna-fig-0"
+                    },
+                    {
+                      "src": "/figures/live/mg-pparg-pcna-fig-1.jpg",
+                      "paperFig": "Fig. 9Aa vs Ba",
+                      "caption": "TUNEL：两组腺泡内阳性细胞均很少。",
+                      "id": "mg-pparg-pcna-fig-1"
+                    },
+                    {
+                      "src": "/figures/live/mg-pparg-pcna-fig-2.jpg",
+                      "paperFig": "Fig. 10A–B",
+                      "caption": "PPARγ：对照与 KR/TG 腺泡均阳性，过表达组仍保留分化标记。",
+                      "id": "mg-pparg-pcna-fig-2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mg-meibum",
+          "index": "2",
+          "title": "睑脂",
+          "topics": [
+            {
+              "id": "meibum-look",
+              "mark": "①",
+              "title": "大体外观与排出",
+              "assays": [
+                {
+                  "id": "meibum-appearance",
+                  "title": "裂隙灯生物显微镜观察睑脂大体外观",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "裂隙灯生物显微镜约 40 倍：观察挤出睑脂的透明度、形态和粘稠外观"
+                  ],
+                  "observations": [
+                    "DMSO 组挤出物呈不透明、卷曲的蜡样团块。",
+                    "ATR101 组挤出物更接近半透明小滴，提示睑脂物理性状改善。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/live/meibum-appearance-fig-0.jpg",
+                      "paperFig": "Fig. 2D",
+                      "caption": "黄圈标挤出的睑脂。左：Awat2−/−/DMSO 蜡样不透明；右：ATR101 后更透明、体积更小。同图 B/C/E 为 CE、FA 与熔融温度。",
+                      "id": "meibum-appearance-fig-0"
+                    }
+                  ]
+                },
+                {
+                  "id": "meibum-expressibility",
+                  "title": "裂隙灯下观察开口并挤压评估排出是否通畅",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "裂隙灯直接观察睑缘开口",
+                    "轻压睑板，比较挤压前后开口处脂质排出"
+                  ],
+                  "observations": [
+                    "挤压前两组开口均可看到白色栓状物。",
+                    "挤压后 DMSO 组开口仍糊、排出差；ATR101 组开口更清晰，睑脂更易排出。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper1-fig5-mg-duct.jpg",
+                      "paperFig": "Fig. 5A",
+                      "caption": "裂隙灯观察上睑末端导管。Day 0 先挤出堵塞物，随后随访 Day 10 / 14。ATR101 组导管更清晰、阻塞减轻。",
+                      "id": "meibum-expressibility-fig-0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "meibum-comp",
+              "mark": "②",
+              "title": "组分与物理性状",
+              "assays": [
+                {
+                  "id": "meibum-biophysics",
+                  "title": "睑脂熔融温度与 CE / FA 组分",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "LC-MS：睑脂胆固醇酯（CE）定量",
+                    "脂肪酸组成分析：饱和 / 单不饱和 FA 链长分布",
+                    "熔融温度测定：重复测量睑脂熔点曲线"
+                  ],
+                  "markers": [
+                    {
+                      "name": "CE（胆固醇酯）",
+                      "role": "SOAT1 产物，过高则睑脂变黏、熔点升高",
+                      "change": "ATR101 后 CE 显著下降"
+                    },
+                    {
+                      "name": "饱和 FA ↓ / 单不饱和 FA ↑",
+                      "role": "流动性相关脂酰组成",
+                      "change": "治疗后饱和 FA 下降、单不饱和 FA 升高"
+                    }
+                  ],
+                  "observations": [
+                    "Fig. 2B：Awat2−/−/DMSO 的 CE 最高，ATR101 后接近野生型。",
+                    "Fig. 2C：治疗后饱和脂肪酸下降、单不饱和脂肪酸升高，利于流动性。",
+                    "Fig. 2E：DMSO 组熔点约 49–55 °C，ATR101 组降至约 37–44 °C。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper1-fig2-meibum.jpg",
+                      "paperFig": "Fig. 2B、2C、2E",
+                      "caption": "B：CE 含量。C：饱和与单不饱和 FA。E：熔融温度重复测量。A 为给药方案，D 为大体外观。",
+                      "id": "meibum-biophysics-fig-0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cornea-tear",
+      "roman": "二",
+      "title": "角膜和泪膜、泪液",
+      "question": "角膜屏障是否破损？上皮是否应激修复？泪膜是否稳定？",
+      "summary": "角膜先用荧光素看破损范围，再用在体共聚焦看表层/翼状/基底细胞形态，最后用 Krt14 / Krt12 / Sprr1a 判断分化与鳞状化生。泪膜用镜面光反射环评价完整性；泪液量、泪河和 TBUT/NIBUT 仍待补。",
+      "sections": [
+        {
+          "id": "cornea",
+          "index": "1",
+          "title": "角膜",
+          "topics": [
+            {
+              "id": "cornea-morphology",
+              "mark": "①",
+              "title": "形态与完整性",
+              "assays": [
+                {
+                  "id": "cornea-fluorescein",
+                  "title": "荧光素染色裂隙灯评估角膜完整性",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "角膜荧光素染色",
+                    "裂隙灯钴蓝光采集代表性图像（双眼 OD/OS，Day 0 / 10 / 14）"
+                  ],
+                  "stains": [
+                    "荧光素"
+                  ],
+                  "observations": [
+                    "着染面积增大表示上皮破损、屏障破坏。",
+                    "SOAT1 抑制后角膜上皮破损减少，角膜表面完整性改善。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper1-fig3-tear-cornea.jpg",
+                      "paperFig": "Fig. 3C–D",
+                      "caption": "C：钴蓝光下荧光素着染，Day 0 / 10 / 14。D：着染积分密度，ATR101 组显著低于 DMSO。",
+                      "id": "cornea-fluorescein-fig-0"
+                    }
+                  ]
+                },
+                {
+                  "id": "cornea-confocal",
+                  "title": "在体共聚焦显微镜观察角膜上皮各层",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "在体共聚焦显微镜，分层采集表层、翼状、基底上皮细胞"
+                  ],
+                  "observations": [
+                    "看三点：细胞是否肥大、固缩核数量、是否出现鳞状化生和表层脱落。",
+                    "黄色箭头：表层上皮脱落 / 鳞状化生；红色箭头：固缩细胞核增多。",
+                    "DMSO 组表层细胞紊乱、固缩核多，基底细胞肥大；ATR101 组接近野生型，但仍可见少量固缩核。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper1-fig4-cornea.jpg",
+                      "paperFig": "Fig. 4A",
+                      "caption": "列：表层 / 翼状 / 基底上皮。行：WT、Awat2−/−/DMSO、Awat2−/−/ATR101。黄箭头脱落/鳞状化生，红箭头固缩核。",
+                      "id": "cornea-confocal-fig-0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cornea-markers-topic",
+              "mark": "②",
+              "title": "分子标志物",
+              "assays": [
+                {
+                  "id": "cornea-markers",
+                  "title": "角膜上皮标志物：免疫荧光 + RT-qPCR",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "角膜切片免疫荧光（IF）",
+                    "RT-qPCR 定量标志物基因 mRNA"
+                  ],
+                  "markers": [
+                    {
+                      "name": "Krt14（红色）",
+                      "role": "基底上皮祖细胞，具备增殖能力",
+                      "change": "应激后上调，并错误定位到浅表层；ATR101 后浅表异位减轻，mRNA 回落至接近 WT"
+                    },
+                    {
+                      "name": "Krt12（绿色）",
+                      "role": "终末分化的基底上层及浅表上皮",
+                      "change": "损伤修复时下调；ATR101 后浅表 Krt12 信号部分恢复"
+                    },
+                    {
+                      "name": "Sprr1a",
+                      "role": "浅表上皮鳞状分化、角化包膜形成",
+                      "change": "DMSO 组显著升高；ATR101 组下降但仍高于 WT"
+                    }
+                  ],
+                  "observations": [
+                    "正常：Krt12 在浅表，Krt14 限于基底。损伤后角膜缘细胞迁入中央，Krt12↓、Krt14↑。",
+                    "Awat2−/− 中 Krt14 出现在浅表层（Fig. 4B 红箭头），提示上皮应激与修复活性升高。",
+                    "4C：Krt14 mRNA 在 ATR101 后与 WT 无显著差异；Sprr1a 仍部分残留，说明鳞状化生尚未完全消退。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper1-fig4-cornea.jpg",
+                      "paperFig": "Fig. 4B–C",
+                      "caption": "B：红=Krt14，绿=Krt12。DMSO 组浅表 Krt14 异位。C：Krt14、Sprr1a 相对 Gapdh 的 RT-qPCR。",
+                      "id": "cornea-markers-fig-0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tear",
+          "index": "2",
+          "title": "泪膜、泪液",
+          "topics": [
+            {
+              "id": "tear-integrity",
+              "mark": "①",
+              "title": "泪膜完整性",
+              "assays": [
+                {
+                  "id": "tear-specular",
+                  "title": "镜面光反射法评估泪膜完整性",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "体视显微镜：观察圆形 LED 光环在眼表的反射模式"
+                  ],
+                  "observations": [
+                    "完整稳定泪膜：平滑、连续的环形反光。",
+                    "反光扭曲、不规则、碎裂：泪膜不稳定或眼表形态异常。",
+                    "DMSO 组光环断裂、扭曲；ATR101 组恢复为较完整圆环。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper1-fig3-tear-cornea.jpg",
+                      "paperFig": "Fig. 3A",
+                      "caption": "镜面光反射。DMSO 组环形反光碎裂、扭曲；ATR101 组恢复较完整圆环。标尺 200 μm。",
+                      "id": "tear-specular-fig-0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "tear-quantity",
+              "mark": "②",
+              "title": "泪液与破裂时间",
+              "assays": [
+                {
+                  "id": "tear-tbut",
+                  "title": "泪膜破裂时间（TBUT）",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "instruments": [
+                    "泪膜破裂时间定量（原文 Fig. 3B）：比较 Awat2−/−/DMSO、ATR101 与 WT"
+                  ],
+                  "observations": [
+                    "DMSO 组 TBUT 最短；ATR101 治疗后显著延长，仍低于野生型。",
+                    "与 Fig. 3A 镜面反射一起读：反射看空间完整性，TBUT 看维持时间。"
+                  ],
+                  "pending": [
+                    "泪液收集方法（毛细管 / 酚红棉线等）及定量结果",
+                    "泪膜脂质层干涉/厚度检测",
+                    "泪河高度测量",
+                    "NIBUT 的操作定义（原文报告的是侵入性/荧光素相关 TBUT）"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper1-fig3-tear-cornea.jpg",
+                      "paperFig": "Fig. 3B",
+                      "caption": "Tear film break-up time。Awat2−/−/DMSO < ATR101 < WT。",
+                      "id": "tear-tbut-fig-0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conjunctiva",
+      "roman": "三",
+      "title": "结膜",
+      "question": "结膜上皮是否增生？杯状细胞和黏蛋白是否改变？MCJ 分化边界是否错位？",
+      "summary": "结膜评价分三层：HE 看睑缘/结膜上皮厚度，PAS 看穹窿杯状细胞，免疫荧光用 Krt4（黏膜）和 Krt10（表皮）判断 MCJ 是否被表皮化。充血和黏蛋白监测在笔记中仍是待补项。",
+      "sections": [
+        {
+          "id": "conj-structure",
+          "index": "1",
+          "title": "上皮结构",
+          "topics": [
+            {
+              "id": "conj-he-topic",
+              "mark": "①",
+              "title": "上皮增厚",
+              "assays": [
+                {
+                  "id": "conj-he",
+                  "title": "睑板上皮 HE：结膜、皮肤黏膜移行上皮增厚",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "石蜡切片 HE"
+                  ],
+                  "stains": [
+                    "H&E"
+                  ],
+                  "observations": [
+                    "KR/TG 小鼠睑缘结膜上皮、皮肤黏膜移行上皮较对照增厚（Fig. 5A–D）。",
+                    "这是 TGFα 作为上皮有丝分裂原的直接效应，需与 MG 本身病变分开记录。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/live/conj-he-fig-0.jpg",
+                      "paperFig": "Fig. 5A–D",
+                      "caption": "HE：对照 A、C vs 转基因 B、D。结膜上皮与皮肤黏膜移行上皮增厚。",
+                      "id": "conj-he-fig-0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "conj-pas-topic",
+              "mark": "②",
+              "title": "杯状细胞",
+              "assays": [
+                {
+                  "id": "conj-pas",
+                  "title": "结膜 PAS 染色评估穹窿杯状细胞",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "PAS 染色，观察结膜穹窿"
+                  ],
+                  "stains": [
+                    "PAS"
+                  ],
+                  "markers": [
+                    {
+                      "name": "PAS 阳性杯状细胞",
+                      "role": "结膜黏液分泌细胞",
+                      "change": "TGFα 过表达 15 天后穹窿杯状细胞增多"
+                    }
+                  ],
+                  "observations": [
+                    "P0–P15 诱导后，结膜穹窿 PAS 阳性杯状细胞增加（Fig. 5E/5F）。",
+                    "杯状细胞增多提示黏液层代偿或上皮分化被重编程，不能单独等同于炎症。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/live/conj-pas-fig-0.jpg",
+                      "paperFig": "Fig. 5E–F",
+                      "caption": "PAS：对照 vs TGFα 过表达 15 天，焦点在穹窿杯状细胞密度。",
+                      "id": "conj-pas-fig-0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "conj-markers",
+          "index": "2",
+          "title": "分子标志物",
+          "topics": [
+            {
+              "id": "conj-krt-topic",
+              "mark": "①",
+              "title": "黏膜 / 表皮分化边界",
+              "assays": [
+                {
+                  "id": "conj-krt4",
+                  "title": "Krt4：皮肤黏膜交界区黏膜上皮分化",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "免疫荧光"
+                  ],
+                  "markers": [
+                    {
+                      "name": "Krt4（K4）",
+                      "role": "黏膜上皮分化标志，正常应出现在 MCJ 黏膜侧",
+                      "change": "转基因鼠 MCJ 处 Krt4 消失（5G/5H）"
+                    }
+                  ],
+                  "observations": [
+                    "Krt4 丢失表示睑缘黏膜表型被削弱，MCJ 身份不稳定。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/live/conj-krt4-fig-0.jpg",
+                      "paperFig": "Fig. 5G–H",
+                      "caption": "免疫荧光：对照 MCJ 黏膜侧 Krt4 阳性，转基因鼠该信号消失。",
+                      "id": "conj-krt4-fig-0"
+                    }
+                  ]
+                },
+                {
+                  "id": "conj-krt10",
+                  "title": "Krt10：表皮分化标志越过 MCJ 进入结膜",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "免疫荧光"
+                  ],
+                  "markers": [
+                    {
+                      "name": "Krt10（K10）",
+                      "role": "表皮终末分化标志",
+                      "change": "越过 MCJ，异位进入结膜上皮（Fig. 5I、J）"
+                    }
+                  ],
+                  "observations": [
+                    "与 Krt4 丢失同时出现 Krt10 前移，说明睑缘发生表皮化。",
+                    "系统评价时应成对看 Krt4↓ + Krt10 越界，而不是只报一个角蛋白。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/live/conj-krt10-fig-0.jpg",
+                      "paperFig": "Fig. 5I–J",
+                      "caption": "Krt10 信号是否跨越 MCJ 进入结膜侧。",
+                      "id": "conj-krt10-fig-0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "conj-pending-topic",
+              "mark": "②",
+              "title": "充血与黏蛋白",
+              "assays": [
+                {
+                  "id": "conj-pending",
+                  "title": "结膜充血与黏蛋白监测（笔记待补）",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "笔记仅列出监测方向，未给出仪器和结果"
+                  ],
+                  "markers": [
+                    {
+                      "name": "结膜黏蛋白（如 Muc5ac 等）",
+                      "role": "泪膜黏液层 / 杯状细胞功能"
+                    }
+                  ],
+                  "observations": [
+                    "目前可落地的是 PAS 杯状细胞计数；充血评分和黏蛋白分子检测仍缺方案。"
+                  ],
+                  "pending": [
+                    "结膜充血的活体评分或裂隙灯标准",
+                    "结膜黏蛋白的免疫组化 / ELISA / qPCR 面板"
+                  ],
+                  "figures": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muscle",
+      "roman": "四",
+      "title": "眼睑相关肌肉",
+      "question": "睑板肌和眼轮匝肌是否存在？肌腱/睑板是否由神经嵴细胞过度增生而畸形？",
+      "summary": "先用 α-SMA 和骨骼肌肌球蛋白确认 TM、OO 本身大体正常，再用 Wnt1Cre 谱系追踪和马松三色看 CPF/TP 是否细胞堆积、胶原丢失。增殖（PCNA）、凋亡（TUNEL）和 EGFR / β-catenin / N-cadherin 解释肌腱细胞为何停在祖细胞状态。",
+      "sections": [
+        {
+          "id": "muscle-identity",
+          "index": "1",
+          "title": "睑板肌与眼轮匝肌",
+          "topics": [
+            {
+              "id": "muscle-sma-topic",
+              "mark": "①",
+              "title": "身份标志",
+              "assays": [
+                {
+                  "id": "muscle-sma-myosin",
+                  "title": "α-SMA 与骨骼肌肌球蛋白：睑板肌 / 眼轮匝肌",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "免疫荧光"
+                  ],
+                  "markers": [
+                    {
+                      "name": "α-SMA",
+                      "role": "睑板肌（TM）",
+                      "change": "整体与对照无明显差异；远端可因囊肿而局部中断"
+                    },
+                    {
+                      "name": "骨骼肌肌球蛋白",
+                      "role": "眼轮匝肌（OO）",
+                      "change": "与对照总体无差异"
+                    }
+                  ],
+                  "observations": [
+                    "眼睑开闭相关横纹肌/平滑肌并非本模型的主要靶点。",
+                    "下睑 CPF 与 TM 并行，囊肿可把 TM 远端顶断，属于占位效应而非肌纤维本身病变。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper2-suppl-fig1-sma-myosin.jpg",
+                      "paperFig": "补充图 1A、1B",
+                      "caption": "P15。红=α-SMA（TM），绿=骨骼肌肌球蛋白（OO），蓝=DAPI。KR 与 KR/TG 总体相似；远端可因囊肿局部中断。",
+                      "id": "muscle-sma-myosin-fig-0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "muscle-tendon",
+          "index": "2",
+          "title": "肌腱与睑板",
+          "topics": [
+            {
+              "id": "muscle-lineage",
+              "mark": "①",
+              "title": "发育来源",
+              "assays": [
+                {
+                  "id": "muscle-lineage-trace",
+                  "title": "Wnt1Cre / Rosa26mTmG 谱系追踪",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "KR/TG 与 Wnt1Cre/Rosa26mTmG 杂交",
+                    "冰冻切片 DAPI，绿色荧光=神经嵴来源"
+                  ],
+                  "markers": [
+                    {
+                      "name": "膜结合 GFP（mG）",
+                      "role": "神经嵴来源细胞",
+                      "change": "下睑 CPF、TP 主要为绿色；TGFα 后 CPF↑、TP↑"
+                    }
+                  ],
+                  "observations": [
+                    "CPF、TP：绿色荧光阳性，神经嵴来源；过表达后细胞数明显增加（Fig. 6B–G、B′–G′）。",
+                    "TM：同样神经嵴来源，但过表达后无明显变化（Fig. 6B–D、B′–D′）。",
+                    "上眼睑肌腱：绿色荧光少，神经嵴贡献少（补充 Fig. 2），可解释下睑表型更重。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper2-fig6-lineage.jpg",
+                      "paperFig": "Fig. 6A–G、A′–G′",
+                      "caption": "下睑。绿=神经嵴来源。对照 CPF/TP 为绿色；KR/TG 后 CPF、TP 明显增厚，TM 相对不受累。",
+                      "id": "muscle-lineage-trace-fig-0"
+                    },
+                    {
+                      "src": "/figures/paper2-suppl-fig2-upper-lid.jpg",
+                      "paperFig": "补充 Fig. 2",
+                      "caption": "上睑 P15。神经嵴来源细胞（绿）在上睑肌腱贡献少，可解释下睑表型更重。",
+                      "id": "muscle-lineage-trace-fig-1"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "muscle-development",
+              "mark": "②",
+              "title": "发育过程",
+              "assays": [
+                {
+                  "id": "muscle-masson-adult",
+                  "title": "马松三色：肌腱与睑板细胞 vs 胶原",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "眼睑石蜡切片马松三色",
+                    "红色=细胞质/细胞，蓝色=胶原"
+                  ],
+                  "stains": [
+                    "Masson 三色"
+                  ],
+                  "observations": [
+                    "对照：肌腱、睑板仅少量细长梭形成纤维细胞，胞外基质胶原丰富（Fig. 4A、Aa、Ab）。",
+                    "转基因：细胞数量显著增多、胶原明显下降，睑板区可见囊肿（Fig. 4B 星号）；高倍下变为致密圆形细胞（4Ba、Bb）。",
+                    "缩写：TM 睑板肌；CPF 下睑囊筋膜；TP 睑板；MG 睑板腺。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper2-fig4-masson.jpg",
+                      "paperFig": "Fig. 4",
+                      "caption": "P0–P15 诱导后 P15 取材。对照胶原丰富、细胞稀少；转基因细胞增多、胶原下降，睑板区可见囊肿。",
+                      "id": "muscle-masson-adult-fig-0"
+                    }
+                  ]
+                },
+                {
+                  "id": "muscle-masson-time",
+                  "title": "马松三色时间序列：对照 vs TGFα 过表达",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "P0、P5、P8、P11 眼睑石蜡切片马松三色"
+                  ],
+                  "stains": [
+                    "Masson 三色"
+                  ],
+                  "observations": [
+                    "对照正常发育：P0 眼睑呈融合薄褶皱，CPF 与 MG 原基已形成；P5 间充质凝集形成 CPF、TP，MG 开始延长；P8 MG 分支并伸入 TP；P11 腺泡簇形成。",
+                    "过表达组异常：P5 CPF 轻度增厚、睑尖间充质堆积、MG 内陷延长受阻；P8 大量细胞堆积，重症出现囊肿、开口异位；P11 CPF 显著增厚，基质间充质堆积加重。",
+                    "读片时分工：MG 看延长/分支/入 TP/腺泡簇/开口；CPF 看增厚与堆积；TP 看凝集、堆积和囊肿；表皮与结膜看增生。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper2-fig7-time.jpg",
+                      "paperFig": "Fig. 7A–G",
+                      "caption": "对照 A/B/D/F，转基因 C/E/G。P0–P11 马松三色。同一时间点左右对照，避免把发育阶段差异当成表型。",
+                      "id": "muscle-masson-time-fig-0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "muscle-signaling",
+              "mark": "③",
+              "title": "增殖、凋亡与分子标志物",
+              "assays": [
+                {
+                  "id": "muscle-pcna-tunel",
+                  "title": "PCNA 与 TUNEL：CPF / TP 增殖和凋亡",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "免疫荧光 PCNA；TUNEL"
+                  ],
+                  "markers": [
+                    {
+                      "name": "PCNA",
+                      "role": "增殖",
+                      "change": "对照散在；过表达组 CPF、TP 的 PCNA⁺ 细胞↑"
+                    },
+                    {
+                      "name": "TUNEL",
+                      "role": "凋亡",
+                      "change": "对照少；过表达组 TUNEL⁺ 细胞↑"
+                    }
+                  ],
+                  "observations": [
+                    "肌腱/睑板同时出现增殖增强和凋亡增多，是细胞堆积伴组织重塑，而不是单纯增生。",
+                    "与 MG 基底层 PCNA 模式不变、腺泡 TUNEL 很少形成对照。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper2-fig8-pcna.jpg",
+                      "paperFig": "Fig. 8Ab–Ac vs Bb–Bc",
+                      "caption": "PCNA：过表达组 CPF、TP 阳性细胞增多；MG 基底层模式相对不变。",
+                      "id": "muscle-pcna-tunel-fig-0"
+                    },
+                    {
+                      "src": "/figures/paper2-fig9-tunel.jpg",
+                      "paperFig": "Fig. 9Ab–Ac vs Bb–Bc",
+                      "caption": "TUNEL：过表达组 CPF、TP 凋亡增多，与 MG 腺泡内很少形成对照。",
+                      "id": "muscle-pcna-tunel-fig-1"
+                    }
+                  ]
+                },
+                {
+                  "id": "muscle-collagen",
+                  "title": "I / III 型胶原：睑板基质是否形成",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "免疫荧光"
+                  ],
+                  "markers": [
+                    {
+                      "name": "I 型胶原",
+                      "role": "肌腱/睑板成熟细胞外基质",
+                      "change": "过表达组 CPF、TP 信号↓"
+                    },
+                    {
+                      "name": "III 型胶原",
+                      "role": "肌腱/睑板细胞外基质",
+                      "change": "过表达组 CPF、TP 信号↓"
+                    }
+                  ],
+                  "observations": [
+                    "细胞多但胶原少，说明肌腱细胞增殖却未完成分化，睑板支架变软、占位。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper2-fig10-pparg-collagen.jpg",
+                      "paperFig": "Fig. 10C–F",
+                      "caption": "C–D 为 I 型胶原，E–F 为 III 型胶原。对照丰富，转基因 CPF/TP 明显减弱。",
+                      "id": "muscle-collagen-fig-0"
+                    }
+                  ]
+                },
+                {
+                  "id": "muscle-egfr",
+                  "title": "EGFR / β-catenin / N-cadherin：CPF 细胞增殖与黏附",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "instruments": [
+                    "免疫荧光"
+                  ],
+                  "markers": [
+                    {
+                      "name": "EGFR",
+                      "role": "TGFα 受体，驱动增殖",
+                      "change": "过表达组 CPF 信号↑"
+                    },
+                    {
+                      "name": "β-catenin",
+                      "role": "Wnt 通路 / 黏附，可核转位",
+                      "change": "过表达组 CPF 信号↑并核转位"
+                    },
+                    {
+                      "name": "N-cadherin",
+                      "role": "间充质祖细胞黏附标志",
+                      "change": "过表达组 CPF 信号↑"
+                    }
+                  ],
+                  "observations": [
+                    "TGFα → EGFR 增强，同时 β-catenin 入核、N-cadherin 维持祖细胞表型。",
+                    "这解释了为何 TM（EGFR 低）不受累，而 CPF 肌腱细胞停在未分化状态并形成囊肿。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper2-fig11-egfr.jpg",
+                      "paperFig": "Fig. 11A–F",
+                      "caption": "A–B EGFR，C–D β-catenin，E–F N-cadherin。焦点在 CPF 而非 MG。",
+                      "id": "muscle-egfr-fig-0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

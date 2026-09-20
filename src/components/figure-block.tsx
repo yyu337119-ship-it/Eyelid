@@ -179,28 +179,30 @@ export function FigureBlock({
       {displaySrc ? (
         <dialog
           ref={dialogRef}
-          className="relative w-[min(100%,72rem)] max-h-[92vh] overflow-auto rounded-xl bg-white p-4 shadow-xl backdrop:bg-black/70"
+          className="w-[min(96vw,72rem)] max-h-[90vh] overflow-auto rounded-xl bg-white p-4 shadow-xl backdrop:bg-black/70"
           onClick={(event) => {
             if (event.target === event.currentTarget) closeLightbox()
           }}
         >
-          <button
-            type="button"
-            onClick={closeLightbox}
-            className="absolute top-2 right-2 inline-flex size-8 items-center justify-center rounded-md text-stone-600 hover:bg-stone-100"
-            aria-label="关闭"
-          >
-            <X className="size-4" />
-          </button>
-          <p className="pr-10 text-sm font-medium text-stone-800">{figure.paperFig}</p>
-          <FigureImage
-            src={displaySrc}
-            alt={figure.paperFig}
-            width={1800}
-            height={1200}
-            className="mt-3 h-auto w-full object-contain"
-          />
-          <p className="mt-3 text-sm leading-6 text-stone-600">{figure.caption}</p>
+          <div className="relative">
+            <button
+              type="button"
+              onClick={closeLightbox}
+              className="absolute top-0 right-0 inline-flex size-8 items-center justify-center rounded-md text-stone-600 hover:bg-stone-100"
+              aria-label="关闭"
+            >
+              <X className="size-4" />
+            </button>
+            <p className="pr-10 text-sm font-medium text-stone-800">{figure.paperFig}</p>
+            <FigureImage
+              src={displaySrc}
+              alt={figure.paperFig}
+              width={1800}
+              height={1200}
+              className="mt-3 h-auto w-full object-contain"
+            />
+            <p className="mt-3 text-sm leading-6 text-stone-600">{figure.caption}</p>
+          </div>
         </dialog>
       ) : null}
     </div>

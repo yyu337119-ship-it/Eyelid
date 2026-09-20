@@ -13,10 +13,14 @@ import { HandbookProvider, useHandbook } from "@/lib/handbook-store"
 
 function jumpTo(id: string, onNavigate?: () => void) {
   return (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault()
+    event.nativeEvent.stopImmediatePropagation()
     const target = document.getElementById(id)
     if (target) {
-      event.preventDefault()
-      target.scrollIntoView({ behavior: "auto", block: "start" })
+      const header = document.querySelector("header")
+      const offset = (header?.getBoundingClientRect().height ?? 96) + 12
+      const top = target.getBoundingClientRect().top + window.scrollY - offset
+      window.scrollTo({ top: Math.max(0, top), behavior: "auto" })
       history.replaceState(null, "", `#${id}`)
     }
     onNavigate?.()
@@ -192,7 +196,7 @@ function PhenotypeAppInner() {
           </section>
 
           {categories.map((category) => (
-            <section key={category.id} id={category.id} className="scroll-mt-24 space-y-6">
+            <section key={category.id} id={category.id} className="scroll-mt-40 space-y-6">
               <div className="rounded-2xl bg-[#1f4b3a] px-5 py-4 text-white">
                 <p className="text-xs tracking-[0.2em] uppercase opacity-80">{category.roman}</p>
                 <h2 className="flex flex-wrap items-baseline gap-1 text-2xl font-semibold">
@@ -220,7 +224,7 @@ function PhenotypeAppInner() {
               </div>
 
               {category.sections.map((section) => (
-                <div key={section.id} id={section.id} className="scroll-mt-24 space-y-5">
+                <div key={section.id} id={section.id} className="scroll-mt-40 space-y-5">
                   <h3 className="flex flex-wrap items-baseline gap-x-2 border-b border-stone-300 pb-2 text-xl font-semibold text-stone-900">
                     <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-2">
                       {section.index}、
@@ -233,7 +237,7 @@ function PhenotypeAppInner() {
                     <SourceCite ids={sectionSources(section)} className="font-normal" />
                   </h3>
                   {section.topics.map((topic) => (
-                    <div key={topic.id} id={topic.id} className="scroll-mt-24 space-y-3">
+                    <div key={topic.id} id={topic.id} className="scroll-mt-40 space-y-3">
                       <h4 className="flex flex-wrap items-baseline gap-x-2 text-base font-semibold text-stone-800">
                         <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-1 text-[#1f4b3a]">
                           {topic.mark}
@@ -268,7 +272,7 @@ function PhenotypeAppInner() {
             </section>
           ))}
 
-          <section id="refs" className="scroll-mt-24 rounded-2xl border border-stone-200 bg-white p-5 sm:p-6">
+          <section id="refs" className="scroll-mt-40 rounded-2xl border border-stone-200 bg-white p-5 sm:p-6">
             <h2 className="text-xl font-semibold text-stone-900">参考文献</h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
               编号按汇报 PPT 首页【1】～【5】。原笔记 PDF 中的 Widjaja 与 Dong 分别对应现【2】与【5】。

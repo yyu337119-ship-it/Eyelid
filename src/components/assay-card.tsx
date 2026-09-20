@@ -39,7 +39,7 @@ export function AssayCard({ assay, path }: { assay: Assay; path: AssayPath }) {
   }
 
   return (
-    <article id={assay.id} className="scroll-mt-28 rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-5">
+    <article id={assay.id} className="scroll-mt-40 rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-5">
       <header className="mb-4">
         <h4 className="flex flex-wrap items-baseline gap-x-2 text-lg font-semibold leading-snug text-stone-900">
           <EditableText

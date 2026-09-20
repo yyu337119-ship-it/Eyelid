@@ -66,19 +66,19 @@ export function FigureBlock({
   }
 
   return (
-    <div className="overflow-hidden rounded-lg border border-stone-200 bg-white">
+    <div className="rounded-lg border border-stone-200 bg-white">
       {displaySrc ? (
         <button
           type="button"
           onClick={openLightbox}
-          className="relative block w-full cursor-zoom-in bg-stone-50"
+          className="relative block w-full cursor-zoom-in overflow-hidden rounded-t-lg bg-stone-50"
         >
           <FigureImage
             src={displaySrc}
             alt={figure.paperFig}
             width={1400}
             height={900}
-            className="mx-auto h-auto max-h-[420px] w-auto object-contain"
+            className="mx-auto h-[min(420px,56vw)] w-auto max-w-full object-contain"
           />
           <span className="absolute right-2 bottom-2 inline-flex items-center gap-1 rounded-md bg-black/70 px-2 py-1 text-xs text-white">
             <Expand className="size-3" />

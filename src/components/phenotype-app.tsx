@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, type MouseEvent } from "react"
 import { BookOpen, Download, Menu, Pencil, RotateCcw, Upload } from "lucide-react"
 import { AssayCard } from "@/components/assay-card"
 import { Button } from "@/components/ui/button"
@@ -11,6 +11,18 @@ import { SourceCite } from "@/components/source-badge"
 import { EditableText } from "@/components/editable-text"
 import { HandbookProvider, useHandbook } from "@/lib/handbook-store"
 
+function jumpTo(id: string, onNavigate?: () => void) {
+  return (event: MouseEvent<HTMLAnchorElement>) => {
+    const target = document.getElementById(id)
+    if (target) {
+      event.preventDefault()
+      target.scrollIntoView({ behavior: "auto", block: "start" })
+      history.replaceState(null, "", `#${id}`)
+    }
+    onNavigate?.()
+  }
+}
+
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const { categories } = useHandbook()
   return (
@@ -19,7 +31,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
         <div key={category.id}>
           <a
             href={`#${category.id}`}
-            onClick={onNavigate}
+            onClick={jumpTo(category.id, onNavigate)}
             className="block font-semibold text-stone-900 hover:text-[#1f4b3a]"
           >
             {category.roman}、{category.title}
@@ -29,7 +41,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
               <li key={section.id}>
                 <a
                   href={`#${section.id}`}
-                  onClick={onNavigate}
+                  onClick={jumpTo(section.id, onNavigate)}
                   className="font-medium text-stone-800 hover:underline"
                 >
                   {section.index}、{section.title}
@@ -39,7 +51,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
                     <li key={topic.id}>
                       <a
                         href={`#${topic.id}`}
-                        onClick={onNavigate}
+                        onClick={jumpTo(topic.id, onNavigate)}
                         className="block leading-5 text-stone-600 hover:text-stone-900 hover:underline"
                       >
                         {`${topic.mark}${topic.title}`}
@@ -52,7 +64,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           </ul>
         </div>
       ))}
-      <a href="#refs" onClick={onNavigate} className="block font-semibold text-stone-900">
+      <a href="#refs" onClick={jumpTo("refs", onNavigate)} className="block font-semibold text-stone-900">
         参考文献
       </a>
     </nav>

@@ -1190,9 +1190,9 @@ export const categories: Category[] = [
     id: "conjunctiva",
     roman: "三",
     title: "结膜",
-    question: "结膜上皮是否增生？杯状细胞和黏蛋白是否改变？MCJ 分化边界是否错位？",
+    question: "结膜上皮是否增生？杯状细胞是否改变？MCJ 分化边界是否错位？",
     summary:
-      "结膜评价分三层：HE 看睑缘/结膜上皮厚度，PAS 看穹窿杯状细胞，免疫荧光用 Krt4（黏膜）和 Krt10（表皮）判断 MCJ 是否被表皮化。充血评分和黏蛋白分子检测仍待补。",
+      "结膜评价分三层：HE 看睑缘/结膜上皮厚度，PAS 看穹窿杯状细胞，免疫荧光用 Krt4（黏膜）和 Krt10（表皮）判断 MCJ 是否被表皮化。",
     sections: [
       {
         id: "conj-structure",
@@ -1315,33 +1315,6 @@ export const categories: Category[] = [
                 caption: "Krt10 信号是否跨越 MCJ 进入结膜侧。",
               },
             ],
-          },
-            ],
-          },
-          {
-            id: "conj-pending-topic",
-            mark: "②",
-            title: "充血与黏蛋白",
-            assays: [
-          {
-            id: "conj-pending",
-            title: "结膜充血与黏蛋白监测（笔记待补）",
-            sources: ["paper5"],
-            instruments: ["笔记仅列出监测方向，未给出仪器和结果"],
-            markers: [
-              {
-                name: "结膜黏蛋白（如 Muc5ac 等）",
-                role: "泪膜黏液层 / 杯状细胞功能",
-              },
-            ],
-            observations: [
-              "目前可落地的是 PAS 杯状细胞计数；充血评分和黏蛋白分子检测仍缺方案。",
-            ],
-            pending: [
-              "结膜充血的活体评分或裂隙灯标准",
-              "结膜黏蛋白的免疫组化 / ELISA / qPCR 面板",
-            ],
-            figures: [],
           },
             ],
           },

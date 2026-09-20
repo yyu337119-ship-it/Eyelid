@@ -1,14 +1,13 @@
 "use client"
 
-import { useRef, useState, type ReactNode } from "react"
-import { BookOpen, Download, Menu, Pencil, RotateCcw, Upload } from "lucide-react"
+import { useState, type ReactNode } from "react"
+import { BookOpen, Menu } from "lucide-react"
 import { AssayCard } from "@/components/assay-card"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { abbreviations, sameSources, sectionSources, sources, topicSources } from "@/data/content"
 import { SourceCite } from "@/components/source-badge"
-import { EditableText } from "@/components/editable-text"
 import { HandbookProvider, useHandbook } from "@/lib/handbook-store"
 
 function scrollToId(id: string, onNavigate?: () => void) {
@@ -102,110 +101,35 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
   )
 }
 
-function EditToolbar() {
-  const { editMode, setEditMode, dirty, hasLegacyEdits, reset, exportJson, importJson, loadLegacyEdits } =
-    useHandbook()
-  const fileRef = useRef<HTMLInputElement>(null)
-
-  return (
-    <div className="flex flex-wrap items-center justify-end gap-2">
-      <Button
-        variant={editMode ? "default" : "outline"}
-        size="sm"
-        onClick={() => setEditMode(!editMode)}
-      >
-        <Pencil className="size-3.5" />
-        {editMode ? "完成编辑" : "编辑正文"}
-      </Button>
-      {hasLegacyEdits ? (
-        <Button variant="outline" size="sm" onClick={loadLegacyEdits}>
-          取出本机旧修改
-        </Button>
-      ) : null}
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => {
-          if (window.confirm("恢复为仓库中的原文，并清除本机保存的文字和替换图片？")) void reset()
-        }}
-        disabled={!dirty}
-      >
-        <RotateCcw className="size-3.5" />
-        恢复原文
-      </Button>
-      <Button size="sm" onClick={() => void exportJson()}>
-        <Download className="size-3.5" />
-        导出本机修改
-      </Button>
-      <Button variant="outline" size="sm" onClick={() => fileRef.current?.click()}>
-        <Upload className="size-3.5" />
-        导入
-      </Button>
-      <input
-        ref={fileRef}
-        type="file"
-        accept="application/json"
-        className="hidden"
-        onChange={(event) => {
-          const file = event.target.files?.[0]
-          if (file) void importJson(file)
-          event.target.value = ""
-        }}
-      />
-    </div>
-  )
-}
-
 function PhenotypeAppInner() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const {
-    categories,
-    intro,
-    setIntro,
-    dirty,
-    hasLegacyEdits,
-    exportJson,
-    updateCategory,
-    updateSectionTitle,
-    updateTopicTitle,
-  } = useHandbook()
+  const { categories, intro } = useHandbook()
 
   return (
     <div className="min-h-screen bg-[#f6f1e7] text-stone-800">
       <header className="sticky top-0 z-40 border-b border-stone-200/80 bg-[#f6f1e7]/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex items-start justify-between gap-3">
-            <div className="min-w-0">
-              <p className="text-[11px] font-semibold tracking-[0.18em] text-[#1f4b3a] uppercase">
-                小鼠眼部表型评价手册
-              </p>
-              <h1 className="truncate text-lg font-semibold text-stone-900 sm:text-xl">
-                如何系统评价小鼠眼睑异常表型
-              </h1>
-            </div>
-            <Button
-              variant="outline"
-              size="icon"
-              className="lg:hidden"
-              onClick={() => setMenuOpen(true)}
-              aria-label="打开目录"
-            >
-              <Menu className="size-4" />
-            </Button>
+        <div className="mx-auto flex max-w-7xl items-start justify-between gap-3 px-4 py-3 sm:px-6">
+          <div className="min-w-0">
+            <p className="text-[11px] font-semibold tracking-[0.18em] text-[#1f4b3a] uppercase">
+              小鼠眼部表型评价手册
+            </p>
+            <h1 className="truncate text-lg font-semibold text-stone-900 sm:text-xl">
+              如何系统评价小鼠眼睑异常表型
+            </h1>
           </div>
-          <EditToolbar />
+          <Button
+            variant="outline"
+            size="icon"
+            className="lg:hidden"
+            onClick={() => setMenuOpen(true)}
+            aria-label="打开目录"
+          >
+            <Menu className="size-4" />
+          </Button>
         </div>
-          <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-stone-600 sm:px-6">
-            本页只含两篇文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。这是后续三篇加进来之前的网页版总结。
-            {dirty ? " 当前浏览器里有未写进仓库的本地修改。" : ""}
-          </p>
-          {hasLegacyEdits ? (
-            <div className="mx-auto mb-3 max-w-7xl px-4 sm:px-6">
-              <div className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-950">
-                这个浏览器里还有另一套旧存档。若当前页不是你要的版本，可点「取出本机旧修改」。
-              </div>
-            </div>
-          ) : null}
+        <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-stone-600 sm:px-6">
+          本页只含两篇文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。后续三篇加进来之前的网页版总结，点击图表可放大。要改正文直接说，改完会发布到这个公开地址。
+        </p>
       </header>
 
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)]">
@@ -221,12 +145,7 @@ function PhenotypeAppInner() {
 
         <main className="space-y-10 pb-16">
           <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6">
-            <EditableText
-              value={intro}
-              onChange={setIntro}
-              multiline
-              className="text-sm leading-7 text-stone-700"
-            />
+            <p className="text-sm leading-7 text-stone-700">{intro}</p>
             <dl className="mt-5 grid gap-3 sm:grid-cols-2">
               {abbreviations.map((item) => (
                 <div key={item.abbr} className="rounded-lg bg-stone-50 px-3 py-2">
@@ -243,26 +162,10 @@ function PhenotypeAppInner() {
                 <p className="text-xs tracking-[0.2em] uppercase opacity-80">{category.roman}</p>
                 <h2 className="flex flex-wrap items-baseline gap-1 text-2xl font-semibold">
                   <span>{category.roman}、</span>
-                  <EditableText
-                    value={category.title}
-                    onChange={(title) => updateCategory(category.id, { title })}
-                    className="text-2xl font-semibold"
-                  />
+                  <span className="text-2xl font-semibold">{category.title}</span>
                 </h2>
-                <div className="mt-2 text-sm leading-6 text-emerald-50">
-                  <EditableText
-                    value={category.question}
-                    onChange={(question) => updateCategory(category.id, { question })}
-                    multiline
-                  />
-                </div>
-                <div className="mt-2 text-sm leading-6 text-emerald-100/90">
-                  <EditableText
-                    value={category.summary}
-                    onChange={(summary) => updateCategory(category.id, { summary })}
-                    multiline
-                  />
-                </div>
+                <p className="mt-2 text-sm leading-6 text-emerald-50">{category.question}</p>
+                <p className="mt-2 text-sm leading-6 text-emerald-100/90">{category.summary}</p>
               </div>
 
               {category.sections.map((section) => {
@@ -271,12 +174,7 @@ function PhenotypeAppInner() {
                 <div key={section.id} id={section.id} className="scroll-mt-40 space-y-5">
                   <h3 className="flex flex-wrap items-baseline gap-x-2 border-b border-stone-300 pb-2 text-xl font-semibold text-stone-900">
                     <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-2">
-                      {section.index}、
-                      <EditableText
-                        value={section.title}
-                        onChange={(title) => updateSectionTitle(category.id, section.id, title)}
-                        className="font-semibold"
-                      />
+                      {section.index}、{section.title}
                     </span>
                     <SourceCite ids={sectionIds} className="font-normal" />
                   </h3>
@@ -287,13 +185,7 @@ function PhenotypeAppInner() {
                       <h4 className="flex flex-wrap items-baseline gap-x-2 text-base font-semibold text-stone-800">
                         <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-1 text-[#1f4b3a]">
                           {topic.mark}
-                          <EditableText
-                            value={topic.title}
-                            onChange={(title) =>
-                              updateTopicTitle(category.id, section.id, topic.id, title)
-                            }
-                            className="font-semibold text-[#1f4b3a]"
-                          />
+                          {topic.title}
                         </span>
                         <SourceCite
                           ids={sameSources(topicIds, sectionIds) ? [] : topicIds}

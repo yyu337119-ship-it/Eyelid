@@ -4,7 +4,7 @@ import { useRef } from "react"
 import Image from "next/image"
 import { Expand, ExternalLink, ImageOff, ImagePlus, RotateCcw, X } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
-import { formatCites, type Figure, type SourceId } from "@/data/content"
+import { type Figure } from "@/data/content"
 import { cn } from "@/lib/utils"
 import { EditableText } from "@/components/editable-text"
 import { useHandbook } from "@/lib/handbook-store"
@@ -30,13 +30,11 @@ function FigureImage({
 
 export function FigureBlock({
   figure,
-  sources,
   onPaperFigChange,
   onCaptionChange,
   onRemove,
 }: {
   figure: Figure
-  sources: SourceId[]
   onPaperFigChange?: (value: string) => void
   onCaptionChange?: (value: string) => void
   onRemove?: () => void
@@ -162,7 +160,6 @@ export function FigureBlock({
           ) : (
             figure.paperFig
           )}
-          <span className="ml-2 font-normal text-stone-500">{formatCites(sources)}</span>
         </p>
         {onCaptionChange ? (
           <EditableText

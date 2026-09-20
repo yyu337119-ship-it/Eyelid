@@ -6,7 +6,7 @@ import { AssayCard } from "@/components/assay-card"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { abbreviations, sectionSources, sources, topicSources } from "@/data/content"
+import { abbreviations, sameSources, sectionSources, sources, topicSources } from "@/data/content"
 import { SourceCite } from "@/components/source-badge"
 import { EditableText } from "@/components/editable-text"
 import { HandbookProvider, useHandbook } from "@/lib/handbook-store"
@@ -250,7 +250,9 @@ function PhenotypeAppInner() {
                 </div>
               </div>
 
-              {category.sections.map((section) => (
+              {category.sections.map((section) => {
+                const sectionIds = sectionSources(section)
+                return (
                 <div key={section.id} id={section.id} className="scroll-mt-40 space-y-5">
                   <h3 className="flex flex-wrap items-baseline gap-x-2 border-b border-stone-300 pb-2 text-xl font-semibold text-stone-900">
                     <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-2">
@@ -261,9 +263,11 @@ function PhenotypeAppInner() {
                         className="font-semibold"
                       />
                     </span>
-                    <SourceCite ids={sectionSources(section)} className="font-normal" />
+                    <SourceCite ids={sectionIds} className="font-normal" />
                   </h3>
-                  {section.topics.map((topic) => (
+                  {section.topics.map((topic) => {
+                    const topicIds = topicSources(topic)
+                    return (
                     <div key={topic.id} id={topic.id} className="scroll-mt-40 space-y-3">
                       <h4 className="flex flex-wrap items-baseline gap-x-2 text-base font-semibold text-stone-800">
                         <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-1 text-[#1f4b3a]">
@@ -276,13 +280,17 @@ function PhenotypeAppInner() {
                             className="font-semibold text-[#1f4b3a]"
                           />
                         </span>
-                        <SourceCite ids={topicSources(topic)} className="font-normal" />
+                        <SourceCite
+                          ids={sameSources(topicIds, sectionIds) ? [] : topicIds}
+                          className="font-normal"
+                        />
                       </h4>
                       <div className="space-y-4">
                         {topic.assays.map((assay) => (
                           <AssayCard
                             key={assay.id}
                             assay={assay}
+                            parentSources={topicIds}
                             path={{
                               categoryId: category.id,
                               sectionId: section.id,
@@ -293,9 +301,11 @@ function PhenotypeAppInner() {
                         ))}
                       </div>
                     </div>
-                  ))}
+                    )
+                  })}
                 </div>
-              ))}
+                )
+              })}
             </section>
           ))}
 

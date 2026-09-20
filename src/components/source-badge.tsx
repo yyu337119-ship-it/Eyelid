@@ -8,6 +8,7 @@ export function SourceCite({
   ids: SourceId[]
   className?: string
 }) {
+  if (!ids.length) return null
   return (
     <span className={cn("text-sm font-medium text-stone-600", className)}>
       {formatCites(ids)}

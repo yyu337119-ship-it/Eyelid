@@ -145,6 +145,12 @@ export function uniqueSources(ids: SourceId[]): SourceId[] {
   return order.filter((id) => ids.includes(id))
 }
 
+export function sameSources(a: SourceId[], b: SourceId[]) {
+  const left = uniqueSources(a)
+  const right = uniqueSources(b)
+  return left.length === right.length && left.every((id, index) => id === right[index])
+}
+
 export function topicSources(topic: Topic): SourceId[] {
   return uniqueSources(topic.assays.flatMap((assay) => assay.sources))
 }

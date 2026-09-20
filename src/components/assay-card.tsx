@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react"
 import { Beaker, Eye, FlaskConical, ImageIcon, Plus, Trash2 } from "lucide-react"
-import type { Assay } from "@/data/content"
+import { sameSources, uniqueSources, type Assay, type SourceId } from "@/data/content"
 import { SourceCite } from "@/components/source-badge"
 import { FigureBlock } from "@/components/figure-block"
 import { EditableList, EditableText } from "@/components/editable-text"
@@ -28,7 +28,15 @@ function Field({
   )
 }
 
-export function AssayCard({ assay, path }: { assay: Assay; path: AssayPath }) {
+export function AssayCard({
+  assay,
+  path,
+  parentSources,
+}: {
+  assay: Assay
+  path: AssayPath
+  parentSources: SourceId[]
+}) {
   const { editMode, updateAssay, restoreFigure } = useHandbook()
   const markers = assay.markers ?? []
   const pending = assay.pending ?? []
@@ -47,7 +55,10 @@ export function AssayCard({ assay, path }: { assay: Assay; path: AssayPath }) {
             onChange={(title) => patch((current) => ({ ...current, title }))}
             className="min-w-[12rem] flex-1 font-semibold"
           />
-          <SourceCite ids={assay.sources} className="font-normal" />
+          <SourceCite
+            ids={sameSources(assay.sources, parentSources) ? [] : uniqueSources(assay.sources)}
+            className="font-normal"
+          />
         </h4>
       </header>
 
@@ -191,7 +202,6 @@ export function AssayCard({ assay, path }: { assay: Assay; path: AssayPath }) {
                 <FigureBlock
                   key={figure.id ?? figure.paperFig + (figure.src ?? "") + index}
                   figure={figure}
-                  sources={assay.sources}
                   onPaperFigChange={(paperFig) =>
                     patch((current) => {
                       const figures = [...current.figures]

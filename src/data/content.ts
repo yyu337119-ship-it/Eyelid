@@ -1,4 +1,4 @@
-export type SourceId = "paper2" | "paper5"
+export type SourceId = "paper1" | "paper2"
 
 export type Marker = {
   name: string
@@ -16,7 +16,7 @@ export type Figure = {
 export type Assay = {
   id: string
   title: string
-  source: SourceId
+  sources: SourceId[]
   instruments: string[]
   stains?: string[]
   markers?: Marker[]
@@ -25,10 +25,18 @@ export type Assay = {
   pending?: string[]
 }
 
-export type Subsection = {
+export type Topic = {
   id: string
+  mark: string
   title: string
   assays: Assay[]
+}
+
+export type Section = {
+  id: string
+  index: string
+  title: string
+  topics: Topic[]
 }
 
 export type Category = {
@@ -37,15 +45,15 @@ export type Category = {
   title: string
   question: string
   summary: string
-  subsections: Subsection[]
+  sections: Section[]
 }
 
 export const sources = {
-  paper2: {
-    id: "paper2" as const,
-    tag: "[2]",
-    colorName: "红字",
-    short: "Widjaja-Adhi 2026",
+  paper1: {
+    id: "paper1" as const,
+    n: 1,
+    cite: "【1】Widjaja-Adhi MAK, et al. IOVS, 2026",
+    short: "Widjaja-Adhi MAK, et al. IOVS, 2026",
     title:
       "Pharmacologic Alteration of Meibum Lipid Composition Alleviates Dry Eye Phenotype in Awat2−/− Mice",
     authors: "Widjaja-Adhi MAK, Chung C, Lapierre-Landry M, et al.",
@@ -54,13 +62,14 @@ export const sources = {
     volume: "67(6): 34",
     doi: "10.1167/iovs.67.6.34",
     doiUrl: "https://doi.org/10.1167/iovs.67.6.34",
+    noteMap: "对应原笔记文献 [2]",
     model: "Awat2−/− 蒸发性干眼模型；ATR101（nevanimibe）抑制 SOAT1 / 胆固醇酯合成",
   },
-  paper5: {
-    id: "paper5" as const,
-    tag: "[5]",
-    colorName: "黄字",
-    short: "Dong 2015",
+  paper2: {
+    id: "paper2" as const,
+    n: 2,
+    cite: "【2】Dong F, et al. Dev Biol, 2015",
+    short: "Dong F, et al. Dev Biol, 2015",
     title:
       "Perturbed meibomian gland and tarsal plate morphogenesis by excess TGFα in eyelid stroma",
     authors: "Dong F, Liu CY, Yuan Y, et al.",
@@ -70,10 +79,15 @@ export const sources = {
     doi: "10.1016/j.ydbio.2015.09.003",
     doiUrl: "https://doi.org/10.1016/j.ydbio.2015.09.003",
     pmcUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
+    noteMap: "对应原笔记文献 [5]",
     model:
       "Kera-rtTA/tetO-TGFα（KR/TG）双转基因小鼠，P0–P15 多西环素诱导眼睑基质过表达 TGFα",
   },
 } as const
+
+export function formatCites(ids: SourceId[]) {
+  return ids.map((id) => sources[id].cite).join("；")
+}
 
 export const abbreviations = [
   { abbr: "MG", full: "睑板腺 Meibomian gland" },
@@ -94,15 +108,21 @@ export const categories: Category[] = [
     question: "腺体形态是否完整？导管是否阻塞？睑脂能否排出、成分是否异常？",
     summary:
       "先看活体/大体形态，再落到切片与三维重建量化导管，最后用分子标志物判断角化、分化与脂质合成，并以裂隙灯观察睑脂外观与排出是否通畅。",
-    subsections: [
+    sections: [
+      {
+        id: "mg-gland",
+        index: "1",
+        title: "MG",
+        topics: [
       {
         id: "mg-morphology",
+        mark: "①",
         title: "腺体形态与组织学",
         assays: [
           {
             id: "mg-gross-he",
             title: "新鲜睑板纵切面大体成像联合 HE",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: [
               "Leica M205 C 体视显微镜：新鲜睑板纵切面大体宏观成像",
               "光学显微镜：睑板横切面 HE 染色",
@@ -125,7 +145,7 @@ export const categories: Category[] = [
           {
             id: "mg-nuclei-count",
             title: "连续 HE 横切面统计腺泡细胞核数",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: [
               "连续多张睑板横切面 HE 染色",
               "每只小鼠统计 32 张切片的腺泡细胞平均核数",
@@ -147,7 +167,7 @@ export const categories: Category[] = [
           {
             id: "mg-stereo-close",
             title: "体视显微镜观察眼睑闭合与 MG 大体形态",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: [
               "体视显微镜：活体/离体翻转眼睑，暴露结膜面观察 MG 排列",
             ],
@@ -168,7 +188,7 @@ export const categories: Category[] = [
           {
             id: "mg-he-acini",
             title: "眼球 HE：腺泡结构、导管扩张、开口位置与间充质",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: ["石蜡切片 HE，光学显微镜"],
             stains: ["H&E"],
             observations: [
@@ -187,16 +207,10 @@ export const categories: Category[] = [
               },
             ],
           },
-        ],
-      },
-      {
-        id: "mg-duct",
-        title: "导管阻塞与管径量化",
-        assays: [
           {
             id: "mg-3d-duct",
             title: "三维虚拟组织学重建测量中央导管最大直径",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: [
               "连续组织切片重新上色，模拟上眼睑 H&E",
               "Amira 软件三维重建：导管标红、腺泡标绿",
@@ -220,7 +234,7 @@ export const categories: Category[] = [
           {
             id: "mg-terminal-duct",
             title: "裂隙灯图像测量末端导管厚度",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: [
               "裂隙灯导出带比例尺照片",
               "ImageJ：沿垂直于导管长轴方向，测外部可视横向宽度（导管 + 管腔内淤积脂质的整体外观厚度）",
@@ -242,12 +256,13 @@ export const categories: Category[] = [
       },
       {
         id: "mg-markers",
+        mark: "②",
         title: "分子标志物",
         assays: [
           {
             id: "mg-rtqpcr",
             title: "睑板腺标志物基因 RT-qPCR",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: ["RT-qPCR，睑板组织 mRNA 定量"],
             markers: [
               {
@@ -281,7 +296,7 @@ export const categories: Category[] = [
           {
             id: "mg-pparg-pcna",
             title: "MG 腺泡分化、增殖与凋亡（PPARγ / PCNA / TUNEL）",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: [
               "石蜡切片免疫荧光",
               "TUNEL 凋亡检测",
@@ -320,14 +335,22 @@ export const categories: Category[] = [
           },
         ],
       },
+        ],
+      },
       {
         id: "mg-meibum",
-        title: "睑脂分泌物",
-        assays: [
+        index: "2",
+        title: "睑脂",
+        topics: [
+          {
+            id: "meibum-look",
+            mark: "①",
+            title: "大体外观与排出",
+            assays: [
           {
             id: "meibum-appearance",
             title: "裂隙灯生物显微镜观察睑脂大体外观",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: [
               "裂隙灯生物显微镜约 40 倍：观察挤出睑脂的透明度、形态和粘稠外观",
             ],
@@ -347,7 +370,7 @@ export const categories: Category[] = [
           {
             id: "meibum-expressibility",
             title: "裂隙灯下观察开口并挤压评估排出是否通畅",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: [
               "裂隙灯直接观察睑缘开口",
               "轻压睑板，比较挤压前后开口处脂质排出",
@@ -365,10 +388,17 @@ export const categories: Category[] = [
               },
             ],
           },
+            ],
+          },
+          {
+            id: "meibum-comp",
+            mark: "②",
+            title: "组分与物理性状",
+            assays: [
           {
             id: "meibum-biophysics",
             title: "睑脂熔融温度与 CE / FA 组分（笔记待补方法细节）",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: [
               "原文摘要已做：睑脂熔融温度、脂质流动性、胆固醇酯合成抑制后的组分改变",
             ],
@@ -386,6 +416,8 @@ export const categories: Category[] = [
             ],
             figures: [],
           },
+            ],
+          },
         ],
       },
     ],
@@ -397,15 +429,21 @@ export const categories: Category[] = [
     question: "角膜屏障是否破损？上皮是否应激修复？泪膜是否稳定？",
     summary:
       "角膜先用荧光素看破损范围，再用在体共聚焦看表层/翼状/基底细胞形态，最后用 Krt14 / Krt12 / Sprr1a 判断分化与鳞状化生。泪膜用镜面光反射环评价完整性；泪液量、泪河和 TBUT/NIBUT 仍待补。",
-    subsections: [
+    sections: [
       {
         id: "cornea",
+        index: "1",
         title: "角膜",
-        assays: [
+        topics: [
+          {
+            id: "cornea-morphology",
+            mark: "①",
+            title: "形态与完整性",
+            assays: [
           {
             id: "cornea-fluorescein",
             title: "荧光素染色裂隙灯评估角膜完整性",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: [
               "角膜荧光素染色",
               "裂隙灯钴蓝光采集代表性图像（双眼 OD/OS，Day 0 / 10 / 14）",
@@ -427,7 +465,7 @@ export const categories: Category[] = [
           {
             id: "cornea-confocal",
             title: "在体共聚焦显微镜观察角膜上皮各层",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: ["在体共聚焦显微镜，分层采集表层、翼状、基底上皮细胞"],
             observations: [
               "看三点：细胞是否肥大、固缩核数量、是否出现鳞状化生和表层脱落。",
@@ -443,10 +481,17 @@ export const categories: Category[] = [
               },
             ],
           },
+            ],
+          },
+          {
+            id: "cornea-markers-topic",
+            mark: "②",
+            title: "分子标志物",
+            assays: [
           {
             id: "cornea-markers",
             title: "角膜上皮标志物：免疫荧光 + RT-qPCR",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: [
               "角膜切片免疫荧光（IF）",
               "RT-qPCR 定量标志物基因 mRNA",
@@ -491,14 +536,22 @@ export const categories: Category[] = [
           },
         ],
       },
+        ],
+      },
       {
         id: "tear",
-        title: "泪膜与泪液",
-        assays: [
+        index: "2",
+        title: "泪膜、泪液",
+        topics: [
+          {
+            id: "tear-integrity",
+            mark: "①",
+            title: "泪膜完整性",
+            assays: [
           {
             id: "tear-specular",
             title: "镜面光反射法评估泪膜完整性",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: [
               "体视显微镜：观察圆形 LED 光环在眼表的反射模式",
             ],
@@ -516,10 +569,17 @@ export const categories: Category[] = [
               },
             ],
           },
+            ],
+          },
+          {
+            id: "tear-quantity",
+            mark: "②",
+            title: "泪液与破裂时间",
+            assays: [
           {
             id: "tear-pending",
             title: "泪液量、脂质层、泪河与破裂时间（笔记待补）",
-            source: "paper2",
+            sources: ["paper1"],
             instruments: [
               "笔记列出但未展开：泪液收集、泪膜脂质层、泪河高度、TBUT / NIBUT",
             ],
@@ -535,6 +595,8 @@ export const categories: Category[] = [
             ],
             figures: [],
           },
+            ],
+          },
         ],
       },
     ],
@@ -546,15 +608,21 @@ export const categories: Category[] = [
     question: "结膜上皮是否增生？杯状细胞和黏蛋白是否改变？MCJ 分化边界是否错位？",
     summary:
       "结膜评价分三层：HE 看睑缘/结膜上皮厚度，PAS 看穹窿杯状细胞，免疫荧光用 Krt4（黏膜）和 Krt10（表皮）判断 MCJ 是否被表皮化。充血和黏蛋白监测在笔记中仍是待补项。",
-    subsections: [
+    sections: [
       {
         id: "conj-structure",
-        title: "上皮与杯状细胞",
-        assays: [
+        index: "1",
+        title: "上皮结构",
+        topics: [
+          {
+            id: "conj-he-topic",
+            mark: "①",
+            title: "上皮增厚",
+            assays: [
           {
             id: "conj-he",
             title: "睑板上皮 HE：结膜、皮肤黏膜移行上皮增厚",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: ["石蜡切片 HE"],
             stains: ["H&E"],
             observations: [
@@ -571,10 +639,17 @@ export const categories: Category[] = [
               },
             ],
           },
+            ],
+          },
+          {
+            id: "conj-pas-topic",
+            mark: "②",
+            title: "杯状细胞",
+            assays: [
           {
             id: "conj-pas",
             title: "结膜 PAS 染色评估穹窿杯状细胞",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: ["PAS 染色，观察结膜穹窿"],
             stains: ["PAS"],
             markers: [
@@ -599,14 +674,22 @@ export const categories: Category[] = [
           },
         ],
       },
+        ],
+      },
       {
         id: "conj-markers",
-        title: "分化边界标志物",
-        assays: [
+        index: "2",
+        title: "分子标志物",
+        topics: [
+          {
+            id: "conj-krt-topic",
+            mark: "①",
+            title: "黏膜 / 表皮分化边界",
+            assays: [
           {
             id: "conj-krt4",
             title: "Krt4：皮肤黏膜交界区黏膜上皮分化",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: ["免疫荧光"],
             markers: [
               {
@@ -630,7 +713,7 @@ export const categories: Category[] = [
           {
             id: "conj-krt10",
             title: "Krt10：表皮分化标志越过 MCJ 进入结膜",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: ["免疫荧光"],
             markers: [
               {
@@ -652,10 +735,17 @@ export const categories: Category[] = [
               },
             ],
           },
+            ],
+          },
+          {
+            id: "conj-pending-topic",
+            mark: "②",
+            title: "充血与黏蛋白",
+            assays: [
           {
             id: "conj-pending",
             title: "结膜充血与黏蛋白监测（笔记待补）",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: ["笔记仅列出监测方向，未给出仪器和结果"],
             markers: [
               {
@@ -672,6 +762,8 @@ export const categories: Category[] = [
             ],
             figures: [],
           },
+            ],
+          },
         ],
       },
     ],
@@ -684,15 +776,21 @@ export const categories: Category[] = [
       "睑板肌和眼轮匝肌是否存在？肌腱/睑板是否由神经嵴细胞过度增生而畸形？",
     summary:
       "先用 α-SMA 和骨骼肌肌球蛋白确认 TM、OO 本身大体正常，再用 Wnt1Cre 谱系追踪和马松三色看 CPF/TP 是否细胞堆积、胶原丢失。增殖（PCNA）、凋亡（TUNEL）和 EGFR / β-catenin / N-cadherin 解释肌腱细胞为何停在祖细胞状态。",
-    subsections: [
+    sections: [
       {
         id: "muscle-identity",
-        title: "肌肉身份标志",
-        assays: [
+        index: "1",
+        title: "睑板肌与眼轮匝肌",
+        topics: [
+          {
+            id: "muscle-sma-topic",
+            mark: "①",
+            title: "身份标志",
+            assays: [
           {
             id: "muscle-sma-myosin",
             title: "α-SMA 与骨骼肌肌球蛋白：睑板肌 / 眼轮匝肌",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: ["免疫荧光"],
             markers: [
               {
@@ -722,14 +820,22 @@ export const categories: Category[] = [
           },
         ],
       },
+        ],
+      },
       {
-        id: "muscle-lineage",
-        title: "发育来源",
-        assays: [
+        id: "muscle-tendon",
+        index: "2",
+        title: "肌腱与睑板",
+        topics: [
           {
             id: "muscle-lineage",
+            mark: "①",
+            title: "发育来源",
+            assays: [
+          {
+            id: "muscle-lineage-trace",
             title: "Wnt1Cre / Rosa26mTmG 谱系追踪",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: [
               "KR/TG 与 Wnt1Cre/Rosa26mTmG 杂交",
               "冰冻切片 DAPI，绿色荧光=神经嵴来源",
@@ -758,14 +864,15 @@ export const categories: Category[] = [
           },
         ],
       },
-      {
-        id: "muscle-development",
-        title: "发育过程（马松三色）",
-        assays: [
+          {
+            id: "muscle-development",
+            mark: "②",
+            title: "发育过程",
+            assays: [
           {
             id: "muscle-masson-adult",
             title: "马松三色：肌腱与睑板细胞 vs 胶原",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: [
               "眼睑石蜡切片马松三色",
               "红色=细胞质/细胞，蓝色=胶原",
@@ -789,7 +896,7 @@ export const categories: Category[] = [
           {
             id: "muscle-masson-time",
             title: "马松三色时间序列：对照 vs TGFα 过表达",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: ["P0、P5、P8、P11 眼睑石蜡切片马松三色"],
             stains: ["Masson 三色"],
             observations: [
@@ -809,14 +916,15 @@ export const categories: Category[] = [
           },
         ],
       },
-      {
-        id: "muscle-signaling",
-        title: "增殖、凋亡与分化信号",
-        assays: [
+          {
+            id: "muscle-signaling",
+            mark: "③",
+            title: "增殖、凋亡与分子标志物",
+            assays: [
           {
             id: "muscle-pcna-tunel",
             title: "PCNA 与 TUNEL：CPF / TP 增殖和凋亡",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: ["免疫荧光 PCNA；TUNEL"],
             markers: [
               {
@@ -846,7 +954,7 @@ export const categories: Category[] = [
           {
             id: "muscle-collagen",
             title: "I / III 型胶原：睑板基质是否形成",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: ["免疫荧光"],
             markers: [
               {
@@ -875,7 +983,7 @@ export const categories: Category[] = [
           {
             id: "muscle-egfr",
             title: "EGFR / β-catenin / N-cadherin：CPF 细胞增殖与黏附",
-            source: "paper5",
+            sources: ["paper2"],
             instruments: ["免疫荧光"],
             markers: [
               {
@@ -909,18 +1017,23 @@ export const categories: Category[] = [
           },
         ],
       },
+        ],
+      },
     ],
   },
 ]
 
 export function allAssays() {
   return categories.flatMap((category) =>
-    category.subsections.flatMap((subsection) =>
-      subsection.assays.map((assay) => ({
-        ...assay,
-        categoryId: category.id,
-        subsectionId: subsection.id,
-      }))
+    category.sections.flatMap((section) =>
+      section.topics.flatMap((topic) =>
+        topic.assays.map((assay) => ({
+          ...assay,
+          categoryId: category.id,
+          sectionId: section.id,
+          topicId: topic.id,
+        }))
+      )
     )
   )
 }

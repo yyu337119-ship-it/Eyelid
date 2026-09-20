@@ -1,9 +1,8 @@
 import type { ReactNode } from "react"
 import { Beaker, Eye, FlaskConical, ImageIcon } from "lucide-react"
 import type { Assay } from "@/data/content"
-import { SourceBadge, sourceTitleClass } from "@/components/source-badge"
+import { SourceCite } from "@/components/source-badge"
 import { FigureBlock } from "@/components/figure-block"
-import { cn } from "@/lib/utils"
 
 function Field({
   icon: Icon,
@@ -27,18 +26,10 @@ function Field({
 
 export function AssayCard({ assay }: { assay: Assay }) {
   return (
-    <article
-      id={assay.id}
-      className={cn(
-        "scroll-mt-28 rounded-xl border bg-white p-4 shadow-sm sm:p-5",
-        assay.source === "paper2" ? "border-l-4 border-l-[#c2301e]" : "border-l-4 border-l-[#d4a017]"
-      )}
-    >
-      <header className="mb-4 flex flex-wrap items-start justify-between gap-3">
-        <h3 className={cn("max-w-3xl text-lg font-semibold leading-snug", sourceTitleClass(assay.source))}>
-          {assay.title}
-        </h3>
-        <SourceBadge source={assay.source} />
+    <article id={assay.id} className="scroll-mt-28 rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-5">
+      <header className="mb-4 space-y-1">
+        <h4 className="text-lg font-semibold leading-snug text-stone-900">{assay.title}</h4>
+        <SourceCite ids={assay.sources} />
       </header>
 
       <div className="space-y-4">
@@ -47,9 +38,7 @@ export function AssayCard({ assay }: { assay: Assay }) {
             {assay.instruments.map((item) => (
               <li key={item}>{item}</li>
             ))}
-            {assay.stains?.length ? (
-              <li>染色：{assay.stains.join("、")}</li>
-            ) : null}
+            {assay.stains?.length ? <li>染色：{assay.stains.join("、")}</li> : null}
           </ul>
         </Field>
 
@@ -60,9 +49,7 @@ export function AssayCard({ assay }: { assay: Assay }) {
                 <li key={marker.name} className="rounded-md bg-stone-50 px-3 py-2 text-sm leading-6">
                   <span className="font-medium text-stone-900">{marker.name}</span>
                   <span className="text-stone-500"> · {marker.role}</span>
-                  {marker.change ? (
-                    <p className="mt-0.5 text-stone-700">{marker.change}</p>
-                  ) : null}
+                  {marker.change ? <p className="mt-0.5 text-stone-700">{marker.change}</p> : null}
                 </li>
               ))}
             </ul>
@@ -93,7 +80,7 @@ export function AssayCard({ assay }: { assay: Assay }) {
           {assay.figures.length ? (
             <div className="grid gap-3">
               {assay.figures.map((figure) => (
-                <FigureBlock key={figure.paperFig + (figure.src ?? "")} figure={figure} source={assay.source} />
+                <FigureBlock key={figure.paperFig + (figure.src ?? "")} figure={figure} sources={assay.sources} />
               ))}
             </div>
           ) : (

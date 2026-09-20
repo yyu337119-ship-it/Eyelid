@@ -5,16 +5,15 @@ import Image from "next/image"
 import { Expand, ExternalLink, ImageOff } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { buttonVariants } from "@/components/ui/button"
-import type { Figure, SourceId } from "@/data/content"
-import { SourceBadge } from "@/components/source-badge"
+import { formatCites, type Figure, type SourceId } from "@/data/content"
 import { cn } from "@/lib/utils"
 
 export function FigureBlock({
   figure,
-  source,
+  sources,
 }: {
   figure: Figure
-  source: SourceId
+  sources: SourceId[]
 }) {
   const [open, setOpen] = useState(false)
 
@@ -58,17 +57,17 @@ export function FigureBlock({
         </div>
       )}
       <figcaption className="space-y-1.5 border-t border-stone-100 px-3 py-2.5">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="font-mono text-xs font-semibold text-stone-700">{figure.paperFig}</span>
-          <SourceBadge source={source} />
-        </div>
+        <p className="text-sm font-medium text-stone-800">
+          {figure.paperFig}
+          <span className="ml-2 font-normal text-stone-500">{formatCites(sources)}</span>
+        </p>
         <p className="text-sm leading-6 text-stone-600">{figure.caption}</p>
       </figcaption>
       {figure.src ? (
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogContent className="max-h-[92vh] max-w-5xl sm:max-w-5xl overflow-auto p-3 sm:p-4">
+          <DialogContent className="max-h-[92vh] max-w-5xl overflow-auto p-3 sm:max-w-5xl sm:p-4">
             <DialogHeader>
-              <DialogTitle className="font-mono text-sm">{figure.paperFig}</DialogTitle>
+              <DialogTitle className="text-sm">{figure.paperFig}</DialogTitle>
             </DialogHeader>
             <Image
               src={figure.src}

@@ -34,7 +34,7 @@
                   "markers": [],
                   "observations": [
                     "大体：\n红线标中央导管，绿箭头标开口堵塞。\nDMSO 组中央导管扩张、管腔内脂质淤积，开口处可见堵塞物；\nATR101 组导管轮廓更规整、开口堵塞减轻。",
-                    "HE：\nDMSO 组导管上皮角化、管腔扩大（黑箭头），周围腺泡稀疏；\nATR101 组角化与扩张减轻、腺泡更密。"
+                    "HE：\nDMSO 组导管上皮角化、管腔扩大，周围腺泡稀疏；\nATR101 组角化与扩张减轻、腺泡更密。"
                   ],
                   "figures": [
                     {
@@ -60,13 +60,13 @@
                   ],
                   "observations": [
                     "腺泡细胞核数：Awat2−/−/DMSO 最低，ATR101 治疗后回升，仍低于野生型。",
-                    "核数下降反映腺泡萎缩/丢失。"
+                    ""
                   ],
                   "figures": [
                     {
                       "src": "/figures/live/mg-nuclei-count-fig-0.jpg",
                       "paperFig": "Fig. 7B",
-                      "caption": "Average meibocyte nuclei count。Awat2−/−/DMSO < ATR101 < WT。",
+                      "caption": "Average meibocyte nuclei count",
                       "id": "mg-nuclei-count-fig-0"
                     }
                   ]
@@ -81,20 +81,19 @@
                     "体视显微镜：\n麻醉后翻转眼睑，暴露结膜面观察 MG 排列"
                   ],
                   "observations": [
-                    "对照 P11 眼睑仍闭合、外形正常；\n KR/TG 小鼠过早睁眼，上下睑肿胀，下睑更明显。",
-                    "Fig. 3A–C：对照 MG 沿睑板平行排列、腺泡簇完整；重症转基因鼠腺体部分缺失、畸形/弯曲/缺损，下睑重于上睑；轻症大体差别小，但仍需切片确认间充质堆积。"
+                    "对照组：眼睑仍闭合、外形正常；\n KR/TG 小鼠过早睁眼，上下睑肿胀，下睑更明显。"
                   ],
                   "figures": [
                     {
                       "src": "/figures/live/mg-stereo-close-fig-0.jpg",
-                      "paperFig": "Fig. 2A–D",
-                      "caption": "P11。A：对照眼睑仍闭合；B：KR/TG 过早睁眼，上下睑肿胀，下睑更明显。C/D：HE 确认开睑与肿胀。",
+                      "paperFig": "Fig. 2A–D ",
+                      "caption": "",
                       "id": "mg-stereo-close-fig-0"
                     },
                     {
                       "src": "/figures/live/mg-stereo-close-fig-1.jpg",
                       "paperFig": "Fig. 3A–C",
-                      "caption": "P15 结膜面大体。对照 MG 平行排列完整；重症腺体部分缺失、畸形；轻症大体接近对照。",
+                      "caption": "P15 结膜面大体。对照 MG 平行排列完整；重症腺体部分缺失、畸形；轻症大体接近对照。\n对照 MG 沿睑板平行排列、腺泡簇完整；\n重症转基因鼠腺体部分缺失、畸形/弯曲/缺损，下睑重于上睑。",
                       "id": "mg-stereo-close-fig-1"
                     }
                   ]

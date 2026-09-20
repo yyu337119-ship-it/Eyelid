@@ -128,4 +128,14 @@
     @apply font-sans;
     scroll-behavior: smooth;
   }
+  dialog:not([open]) {
+    display: none;
+  }
+  dialog[open] {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    height: fit-content;
+    max-height: 92vh;
+  }
 }

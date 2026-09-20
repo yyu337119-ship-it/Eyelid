@@ -1,7 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { createPortal } from "react-dom"
+import { useRef } from "react"
 import Image from "next/image"
 import { Expand, ExternalLink, ImageOff, X } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
@@ -15,28 +14,22 @@ export function FigureBlock({
   figure: Figure
   sources: SourceId[]
 }) {
-  const [open, setOpen] = useState(false)
+  const dialogRef = useRef<HTMLDialogElement>(null)
 
-  useEffect(() => {
-    if (!open) return
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false)
-    }
-    window.addEventListener("keydown", onKey)
-    const previous = document.body.style.overflow
-    document.body.style.overflow = "hidden"
-    return () => {
-      window.removeEventListener("keydown", onKey)
-      document.body.style.overflow = previous
-    }
-  }, [open])
+  function openLightbox() {
+    dialogRef.current?.showModal()
+  }
+
+  function closeLightbox() {
+    dialogRef.current?.close()
+  }
 
   return (
     <div className="overflow-hidden rounded-lg border border-stone-200 bg-white">
       {figure.src ? (
         <button
           type="button"
-          onClick={() => setOpen(true)}
+          onClick={openLightbox}
           className="relative block w-full cursor-zoom-in bg-stone-50"
         >
           <Image
@@ -78,41 +71,33 @@ export function FigureBlock({
         <p className="text-sm leading-6 text-stone-600">{figure.caption}</p>
       </div>
 
-      {open && figure.src
-        ? createPortal(
-            <div
-              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4"
-              role="dialog"
-              aria-modal="true"
-              aria-label={figure.paperFig}
-              onClick={() => setOpen(false)}
-            >
-              <div
-                className="relative max-h-[92vh] w-full max-w-5xl overflow-auto rounded-xl bg-white p-4 shadow-xl"
-                onClick={(event) => event.stopPropagation()}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  className="absolute top-2 right-2 inline-flex size-8 items-center justify-center rounded-md text-stone-600 hover:bg-stone-100"
-                  aria-label="关闭"
-                >
-                  <X className="size-4" />
-                </button>
-                <p className="pr-10 text-sm font-medium text-stone-800">{figure.paperFig}</p>
-                <Image
-                  src={figure.src}
-                  alt={figure.paperFig}
-                  width={1800}
-                  height={1200}
-                  className="mt-3 h-auto w-full object-contain"
-                />
-                <p className="mt-3 text-sm leading-6 text-stone-600">{figure.caption}</p>
-              </div>
-            </div>,
-            document.body
-          )
-        : null}
+      {figure.src ? (
+        <dialog
+          ref={dialogRef}
+          className="relative w-[min(100%,72rem)] max-h-[92vh] overflow-auto rounded-xl bg-white p-4 shadow-xl backdrop:bg-black/70"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) closeLightbox()
+          }}
+        >
+          <button
+            type="button"
+            onClick={closeLightbox}
+            className="absolute top-2 right-2 inline-flex size-8 items-center justify-center rounded-md text-stone-600 hover:bg-stone-100"
+            aria-label="关闭"
+          >
+            <X className="size-4" />
+          </button>
+          <p className="pr-10 text-sm font-medium text-stone-800">{figure.paperFig}</p>
+          <Image
+            src={figure.src}
+            alt={figure.paperFig}
+            width={1800}
+            height={1200}
+            className="mt-3 h-auto w-full object-contain"
+          />
+          <p className="mt-3 text-sm leading-6 text-stone-600">{figure.caption}</p>
+        </dialog>
+      ) : null}
     </div>
   )
 }

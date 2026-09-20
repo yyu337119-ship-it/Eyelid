@@ -150,10 +150,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/p2-fig7a-mg-gross-he.png",
+                src: "/figures/paper1-fig7-mg.jpg",
                 paperFig: "Fig. 7A",
                 caption:
-                  "上排 Awat2−/−/DMSO，下排 Awat2−/−/ATR101。左列纵切大体，右列 HE。红线标中央导管，绿箭头标开口，黑箭头标导管上皮。",
+                  "上排 Awat2−/−/DMSO，下排 Awat2−/−/ATR101。左列纵切大体，右列 HE。红线标中央导管，绿箭头标开口堵塞。原图亦含 7B 核数与 7C RT-qPCR。",
               },
             ],
           },
@@ -172,7 +172,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/p2-fig7b-meibocyte-nuclei.png",
+                src: "/figures/paper1-fig7-mg.jpg",
                 paperFig: "Fig. 7B",
                 caption:
                   "Average meibocyte nuclei count。Awat2−/−/DMSO < ATR101 < WT。",
@@ -192,11 +192,16 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                paperFig: "Fig. 2A–B；Fig. 3A–C",
+                src: "/figures/paper2-fig2-eyelid.jpg",
+                paperFig: "Fig. 2A–D",
                 caption:
-                  "笔记未贴原图。2A/2B 看眼睑是否闭合与肿胀；3A–C 看 MG 是否畸形、弯曲或缺损。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
+                  "P11。A：对照眼睑仍闭合；B：KR/TG 过早睁眼，上下睑肿胀，下睑更明显。C/D：HE 确认开睑与肿胀。",
+              },
+              {
+                src: "/figures/paper2-fig3-mg.jpg",
+                paperFig: "Fig. 3A–C",
+                caption:
+                  "P15 结膜面大体。对照 MG 平行排列完整；重症腺体部分缺失、畸形；轻症大体接近对照。",
               },
             ],
           },
@@ -214,11 +219,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                paperFig: "Fig. 2B；Fig. 3D–I",
+                src: "/figures/paper2-fig3-mg.jpg",
+                paperFig: "Fig. 3D–I",
                 caption:
-                  "HE 用于确认大体无法分辨的导管扩张、开口异位和间充质堆积。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
+                  "HE：对照腺泡成簇、开口在 MCJ 前方；重症导管扩张、开口异位到皮肤侧、间充质堆积；轻症大体接近对照但间充质仍增多。",
               },
             ],
           },
@@ -239,7 +243,7 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/p2-fig6-3d-reconstruction.png",
+                src: "/figures/paper1-fig6-3d.jpg",
                 paperFig: "Fig. 6A–C",
                 caption:
                   "A：不同 Z 深度切片，黑箭头标导管。B：三维渲染，红=导管、绿=腺泡。C：中央导管最大直径箱线图。",
@@ -260,10 +264,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/p2-fig5b-terminal-duct.png",
+                src: "/figures/paper1-fig5-mg-duct.jpg",
                 paperFig: "Fig. 5B",
                 caption:
-                  "MG terminal duct thickness (Dx−Do)/Do。ATR101 + 组在 Day 10、Day 14 均低于溶剂对照。",
+                  "B：MG terminal duct thickness (Dx−Do)/Do。ATR101 组在 Day 10、Day 14 均低于溶剂对照。A 为同一批裂隙灯导管图像。",
               },
             ],
           },
@@ -302,9 +306,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                paperFig: "原文 RT-qPCR 图（笔记未单独贴图）",
+                src: "/figures/paper1-fig7-mg.jpg",
+                paperFig: "Fig. 7C",
                 caption:
-                  "检测面板：Aldh1a3、Rarb、Rbp1、Pparg、Sprr1a、Krt14。结果解读见左侧标志物。",
+                  "睑板组织 RT-qPCR：Aldh1a3、Rarb、Rbp1、Sprr1a、Pparg、Krt14（相对 Gapdh）。ATR101 后角化/修复轴下降，Pparg 回升。",
               },
             ],
           },
@@ -340,11 +345,19 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                paperFig: "Fig. 8Aa vs Ba；Fig. 9Aa vs Ba；Fig. 10A–B",
-                caption:
-                  "PCNA 看基底层增殖，TUNEL 看腺泡凋亡，PPARγ 看腺泡是否仍能分化。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
+                src: "/figures/paper2-fig8-pcna.jpg",
+                paperFig: "Fig. 8Aa vs Ba",
+                caption: "PCNA：两组阳性细胞均在 MG 基底层，分布模式相似。",
+              },
+              {
+                src: "/figures/paper2-fig9-tunel.jpg",
+                paperFig: "Fig. 9Aa vs Ba",
+                caption: "TUNEL：两组腺泡内阳性细胞均很少。",
+              },
+              {
+                src: "/figures/paper2-fig10-pparg-collagen.jpg",
+                paperFig: "Fig. 10A–B",
+                caption: "PPARγ：对照与 KR/TG 腺泡均阳性，过表达组仍保留分化标记。",
               },
             ],
           },
@@ -375,10 +388,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/p2-fig-meibum-appearance.png",
-                paperFig: "原文图 D（笔记贴图）",
+                src: "/figures/paper1-fig2-meibum.jpg",
+                paperFig: "Fig. 2D",
                 caption:
-                  "黄圈标挤出的睑脂。左：Awat2−/−/DMSO 蜡样不透明；右：ATR101 后更透明、体积更小。",
+                  "黄圈标挤出的睑脂。左：Awat2−/−/DMSO 蜡样不透明；右：ATR101 后更透明、体积更小。同图 B/C/E 为 CE、FA 与熔融温度。",
               },
             ],
           },
@@ -396,10 +409,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/p2-fig-slitlamp-orifice.png",
-                paperFig: "原文图 A（笔记贴图）",
+                src: "/figures/paper1-fig5-mg-duct.jpg",
+                paperFig: "Fig. 5A",
                 caption:
-                  "Day 0：上行挤压前，下行挤压后。左右分别为 DMSO 与 ATR101。",
+                  "裂隙灯观察上睑末端导管。Day 0 先挤出堵塞物，随后随访 Day 10 / 14。ATR101 组导管更清晰、阻塞减轻。",
               },
             ],
           },
@@ -412,24 +425,30 @@ export const categories: Category[] = [
             assays: [
           {
             id: "meibum-biophysics",
-            title: "睑脂熔融温度与 CE / FA 组分（笔记待补方法细节）",
+            title: "睑脂熔融温度与 CE / FA 组分",
             sources: ["paper1"],
             instruments: [
-              "原文摘要已做：睑脂熔融温度、脂质流动性、胆固醇酯合成抑制后的组分改变",
+              "LC-MS：睑脂胆固醇酯（CE）定量",
+              "脂肪酸组成分析：饱和 / 单不饱和 FA 链长分布",
+              "熔融温度测定：重复测量睑脂熔点曲线",
             ],
             markers: [
-              { name: "CE（胆固醇酯）", role: "SOAT1 产物，过高则睑脂变黏、熔点升高" },
-              { name: "FA（脂肪酸） / 蜡酯相关通路", role: "Awat2 缺失后蜡酯缺失，CE 代偿性增多" },
+              { name: "CE（胆固醇酯）", role: "SOAT1 产物，过高则睑脂变黏、熔点升高", change: "ATR101 后 CE 显著下降" },
+              { name: "饱和 FA ↓ / 单不饱和 FA ↑", role: "流动性相关脂酰组成", change: "治疗后饱和 FA 下降、单不饱和 FA 升高" },
             ],
             observations: [
-              "摘要结论：抑制 CE 合成后睑脂熔点下降、流动性增加，从而减轻导管阻塞。",
-              "笔记原文只列出检测项，尚未整理仪器参数、色谱方法和对应图号。",
+              "Fig. 2B：Awat2−/−/DMSO 的 CE 最高，ATR101 后接近野生型。",
+              "Fig. 2C：治疗后饱和脂肪酸下降、单不饱和脂肪酸升高，利于流动性。",
+              "Fig. 2E：DMSO 组熔点约 49–55 °C，ATR101 组降至约 37–44 °C。",
             ],
-            pending: [
-              "睑脂样本熔融温度测定的具体仪器与曲线图",
-              "CE 与 FA 组分测定方法（如 LC-MS）及定量图",
+            figures: [
+              {
+                src: "/figures/paper1-fig2-meibum.jpg",
+                paperFig: "Fig. 2B、2C、2E",
+                caption:
+                  "B：CE 含量。C：饱和与单不饱和 FA。E：熔融温度重复测量。A 为给药方案，D 为大体外观。",
+              },
             ],
-            figures: [],
           },
             ],
           },
@@ -470,10 +489,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/p2-fig3c-fluorescein.png",
-                paperFig: "Fig. 3C",
+                src: "/figures/paper1-fig3-tear-cornea.jpg",
+                paperFig: "Fig. 3C–D",
                 caption:
-                  "钴蓝光下荧光素着染。DMSO 组持续着染；ATR101 组 Day 10–14 着染明显减少。",
+                  "C：钴蓝光下荧光素着染，Day 0 / 10 / 14。D：着染积分密度，ATR101 组显著低于 DMSO。",
               },
             ],
           },
@@ -489,10 +508,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/p2-fig4a-confocal.png",
+                src: "/figures/paper1-fig4-cornea.jpg",
                 paperFig: "Fig. 4A",
                 caption:
-                  "列：表层 / 翼状 / 基底上皮。行：WT、Awat2−/−/DMSO、Awat2−/−/ATR101。",
+                  "列：表层 / 翼状 / 基底上皮。行：WT、Awat2−/−/DMSO、Awat2−/−/ATR101。黄箭头脱落/鳞状化生，红箭头固缩核。",
               },
             ],
           },
@@ -536,16 +555,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/p2-fig4b-krt14-krt12.png",
-                paperFig: "Fig. 4B",
+                src: "/figures/paper1-fig4-cornea.jpg",
+                paperFig: "Fig. 4B–C",
                 caption:
-                  "红=Krt14，绿=Krt12。DMSO 组浅表 Krt14 异位（红箭头）并与脱落相关（黄箭头）。",
-              },
-              {
-                src: "/figures/p2-fig4c-rtqpcr.png",
-                paperFig: "Fig. 4C",
-                caption:
-                  "Krt14、Sprr1a 相对 Gapdh 的 RT-qPCR。ATR101 显著降低 Krt14，Sprr1a 呈下降趋势。",
+                  "B：红=Krt14，绿=Krt12。DMSO 组浅表 Krt14 异位。C：Krt14、Sprr1a 相对 Gapdh 的 RT-qPCR。",
               },
             ],
           },
@@ -577,10 +590,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                src: "/figures/p2-fig-specular-tearfilm.png",
-                paperFig: "原文图 A（笔记贴图）",
+                src: "/figures/paper1-fig3-tear-cornea.jpg",
+                paperFig: "Fig. 3A",
                 caption:
-                  "上排 Awat2−/−/DMSO：环形反光碎裂。下排 ATR101：环形反光连续。标尺 200 μm。",
+                  "镜面光反射。DMSO 组环形反光碎裂、扭曲；ATR101 组恢复较完整圆环。标尺 200 μm。",
               },
             ],
           },
@@ -592,23 +605,30 @@ export const categories: Category[] = [
             title: "泪液与破裂时间",
             assays: [
           {
-            id: "tear-pending",
-            title: "泪液量、脂质层、泪河与破裂时间（笔记待补）",
+            id: "tear-tbut",
+            title: "泪膜破裂时间（TBUT）",
             sources: ["paper1"],
             instruments: [
-              "笔记列出但未展开：泪液收集、泪膜脂质层、泪河高度、TBUT / NIBUT",
+              "泪膜破裂时间定量（原文 Fig. 3B）：比较 Awat2−/−/DMSO、ATR101 与 WT",
             ],
             observations: [
-              "原文摘要已报告泪膜破裂时间延长、泪膜稳定性改善。",
-              "系统评价时应把「形态反射」和「时间定量」分开：反射法看空间完整性，TBUT/NIBUT 看维持时间。",
+              "DMSO 组 TBUT 最短；ATR101 治疗后显著延长，仍低于野生型。",
+              "与 Fig. 3A 镜面反射一起读：反射看空间完整性，TBUT 看维持时间。",
             ],
             pending: [
               "泪液收集方法（毛细管 / 酚红棉线等）及定量结果",
               "泪膜脂质层干涉/厚度检测",
               "泪河高度测量",
-              "TBUT 与 NIBUT 的操作定义、仪器和统计图",
+              "NIBUT 的操作定义（原文报告的是侵入性/荧光素相关 TBUT）",
             ],
-            figures: [],
+            figures: [
+              {
+                src: "/figures/paper1-fig3-tear-cornea.jpg",
+                paperFig: "Fig. 3B",
+                caption:
+                  "Tear film break-up time。Awat2−/−/DMSO < ATR101 < WT。",
+              },
+            ],
           },
             ],
           },
@@ -646,11 +666,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
+                src: "/figures/paper2-fig5-conjunctiva.jpg",
                 paperFig: "Fig. 5A–D",
                 caption:
-                  "对照 A、C vs 转基因 B、D。记录结膜和 MCJ 上皮厚度，而不是腺泡。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
+                  "HE：对照 A、C vs 转基因 B、D。结膜上皮与皮肤黏膜移行上皮增厚。",
               },
             ],
           },
@@ -680,10 +699,9 @@ export const categories: Category[] = [
             ],
             figures: [
               {
+                src: "/figures/paper2-fig5-conjunctiva.jpg",
                 paperFig: "Fig. 5E–F",
                 caption: "PAS：对照 vs TGFα 过表达 15 天，焦点在穹窿杯状细胞密度。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
               },
             ],
           },
@@ -718,10 +736,9 @@ export const categories: Category[] = [
             ],
             figures: [
               {
+                src: "/figures/paper2-fig5-conjunctiva.jpg",
                 paperFig: "Fig. 5G–H",
                 caption: "免疫荧光：对照 MCJ 黏膜侧 Krt4 阳性，转基因鼠该信号消失。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
               },
             ],
           },
@@ -743,10 +760,9 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                paperFig: "Fig. 5I–J（笔记亦写 Supplementary Fig. 1I、J）",
+                src: "/figures/paper2-fig5-conjunctiva.jpg",
+                paperFig: "Fig. 5I–J",
                 caption: "Krt10 信号是否跨越 MCJ 进入结膜侧。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
               },
             ],
           },
@@ -825,11 +841,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
+                src: "/figures/paper2-suppl-fig1-sma-myosin.jpg",
                 paperFig: "补充图 1A、1B",
                 caption:
-                  "α-SMA 标 TM，骨骼肌肌球蛋白标 OO。记录「总体不变」本身就是阴性结果。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
+                  "P15。红=α-SMA（TM），绿=骨骼肌肌球蛋白（OO），蓝=DAPI。KR 与 KR/TG 总体相似；远端可因囊肿局部中断。",
               },
             ],
           },
@@ -869,11 +884,16 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                paperFig: "Fig. 6B–G、B′–G′；补充 Fig. 2",
+                src: "/figures/paper2-fig6-lineage.jpg",
+                paperFig: "Fig. 6A–G、A′–G′",
                 caption:
-                  "绿=神经嵴。对比下睑 CPF/TP 增厚与 TM 相对不受累，以及上睑肌腱来源差异。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
+                  "下睑。绿=神经嵴来源。对照 CPF/TP 为绿色；KR/TG 后 CPF、TP 明显增厚，TM 相对不受累。",
+              },
+              {
+                src: "/figures/paper2-suppl-fig2-upper-lid.jpg",
+                paperFig: "补充 Fig. 2",
+                caption:
+                  "上睑 P15。神经嵴来源细胞（绿）在上睑肌腱贡献少，可解释下睑表型更重。",
               },
             ],
           },
@@ -900,11 +920,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
+                src: "/figures/paper2-fig4-masson.jpg",
                 paperFig: "Fig. 4",
                 caption:
-                  "P0–P15 诱导后 P15 取材。先低倍看红蓝比例，再高倍看细胞形态，并标记囊肿。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
+                  "P0–P15 诱导后 P15 取材。对照胶原丰富、细胞稀少；转基因细胞增多、胶原下降，睑板区可见囊肿。",
               },
             ],
           },
@@ -921,11 +940,10 @@ export const categories: Category[] = [
             ],
             figures: [
               {
+                src: "/figures/paper2-fig7-time.jpg",
                 paperFig: "Fig. 7A–G",
                 caption:
-                  "对照 A/B/D/F，转基因 C/E/G。同一时间点左右对照，避免把发育阶段差异当成表型。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
+                  "对照 A/B/D/F，转基因 C/E/G。P0–P11 马松三色。同一时间点左右对照，避免把发育阶段差异当成表型。",
               },
             ],
           },
@@ -959,10 +977,14 @@ export const categories: Category[] = [
             ],
             figures: [
               {
-                paperFig: "Fig. 8Ab–Ac vs Bb–Bc；Fig. 9Ab–Ac vs Bb–Bc",
-                caption: "同一张图里把 MG、CPF、TP 三区放在一起比，避免只看腺体。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
+                src: "/figures/paper2-fig8-pcna.jpg",
+                paperFig: "Fig. 8Ab–Ac vs Bb–Bc",
+                caption: "PCNA：过表达组 CPF、TP 阳性细胞增多；MG 基底层模式相对不变。",
+              },
+              {
+                src: "/figures/paper2-fig9-tunel.jpg",
+                paperFig: "Fig. 9Ab–Ac vs Bb–Bc",
+                caption: "TUNEL：过表达组 CPF、TP 凋亡增多，与 MG 腺泡内很少形成对照。",
               },
             ],
           },
@@ -988,10 +1010,9 @@ export const categories: Category[] = [
             ],
             figures: [
               {
+                src: "/figures/paper2-fig10-pparg-collagen.jpg",
                 paperFig: "Fig. 10C–F",
-                caption: "C–D 为 I 型胶原，E–F 为 III 型胶原。对照丰富，转基因明显减弱。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
+                caption: "C–D 为 I 型胶原，E–F 为 III 型胶原。对照丰富，转基因 CPF/TP 明显减弱。",
               },
             ],
           },
@@ -1023,10 +1044,9 @@ export const categories: Category[] = [
             ],
             figures: [
               {
+                src: "/figures/paper2-fig11-egfr.jpg",
                 paperFig: "Fig. 11A–F",
                 caption: "A–B EGFR，C–D β-catenin，E–F N-cadherin。焦点在 CPF 而非 MG。",
-                pmcUrl:
-                  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4996271/",
               },
             ],
           },

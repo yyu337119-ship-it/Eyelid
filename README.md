@@ -29,3 +29,15 @@ npm run dev
 ```
 
 浏览器打开 [http://127.0.0.1:43127](http://127.0.0.1:43127)。
+
+## 发布到公网
+
+站点是静态导出，内容与本地预览相同。访客打开链接即可阅读；「编辑正文 / 替换图片」仍只保存在每位访客自己的浏览器里。
+
+```bash
+npm install
+npm run build
+npx vercel deploy out --prod --yes
+```
+
+也可把 `out/` 拖到 [Netlify Drop](https://app.netlify.com/drop) 或 [Cloudflare Pages](https://pages.cloudflare.com)。

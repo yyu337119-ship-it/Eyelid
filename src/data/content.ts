@@ -178,7 +178,7 @@ export const categories: Category[] = [
     title: "MG 及其分泌物",
     question: "腺体形态是否完整？导管是否阻塞？睑脂能否排出、成分是否异常？",
     summary:
-      "先看活体/大体：腺体是否存在、导管是否被角化物或脂质堵塞。用 Ly6G 排除腺体本身的中性粒细胞性炎症堵塞。再落到 HE、Oil Red O 和三维重建量化导管。分子层先画 K6/K14/Abca12、KROX20/PPARγ、Slc1a3/Lrig1 等定位图，再判断角化、干细胞更新与脂质合成。裂隙灯看睑脂外观与排出。",
+      "先看活体/大体和切片：腺体是否存在、导管是否角化阻塞。Oil Red O 只放在组织学里，用来看脂质在腺泡还是潴留在导管。裂隙灯看挤出睑脂的外观和排出；CE / FA / 熔点才算组分。分子层用 K6/K14/Abca12、KROX20/PPARγ、Slc1a3/Lrig1、Ki-67 等判断角化、干细胞和产脂程序。",
     sections: [
       {
         id: "mg-gland",
@@ -192,44 +192,26 @@ export const categories: Category[] = [
         assays: [
           {
             id: "mg-abca12-duct",
-            title: "K6⁺ 中央导管 Abca12 敲除：大体 + IF + HE + Oil Red O",
+            title: "Abca12 导管敲除：眼睑大体、HE 导管阻塞与 Oil Red O 脂质潴留",
             sources: ["paper1"],
             instruments: [
-              "Krt6a-iCreERT2;Abca12-flox;YFP 小鼠腹腔注射他莫昔芬，靶向敲除中央导管分化细胞中的 Abca12",
+              "Krt6a-iCreERT2;Abca12-flox;YFP 小鼠腹腔注射他莫昔芬，在 K6⁺ 中央导管分化细胞中敲除 Abca12",
               "活体大体观察眼睑干燥与结痂",
-              "免疫荧光：YFP 追踪 K6⁺ 细胞，K14 标上皮",
-              "石蜡切片 H&E",
-              "冰冻切片 Oil Red O 显示管腔/腺泡脂质",
+              "石蜡切片 H&E：导管是否被角化物堵塞、管腔是否扩张",
+              "冰冻切片 Oil Red O：脂质在腺泡还是潴留在扩张导管",
             ],
             stains: ["H&E", "Oil Red O"],
-            markers: [
-              {
-                name: "K6 / YFP",
-                role: "中央导管分化细胞及其重组标记",
-                change: "TAM 10 天：YFP⁺ K6⁺ 过度角化细胞填充导管；14 天：过度角化细胞脱落",
-              },
-              {
-                name: "K14",
-                role: "眼睑上皮 / MG 导管与腺泡轮廓",
-                change: "用于定位表皮、结膜、中央导管（MD）和腺泡（Ac）",
-              },
-              {
-                name: "Abca12",
-                role: "导管脱屑所需的脂质转运蛋白",
-                change: "在 K6⁺ 导管细胞中敲除后脱屑失败、角化物堆积",
-              },
-            ],
             observations: [
-              "对照：K14 勾勒完整中央导管与腺泡，管腔通畅（A）。",
-              "TAM 10 天 cKO：眼睑干燥、结痂（B 白箭头）；IF 显示导管被 YFP⁺ 过度角化细胞填充（C 白箭头）；HE 导管阻塞并扩张（D 黑箭头）；Oil Red O 显示脂质潴留在扩张管腔（E）。",
-              "TAM 14 天：F 显示 K6⁺ 过度角化细胞从导管脱落。不直接靶向腺泡，仅破坏导管脱屑即可诱发过度角化相关干眼。",
+              "TAM 10 天 cKO：眼睑干燥、结痂（B）。HE 显示中央导管阻塞并扩张（D 黑箭头）。",
+              "Oil Red O：对照脂质主要在腺泡；cKO 扩张导管内大片红染，是脱屑失败后睑脂排不出，不是腺泡不产脂。",
+              "TAM 14 天：角化栓可从导管脱落（F）。不直接靶向腺泡，仅破坏导管脱屑即可造成阻塞。K6/K14/YFP 定位见 ②。",
             ],
             figures: [
               {
                 src: "/figures/paper1-fig-phenotype.jpg",
-                paperFig: "Fig. 表型组合（大体 / IF / HE / ORO）",
+                paperFig: "Fig. B / D / E",
                 caption:
-                  "A：正常解剖，绿=YFP，红=K14。B：对照 vs cKO 眼睑结痂。C：YFP/K14，cKO 导管被角化细胞填充。D：HE 导管阻塞扩张。E：Oil Red O 脂质潴留。F：14 天角化栓脱落。",
+                  "B：对照 vs cKO 眼睑结痂。D：HE 导管阻塞扩张。E：Oil Red O，cKO 导管内脂质潴留。A/C/F 的 IF 见分子标志物。",
               },
             ],
           },
@@ -259,6 +241,33 @@ export const categories: Category[] = [
                 paperFig: "Fig. Ly6G / 细胞计数",
                 caption:
                   "A：绿=Ly6G，红=K14，标注 Epi / MD / Ac / Conj。计数分 Contacting gland 与 boxed area。cKO 不高于对照。",
+              },
+            ],
+          },
+          {
+            id: "mg-oro-krox20",
+            title: "Oil Red O：切片上判断腺泡是否含睑脂",
+            sources: ["paper3"],
+            instruments: [
+              "冰冻切片 Oil Red O 染睑板腺区域",
+              "Krox20-cKO 或发育期 DTA 清除 vs 对照",
+            ],
+            stains: ["Oil Red O"],
+            observations: [
+              "这是组织切片上的脂质定位，不是裂隙灯下的睑脂外观。",
+              "对照腺泡强红染，说明有睑脂。Krox20-cKO 和发育期 DTA 清除后红染消失，是腺体未形成、无脂可分泌，不是排出障碍。",
+              "与 Abca12 模型对照：一个是导管内潴留，一个是腺泡脂质缺失。",
+            ],
+            figures: [
+              {
+                src: "/figures/paper3-fig2-mg.jpg",
+                paperFig: "Fig. 2G",
+                caption: "Oil Red O。上：cKO 无红染；下：对照腺泡充满睑脂。",
+              },
+              {
+                src: "/figures/paper3-fig5-dta.jpg",
+                paperFig: "Fig. 5D",
+                caption: "发育期清除 KROX20⁺ 细胞后切片上 Oil Red O 信号缺失。",
               },
             ],
           },
@@ -406,6 +415,44 @@ export const categories: Category[] = [
         mark: "②",
         title: "分子标志物",
         assays: [
+          {
+            id: "mg-abca12-markers",
+            title: "K6 / K14 / Abca12 / YFP：中央导管分化细胞定位与重组",
+            sources: ["paper1"],
+            instruments: [
+              "免疫荧光：K14 勾勒表皮、结膜、中央导管和腺泡",
+              "YFP 追踪 Krt6a-iCreERT2 重组的 K6⁺ 导管分化细胞",
+            ],
+            markers: [
+              {
+                name: "K6 / YFP",
+                role: "中央导管分化细胞及其重组标记",
+                change: "TAM 10 天：YFP⁺ K6⁺ 过度角化细胞填充导管；14 天：过度角化细胞脱落",
+              },
+              {
+                name: "K14",
+                role: "眼睑上皮 / MG 导管与腺泡轮廓",
+                change: "用于把表皮、结膜、中央导管（MD）和腺泡（Ac）分开",
+              },
+              {
+                name: "Abca12",
+                role: "导管脱屑所需的脂质转运蛋白",
+                change: "在 K6⁺ 导管细胞中敲除后脱屑失败、角化物堆积",
+              },
+            ],
+            observations: [
+              "先建立正常 marker 地图：目标蛋白在眼睑表皮、结膜、MG 导管还是腺泡。",
+              "对照：K14 勾勒完整中央导管与腺泡，管腔通畅（A）。cKO：导管被 YFP⁺ 角化细胞填充（C 白箭头）。",
+            ],
+            figures: [
+              {
+                src: "/figures/paper1-fig-phenotype.jpg",
+                paperFig: "Fig. A / C / F",
+                caption:
+                  "A：绿=YFP，红=K14，正常解剖。C：cKO 导管被 YFP⁺ 角化细胞填充。F：14 天角化细胞脱落。大体/HE/ORO 见 ①。",
+              },
+            ],
+          },
           {
             id: "mg-krox20-lineage",
             title: "KROX20 定位、发育时间窗与谱系示踪",
@@ -609,6 +656,38 @@ export const categories: Category[] = [
             ],
           },
           {
+            id: "mg-gli2-lipid",
+            title: "GLI2 激活后脂质代谢基因与 PLIN2",
+            sources: ["paper4"],
+            instruments: [
+              "激光捕获睑板腺 bulk RNA-seq，看脂质代谢 / 睑脂分化基因",
+              "免疫荧光 PLIN2 判断产脂分化是否被抑制",
+            ],
+            markers: [
+              {
+                name: "脂质代谢 / 睑脂分化基因",
+                role: "产脂程序的分子读出，不是挤出睑脂的物理组分",
+                change: "GLI2 激活后下调",
+              },
+              {
+                name: "PLIN2",
+                role: "分化睑脂细胞脂滴包被蛋白",
+                change: "干细胞扩增同时分化受抑；人睑板腺癌中 PLIN2 缺失",
+              },
+            ],
+            observations: [
+              "Hh 过激活让腺体看起来变大，但转录组显示产脂程序被压下去，属于增殖↑、分化↓，不能当成睑脂功能恢复。",
+              "挤出睑脂的 CE / FA / 熔点见「2、睑脂 ②组分与物理性状」。",
+            ],
+            figures: [
+              {
+                src: "/figures/paper4-fig5-gli2-rna.jpg",
+                paperFig: "Fig. 5C",
+                caption: "GLI2 激活：Hh 与增殖相关基因上调，脂质代谢和睑脂分化相关基因下调。",
+              },
+            ],
+          },
+          {
             id: "mg-zhu-hh-aging",
             title: "Hh / HBEGF–EGFR 与衰老微环境",
             sources: ["paper4"],
@@ -772,48 +851,6 @@ export const categories: Category[] = [
             title: "大体外观与排出",
             assays: [
           {
-            id: "meibum-oro-gardon",
-            title: "Oil Red O：导管脂质潴留 vs 排出受阻",
-            sources: ["paper1"],
-            instruments: ["冰冻切片 Oil Red O，对照 vs Abca12 cKO 中央导管和腺泡"],
-            stains: ["Oil Red O"],
-            observations: [
-              "对照：脂质主要在腺泡，中央导管相对通畅。",
-              "cKO：扩张导管内出现大片红染脂质潴留，对应脱屑失败后睑脂排不出，而不是腺泡不产脂。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper1-fig-phenotype.jpg",
-                paperFig: "Fig. E Oil Red O",
-                caption: "对照 vs cKO。cKO 中央导管扩张并充满红染脂质。同图 A–D 为 IF/HE/大体。",
-              },
-            ],
-          },
-          {
-            id: "meibum-oro-krox20",
-            title: "Oil Red O：睑脂是否生成",
-            sources: ["paper3"],
-            instruments: ["Oil Red O 染色睑板腺区域，cKO 或 DTA 清除 vs 对照"],
-            stains: ["Oil Red O"],
-            observations: [
-              "对照腺泡强红染，提示有睑脂。",
-              "Krox20-cKO 和发育期 DTA 清除后红染消失，说明不是排出障碍，而是腺体未形成、无睑脂可分泌。",
-              "与 Abca12 模型对照读：一个是管腔潴留，一个是脂质缺失。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper3-fig2-mg.jpg",
-                paperFig: "Fig. 2G",
-                caption: "Oil Red O。上：cKO 无红染；下：对照腺泡充满睑脂。",
-              },
-              {
-                src: "/figures/paper3-fig5-dta.jpg",
-                paperFig: "Fig. 5D",
-                caption: "发育期清除 KROX20⁺ 细胞后 Oil Red O 信号缺失。",
-              },
-            ],
-          },
-          {
             id: "meibum-appearance",
             title: "裂隙灯生物显微镜观察睑脂大体外观",
             sources: ["paper2"],
@@ -861,37 +898,6 @@ export const categories: Category[] = [
             mark: "②",
             title: "组分与物理性状",
             assays: [
-          {
-            id: "meibum-gli2-lipid",
-            title: "GLI2 激活后脂质代谢基因与 PLIN2",
-            sources: ["paper4"],
-            instruments: [
-              "激光捕获睑板腺 bulk RNA-seq，看脂质代谢 / 睑脂分化基因",
-              "免疫荧光 PLIN2 判断产脂分化是否被抑制",
-            ],
-            markers: [
-              {
-                name: "脂质代谢 / 睑脂分化基因",
-                role: "产脂功能读出",
-                change: "GLI2 激活后下调",
-              },
-              {
-                name: "PLIN2",
-                role: "分化睑脂细胞",
-                change: "干细胞扩增同时分化受抑；人睑板腺癌中 PLIN2 缺失",
-              },
-            ],
-            observations: [
-              "Hh 过激活让腺体看起来变大，但转录组显示产脂程序被压下去，属于增殖↑、分化↓，不能当成功能恢复。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper4-fig5-gli2-rna.jpg",
-                paperFig: "Fig. 5C",
-                caption: "GLI2 激活：Hh 与增殖相关基因上调，脂质代谢和睑脂分化相关基因下调。",
-              },
-            ],
-          },
           {
             id: "meibum-biophysics",
             title: "睑脂熔融温度与 CE / FA 组分",

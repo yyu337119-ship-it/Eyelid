@@ -28,7 +28,7 @@ import {
 export const HANDBOOK_INTRO =
   "按解剖部位系统评价小鼠眼表异常。一级为四大分类；其下再分「1、2、」二级和「①②」三级。每一级分支标题后直接标注文献【1】～【5】，编号与汇报 PPT 首页一致，不再用红字、黄字区分来源。每张卡片仍固定写出检测手段/仪器、分子标志物、观察结果和原文图表。打开「编辑正文」可改文字；每张图下方可「替换图片」。修改保存在本机浏览器。"
 
-const STORAGE_KEY = "eyelid-handbook-edits-v5"
+const STORAGE_KEY = "eyelid-handbook-edits-v6"
 
 export type AssayPath = {
   categoryId: string

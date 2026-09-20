@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Expand, ExternalLink, ImageOff, ImagePlus, RotateCcw, X } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { type Figure } from "@/data/content"
+import { publicPath } from "@/lib/public-path"
 import { cn } from "@/lib/utils"
 import { EditableText } from "@/components/editable-text"
 import { useHandbook } from "@/lib/handbook-store"
@@ -44,7 +45,8 @@ export function FigureBlock({
   const { figureUrls, replaceFigure, restoreFigure } = useHandbook()
   const figureId = figure.id
   const replaced = Boolean(figureId && figureUrls[figureId])
-  const displaySrc = (figureId && figureUrls[figureId]) || figure.src
+  const displaySrc =
+    (figureId && figureUrls[figureId]) || publicPath(figure.src)
 
   function openLightbox() {
     dialogRef.current?.showModal()

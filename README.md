@@ -30,14 +30,10 @@ npm run dev
 
 浏览器打开 [http://127.0.0.1:43127](http://127.0.0.1:43127)。
 
-## 发布到公网
+## 公网长期地址（GitHub Pages）
 
-站点是静态导出，内容与本地预览相同。访客打开链接即可阅读；「编辑正文 / 替换图片」仍只保存在每位访客自己的浏览器里。
+发布后打开：**https://yyu337119-ship-it.github.io/Eyelid/**
 
-```bash
-npm install
-npm run build
-npx vercel deploy out --prod --yes
-```
+仓库需为 **Public**。推送到 `main` 后 GitHub Actions 会自动构建。首次如未上线，到仓库 **Settings → Pages**，Build and deployment 选 **GitHub Actions**。
 
-也可把 `out/` 拖到 [Netlify Drop](https://app.netlify.com/drop) 或 [Cloudflare Pages](https://pages.cloudflare.com)。
+访客打开链接即可阅读。「编辑正文 / 替换图片」只保存在每位访客自己的浏览器里。

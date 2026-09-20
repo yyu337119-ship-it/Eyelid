@@ -6,13 +6,18 @@ import { Expand, ExternalLink, ImageOff, X } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { formatCites, type Figure, type SourceId } from "@/data/content"
 import { cn } from "@/lib/utils"
+import { EditableText } from "@/components/editable-text"
 
 export function FigureBlock({
   figure,
   sources,
+  onPaperFigChange,
+  onCaptionChange,
 }: {
   figure: Figure
   sources: SourceId[]
+  onPaperFigChange?: (value: string) => void
+  onCaptionChange?: (value: string) => void
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null)
 
@@ -65,10 +70,27 @@ export function FigureBlock({
       )}
       <div className="space-y-1.5 border-t border-stone-100 px-3 py-2.5">
         <p className="text-sm font-medium text-stone-800">
-          {figure.paperFig}
+          {onPaperFigChange ? (
+            <EditableText
+              value={figure.paperFig}
+              onChange={onPaperFigChange}
+              className="font-medium"
+            />
+          ) : (
+            figure.paperFig
+          )}
           <span className="ml-2 font-normal text-stone-500">{formatCites(sources)}</span>
         </p>
-        <p className="text-sm leading-6 text-stone-600">{figure.caption}</p>
+        {onCaptionChange ? (
+          <EditableText
+            value={figure.caption}
+            onChange={onCaptionChange}
+            multiline
+            className="text-sm leading-6 text-stone-600"
+          />
+        ) : (
+          <p className="text-sm leading-6 text-stone-600">{figure.caption}</p>
+        )}
       </div>
 
       {figure.src ? (

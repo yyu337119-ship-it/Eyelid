@@ -1,21 +1,18 @@
 "use client"
 
-import { useState } from "react"
-import { BookOpen, Menu } from "lucide-react"
+import { useRef, useState } from "react"
+import { BookOpen, Download, Menu, Pencil, RotateCcw, Upload } from "lucide-react"
 import { AssayCard } from "@/components/assay-card"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import {
-  abbreviations,
-  categories,
-  sectionSources,
-  sources,
-  topicSources,
-} from "@/data/content"
+import { abbreviations, sectionSources, sources, topicSources } from "@/data/content"
 import { SourceCite } from "@/components/source-badge"
+import { EditableText } from "@/components/editable-text"
+import { HandbookProvider, useHandbook } from "@/lib/handbook-store"
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
+  const { categories } = useHandbook()
   return (
     <nav className="space-y-5 text-sm">
       {categories.map((category) => (
@@ -62,31 +59,98 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
   )
 }
 
-export function PhenotypeApp() {
+function EditToolbar() {
+  const { editMode, setEditMode, dirty, reset, exportJson, importJson } = useHandbook()
+  const fileRef = useRef<HTMLInputElement>(null)
+
+  return (
+    <div className="flex flex-wrap items-center justify-end gap-2">
+      <Button
+        variant={editMode ? "default" : "outline"}
+        size="sm"
+        onClick={() => setEditMode(!editMode)}
+      >
+        <Pencil className="size-3.5" />
+        {editMode ? "完成编辑" : "编辑正文"}
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => {
+          if (window.confirm("恢复为仓库中的原文，并清除本机保存的修改？")) reset()
+        }}
+        disabled={!dirty}
+      >
+        <RotateCcw className="size-3.5" />
+        恢复原文
+      </Button>
+      <Button variant="outline" size="sm" onClick={exportJson}>
+        <Download className="size-3.5" />
+        导出
+      </Button>
+      <Button variant="outline" size="sm" onClick={() => fileRef.current?.click()}>
+        <Upload className="size-3.5" />
+        导入
+      </Button>
+      <input
+        ref={fileRef}
+        type="file"
+        accept="application/json"
+        className="hidden"
+        onChange={(event) => {
+          const file = event.target.files?.[0]
+          if (file) void importJson(file)
+          event.target.value = ""
+        }}
+      />
+    </div>
+  )
+}
+
+function PhenotypeAppInner() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const {
+    categories,
+    intro,
+    setIntro,
+    editMode,
+    dirty,
+    updateCategory,
+    updateSectionTitle,
+    updateTopicTitle,
+  } = useHandbook()
 
   return (
     <div className="min-h-screen bg-[#f6f1e7] text-stone-800">
       <header className="sticky top-0 z-40 border-b border-stone-200/80 bg-[#f6f1e7]/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-          <div className="min-w-0">
-            <p className="text-[11px] font-semibold tracking-[0.18em] text-[#1f4b3a] uppercase">
-              小鼠眼部表型评价手册
-            </p>
-            <h1 className="truncate text-lg font-semibold text-stone-900 sm:text-xl">
-              如何系统评价小鼠眼睑异常表型
-            </h1>
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold tracking-[0.18em] text-[#1f4b3a] uppercase">
+                小鼠眼部表型评价手册
+              </p>
+              <h1 className="truncate text-lg font-semibold text-stone-900 sm:text-xl">
+                如何系统评价小鼠眼睑异常表型
+              </h1>
+            </div>
+            <Button
+              variant="outline"
+              size="icon"
+              className="lg:hidden"
+              onClick={() => setMenuOpen(true)}
+              aria-label="打开目录"
+            >
+              <Menu className="size-4" />
+            </Button>
           </div>
-          <Button
-            variant="outline"
-            size="icon"
-            className="lg:hidden"
-            onClick={() => setMenuOpen(true)}
-            aria-label="打开目录"
-          >
-            <Menu className="size-4" />
-          </Button>
+          <EditToolbar />
         </div>
+        {editMode ? (
+          <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-emerald-900 sm:px-6">
+            虚线框内的文字可直接改。修改只保存在这台电脑的浏览器里，不会写回服务器。可用导出备份。
+            {dirty ? " 当前有未恢复的本地修改。" : ""}
+          </p>
+        ) : null}
       </header>
 
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)]">
@@ -102,10 +166,12 @@ export function PhenotypeApp() {
 
         <main className="space-y-10 pb-16">
           <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6">
-            <p className="text-sm leading-7 text-stone-700">
-              按解剖部位系统评价小鼠眼表异常。一级为四大分类；其下再分「1、2、」二级和「①②」三级。每一级分支标题后直接标注文献
-              【1】或【2】，不再用红字、黄字区分来源。每张卡片仍固定写出检测手段/仪器、分子标志物、观察结果和原文图表。
-            </p>
+            <EditableText
+              value={intro}
+              onChange={setIntro}
+              multiline
+              className="text-sm leading-7 text-stone-700"
+            />
             <dl className="mt-5 grid gap-3 sm:grid-cols-2">
               {abbreviations.map((item) => (
                 <div key={item.abbr} className="rounded-lg bg-stone-50 px-3 py-2">
@@ -120,30 +186,70 @@ export function PhenotypeApp() {
             <section key={category.id} id={category.id} className="scroll-mt-24 space-y-6">
               <div className="rounded-2xl bg-[#1f4b3a] px-5 py-4 text-white">
                 <p className="text-xs tracking-[0.2em] uppercase opacity-80">{category.roman}</p>
-                <h2 className="text-2xl font-semibold">
-                  {category.roman}、{category.title}
+                <h2 className="flex flex-wrap items-baseline gap-1 text-2xl font-semibold">
+                  <span>{category.roman}、</span>
+                  <EditableText
+                    value={category.title}
+                    onChange={(title) => updateCategory(category.id, { title })}
+                    className="text-2xl font-semibold"
+                  />
                 </h2>
-                <p className="mt-2 text-sm leading-6 text-emerald-50">{category.question}</p>
-                <p className="mt-2 text-sm leading-6 text-emerald-100/90">{category.summary}</p>
+                <div className="mt-2 text-sm leading-6 text-emerald-50">
+                  <EditableText
+                    value={category.question}
+                    onChange={(question) => updateCategory(category.id, { question })}
+                    multiline
+                  />
+                </div>
+                <div className="mt-2 text-sm leading-6 text-emerald-100/90">
+                  <EditableText
+                    value={category.summary}
+                    onChange={(summary) => updateCategory(category.id, { summary })}
+                    multiline
+                  />
+                </div>
               </div>
 
               {category.sections.map((section) => (
                 <div key={section.id} id={section.id} className="scroll-mt-24 space-y-5">
                   <h3 className="flex flex-wrap items-baseline gap-x-2 border-b border-stone-300 pb-2 text-xl font-semibold text-stone-900">
-                    <span>
-                      {section.index}、{section.title}
+                    <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-2">
+                      {section.index}、
+                      <EditableText
+                        value={section.title}
+                        onChange={(title) => updateSectionTitle(category.id, section.id, title)}
+                        className="font-semibold"
+                      />
                     </span>
                     <SourceCite ids={sectionSources(section)} className="font-normal" />
                   </h3>
                   {section.topics.map((topic) => (
                     <div key={topic.id} id={topic.id} className="scroll-mt-24 space-y-3">
                       <h4 className="flex flex-wrap items-baseline gap-x-2 text-base font-semibold text-stone-800">
-                        <span className="text-[#1f4b3a]">{`${topic.mark}${topic.title}`}</span>
+                        <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-1 text-[#1f4b3a]">
+                          {topic.mark}
+                          <EditableText
+                            value={topic.title}
+                            onChange={(title) =>
+                              updateTopicTitle(category.id, section.id, topic.id, title)
+                            }
+                            className="font-semibold text-[#1f4b3a]"
+                          />
+                        </span>
                         <SourceCite ids={topicSources(topic)} className="font-normal" />
                       </h4>
                       <div className="space-y-4">
                         {topic.assays.map((assay) => (
-                          <AssayCard key={assay.id} assay={assay} />
+                          <AssayCard
+                            key={assay.id}
+                            assay={assay}
+                            path={{
+                              categoryId: category.id,
+                              sectionId: section.id,
+                              topicId: topic.id,
+                              assayId: assay.id,
+                            }}
+                          />
                         ))}
                       </div>
                     </div>
@@ -199,5 +305,13 @@ export function PhenotypeApp() {
         </SheetContent>
       </Sheet>
     </div>
+  )
+}
+
+export function PhenotypeApp() {
+  return (
+    <HandbookProvider>
+      <PhenotypeAppInner />
+    </HandbookProvider>
   )
 }

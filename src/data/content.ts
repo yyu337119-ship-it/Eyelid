@@ -263,104 +263,6 @@ export const categories: Category[] = [
             ],
           },
           {
-            id: "mg-krox20-absent",
-            title: "Krox20 缺失或谱系清除后睑板腺是否存在",
-            sources: ["paper3"],
-            instruments: [
-              "Krox20fl/fl;K14-Cre（Krox20-cKO）vs Krox20fl/fl 对照",
-              "Krox20-DTA;K14-Cre：P6 清除 K14 谱系中的 KROX20⁺ 细胞",
-              "Krox20-Cre;R26-rtTA;Tet-DTA：P20 起多西环素诱导，成年期清除已形成腺体中的谱系细胞",
-              "石蜡切片 H&E；免疫荧光 K14 / PPARγ / KROX20",
-            ],
-            stains: ["H&E"],
-            markers: [
-              {
-                name: "K14",
-                role: "MG 导管和腺泡上皮轮廓",
-                change: "cKO、发育期 DTA、成年期清除后腺体结构信号缺失",
-              },
-              {
-                name: "PPARγ",
-                role: "腺泡睑脂细胞分化",
-                change: "腺体缺失时 PPARγ 信号消失",
-              },
-              {
-                name: "KROX20",
-                role: "MG 干/祖细胞标志",
-                change: "cKO 和 DTA 清除后信号消失，证实靶细胞被去掉",
-              },
-            ],
-            observations: [
-              "Fig. 2E：2.5 月龄 Krox20-cKO 睑板腺结构完全缺失（虚线区空），对照腺体完整。所有 cKO 小鼠均缺腺体。",
-              "Fig. 5：P6 DTA 清除后 KROX20⁺ 细胞消失，H&E 无腺体，K14/PPARγ 缺失。",
-              "Fig. 6：成年期清除已形成的腺体，H&E 显示腺体丢失，并继发角膜病变。",
-              "Fig. 8：Krox24 单敲保留正常腺体；Krox20-cKO 和双敲均无腺体。Krox20 而非 Krox24 决定腺体结构形成。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper3-fig2-mg.jpg",
-                paperFig: "Fig. 2E–J",
-                caption:
-                  "E：H&E，cKO 睑板腺缺失。F：K14/PPARγ 腺体标志消失。H–J：KROX20 与 K14 共染确认靶蛋白丢失。A–D 为角膜缘谱系，见角膜分支。",
-              },
-              {
-                src: "/figures/paper3-fig5-dta.jpg",
-                paperFig: "Fig. 5",
-                caption:
-                  "P6 清除 KROX20⁺ 上皮谱系。A：KROX20 消失。B：H&E 无腺体。C：K14/PPARγ 缺失。D：Oil Red O 无睑脂。",
-              },
-              {
-                src: "/figures/paper3-fig6-adult.jpg",
-                paperFig: "Fig. 6C–E",
-                caption:
-                  "成年期诱导清除。C：H&E 已形成腺体丢失。D：K14/PPARγ 缺失。E：KROX20 信号消失。A–B 为继发角膜病变。",
-              },
-              {
-                src: "/figures/paper3-fig8-mg.jpg",
-                paperFig: "Fig. 8B–F",
-                caption:
-                  "WT / Krox24-KO 保留腺体；Krox20-cKO 与双敲腺体缺失。E–F：Krox24-KO 仍表达 KROX20。",
-              },
-            ],
-          },
-          {
-            id: "mg-zhu-morphology",
-            title: "离体睑板腺形态与基底细胞 Ki-67 增殖",
-            sources: ["paper4"],
-            instruments: [
-              "分离眼睑后观察整根 MG 形态（中央导管 CD、腺泡簇、睑缘开口）",
-              "KRT14-CreERT2;Smofl/fl 抑制 Hh，或 Krt5-rtTA;tetO-GLI2ΔN 激活 Hh",
-              "免疫组化：Ki-67 计数腺泡和导管基底细胞增殖比例",
-            ],
-            stains: ["IHC（Ki-67、PPARγ、FASN）"],
-            markers: [
-              {
-                name: "Ki-67",
-                role: "腺泡 / 导管基底细胞增殖",
-                change: "Smo 敲除后腺泡和导管 Ki-67⁺ 比例显著下降；GLI2 激活后增殖升高",
-              },
-            ],
-            observations: [
-              "对照整腺：腺泡簇沿中央导管排列，开口朝向睑缘。",
-              "抑制 Hh（Smo cKO）：腺体缩小、部分腺泡脱落（黄星），Ki-67⁺ 腺泡和导管基底细胞减少。",
-              "评价衰老或干预时，要同时看腺体是否变小、腺泡是否脱落，以及基底增殖是否下降，避免只报一个形态指标。",
-            ],
-            figures: [
-              {
-                src: "/figures/paper4-fig3-smo.jpg",
-                paperFig: "Fig. 3",
-                caption:
-                  "a–c：整腺形态，CD=中央导管，黄星=脱落腺泡。d–k：PPARγ、FASN、Ki-67。l–m：腺泡与导管基底 Ki-67⁺ 比例下降。",
-              },
-              {
-                src: "/figures/paper4-fig4-gli2.jpg",
-                paperFig: "Fig. 4",
-                caption:
-                  "激活 Hh / GLI2 后腺体增大、基底细胞扩增，与 Smo 敲除方向相反，构成双向遗传学证据。",
-              },
-            ],
-          },
-          {
             id: "mg-gross-he",
             title: "新鲜睑板纵切面大体成像联合 HE",
             sources: ["paper2"],
@@ -558,6 +460,67 @@ export const categories: Category[] = [
             ],
           },
           {
+            id: "mg-krox20-absent",
+            title: "Krox20 缺失或谱系清除后睑板腺是否存在",
+            sources: ["paper3"],
+            instruments: [
+              "Krox20fl/fl;K14-Cre（Krox20-cKO）vs Krox20fl/fl 对照",
+              "Krox20-DTA;K14-Cre：P6 清除 K14 谱系中的 KROX20⁺ 细胞",
+              "Krox20-Cre;R26-rtTA;Tet-DTA：P20 起多西环素诱导，成年期清除已形成腺体中的谱系细胞",
+              "石蜡切片 H&E；免疫荧光 K14 / PPARγ / KROX20",
+            ],
+            stains: ["H&E"],
+            markers: [
+              {
+                name: "K14",
+                role: "MG 导管和腺泡上皮轮廓",
+                change: "cKO、发育期 DTA、成年期清除后腺体结构信号缺失",
+              },
+              {
+                name: "PPARγ",
+                role: "腺泡睑脂细胞分化",
+                change: "腺体缺失时 PPARγ 信号消失",
+              },
+              {
+                name: "KROX20",
+                role: "MG 干/祖细胞标志",
+                change: "cKO 和 DTA 清除后信号消失，证实靶细胞被去掉",
+              },
+            ],
+            observations: [
+              "Fig. 2E：2.5 月龄 Krox20-cKO 睑板腺结构完全缺失（虚线区空），对照腺体完整。所有 cKO 小鼠均缺腺体。",
+              "Fig. 5：P6 DTA 清除后 KROX20⁺ 细胞消失，H&E 无腺体，K14/PPARγ 缺失。",
+              "Fig. 6：成年期清除已形成的腺体，H&E 显示腺体丢失，并继发角膜病变。",
+              "Fig. 8：Krox24 单敲保留正常腺体；Krox20-cKO 和双敲均无腺体。Krox20 而非 Krox24 决定腺体结构形成。",
+            ],
+            figures: [
+              {
+                src: "/figures/paper3-fig2-mg.jpg",
+                paperFig: "Fig. 2E–J",
+                caption:
+                  "E：H&E，cKO 睑板腺缺失。F：K14/PPARγ 腺体标志消失。H–J：KROX20 与 K14 共染确认靶蛋白丢失。A–D 为角膜缘谱系，见角膜分支。",
+              },
+              {
+                src: "/figures/paper3-fig5-dta.jpg",
+                paperFig: "Fig. 5",
+                caption:
+                  "P6 清除 KROX20⁺ 上皮谱系。A：KROX20 消失。B：H&E 无腺体。C：K14/PPARγ 缺失。D：Oil Red O 无睑脂。",
+              },
+              {
+                src: "/figures/paper3-fig6-adult.jpg",
+                paperFig: "Fig. 6C–E",
+                caption:
+                  "成年期诱导清除。C：H&E 已形成腺体丢失。D：K14/PPARγ 缺失。E：KROX20 信号消失。A–B 为继发角膜病变。",
+              },
+              {
+                src: "/figures/paper3-fig8-mg.jpg",
+                paperFig: "Fig. 8B–F",
+                caption:
+                  "WT / Krox24-KO 保留腺体；Krox20-cKO 与双敲腺体缺失。E–F：Krox24-KO 仍表达 KROX20。",
+              },
+            ],
+          },
+          {
             id: "mg-zhu-stem",
             title: "snRNA-seq + RNAscope + 谱系追踪鉴定 MG 干细胞群",
             sources: ["paper4"],
@@ -605,6 +568,43 @@ export const categories: Category[] = [
                 paperFig: "Fig. 2",
                 caption:
                   "a：P50 诱导、2 天 vs 90/120 天。b–d：Lrig1/Lgr6/Axin2 从导管扩展。e：Gli2。f：Slc1a3 偏腺泡。绿/品红=谱系，红=PLIN2。",
+              },
+            ],
+          },
+          {
+            id: "mg-zhu-morphology",
+            title: "离体睑板腺形态与基底细胞 Ki-67 增殖",
+            sources: ["paper4"],
+            instruments: [
+              "分离眼睑后观察整根 MG 形态（中央导管 CD、腺泡簇、睑缘开口）",
+              "KRT14-CreERT2;Smofl/fl 抑制 Hh，或 Krt5-rtTA;tetO-GLI2ΔN 激活 Hh",
+              "免疫组化：Ki-67 计数腺泡和导管基底细胞增殖比例",
+            ],
+            stains: ["IHC（Ki-67、PPARγ、FASN）"],
+            markers: [
+              {
+                name: "Ki-67",
+                role: "腺泡 / 导管基底细胞增殖",
+                change: "Smo 敲除后腺泡和导管 Ki-67⁺ 比例显著下降；GLI2 激活后增殖升高",
+              },
+            ],
+            observations: [
+              "对照整腺：腺泡簇沿中央导管排列，开口朝向睑缘。",
+              "抑制 Hh（Smo cKO）：腺体缩小、部分腺泡脱落（黄星），Ki-67⁺ 腺泡和导管基底细胞减少。",
+              "评价衰老或干预时，要同时看腺体是否变小、腺泡是否脱落，以及基底增殖是否下降，避免只报一个形态指标。",
+            ],
+            figures: [
+              {
+                src: "/figures/paper4-fig3-smo.jpg",
+                paperFig: "Fig. 3",
+                caption:
+                  "a–c：整腺形态，CD=中央导管，黄星=脱落腺泡。d–k：PPARγ、FASN、Ki-67。l–m：腺泡与导管基底 Ki-67⁺ 比例下降。",
+              },
+              {
+                src: "/figures/paper4-fig4-gli2.jpg",
+                paperFig: "Fig. 4",
+                caption:
+                  "激活 Hh / GLI2 后腺体增大、基底细胞扩增，与 Smo 敲除方向相反，构成双向遗传学证据。",
               },
             ],
           },

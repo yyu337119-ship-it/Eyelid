@@ -199,7 +199,7 @@ export function FigureBlock({
               alt={figure.paperFig}
               width={1800}
               height={1200}
-              className="mt-3 h-auto w-full object-contain"
+              className="mt-3 h-auto max-h-[70vh] w-full object-contain"
             />
             <p className="mt-3 text-sm leading-6 text-stone-600">{figure.caption}</p>
           </div>

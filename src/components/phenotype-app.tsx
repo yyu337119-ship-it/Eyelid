@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, type MouseEvent } from "react"
+import { useRef, useState, type ReactNode } from "react"
 import { BookOpen, Download, Menu, Pencil, RotateCcw, Upload } from "lucide-react"
 import { AssayCard } from "@/components/assay-card"
 import { Button } from "@/components/ui/button"
@@ -11,20 +11,43 @@ import { SourceCite } from "@/components/source-badge"
 import { EditableText } from "@/components/editable-text"
 import { HandbookProvider, useHandbook } from "@/lib/handbook-store"
 
-function jumpTo(id: string, onNavigate?: () => void) {
-  return (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault()
-    event.nativeEvent.stopImmediatePropagation()
-    const target = document.getElementById(id)
-    if (target) {
-      const header = document.querySelector("header")
-      const offset = (header?.getBoundingClientRect().height ?? 96) + 12
-      const top = target.getBoundingClientRect().top + window.scrollY - offset
-      window.scrollTo({ top: Math.max(0, top), behavior: "auto" })
-      history.replaceState(null, "", `#${id}`)
-    }
-    onNavigate?.()
+function scrollToId(id: string, onNavigate?: () => void) {
+  const target = document.getElementById(id)
+  if (target) {
+    const header = document.querySelector("header")
+    const offset = (header?.getBoundingClientRect().height ?? 96) + 12
+    const top = target.getBoundingClientRect().top + window.scrollY - offset
+    const html = document.documentElement
+    const previous = html.style.scrollBehavior
+    html.style.scrollBehavior = "auto"
+    window.scrollTo({ top: Math.max(0, top), behavior: "auto" })
+    html.style.scrollBehavior = previous
+    history.replaceState(null, "", `#${id}`)
   }
+  onNavigate?.()
+}
+
+function NavButton({
+  id,
+  className,
+  children,
+  onNavigate,
+}: {
+  id: string
+  className?: string
+  children: ReactNode
+  onNavigate?: () => void
+}) {
+  return (
+    <button
+      type="button"
+      data-jump={id}
+      className={className}
+      onClick={() => scrollToId(id, onNavigate)}
+    >
+      {children}
+    </button>
+  )
 }
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
@@ -33,33 +56,33 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
     <nav className="space-y-5 text-sm">
       {categories.map((category) => (
         <div key={category.id}>
-          <a
-            href={`#${category.id}`}
-            onClick={jumpTo(category.id, onNavigate)}
-            className="block font-semibold text-stone-900 hover:text-[#1f4b3a]"
+          <NavButton
+            id={category.id}
+            onNavigate={onNavigate}
+            className="block w-full text-left font-semibold text-stone-900 hover:text-[#1f4b3a]"
           >
             {category.roman}、{category.title}
-          </a>
+          </NavButton>
           <ul className="mt-2 space-y-3 border-l border-stone-200 pl-3">
             {category.sections.map((section) => (
               <li key={section.id}>
-                <a
-                  href={`#${section.id}`}
-                  onClick={jumpTo(section.id, onNavigate)}
-                  className="font-medium text-stone-800 hover:underline"
+                <NavButton
+                  id={section.id}
+                  onNavigate={onNavigate}
+                  className="w-full text-left font-medium text-stone-800 hover:underline"
                 >
                   {section.index}、{section.title}
-                </a>
+                </NavButton>
                 <ul className="mt-1 space-y-1">
                   {section.topics.map((topic) => (
                     <li key={topic.id}>
-                      <a
-                        href={`#${topic.id}`}
-                        onClick={jumpTo(topic.id, onNavigate)}
-                        className="block leading-5 text-stone-600 hover:text-stone-900 hover:underline"
+                      <NavButton
+                        id={topic.id}
+                        onNavigate={onNavigate}
+                        className="block w-full text-left leading-5 text-stone-600 hover:text-stone-900 hover:underline"
                       >
                         {`${topic.mark}${topic.title}`}
-                      </a>
+                      </NavButton>
                     </li>
                   ))}
                 </ul>
@@ -68,9 +91,13 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           </ul>
         </div>
       ))}
-      <a href="#refs" onClick={jumpTo("refs", onNavigate)} className="block font-semibold text-stone-900">
+      <NavButton
+        id="refs"
+        onNavigate={onNavigate}
+        className="block w-full text-left font-semibold text-stone-900"
+      >
         参考文献
-      </a>
+      </NavButton>
     </nav>
   )
 }

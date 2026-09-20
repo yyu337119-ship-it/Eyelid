@@ -135,7 +135,9 @@
     position: fixed;
     inset: 0;
     margin: auto;
+    width: min(96vw, 72rem);
     height: fit-content;
-    max-height: 92vh;
+    max-height: 90vh;
+    overflow: auto;
   }
 }

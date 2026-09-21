@@ -12,6 +12,7 @@ import {
 } from "react"
 import {
   categories as defaultCategories,
+  pruneEmptyOutline,
   withFigureIds,
   type Assay,
   type Category,
@@ -43,7 +44,7 @@ export const PUBLIC_SITE_URL = "https://yyu337119-ship-it.github.io/Eyelid/"
 export const DEFAULT_REFS_LABEL = "参考文献"
 
 /** Unsaved in-browser draft only. Never auto-load eyelid-handbook-edits-v1…v10. */
-const DRAFT_KEY = "eyelid-handbook-unsaved-draft-v14"
+const DRAFT_KEY = "eyelid-handbook-unsaved-draft-v15"
 
 export type AssayPath = {
   categoryId: string
@@ -98,6 +99,9 @@ type HandbookContextValue = {
     patch: Partial<Pick<Category["sections"][number]["topics"][number], "title" | "mark">>
   ) => void
   updateAssay: (path: AssayPath, updater: (assay: Assay) => Assay) => void
+  removeSection: (categoryId: string, sectionId: string) => void
+  removeTopic: (categoryId: string, sectionId: string, topicId: string) => void
+  removeAssay: (path: AssayPath) => void
   replaceFigure: (id: string, file: File) => Promise<void>
   restoreFigure: (id: string) => Promise<void>
   reset: () => Promise<void>
@@ -108,7 +112,7 @@ type HandbookContextValue = {
 const HandbookContext = createContext<HandbookContextValue | null>(null)
 
 function cloneCategories() {
-  return withFigureIds(structuredClone(defaultCategories))
+  return pruneEmptyOutline(withFigureIds(structuredClone(defaultCategories)))
 }
 
 function revokeAll(urls: Record<string, string>) {
@@ -155,7 +159,7 @@ async function collectPublishPayload(
   categories: Category[],
   figureUrls: Record<string, string>
 ) {
-  const next = withFigureIds(structuredClone(categories))
+  const next = pruneEmptyOutline(withFigureIds(structuredClone(categories)))
   const images: { path: string; blob: Blob }[] = []
   const uploaded = new Set<string>()
 
@@ -228,7 +232,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
             ? live.refsLabel
             : DEFAULT_REFS_LABEL
         if (Array.isArray(live.categories) && live.categories.length) {
-          const next = withFigureIds(live.categories)
+          const next = pruneEmptyOutline(withFigureIds(live.categories))
           setCategories(next)
           publishedRef.current = { intro: nextIntro, refsLabel: nextRefs, categories: next }
         } else {
@@ -252,7 +256,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
           if (typeof parsed.intro === "string") setIntroState(parsed.intro)
           if (typeof parsed.refsLabel === "string") setRefsLabelState(parsed.refsLabel)
           if (Array.isArray(parsed.categories) && parsed.categories.length) {
-            setCategories(withFigureIds(parsed.categories))
+            setCategories(pruneEmptyOutline(withFigureIds(parsed.categories)))
           }
           setTextDirty(true)
           setHasLocalDraft(true)
@@ -410,6 +414,77 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     [commit]
   )
 
+  const removeSection = useCallback(
+    (categoryId: string, sectionId: string) => {
+      commit((prev) =>
+        prev.map((category) =>
+          category.id !== categoryId
+            ? category
+            : {
+                ...category,
+                sections: category.sections.filter((section) => section.id !== sectionId),
+              }
+        )
+      )
+    },
+    [commit]
+  )
+
+  const removeTopic = useCallback(
+    (categoryId: string, sectionId: string, topicId: string) => {
+      commit((prev) =>
+        prev.map((category) =>
+          category.id !== categoryId
+            ? category
+            : {
+                ...category,
+                sections: category.sections.map((section) =>
+                  section.id !== sectionId
+                    ? section
+                    : {
+                        ...section,
+                        topics: section.topics.filter((topic) => topic.id !== topicId),
+                      }
+                ),
+              }
+        )
+      )
+    },
+    [commit]
+  )
+
+  const removeAssay = useCallback(
+    (path: AssayPath) => {
+      commit((prev) =>
+        pruneEmptyOutline(
+          prev.map((category) =>
+            category.id !== path.categoryId
+              ? category
+              : {
+                  ...category,
+                  sections: category.sections.map((section) =>
+                    section.id !== path.sectionId
+                      ? section
+                      : {
+                          ...section,
+                          topics: section.topics.map((topic) =>
+                            topic.id !== path.topicId
+                              ? topic
+                              : {
+                                  ...topic,
+                                  assays: topic.assays.filter((assay) => assay.id !== path.assayId),
+                                }
+                          ),
+                        }
+                  ),
+                }
+          )
+        )
+      )
+    },
+    [commit]
+  )
+
   const replaceFigure = useCallback(async (id: string, file: File) => {
     const blob = await fileToJpegBlob(file)
     await putFigureBlob(id, blob)
@@ -519,7 +594,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     if (typeof parsed.intro === "string") setIntroState(parsed.intro)
     if (typeof parsed.refsLabel === "string") setRefsLabelState(parsed.refsLabel)
     if (Array.isArray(parsed.categories) && parsed.categories.length) {
-      setCategories(withFigureIds(parsed.categories))
+      setCategories(pruneEmptyOutline(withFigureIds(parsed.categories)))
     }
     setTextDirty(true)
     setHasLocalDraft(true)
@@ -563,6 +638,9 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       updateSection,
       updateTopic,
       updateAssay,
+      removeSection,
+      removeTopic,
+      removeAssay,
       replaceFigure,
       restoreFigure,
       reset,
@@ -589,6 +667,9 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       updateSection,
       updateTopic,
       updateAssay,
+      removeSection,
+      removeTopic,
+      removeAssay,
       replaceFigure,
       restoreFigure,
       reset,

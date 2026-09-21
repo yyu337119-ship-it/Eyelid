@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import {
   abbreviations,
+  assayHasSubstance,
   assayMark,
   sameSources,
   sectionSources,
@@ -33,6 +34,7 @@ function PhenotypeAppInner() {
     updateSection,
     updateTopic,
     updateAssay,
+    editMode,
   } = useHandbook()
 
   return (
@@ -153,7 +155,12 @@ function PhenotypeAppInner() {
                       </span>
                       <SourceCite ids={sectionIds} className="font-normal" />
                     </h3>
-                    {section.topics.map((topic) => {
+                    {section.topics
+                      .filter(
+                        (topic) =>
+                          editMode || Boolean(topic.title.trim()) || topic.assays.some(assayHasSubstance)
+                      )
+                      .map((topic) => {
                       const topicIds = topicSources(topic)
                       return (
                         <div key={topic.id} id={topic.id} className="scroll-mt-40 space-y-3">
@@ -180,7 +187,9 @@ function PhenotypeAppInner() {
                             />
                           </h4>
                           <div className="space-y-4">
-                            {topic.assays.map((assay, assayIndex) => (
+                            {topic.assays
+                              .filter((assay) => editMode || assayHasSubstance(assay))
+                              .map((assay, assayIndex) => (
                               <AssayCard
                                 key={assay.id}
                                 assay={assay}

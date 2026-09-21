@@ -1071,6 +1071,47 @@ export function assayMark(assay: Pick<Assay, "mark">, index: number) {
   return assay.mark?.trim() || `（${index + 1}）`
 }
 
+function filled(value?: string) {
+  return Boolean(value?.trim())
+}
+
+function filledList(values?: string[]) {
+  return (values ?? []).some(filled)
+}
+
+/** 标题和卡片内容都空的条目，不进目录也不进正文。 */
+export function assayHasSubstance(assay: Assay) {
+  if (filled(assay.title)) return true
+  if (filledList(assay.instruments) || filledList(assay.stains) || filledList(assay.observations) || filledList(assay.pending)) {
+    return true
+  }
+  if ((assay.markers ?? []).some((marker) => filled(marker.name) || filled(marker.role) || filled(marker.change))) {
+    return true
+  }
+  return (assay.figures ?? []).some(
+    (figure) => filled(figure.src) || filled(figure.paperFig) || filled(figure.caption)
+  )
+}
+
+export function pruneEmptyOutline(tree: Category[]): Category[] {
+  return tree
+    .map((category) => ({
+      ...category,
+      sections: category.sections
+        .map((section) => ({
+          ...section,
+          topics: section.topics
+            .map((topic) => ({
+              ...topic,
+              assays: topic.assays.filter(assayHasSubstance),
+            }))
+            .filter((topic) => filled(topic.title) || topic.assays.length > 0),
+        }))
+        .filter((section) => filled(section.title) || section.topics.length > 0),
+    }))
+    .filter((category) => filled(category.title) || category.sections.length > 0)
+}
+
 export function withFigureIds(tree: Category[]): Category[] {
   return tree.map((category) => ({
     ...category,

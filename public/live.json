@@ -298,17 +298,6 @@
                     }
                   ],
                   "mark": "（1）"
-                },
-                {
-                  "id": "meibum-expressibility",
-                  "title": "",
-                  "sources": [
-                    "paper1"
-                  ],
-                  "instruments": [],
-                  "observations": [],
-                  "figures": [],
-                  "mark": "（2）"
                 }
               ]
             },
@@ -711,38 +700,6 @@
                   ]
                 }
               ]
-            },
-            {
-              "id": "conj-pending-topic",
-              "mark": "②",
-              "title": "",
-              "assays": [
-                {
-                  "id": "conj-pending",
-                  "title": "",
-                  "sources": [
-                    "paper2"
-                  ],
-                  "instruments": [
-                    ""
-                  ],
-                  "markers": [
-                    {
-                      "name": "",
-                      "role": ""
-                    }
-                  ],
-                  "observations": [
-                    ""
-                  ],
-                  "pending": [
-                    "",
-                    ""
-                  ],
-                  "figures": [],
-                  "mark": "（1）"
-                }
-              ]
             }
           ]
         }
@@ -909,36 +866,6 @@
               "mark": "③",
               "title": "增殖、凋亡标记物",
               "assays": [
-                {
-                  "id": "muscle-pcna-tunel",
-                  "title": "",
-                  "sources": [
-                    "paper2"
-                  ],
-                  "instruments": [],
-                  "markers": [],
-                  "observations": [],
-                  "figures": [],
-                  "mark": "（1）"
-                },
-                {
-                  "id": "muscle-collagen",
-                  "title": "",
-                  "sources": [
-                    "paper2"
-                  ],
-                  "instruments": [],
-                  "markers": [
-                    {
-                      "name": "",
-                      "role": "",
-                      "change": ""
-                    }
-                  ],
-                  "observations": [],
-                  "figures": [],
-                  "mark": "（2）"
-                },
                 {
                   "id": "muscle-egfr",
                   "title": "EGFR / β-catenin / N-cadherin：CPF 细胞增殖与黏附",

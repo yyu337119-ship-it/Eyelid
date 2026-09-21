@@ -1,8 +1,8 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { CornerDownRight } from "lucide-react"
-import { assayMark } from "@/data/content"
+import { CornerDownRight, Trash2 } from "lucide-react"
+import { assayHasSubstance, assayMark } from "@/data/content"
 import { EditableText } from "@/components/editable-text"
 import { useHandbook } from "@/lib/handbook-store"
 
@@ -54,6 +54,7 @@ function TocRow({
   onNumberChange,
   onTitleChange,
   onNavigate,
+  onRemove,
   numberClassName,
   titleClassName,
   rowClassName,
@@ -66,6 +67,7 @@ function TocRow({
   onNumberChange: (value: string) => void
   onTitleChange: (value: string) => void
   onNavigate?: () => void
+  onRemove?: () => void
   numberClassName?: string
   titleClassName?: string
   rowClassName?: string
@@ -103,6 +105,16 @@ function TocRow({
         onChange={onTitleChange}
         className={titleClassName}
       />
+      {onRemove ? (
+        <button
+          type="button"
+          onClick={onRemove}
+          className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded text-stone-400 hover:bg-red-50 hover:text-red-700"
+          aria-label={`删除${title || "空白条目"}`}
+        >
+          <Trash2 className="size-3.5" />
+        </button>
+      ) : null}
       <button
         type="button"
         onClick={() => scrollToId(id, onNavigate)}
@@ -124,6 +136,10 @@ export function TocNav({ onNavigate }: { onNavigate?: () => void }) {
     updateSection,
     updateTopic,
     updateAssay,
+    removeSection,
+    removeTopic,
+    removeAssay,
+    editMode,
   } = useHandbook()
 
   return (
@@ -153,12 +169,22 @@ export function TocNav({ onNavigate }: { onNavigate?: () => void }) {
                   onNumberChange={(index) => updateSection(category.id, section.id, { index })}
                   onTitleChange={(title) => updateSection(category.id, section.id, { title })}
                   onNavigate={onNavigate}
+                  onRemove={() => {
+                    if (window.confirm(`删除「${section.index}、${section.title || "空白"}」及其下属条目？`)) {
+                      removeSection(category.id, section.id)
+                    }
+                  }}
                   numberClassName="w-8 shrink-0 font-medium"
                   titleClassName="flex-1 font-medium text-stone-800"
                   rowClassName="w-full text-left font-medium text-stone-800 hover:underline"
                 />
                 <ul className="mt-1 space-y-1">
-                  {section.topics.map((topic) => (
+                  {section.topics
+                    .filter(
+                      (topic) =>
+                        editMode || Boolean(topic.title.trim()) || topic.assays.some(assayHasSubstance)
+                    )
+                    .map((topic) => (
                     <li key={topic.id}>
                       <TocRow
                         id={topic.id}
@@ -171,12 +197,19 @@ export function TocNav({ onNavigate }: { onNavigate?: () => void }) {
                           updateTopic(category.id, section.id, topic.id, { title })
                         }
                         onNavigate={onNavigate}
+                        onRemove={() => {
+                          if (window.confirm(`删除「${topic.mark}${topic.title || "空白"}」及其下属条目？`)) {
+                            removeTopic(category.id, section.id, topic.id)
+                          }
+                        }}
                         numberClassName="w-8 shrink-0 text-[#1f4b3a]"
                         titleClassName="flex-1 leading-5 text-stone-600"
                         rowClassName="block w-full text-left leading-5 text-stone-600 hover:text-stone-900 hover:underline"
                       />
                       <ul className="mt-1 space-y-0.5 pl-2">
-                        {topic.assays.map((assay, assayIndex) => (
+                        {topic.assays
+                          .filter((assay) => editMode || assayHasSubstance(assay))
+                          .map((assay, assayIndex) => (
                           <li key={assay.id}>
                             <TocRow
                               id={assay.id}
@@ -205,6 +238,16 @@ export function TocNav({ onNavigate }: { onNavigate?: () => void }) {
                                 )
                               }
                               onNavigate={onNavigate}
+                              onRemove={() => {
+                                if (window.confirm(`删除「${assayMark(assay, assayIndex)}${assay.title || "空白"}」？`)) {
+                                  removeAssay({
+                                    categoryId: category.id,
+                                    sectionId: section.id,
+                                    topicId: topic.id,
+                                    assayId: assay.id,
+                                  })
+                                }
+                              }}
                               numberClassName="w-10 shrink-0 text-stone-500"
                               titleClassName="flex-1 text-[13px] leading-5 text-stone-500"
                               rowClassName="block w-full text-left text-[13px] leading-5 text-stone-500 hover:text-stone-800 hover:underline"

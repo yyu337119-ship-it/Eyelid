@@ -104,7 +104,7 @@
                 },
                 {
                   "id": "mg-he-acini",
-                  "title": "眼球 HE：腺泡、导管、导管开口位置与间充质",
+                  "title": "MGHE染色",
                   "sources": [
                     "paper2"
                   ],
@@ -132,7 +132,7 @@
                 },
                 {
                   "id": "mg-3d-duct",
-                  "title": "三维虚拟组织学重建测量中央导管最大直径",
+                  "title": "MG中央导管最大直径",
                   "sources": [
                     "paper1"
                   ],
@@ -161,7 +161,7 @@
                 },
                 {
                   "id": "mg-terminal-duct",
-                  "title": "裂隙灯图像测量末端导管厚度",
+                  "title": "MG末端导管厚度",
                   "sources": [
                     "paper1"
                   ],
@@ -192,7 +192,7 @@
               "assays": [
                 {
                   "id": "mg-rtqpcr",
-                  "title": "MG导管上皮标志物基因 RT-qPCR",
+                  "title": "MG导管上皮标志物",
                   "sources": [
                     "paper1"
                   ],
@@ -221,12 +221,12 @@
                 },
                 {
                   "id": "mg-pparg-pcna",
-                  "title": "MG 腺泡分化（PPARγ）、增殖与凋亡（ PCNA / TUNEL）",
+                  "title": "MG腺泡标志物",
                   "sources": [
                     "paper2"
                   ],
                   "instruments": [
-                    "石蜡切片、免疫荧光\n",
+                    "MG 腺泡分化（PPARγ）、增殖与凋亡（ PCNA / TUNEL）\n石蜡切片、免疫荧光\n",
                     ""
                   ],
                   "markers": [
@@ -365,11 +365,11 @@
             {
               "id": "cornea-morphology",
               "mark": "①",
-              "title": "形态与完整性",
+              "title": "评估角膜上皮",
               "assays": [
                 {
                   "id": "cornea-fluorescein",
-                  "title": "荧光素染色裂隙灯评估角膜完整性",
+                  "title": "荧光素染色裂隙灯评估角膜上皮损失",
                   "sources": [
                     "paper1"
                   ],
@@ -472,7 +472,7 @@
         {
           "id": "tear",
           "index": "2",
-          "title": "泪膜、泪液",
+          "title": "泪膜",
           "topics": [
             {
               "id": "tear-integrity",
@@ -508,7 +508,7 @@
             {
               "id": "tear-quantity",
               "mark": "②",
-              "title": "泪液与破裂时间",
+              "title": "泪膜破裂时间",
               "assays": [
                 {
                   "id": "tear-tbut",

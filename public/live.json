@@ -6,8 +6,8 @@
       "id": "mg",
       "roman": "一",
       "title": "MG 及其分泌物",
-      "question": "腺体形态是否完整？导管是否阻塞？睑脂能否排出、成分是否异常？",
-      "summary": "先看活体/大体形态，再落到切片与三维重建量化导管，最后用分子标志物判断角化、分化与脂质合成，并以裂隙灯观察睑脂外观与排出是否通畅。",
+      "question": "",
+      "summary": "",
       "sections": [
         {
           "id": "mg-gland",
@@ -353,9 +353,9 @@
     {
       "id": "cornea-tear",
       "roman": "二",
-      "title": "角膜和泪膜、泪液",
-      "question": "角膜屏障是否破损？上皮是否应激修复？泪膜是否稳定？",
-      "summary": "角膜先用荧光素看破损范围，再用在体共聚焦看表层/翼状/基底细胞形态，最后用 Krt14 / Krt12 / Sprr1a 判断分化与鳞状化生。泪膜用镜面光反射环评价完整性；泪液量、泪河和 TBUT/NIBUT 仍待补。",
+      "title": "角膜和泪膜",
+      "question": "",
+      "summary": "",
       "sections": [
         {
           "id": "cornea",
@@ -544,8 +544,8 @@
       "id": "conjunctiva",
       "roman": "三",
       "title": "结膜",
-      "question": "结膜上皮是否增生？杯状细胞和黏蛋白是否改变？MCJ 分化边界是否错位？",
-      "summary": "结膜评价分三层：HE 看睑缘/结膜上皮厚度，PAS 看穹窿杯状细胞，免疫荧光用 Krt4（黏膜）和 Krt10（表皮）判断 MCJ 是否被表皮化。充血和黏蛋白监测在笔记中仍是待补项。",
+      "question": "、",
+      "summary": "",
       "sections": [
         {
           "id": "conj-structure",

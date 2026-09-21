@@ -582,13 +582,13 @@
                   ],
                   "observations": [
                     "KR/TG 小鼠睑缘结膜上皮、皮肤黏膜移行上皮较对照增厚（Fig. 5A–D）。",
-                    "这是 TGFα 作为上皮有丝分裂原的直接效应，需与 MG 本身病变分开记录。"
+                    " TGFα 作为上皮有丝分裂原的直接效应"
                   ],
                   "figures": [
                     {
                       "src": "/figures/live/conj-he-fig-0.jpg",
                       "paperFig": "Fig. 5A–D",
-                      "caption": "HE：对照 A、C vs 转基因 B、D。结膜上皮与皮肤黏膜移行上皮增厚。",
+                      "caption": "HE：对照 A、C vs 转基因 B、D\n结膜上皮与皮肤黏膜移行上皮增厚。",
                       "id": "conj-he-fig-0"
                     }
                   ],
@@ -622,13 +622,13 @@
                   ],
                   "observations": [
                     "P0–P15 诱导后，结膜穹窿 PAS 阳性杯状细胞增加（Fig. 5E/5F）。",
-                    "杯状细胞增多提示黏液层代偿或上皮分化被重编程，不能单独等同于炎症。"
+                    "杯状细胞增多提示黏液层代偿或上皮分化"
                   ],
                   "figures": [
                     {
                       "src": "/figures/live/conj-pas-fig-0.jpg",
                       "paperFig": "Fig. 5E–F",
-                      "caption": "PAS：对照 vs TGFα 过表达 15 天，焦点在穹窿杯状细胞密度。",
+                      "caption": "PAS：对照 vs TGFα 过表达 15 天，穹窿杯状细胞密度↑。",
                       "id": "conj-pas-fig-0"
                     }
                   ],
@@ -659,23 +659,26 @@
                   ],
                   "markers": [
                     {
-                      "name": "Krt4（K4）",
-                      "role": "黏膜上皮分化标志，正常应出现在 MCJ 黏膜侧",
-                      "change": "转基因鼠 MCJ 处 Krt4 消失（5G/5H）"
+                      "name": "Krt4：黏膜上皮分化标志，正常应出现在 MCJ 黏膜侧",
+                      "role": "",
+                      "change": ""
                     }
                   ],
                   "observations": [
-                    "Krt4 丢失表示睑缘黏膜表型被削弱，MCJ 身份不稳定。"
+                    ""
                   ],
                   "figures": [
                     {
                       "src": "/figures/live/conj-krt4-fig-0.jpg",
                       "paperFig": "Fig. 5G–H",
-                      "caption": "免疫荧光：对照 MCJ 黏膜侧 Krt4 阳性，转基因鼠该信号消失。",
+                      "caption": "",
                       "id": "conj-krt4-fig-0"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "pending": [
+                    "Krt4：黏膜上皮分化标志，正常应出现在 MCJ 黏膜侧\n转基因鼠 MCJ 处 Krt4 消失（5G/5H），表示睑缘黏膜表型被削弱"
+                  ]
                 },
                 {
                   "id": "conj-krt10",
@@ -688,53 +691,53 @@
                   ],
                   "markers": [
                     {
-                      "name": "Krt10（K10）",
-                      "role": "表皮终末分化标志",
+                      "name": "Krt10（K10）：MG表皮终末分化标志",
+                      "role": "",
                       "change": "越过 MCJ，异位进入结膜上皮（Fig. 5I、J）"
                     }
                   ],
-                  "observations": [
-                    "与 Krt4 丢失同时出现 Krt10 前移，说明睑缘发生表皮化。",
-                    "系统评价时应成对看 Krt4↓ + Krt10 越界，而不是只报一个角蛋白。"
-                  ],
+                  "observations": [],
                   "figures": [
                     {
                       "src": "/figures/live/conj-krt10-fig-0.jpg",
-                      "paperFig": "Fig. 5I–J",
-                      "caption": "Krt10 信号是否跨越 MCJ 进入结膜侧。",
+                      "paperFig": "Fig. 5I–J Krt10 信号跨越 MCJ 进入结膜侧。",
+                      "caption": "",
                       "id": "conj-krt10-fig-0"
                     }
                   ],
-                  "mark": "（2）"
+                  "mark": "（2）",
+                  "pending": [
+                    "K10越过 MCJ，异位进入结膜上皮（Fig. 5I、J）"
+                  ]
                 }
               ]
             },
             {
               "id": "conj-pending-topic",
               "mark": "②",
-              "title": "充血与黏蛋白",
+              "title": "",
               "assays": [
                 {
                   "id": "conj-pending",
-                  "title": "结膜充血与黏蛋白监测（笔记待补）",
+                  "title": "",
                   "sources": [
                     "paper2"
                   ],
                   "instruments": [
-                    "笔记仅列出监测方向，未给出仪器和结果"
+                    ""
                   ],
                   "markers": [
                     {
-                      "name": "结膜黏蛋白（如 Muc5ac 等）",
-                      "role": "泪膜黏液层 / 杯状细胞功能"
+                      "name": "",
+                      "role": ""
                     }
                   ],
                   "observations": [
-                    "目前可落地的是 PAS 杯状细胞计数；充血评分和黏蛋白分子检测仍缺方案。"
+                    ""
                   ],
                   "pending": [
-                    "结膜充血的活体评分或裂隙灯标准",
-                    "结膜黏蛋白的免疫组化 / ELISA / qPCR 面板"
+                    "",
+                    ""
                   ],
                   "figures": [],
                   "mark": "（1）"

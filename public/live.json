@@ -397,7 +397,7 @@
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig3-tear-cornea.jpg",
+                      "src": "/figures/live/cornea-fluorescein-fig-0.jpg",
                       "paperFig": "Fig. 3C–D",
                       "caption": "C：钴蓝光下荧光素着染，Day 0 / 10 / 14。D：着染积分密度，ATR101 组显著低于 DMSO。",
                       "id": "cornea-fluorescein-fig-0"
@@ -416,14 +416,13 @@
                   ],
                   "observations": [
                     "看三点：细胞是否肥大、固缩核数量、是否出现鳞状化生和表层脱落。",
-                    "黄色箭头：表层上皮脱落 / 鳞状化生；红色箭头：固缩细胞核增多。",
-                    "DMSO 组表层细胞紊乱、固缩核多，基底细胞肥大；ATR101 组接近野生型，但仍可见少量固缩核。"
+                    "列：表层 / 翼状 / 基底上皮。\n黄色箭头：表层上皮脱落 / 鳞状化生；红色箭头：固缩细胞核增多。\nDMSO 组表层细胞紊乱、固缩核多，基底细胞肥大；ATR101 组接近野生型，但仍可见少量固缩核。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig4-cornea.jpg",
+                      "src": "/figures/live/cornea-confocal-fig-0.jpg",
                       "paperFig": "Fig. 4A",
-                      "caption": "列：表层 / 翼状 / 基底上皮。行：WT、Awat2−/−/DMSO、Awat2−/−/ATR101。黄箭头脱落/鳞状化生，红箭头固缩核。",
+                      "caption": "",
                       "id": "cornea-confocal-fig-0"
                     }
                   ],
@@ -443,40 +442,39 @@
                     "paper1"
                   ],
                   "instruments": [
-                    "角膜切片免疫荧光（IF）",
-                    "RT-qPCR 定量标志物基因 mRNA"
+                    "翻译层面：角膜切片免疫荧光（IF）",
+                    "转录：RT-qPCR 定量标志物基因 mRNA"
                   ],
                   "markers": [
                     {
-                      "name": "Krt14（红色）",
-                      "role": "基底上皮祖细胞，具备增殖能力",
+                      "name": "Krt14（红色）：基底上皮祖细胞，具备增殖能力",
+                      "role": "",
                       "change": "应激后上调，并错误定位到浅表层；ATR101 后浅表异位减轻，mRNA 回落至接近 WT"
                     },
                     {
-                      "name": "Krt12（绿色）",
-                      "role": "终末分化的基底上层及浅表上皮",
-                      "change": "损伤修复时下调；ATR101 后浅表 Krt12 信号部分恢复"
+                      "name": "Krt12（绿色）：终末分化的基底上层及浅表上皮",
+                      "role": "",
+                      "change": "损失时下调，ATR101 组浅表 Krt12 信号部分恢复"
                     },
                     {
-                      "name": "Sprr1a",
-                      "role": "浅表上皮鳞状分化、角化包膜形成",
+                      "name": "Sprr1a：RT-qPCR：浅表上皮鳞状分化、角化包膜形成",
+                      "role": "",
                       "change": "DMSO 组显著升高；ATR101 组下降但仍高于 WT"
                     }
                   ],
-                  "observations": [
-                    "正常：Krt12 在浅表，Krt14 限于基底。损伤后角膜缘细胞迁入中央，Krt12↓、Krt14↑。",
-                    "Awat2−/− 中 Krt14 出现在浅表层（Fig. 4B 红箭头），提示上皮应激与修复活性升高。",
-                    "4C：Krt14 mRNA 在 ATR101 后与 WT 无显著差异；Sprr1a 仍部分残留，说明鳞状化生尚未完全消退。"
-                  ],
+                  "observations": [],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig4-cornea.jpg",
+                      "src": "/figures/live/cornea-markers-fig-0.jpg",
                       "paperFig": "Fig. 4B–C",
                       "caption": "B：红=Krt14，绿=Krt12。DMSO 组浅表 Krt14 异位。C：Krt14、Sprr1a 相对 Gapdh 的 RT-qPCR。",
                       "id": "cornea-markers-fig-0"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "pending": [
+                    "Krt14（红色）：基底上皮祖细胞，具备增殖能力\n应激后上调，并错误定位到浅表层；ATR101 后浅表异位减轻，mRNA 回落至接近 WT。\n\nKrt12（绿色）：终末分化的基底上层及浅表上皮\n损失时下调，ATR101 组浅表 Krt12 信号部分恢复\n\nSprr1a：RT-qPCR：浅表上皮鳞状分化、角化包膜形成\nDMSO 组显著升高；ATR101 组下降但仍高于 WT\n"
+                  ]
                 }
               ]
             }
@@ -508,7 +506,7 @@
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig3-tear-cornea.jpg",
+                      "src": "/figures/live/tear-specular-fig-0.jpg",
                       "paperFig": "Fig. 3A",
                       "caption": "镜面光反射。DMSO 组环形反光碎裂、扭曲；ATR101 组恢复较完整圆环。标尺 200 μm。",
                       "id": "tear-specular-fig-0"
@@ -534,17 +532,12 @@
                   ],
                   "observations": [
                     "DMSO 组 TBUT 最短；ATR101 治疗后显著延长，仍低于野生型。",
-                    "与 Fig. 3A 镜面反射一起读：反射看空间完整性，TBUT 看维持时间。"
+                    ""
                   ],
-                  "pending": [
-                    "泪液收集方法（毛细管 / 酚红棉线等）及定量结果",
-                    "泪膜脂质层干涉/厚度检测",
-                    "泪河高度测量",
-                    "NIBUT 的操作定义（原文报告的是侵入性/荧光素相关 TBUT）"
-                  ],
+                  "pending": [],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig3-tear-cornea.jpg",
+                      "src": "/figures/live/tear-tbut-fig-0.jpg",
                       "paperFig": "Fig. 3B",
                       "caption": "Tear film break-up time。Awat2−/−/DMSO < ATR101 < WT。",
                       "id": "tear-tbut-fig-0"

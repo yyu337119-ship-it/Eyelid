@@ -4,12 +4,14 @@
 
 公开阅读：**https://yyu337119-ship-it.github.io/Eyelid/**
 
+目录四级：**一、** → **1、** → **①** → **（1）**。点「编辑正文」后，左侧目录的编号和标题也可以改；改完点 **保存到公开页**，别人刷新就能看到。
+
 ## 在网页上改完怎么保存，别人才能看到
 
 「编辑正文」只是打开编辑；「退出编辑」**不会**发布。必须点右上角绿色的 **保存到公开页**，别人刷新公开页才能看到。
 
 1. 打开 https://yyu337119-ship-it.github.io/Eyelid/
-2. 点 **编辑正文**，改字或换图。
+2. 点 **编辑正文**，改正文、换图，或直接改左侧目录的四级标题。
 3. 点绿色 **保存到公开页**。
 4. 第一次会弹出令牌框。必须用账号 **yyu337119-ship-it** 登录。GitHub **没有**一条叫「Repository permissions → Contents：Read and write」的选项。那是：
    - 打开[预填好 Contents 的新建页](https://github.com/settings/personal-access-tokens/new?name=Eyelid%20handbook%20save&description=Commit%20live.json%20to%20the%20public%20handbook&target_name=yyu337119-ship-it&contents=write)

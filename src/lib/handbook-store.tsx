@@ -37,12 +37,13 @@ import {
 import { publicPath } from "@/lib/public-path"
 
 export const HANDBOOK_INTRO =
-  "按解剖部位系统评价小鼠眼表异常。一级为四大分类；其下再分「1、2、」二级和「①②」三级。每一级分支标题后直接标注【1】或【2】。每张卡片写出检测手段/仪器、分子标志物、观察结果和原文图表。"
+  "按解剖部位系统评价小鼠眼表异常。目录四级：一、为一级；「1、2、」为二级；「①②」为三级；「（1）（2）」为四级检测卡片。每一级标题后直接标注【1】或【2】。每张卡片写出检测手段/仪器、分子标志物、观察结果和原文图表。"
 
 export const PUBLIC_SITE_URL = "https://yyu337119-ship-it.github.io/Eyelid/"
+export const DEFAULT_REFS_LABEL = "参考文献"
 
 /** Unsaved in-browser draft only. Never auto-load eyelid-handbook-edits-v1…v10. */
-const DRAFT_KEY = "eyelid-handbook-unsaved-draft-v13"
+const DRAFT_KEY = "eyelid-handbook-unsaved-draft-v14"
 
 export type AssayPath = {
   categoryId: string
@@ -58,6 +59,7 @@ export type PublishState = {
 
 type PublishedSnapshot = {
   intro: string
+  refsLabel: string
   categories: Category[]
 }
 
@@ -69,6 +71,8 @@ type HandbookContextValue = {
   loadedLive: boolean
   intro: string
   setIntro: (value: string) => void
+  refsLabel: string
+  setRefsLabel: (value: string) => void
   categories: Category[]
   figureUrls: Record<string, string>
   hasGithubToken: boolean
@@ -78,9 +82,21 @@ type HandbookContextValue = {
   publishToGithub: () => Promise<boolean>
   /** Alias used by the header toolbar. Same as publishToGithub. */
   publishToPublic: () => Promise<boolean>
-  updateCategory: (categoryId: string, patch: Partial<Pick<Category, "title" | "question" | "summary">>) => void
-  updateSectionTitle: (categoryId: string, sectionId: string, title: string) => void
-  updateTopicTitle: (categoryId: string, sectionId: string, topicId: string, title: string) => void
+  updateCategory: (
+    categoryId: string,
+    patch: Partial<Pick<Category, "title" | "question" | "summary" | "roman">>
+  ) => void
+  updateSection: (
+    categoryId: string,
+    sectionId: string,
+    patch: Partial<Pick<Category["sections"][number], "title" | "index">>
+  ) => void
+  updateTopic: (
+    categoryId: string,
+    sectionId: string,
+    topicId: string,
+    patch: Partial<Pick<Category["sections"][number]["topics"][number], "title" | "mark">>
+  ) => void
   updateAssay: (path: AssayPath, updater: (assay: Assay) => Assay) => void
   replaceFigure: (id: string, file: File) => Promise<void>
   restoreFigure: (id: string) => Promise<void>
@@ -111,13 +127,21 @@ function walkFigures(categories: Category[], visit: (figure: Figure) => void) {
   }
 }
 
-async function fetchPublishedLive(): Promise<{ intro?: string; categories?: Category[] } | null> {
+async function fetchPublishedLive(): Promise<{
+  intro?: string
+  refsLabel?: string
+  categories?: Category[]
+} | null> {
   const path = publicPath("/live.json")
   if (!path) return null
   try {
     const response = await fetch(`${path}?t=${Date.now()}`, { cache: "no-store" })
     if (!response.ok) return null
-    const data = (await response.json()) as { intro?: string; categories?: Category[] }
+    const data = (await response.json()) as {
+      intro?: string
+      refsLabel?: string
+      categories?: Category[]
+    }
     if (!data || typeof data !== "object") return null
     return data
   } catch {
@@ -127,6 +151,7 @@ async function fetchPublishedLive(): Promise<{ intro?: string; categories?: Cate
 
 async function collectPublishPayload(
   intro: string,
+  refsLabel: string,
   categories: Category[],
   figureUrls: Record<string, string>
 ) {
@@ -161,7 +186,7 @@ async function collectPublishPayload(
   })
 
   return {
-    liveJson: JSON.stringify({ intro, categories: next }, null, 2),
+    liveJson: JSON.stringify({ intro, refsLabel, categories: next }, null, 2),
     categories: next,
     images,
   }
@@ -170,6 +195,7 @@ async function collectPublishPayload(
 export function HandbookProvider({ children }: { children: ReactNode }) {
   const [editMode, setEditMode] = useState(false)
   const [intro, setIntroState] = useState(HANDBOOK_INTRO)
+  const [refsLabel, setRefsLabelState] = useState(DEFAULT_REFS_LABEL)
   const [categories, setCategories] = useState<Category[]>(cloneCategories)
   const [textDirty, setTextDirty] = useState(false)
   const [figuresSynced, setFiguresSynced] = useState(true)
@@ -181,6 +207,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const [publishState, setPublishState] = useState<PublishState>({ status: "idle", detail: "" })
   const publishedRef = useRef<PublishedSnapshot>({
     intro: HANDBOOK_INTRO,
+    refsLabel: DEFAULT_REFS_LABEL,
     categories: cloneCategories(),
   })
 
@@ -192,15 +219,24 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       if (cancelled) return
       if (live) {
         if (typeof live.intro === "string") setIntroState(live.intro)
+        if (typeof live.refsLabel === "string" && live.refsLabel.trim()) {
+          setRefsLabelState(live.refsLabel)
+        }
+        const nextIntro = typeof live.intro === "string" ? live.intro : HANDBOOK_INTRO
+        const nextRefs =
+          typeof live.refsLabel === "string" && live.refsLabel.trim()
+            ? live.refsLabel
+            : DEFAULT_REFS_LABEL
         if (Array.isArray(live.categories) && live.categories.length) {
           const next = withFigureIds(live.categories)
           setCategories(next)
+          publishedRef.current = { intro: nextIntro, refsLabel: nextRefs, categories: next }
+        } else {
           publishedRef.current = {
-            intro: typeof live.intro === "string" ? live.intro : HANDBOOK_INTRO,
-            categories: next,
+            intro: nextIntro,
+            refsLabel: nextRefs,
+            categories: cloneCategories(),
           }
-        } else if (typeof live.intro === "string") {
-          publishedRef.current = { intro: live.intro, categories: cloneCategories() }
         }
         setLoadedLive(true)
       }
@@ -208,8 +244,13 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       const draftRaw = window.localStorage.getItem(DRAFT_KEY)
       if (draftRaw) {
         try {
-          const parsed = JSON.parse(draftRaw) as { intro?: string; categories?: Category[] }
+          const parsed = JSON.parse(draftRaw) as {
+            intro?: string
+            refsLabel?: string
+            categories?: Category[]
+          }
           if (typeof parsed.intro === "string") setIntroState(parsed.intro)
+          if (typeof parsed.refsLabel === "string") setRefsLabelState(parsed.refsLabel)
           if (Array.isArray(parsed.categories) && parsed.categories.length) {
             setCategories(withFigureIds(parsed.categories))
           }
@@ -249,14 +290,20 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       window.localStorage.removeItem(DRAFT_KEY)
       return
     }
-    window.localStorage.setItem(DRAFT_KEY, JSON.stringify({ intro, categories }))
+    window.localStorage.setItem(DRAFT_KEY, JSON.stringify({ intro, refsLabel, categories }))
     setHasLocalDraft(true)
-  }, [ready, textDirty, intro, categories])
+  }, [ready, textDirty, intro, refsLabel, categories])
 
   const dirty = textDirty || !figuresSynced
 
   const setIntro = useCallback((value: string) => {
     setIntroState(value)
+    setTextDirty(true)
+    setPublishState({ status: "idle", detail: "" })
+  }, [])
+
+  const setRefsLabel = useCallback((value: string) => {
+    setRefsLabelState(value)
     setTextDirty(true)
     setPublishState({ status: "idle", detail: "" })
   }, [])
@@ -268,7 +315,10 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const updateCategory = useCallback(
-    (categoryId: string, patch: Partial<Pick<Category, "title" | "question" | "summary">>) => {
+    (
+      categoryId: string,
+      patch: Partial<Pick<Category, "title" | "question" | "summary" | "roman">>
+    ) => {
       commit((prev) =>
         prev.map((category) => (category.id === categoryId ? { ...category, ...patch } : category))
       )
@@ -276,8 +326,12 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     [commit]
   )
 
-  const updateSectionTitle = useCallback(
-    (categoryId: string, sectionId: string, title: string) => {
+  const updateSection = useCallback(
+    (
+      categoryId: string,
+      sectionId: string,
+      patch: Partial<Pick<Category["sections"][number], "title" | "index">>
+    ) => {
       commit((prev) =>
         prev.map((category) =>
           category.id !== categoryId
@@ -285,7 +339,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
             : {
                 ...category,
                 sections: category.sections.map((section) =>
-                  section.id === sectionId ? { ...section, title } : section
+                  section.id === sectionId ? { ...section, ...patch } : section
                 ),
               }
         )
@@ -294,8 +348,13 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     [commit]
   )
 
-  const updateTopicTitle = useCallback(
-    (categoryId: string, sectionId: string, topicId: string, title: string) => {
+  const updateTopic = useCallback(
+    (
+      categoryId: string,
+      sectionId: string,
+      topicId: string,
+      patch: Partial<Pick<Category["sections"][number]["topics"][number], "title" | "mark">>
+    ) => {
       commit((prev) =>
         prev.map((category) =>
           category.id !== categoryId
@@ -308,7 +367,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
                     : {
                         ...section,
                         topics: section.topics.map((topic) =>
-                          topic.id === topicId ? { ...topic, title } : topic
+                          topic.id === topicId ? { ...topic, ...patch } : topic
                         ),
                       }
                 ),
@@ -382,6 +441,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       return {}
     })
     setIntroState(publishedRef.current.intro)
+    setRefsLabelState(publishedRef.current.refsLabel)
     setCategories(structuredClone(publishedRef.current.categories))
     setTextDirty(false)
     setFiguresSynced(true)
@@ -408,13 +468,13 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     }
     setPublishState({ status: "saving", detail: "正在保存到 GitHub…" })
     try {
-      const payload = await collectPublishPayload(intro, categories, figureUrls)
+      const payload = await collectPublishPayload(intro, refsLabel, categories, figureUrls)
       await publishHandbookFiles({
         token,
         liveJson: payload.liveJson,
         images: payload.images,
       })
-      publishedRef.current = { intro, categories: payload.categories }
+      publishedRef.current = { intro, refsLabel, categories: payload.categories }
       setCategories(payload.categories)
       setTextDirty(false)
       setFiguresSynced(true)
@@ -431,7 +491,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       setPublishState({ status: "error", detail })
       throw error instanceof Error ? error : new Error(detail)
     }
-  }, [intro, categories, figureUrls])
+  }, [intro, refsLabel, categories, figureUrls])
 
   const exportJson = useCallback(async () => {
     const figures: Record<string, string> = {}
@@ -439,7 +499,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       const blob = await fetch(url).then((response) => response.blob())
       figures[id] = await blobToDataUrl(blob)
     }
-    const payload = JSON.stringify({ intro, categories, figures }, null, 2)
+    const payload = JSON.stringify({ intro, refsLabel, categories, figures }, null, 2)
     const blob = new Blob([payload], { type: "application/json" })
     const url = URL.createObjectURL(blob)
     const link = document.createElement("a")
@@ -447,15 +507,17 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     link.download = "eyelid-handbook-edits.json"
     link.click()
     URL.revokeObjectURL(url)
-  }, [intro, categories, figureUrls])
+  }, [intro, refsLabel, categories, figureUrls])
 
   const importJson = useCallback(async (file: File) => {
     const parsed = JSON.parse(await file.text()) as {
       intro?: string
+      refsLabel?: string
       categories?: Category[]
       figures?: Record<string, string>
     }
     if (typeof parsed.intro === "string") setIntroState(parsed.intro)
+    if (typeof parsed.refsLabel === "string") setRefsLabelState(parsed.refsLabel)
     if (Array.isArray(parsed.categories) && parsed.categories.length) {
       setCategories(withFigureIds(parsed.categories))
     }
@@ -487,6 +549,8 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       loadedLive,
       intro,
       setIntro,
+      refsLabel,
+      setRefsLabel,
       categories,
       figureUrls,
       hasGithubToken,
@@ -496,8 +560,8 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       publishToGithub,
       publishToPublic: publishToGithub,
       updateCategory,
-      updateSectionTitle,
-      updateTopicTitle,
+      updateSection,
+      updateTopic,
       updateAssay,
       replaceFigure,
       restoreFigure,
@@ -512,6 +576,8 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       loadedLive,
       intro,
       setIntro,
+      refsLabel,
+      setRefsLabel,
       categories,
       figureUrls,
       hasGithubToken,
@@ -520,8 +586,8 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       clearStoredToken,
       publishToGithub,
       updateCategory,
-      updateSectionTitle,
-      updateTopicTitle,
+      updateSection,
+      updateTopic,
       updateAssay,
       replaceFigure,
       restoreFigure,

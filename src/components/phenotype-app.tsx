@@ -1,107 +1,24 @@
 "use client"
 
-import { useState, type ReactNode } from "react"
+import { useState } from "react"
 import { BookOpen, Menu } from "lucide-react"
 import { AssayCard } from "@/components/assay-card"
 import { EditToolbar } from "@/components/edit-toolbar"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { abbreviations, sameSources, sectionSources, sources, topicSources } from "@/data/content"
+import {
+  abbreviations,
+  assayMark,
+  sameSources,
+  sectionSources,
+  sources,
+  topicSources,
+} from "@/data/content"
 import { SourceCite } from "@/components/source-badge"
 import { EditableText } from "@/components/editable-text"
+import { TocNav } from "@/components/toc-nav"
 import { HandbookProvider, PUBLIC_SITE_URL, useHandbook } from "@/lib/handbook-store"
-
-function scrollToId(id: string, onNavigate?: () => void) {
-  const target = document.getElementById(id)
-  if (target) {
-    const header = document.querySelector("header")
-    const offset = (header?.getBoundingClientRect().height ?? 96) + 12
-    const top = target.getBoundingClientRect().top + window.scrollY - offset
-    const html = document.documentElement
-    const previous = html.style.scrollBehavior
-    html.style.scrollBehavior = "auto"
-    window.scrollTo({ top: Math.max(0, top), behavior: "auto" })
-    html.style.scrollBehavior = previous
-    history.replaceState(null, "", `#${id}`)
-  }
-  onNavigate?.()
-}
-
-function NavButton({
-  id,
-  className,
-  children,
-  onNavigate,
-}: {
-  id: string
-  className?: string
-  children: ReactNode
-  onNavigate?: () => void
-}) {
-  return (
-    <button
-      type="button"
-      data-jump={id}
-      className={className}
-      onClick={() => scrollToId(id, onNavigate)}
-    >
-      {children}
-    </button>
-  )
-}
-
-function NavList({ onNavigate }: { onNavigate?: () => void }) {
-  const { categories } = useHandbook()
-  return (
-    <nav className="space-y-5 text-sm">
-      {categories.map((category) => (
-        <div key={category.id}>
-          <NavButton
-            id={category.id}
-            onNavigate={onNavigate}
-            className="block w-full text-left font-semibold text-stone-900 hover:text-[#1f4b3a]"
-          >
-            {category.roman}、{category.title}
-          </NavButton>
-          <ul className="mt-2 space-y-3 border-l border-stone-200 pl-3">
-            {category.sections.map((section) => (
-              <li key={section.id}>
-                <NavButton
-                  id={section.id}
-                  onNavigate={onNavigate}
-                  className="w-full text-left font-medium text-stone-800 hover:underline"
-                >
-                  {section.index}、{section.title}
-                </NavButton>
-                <ul className="mt-1 space-y-1">
-                  {section.topics.map((topic) => (
-                    <li key={topic.id}>
-                      <NavButton
-                        id={topic.id}
-                        onNavigate={onNavigate}
-                        className="block w-full text-left leading-5 text-stone-600 hover:text-stone-900 hover:underline"
-                      >
-                        {`${topic.mark}${topic.title}`}
-                      </NavButton>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-      <NavButton
-        id="refs"
-        onNavigate={onNavigate}
-        className="block w-full text-left font-semibold text-stone-900"
-      >
-        参考文献
-      </NavButton>
-    </nav>
-  )
-}
 
 function PhenotypeAppInner() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -110,9 +27,12 @@ function PhenotypeAppInner() {
     intro,
     setIntro,
     dirty,
+    refsLabel,
+    setRefsLabel,
     updateCategory,
-    updateSectionTitle,
-    updateTopicTitle,
+    updateSection,
+    updateTopic,
+    updateAssay,
   } = useHandbook()
 
   return (
@@ -141,7 +61,7 @@ function PhenotypeAppInner() {
           <EditToolbar />
         </div>
         <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-stone-600 sm:px-6">
-          本页两篇文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。点「编辑正文」改字换图，再点绿色「保存到公开页」。「退出编辑」不会发布。第一次会要求粘贴
+          目录四级：一、 / 1、 / ① / （1）。点「编辑正文」后，正文和左侧目录的编号、标题都可以改，再点绿色「保存到公开页」。第一次会要求粘贴
           GitHub 令牌；保存后约 1 分钟，别人刷新{" "}
           <a className="underline underline-offset-2" href={PUBLIC_SITE_URL} target="_blank" rel="noreferrer">
             {PUBLIC_SITE_URL}
@@ -151,14 +71,14 @@ function PhenotypeAppInner() {
         </p>
       </header>
 
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[300px_minmax(0,1fr)]">
         <aside className="hidden lg:block">
           <div className="sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
             <p className="mb-3 flex items-center gap-2 text-xs font-semibold tracking-wide text-stone-500 uppercase">
               <BookOpen className="size-3.5" />
               目录
             </p>
-            <NavList />
+            <TocNav />
           </div>
         </aside>
 
@@ -185,7 +105,12 @@ function PhenotypeAppInner() {
               <div className="rounded-2xl bg-[#1f4b3a] px-5 py-4 text-white">
                 <p className="text-xs tracking-[0.2em] uppercase opacity-80">{category.roman}</p>
                 <h2 className="flex flex-wrap items-baseline gap-1 text-2xl font-semibold">
-                  <span>{category.roman}、</span>
+                  <EditableText
+                    value={category.roman}
+                    onChange={(roman) => updateCategory(category.id, { roman })}
+                    className="w-12 text-2xl font-semibold"
+                  />
+                  <span>、</span>
                   <EditableText
                     value={category.title}
                     onChange={(title) => updateCategory(category.id, { title })}
@@ -214,10 +139,15 @@ function PhenotypeAppInner() {
                   <div key={section.id} id={section.id} className="scroll-mt-40 space-y-5">
                     <h3 className="flex flex-wrap items-baseline gap-x-2 border-b border-stone-300 pb-2 text-xl font-semibold text-stone-900">
                       <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-2">
-                        {section.index}、
+                        <EditableText
+                          value={section.index}
+                          onChange={(index) => updateSection(category.id, section.id, { index })}
+                          className="w-10 font-semibold"
+                        />
+                        、
                         <EditableText
                           value={section.title}
-                          onChange={(title) => updateSectionTitle(category.id, section.id, title)}
+                          onChange={(title) => updateSection(category.id, section.id, { title })}
                           className="font-semibold"
                         />
                       </span>
@@ -229,11 +159,17 @@ function PhenotypeAppInner() {
                         <div key={topic.id} id={topic.id} className="scroll-mt-40 space-y-3">
                           <h4 className="flex flex-wrap items-baseline gap-x-2 text-base font-semibold text-stone-800">
                             <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-1 text-[#1f4b3a]">
-                              {topic.mark}
+                              <EditableText
+                                value={topic.mark}
+                                onChange={(mark) =>
+                                  updateTopic(category.id, section.id, topic.id, { mark })
+                                }
+                                className="w-10 font-semibold text-[#1f4b3a]"
+                              />
                               <EditableText
                                 value={topic.title}
                                 onChange={(title) =>
-                                  updateTopicTitle(category.id, section.id, topic.id, title)
+                                  updateTopic(category.id, section.id, topic.id, { title })
                                 }
                                 className="font-semibold text-[#1f4b3a]"
                               />
@@ -244,10 +180,22 @@ function PhenotypeAppInner() {
                             />
                           </h4>
                           <div className="space-y-4">
-                            {topic.assays.map((assay) => (
+                            {topic.assays.map((assay, assayIndex) => (
                               <AssayCard
                                 key={assay.id}
                                 assay={assay}
+                                headingMark={assayMark(assay, assayIndex)}
+                                onMarkChange={(mark) =>
+                                  updateAssay(
+                                    {
+                                      categoryId: category.id,
+                                      sectionId: section.id,
+                                      topicId: topic.id,
+                                      assayId: assay.id,
+                                    },
+                                    (current) => ({ ...current, mark })
+                                  )
+                                }
                                 parentSources={topicIds}
                                 path={{
                                   categoryId: category.id,
@@ -268,7 +216,9 @@ function PhenotypeAppInner() {
           ))}
 
           <section id="refs" className="scroll-mt-40 rounded-2xl border border-stone-200 bg-white p-5 sm:p-6">
-            <h2 className="text-xl font-semibold text-stone-900">参考文献</h2>
+            <h2 className="text-xl font-semibold text-stone-900">
+              <EditableText value={refsLabel} onChange={setRefsLabel} className="font-semibold" />
+            </h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
               本页为后续三篇文献加入前的版本。编号对应两篇核心文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。
             </p>
@@ -308,7 +258,7 @@ function PhenotypeAppInner() {
             <SheetTitle>目录</SheetTitle>
           </SheetHeader>
           <div className="px-4 pb-6">
-            <NavList onNavigate={() => setMenuOpen(false)} />
+            <TocNav onNavigate={() => setMenuOpen(false)} />
           </div>
         </SheetContent>
       </Sheet>

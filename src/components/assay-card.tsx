@@ -32,10 +32,14 @@ export function AssayCard({
   assay,
   path,
   parentSources,
+  headingMark,
+  onMarkChange,
 }: {
   assay: Assay
   path: AssayPath
   parentSources: SourceId[]
+  headingMark: string
+  onMarkChange: (mark: string) => void
 }) {
   const { editMode, updateAssay, restoreFigure } = useHandbook()
   const markers = assay.markers ?? []
@@ -49,7 +53,12 @@ export function AssayCard({
   return (
     <article id={assay.id} className="scroll-mt-40 rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-5">
       <header className="mb-4">
-        <h4 className="flex flex-wrap items-baseline gap-x-2 text-lg font-semibold leading-snug text-stone-900">
+        <h5 className="flex flex-wrap items-baseline gap-x-2 text-lg font-semibold leading-snug text-stone-900">
+          <EditableText
+            value={headingMark}
+            onChange={onMarkChange}
+            className="w-12 font-semibold"
+          />
           <EditableText
             value={assay.title}
             onChange={(title) => patch((current) => ({ ...current, title }))}
@@ -59,7 +68,7 @@ export function AssayCard({
             ids={sameSources(assay.sources, parentSources) ? [] : uniqueSources(assay.sources)}
             className="font-normal"
           />
-        </h4>
+        </h5>
       </header>
 
       <div className="space-y-4">

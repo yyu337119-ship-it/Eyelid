@@ -5,32 +5,36 @@ import { useHandbook } from "@/lib/handbook-store"
 import { cn } from "@/lib/utils"
 
 const fieldClass =
-  "w-full rounded-md border border-dashed border-emerald-800/35 bg-white px-2 py-1 text-inherit shadow-none outline-none focus:border-emerald-800"
+  "rounded-md border border-dashed border-emerald-800/35 bg-white text-inherit shadow-none outline-none focus:border-emerald-800"
 
 export function EditableText({
   value,
   onChange,
   className,
   multiline = false,
+  compact = false,
   placeholder,
 }: {
   value: string
   onChange: (value: string) => void
   className?: string
   multiline?: boolean
+  compact?: boolean
   placeholder?: string
 }) {
   const { editMode } = useHandbook()
   if (!editMode) {
     return <span className={className}>{value}</span>
   }
+  const sizing = compact ? "min-w-0 px-1 py-0.5 text-[13px] leading-5" : "w-full px-2 py-1"
   if (!multiline) {
     return (
       <input
         value={value}
         placeholder={placeholder}
+        onClick={(event) => event.stopPropagation()}
         onChange={(event) => onChange(event.target.value)}
-        className={cn(fieldClass, className)}
+        className={cn(fieldClass, sizing, className)}
       />
     )
   }
@@ -39,8 +43,9 @@ export function EditableText({
       value={value}
       placeholder={placeholder}
       rows={Math.min(8, Math.max(3, value.split("\n").length + 1))}
+      onClick={(event) => event.stopPropagation()}
       onChange={(event) => onChange(event.target.value)}
-      className={cn(fieldClass, "resize-y leading-6", className)}
+      className={cn(fieldClass, sizing, "resize-y leading-6", className)}
     />
   )
 }
@@ -77,7 +82,7 @@ export function EditableList({
               next[index] = event.target.value
               onChange(next)
             }}
-            className={cn(fieldClass, "resize-y text-sm leading-6")}
+            className={cn(fieldClass, "w-full resize-y px-2 py-1 text-sm leading-6")}
           />
           <button
             type="button"

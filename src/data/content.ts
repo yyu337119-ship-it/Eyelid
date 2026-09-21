@@ -17,6 +17,8 @@ export type Figure = {
 export type Assay = {
   id: string
   title: string
+  /** 四级编号，缺省按同级顺序写成（1）（2） */
+  mark?: string
   sources: SourceId[]
   instruments: string[]
   stains?: string[]
@@ -1065,6 +1067,10 @@ export const categories: Category[] = [
   },
 ]
 
+export function assayMark(assay: Pick<Assay, "mark">, index: number) {
+  return assay.mark?.trim() || `（${index + 1}）`
+}
+
 export function withFigureIds(tree: Category[]): Category[] {
   return tree.map((category) => ({
     ...category,
@@ -1072,8 +1078,9 @@ export function withFigureIds(tree: Category[]): Category[] {
       ...section,
       topics: section.topics.map((topic) => ({
         ...topic,
-        assays: topic.assays.map((assay) => ({
+        assays: topic.assays.map((assay, assayIndex) => ({
           ...assay,
+          mark: assayMark(assay, assayIndex),
           figures: assay.figures.map((figure, index) => ({
             ...figure,
             id: figure.id ?? `${assay.id}-fig-${index}`,

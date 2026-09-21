@@ -232,7 +232,7 @@
                   "markers": [
                     {
                       "name": "PPARγ：腺泡细胞分化、脂质代谢；PCNA :增殖细胞核抗原;  TUNEL :DNA断裂信号；",
-                      "role": "Col Ⅰ、Col Ⅲ：细胞外基质胶原",
+                      "role": "Col Ⅰ、Col Ⅲ：细胞外基质胶原 →睑板基质是否形成",
                       "change": ""
                     }
                   ],
@@ -776,29 +776,29 @@
                   ],
                   "markers": [
                     {
-                      "name": "α-SMA",
-                      "role": "睑板肌（TM）",
-                      "change": "整体与对照无明显差异；远端可因囊肿而局部中断"
+                      "name": "α-SMA：标记睑板肌（TM）",
+                      "role": "",
+                      "change": ""
                     },
                     {
-                      "name": "骨骼肌肌球蛋白",
-                      "role": "眼轮匝肌（OO）",
-                      "change": "与对照总体无差异"
+                      "name": "骨骼肌肌球蛋白：标记眼轮匝肌（OO）",
+                      "role": "",
+                      "change": ""
                     }
                   ],
-                  "observations": [
-                    "眼睑开闭相关横纹肌/平滑肌并非本模型的主要靶点。",
-                    "下睑 CPF 与 TM 并行，囊肿可把 TM 远端顶断，属于占位效应而非肌纤维本身病变。"
-                  ],
+                  "observations": [],
                   "figures": [
                     {
                       "src": "/figures/paper2-suppl-fig1-sma-myosin.jpg",
                       "paperFig": "补充图 1A、1B",
-                      "caption": "P15。红=α-SMA（TM），绿=骨骼肌肌球蛋白（OO），蓝=DAPI。KR 与 KR/TG 总体相似；远端可因囊肿局部中断。",
+                      "caption": "P15。红=α-SMA（TM），绿=骨骼肌肌球蛋白（OO），蓝=DAPI。KR 与 KR/TG 总体相似；",
                       "id": "muscle-sma-myosin-fig-0"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "pending": [
+                    "α-SMA：标记睑板肌（TM）\n骨骼肌肌球蛋白：标记眼轮匝肌（OO）\n两组无显著差异"
+                  ]
                 }
               ]
             }
@@ -821,36 +821,29 @@
                     "paper2"
                   ],
                   "instruments": [
-                    "KR/TG 与 Wnt1Cre/Rosa26mTmG 杂交",
+                    "KR/TG 与 Wnt1Cre/Rosa26mTmG 杂交\n目的：鉴别间充质细胞的来源",
                     "冰冻切片 DAPI，绿色荧光=神经嵴来源"
                   ],
                   "markers": [
                     {
-                      "name": "膜结合 GFP（mG）",
-                      "role": "神经嵴来源细胞",
-                      "change": "下睑 CPF、TP 主要为绿色；TGFα 后 CPF↑、TP↑"
+                      "name": "膜结合 GFP（mG）：标记神经嵴来源细胞",
+                      "role": "",
+                      "change": ""
                     }
                   ],
-                  "observations": [
-                    "CPF、TP：绿色荧光阳性，神经嵴来源；过表达后细胞数明显增加（Fig. 6B–G、B′–G′）。",
-                    "TM：同样神经嵴来源，但过表达后无明显变化（Fig. 6B–D、B′–D′）。",
-                    "上眼睑肌腱：绿色荧光少，神经嵴贡献少（补充 Fig. 2），可解释下睑表型更重。"
-                  ],
+                  "observations": [],
                   "figures": [
                     {
-                      "src": "/figures/paper2-fig6-lineage.jpg",
+                      "src": "/figures/live/muscle-lineage-trace-fig-0.jpg",
                       "paperFig": "Fig. 6A–G、A′–G′",
                       "caption": "下睑。绿=神经嵴来源。对照 CPF/TP 为绿色；KR/TG 后 CPF、TP 明显增厚，TM 相对不受累。",
                       "id": "muscle-lineage-trace-fig-0"
-                    },
-                    {
-                      "src": "/figures/paper2-suppl-fig2-upper-lid.jpg",
-                      "paperFig": "补充 Fig. 2",
-                      "caption": "上睑 P15。神经嵴来源细胞（绿）在上睑肌腱贡献少，可解释下睑表型更重。",
-                      "id": "muscle-lineage-trace-fig-1"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "pending": [
+                    "CPF、TP：绿色荧光阳性，神经嵴来源；TGFα过表达后细胞数明显增加（Fig. 6B–G、B′–G′）。\nTM：同样神经嵴来源，但过表达后无明显变化（Fig. 6B–D、B′–D′）。\n上眼睑肌腱：绿色荧光少，提示神经嵴来源的细胞数较少（补充 Fig. 2）\n"
+                  ]
                 }
               ]
             },
@@ -861,27 +854,26 @@
               "assays": [
                 {
                   "id": "muscle-masson-adult",
-                  "title": "马松三色：肌腱与睑板细胞 vs 胶原",
+                  "title": "Masson三色染色",
                   "sources": [
                     "paper2"
                   ],
                   "instruments": [
-                    "眼睑石蜡切片马松三色",
-                    "红色=细胞质/细胞，蓝色=胶原"
+                    "眼睑石蜡切片\n马松三色染色"
                   ],
                   "stains": [
-                    "Masson 三色"
+                    "Masson 三色\n红色=肌腱与睑板细胞，蓝色=胶原"
                   ],
                   "observations": [
-                    "对照：肌腱、睑板仅少量细长梭形成纤维细胞，胞外基质胶原丰富（Fig. 4A、Aa、Ab）。",
+                    "对照组：肌腱、睑板仅少量细长梭形成纤维细胞，胞外基质胶原丰富（Fig. 4A、Aa、Ab）。",
                     "转基因：细胞数量显著增多、胶原明显下降，睑板区可见囊肿（Fig. 4B 星号）；高倍下变为致密圆形细胞（4Ba、Bb）。",
-                    "缩写：TM 睑板肌；CPF 下睑囊筋膜；TP 睑板；MG 睑板腺。"
+                    "TM 睑板肌；CPF 下睑囊筋膜；TP 睑板；MG 睑板腺。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper2-fig4-masson.jpg",
+                      "src": "/figures/live/muscle-masson-adult-fig-0.jpg",
                       "paperFig": "Fig. 4",
-                      "caption": "P0–P15 诱导后 P15 取材。对照胶原丰富、细胞稀少；转基因细胞增多、胶原下降，睑板区可见囊肿。",
+                      "caption": "P0–P15 诱导后 P15 取材。\nTM 睑板肌；CPF 下睑囊筋膜；TP 睑板；MG 睑板腺。\n对照组胶原丰富、细胞稀少；转基因细胞增多、胶原下降，睑板区可见囊肿。",
                       "id": "muscle-masson-adult-fig-0"
                     }
                   ],
@@ -889,7 +881,7 @@
                 },
                 {
                   "id": "muscle-masson-time",
-                  "title": "马松三色时间序列：对照 vs TGFα 过表达",
+                  "title": "Masson 三色时间序列染色：对照 vs TGFα 过表达",
                   "sources": [
                     "paper2"
                   ],
@@ -899,16 +891,12 @@
                   "stains": [
                     "Masson 三色"
                   ],
-                  "observations": [
-                    "对照正常发育：P0 眼睑呈融合薄褶皱，CPF 与 MG 原基已形成；P5 间充质凝集形成 CPF、TP，MG 开始延长；P8 MG 分支并伸入 TP；P11 腺泡簇形成。",
-                    "过表达组异常：P5 CPF 轻度增厚、睑尖间充质堆积、MG 内陷延长受阻；P8 大量细胞堆积，重症出现囊肿、开口异位；P11 CPF 显著增厚，基质间充质堆积加重。",
-                    "读片时分工：MG 看延长/分支/入 TP/腺泡簇/开口；CPF 看增厚与堆积；TP 看凝集、堆积和囊肿；表皮与结膜看增生。"
-                  ],
+                  "observations": [],
                   "figures": [
                     {
-                      "src": "/figures/paper2-fig7-time.jpg",
+                      "src": "/figures/live/muscle-masson-time-fig-0.jpg",
                       "paperFig": "Fig. 7A–G",
-                      "caption": "对照 A/B/D/F，转基因 C/E/G。P0–P11 马松三色。同一时间点左右对照，避免把发育阶段差异当成表型。",
+                      "caption": "对照：P0 眼睑呈融合薄褶皱，CPF 与 MG 原基已形成；P5 间充质凝集形成 CPF、TP，MG 开始延长；P8 MG 分支并伸入 TP；P11 腺泡簇形成。\nTGFα过表达组：P5 CPF 轻度增厚、睑尖间充质堆积、MG 内陷延长受阻；P8 大量细胞堆积，重症出现囊肿、开口异位；P11 CPF 显著增厚，基质间充质堆积加重。\n",
                       "id": "muscle-masson-time-fig-0"
                     }
                   ],
@@ -919,81 +907,36 @@
             {
               "id": "muscle-signaling",
               "mark": "③",
-              "title": "增殖、凋亡与分子标志物",
+              "title": "增殖、凋亡标记物",
               "assays": [
                 {
                   "id": "muscle-pcna-tunel",
-                  "title": "PCNA 与 TUNEL：CPF / TP 增殖和凋亡",
+                  "title": "",
                   "sources": [
                     "paper2"
                   ],
-                  "instruments": [
-                    "免疫荧光 PCNA；TUNEL"
-                  ],
-                  "markers": [
-                    {
-                      "name": "PCNA",
-                      "role": "增殖",
-                      "change": "对照散在；过表达组 CPF、TP 的 PCNA⁺ 细胞↑"
-                    },
-                    {
-                      "name": "TUNEL",
-                      "role": "凋亡",
-                      "change": "对照少；过表达组 TUNEL⁺ 细胞↑"
-                    }
-                  ],
-                  "observations": [
-                    "肌腱/睑板同时出现增殖增强和凋亡增多，是细胞堆积伴组织重塑，而不是单纯增生。",
-                    "与 MG 基底层 PCNA 模式不变、腺泡 TUNEL 很少形成对照。"
-                  ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper2-fig8-pcna.jpg",
-                      "paperFig": "Fig. 8Ab–Ac vs Bb–Bc",
-                      "caption": "PCNA：过表达组 CPF、TP 阳性细胞增多；MG 基底层模式相对不变。",
-                      "id": "muscle-pcna-tunel-fig-0"
-                    },
-                    {
-                      "src": "/figures/paper2-fig9-tunel.jpg",
-                      "paperFig": "Fig. 9Ab–Ac vs Bb–Bc",
-                      "caption": "TUNEL：过表达组 CPF、TP 凋亡增多，与 MG 腺泡内很少形成对照。",
-                      "id": "muscle-pcna-tunel-fig-1"
-                    }
-                  ],
+                  "instruments": [],
+                  "markers": [],
+                  "observations": [],
+                  "figures": [],
                   "mark": "（1）"
                 },
                 {
                   "id": "muscle-collagen",
-                  "title": "I / III 型胶原：睑板基质是否形成",
+                  "title": "",
                   "sources": [
                     "paper2"
                   ],
-                  "instruments": [
-                    "免疫荧光"
-                  ],
+                  "instruments": [],
                   "markers": [
                     {
-                      "name": "I 型胶原",
-                      "role": "肌腱/睑板成熟细胞外基质",
-                      "change": "过表达组 CPF、TP 信号↓"
-                    },
-                    {
-                      "name": "III 型胶原",
-                      "role": "肌腱/睑板细胞外基质",
-                      "change": "过表达组 CPF、TP 信号↓"
+                      "name": "",
+                      "role": "",
+                      "change": ""
                     }
                   ],
-                  "observations": [
-                    "细胞多但胶原少，说明肌腱细胞增殖却未完成分化，睑板支架变软、占位。"
-                  ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper2-fig10-pparg-collagen.jpg",
-                      "paperFig": "Fig. 10C–F",
-                      "caption": "C–D 为 I 型胶原，E–F 为 III 型胶原。对照丰富，转基因 CPF/TP 明显减弱。",
-                      "id": "muscle-collagen-fig-0"
-                    }
-                  ],
+                  "observations": [],
+                  "figures": [],
                   "mark": "（2）"
                 },
                 {
@@ -1007,30 +950,29 @@
                   ],
                   "markers": [
                     {
-                      "name": "EGFR",
-                      "role": "TGFα 受体，驱动增殖",
-                      "change": "过表达组 CPF 信号↑"
+                      "name": "EGFR：TGFα 受体，驱动增殖",
+                      "role": "",
+                      "change": ""
                     },
                     {
-                      "name": "β-catenin",
-                      "role": "Wnt 通路 / 黏附，可核转位",
-                      "change": "过表达组 CPF 信号↑并核转位"
+                      "name": "β-catenin：β- 连环蛋白，核转位后Wnt 通路活化，介导增殖",
+                      "role": "",
+                      "change": ""
                     },
                     {
-                      "name": "N-cadherin",
-                      "role": "间充质祖细胞黏附标志",
-                      "change": "过表达组 CPF 信号↑"
+                      "name": "N-cadherin：N - 钙黏蛋白，间充质细胞黏附分子",
+                      "role": "",
+                      "change": ""
                     }
                   ],
                   "observations": [
-                    "TGFα → EGFR 增强，同时 β-catenin 入核、N-cadherin 维持祖细胞表型。",
-                    "这解释了为何 TM（EGFR 低）不受累，而 CPF 肌腱细胞停在未分化状态并形成囊肿。"
+                    "TGFα → EGFR 增强，同时 β-catenin 入核、N-cadherin 维持细胞表型。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper2-fig11-egfr.jpg",
+                      "src": "/figures/live/muscle-egfr-fig-0.jpg",
                       "paperFig": "Fig. 11A–F",
-                      "caption": "A–B EGFR，C–D β-catenin，E–F N-cadherin。焦点在 CPF 而非 MG。",
+                      "caption": "A–B EGFR，C–D β-catenin，E–F N-cadherin。\nTGFα过表达组：EGFR、β-catenin、N-cadherin均↑\n",
                       "id": "muscle-egfr-fig-0"
                     }
                   ],

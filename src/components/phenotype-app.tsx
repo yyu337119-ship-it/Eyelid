@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { BookOpen, Menu } from "lucide-react"
+import { useEffect, useState } from "react"
+import { Menu } from "lucide-react"
 import { AssayCard } from "@/components/assay-card"
 import { EditToolbar } from "@/components/edit-toolbar"
 import { Button } from "@/components/ui/button"
@@ -19,9 +19,27 @@ import {
 import { SourceCite } from "@/components/source-badge"
 import { EditableText } from "@/components/editable-text"
 import { TocNav } from "@/components/toc-nav"
-import { HandbookProvider, PUBLIC_SITE_URL, useHandbook } from "@/lib/handbook-store"
+import { HandbookProvider, useHandbook } from "@/lib/handbook-store"
+
+import { AnatomyPanel } from "@/components/anatomy-panel"
 
 function PhenotypeAppInner() {
+  const [activeSheet, setActiveSheet] = useState<"anatomy" | "phenotype">("anatomy")
+  useEffect(() => {
+    function syncHash() {
+      const hash = window.location.hash.slice(1)
+      setActiveSheet(hash && !hash.startsWith("anatomy") ? "phenotype" : "anatomy")
+      if (hash) requestAnimationFrame(() => document.getElementById(hash)?.scrollIntoView({ behavior: "instant" }))
+    }
+    syncHash()
+    window.addEventListener("hashchange", syncHash)
+    return () => window.removeEventListener("hashchange", syncHash)
+  }, [])
+  function switchSheet(sheet: "anatomy" | "phenotype") {
+    setActiveSheet(sheet)
+    window.history.replaceState(null, "", sheet === "anatomy" ? "#anatomy" : "#phenotype")
+    window.scrollTo({ top: 0, behavior: "instant" })
+  }
   const [menuOpen, setMenuOpen] = useState(false)
   const {
     categories,
@@ -44,16 +62,16 @@ function PhenotypeAppInner() {
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <p className="text-[11px] font-semibold tracking-[0.18em] text-[#1f4b3a] uppercase">
-                小鼠眼部表型评价手册
+                MOUSE OCULAR ATLAS · 小鼠眼部图谱
               </p>
               <h1 className="truncate text-lg font-semibold text-stone-900 sm:text-xl">
-                如何系统评价小鼠眼睑异常表型
+                小鼠眼睑与眼表研究手册
               </h1>
             </div>
             <Button
               variant="outline"
               size="icon"
-              className="lg:hidden"
+              className={activeSheet === "phenotype" ? "" : "hidden"}
               onClick={() => setMenuOpen(true)}
               aria-label="打开目录"
             >
@@ -62,28 +80,19 @@ function PhenotypeAppInner() {
           </div>
           <EditToolbar />
         </div>
-        <p className="mx-auto max-w-7xl px-4 pb-3 text-xs leading-5 text-stone-600 sm:px-6">
-          目录四级：一、 / 1、 / ① / （1）。点「编辑正文」后，正文和左侧目录的编号、标题都可以改，再点绿色「保存到公开页」。第一次会要求粘贴
-          GitHub 令牌；保存后约 1 分钟，别人刷新{" "}
-          <a className="underline underline-offset-2" href={PUBLIC_SITE_URL} target="_blank" rel="noreferrer">
-            {PUBLIC_SITE_URL}
-          </a>{" "}
-          就能看到。
-          {dirty ? " 当前有未保存到公开页的修改。" : ""}
-        </p>
+        <div className="sheet-tabs" role="tablist" aria-label="手册模块">
+          <button id="tab-anatomy" role="tab" aria-selected={activeSheet === "anatomy"} aria-controls="panel-anatomy" tabIndex={activeSheet === "anatomy" ? 0 : -1} onKeyDown={e => { if (["ArrowLeft", "ArrowRight", "End"].includes(e.key)) { e.preventDefault(); switchSheet("phenotype"); document.getElementById("tab-phenotype")?.focus() } }} onClick={() => switchSheet("anatomy")}><span>01</span> 正常解剖与生理</button>
+          <button id="tab-phenotype" role="tab" aria-selected={activeSheet === "phenotype"} aria-controls="panel-phenotype" tabIndex={activeSheet === "phenotype" ? 0 : -1} onKeyDown={e => { if (["ArrowLeft", "ArrowRight", "Home"].includes(e.key)) { e.preventDefault(); switchSheet("anatomy"); document.getElementById("tab-anatomy")?.focus() } }} onClick={() => switchSheet("phenotype")}><span>02</span> 眼睑表型</button>
+          <p className="sheet-status">{dirty ? "● 有未发布的修改" : "解剖 · 生理 · 表型"}</p>
+        </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[300px_minmax(0,1fr)]">
-        <aside className="hidden lg:block">
-          <div className="sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
-            <p className="mb-3 flex items-center gap-2 text-xs font-semibold tracking-wide text-stone-500 uppercase">
-              <BookOpen className="size-3.5" />
-              目录
-            </p>
-            <TocNav />
-          </div>
-        </aside>
-
+      <div id="panel-anatomy" role="tabpanel" aria-labelledby="tab-anatomy" hidden={activeSheet !== "anatomy"}>
+        <AnatomyPanel active={activeSheet === "anatomy"} />
+      </div>
+      <div id="panel-phenotype" role="tabpanel" aria-labelledby="tab-phenotype" hidden={activeSheet !== "phenotype"}>
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+        <details className="phenotype-directory"><summary>眼睑表型 · 展开目录</summary><div className="p-5"><TocNav /></div></details>
         <main className="space-y-10 pb-16">
           <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6">
             <EditableText
@@ -259,6 +268,8 @@ function PhenotypeAppInner() {
             </div>
           </section>
         </main>
+      </div>
+
       </div>
 
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>

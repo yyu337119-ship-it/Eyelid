@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import { Noto_Sans_SC, Noto_Serif_SC } from "next/font/google"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import "./globals.css"
+import "./anatomy.css"
+import "./anatomy-nav.css"
 
 const sans = Noto_Sans_SC({
   subsets: ["latin"],
@@ -16,7 +18,7 @@ const serif = Noto_Serif_SC({
 })
 
 export const metadata: Metadata = {
-  title: "系统评价小鼠眼睑异常表型",
+  title: "小鼠眼睑与眼表研究手册 · 正常解剖与眼睑表型",
   description:
     "按 MG、角膜与泪膜、结膜、眼睑相关肌肉四类整理检测方法、分子标志物、观察结果和原文图表。",
 }

@@ -8,6 +8,8 @@ export type Marker = {
 
 export type Figure = {
   id?: string
+  width?: number
+  height?: number
   src?: string
   paperFig: string
   caption: string

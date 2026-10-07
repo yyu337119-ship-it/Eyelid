@@ -35,6 +35,7 @@ import {
   publishHandbookFiles,
   setGithubToken,
 } from "@/lib/github-publish"
+import { defaultAnatomy, type AnatomySection, type AnatomyBlock } from "@/data/anatomy"
 import { publicPath } from "@/lib/public-path"
 
 export const HANDBOOK_INTRO =
@@ -59,12 +60,15 @@ export type PublishState = {
 }
 
 type PublishedSnapshot = {
+  anatomy: AnatomySection[]
   intro: string
   refsLabel: string
   categories: Category[]
 }
 
 type HandbookContextValue = {
+  anatomy: AnatomySection[]
+  updateAnatomyBlock: (id: string, patch: Partial<AnatomyBlock>) => void
   editMode: boolean
   setEditMode: (value: boolean) => void
   dirty: boolean
@@ -134,6 +138,7 @@ function walkFigures(categories: Category[], visit: (figure: Figure) => void) {
 async function fetchPublishedLive(): Promise<{
   intro?: string
   refsLabel?: string
+  anatomy?: AnatomySection[]
   categories?: Category[]
 } | null> {
   const path = publicPath("/live.json")
@@ -144,7 +149,8 @@ async function fetchPublishedLive(): Promise<{
     const data = (await response.json()) as {
       intro?: string
       refsLabel?: string
-      categories?: Category[]
+      anatomy?: AnatomySection[]
+  categories?: Category[]
     }
     if (!data || typeof data !== "object") return null
     return data
@@ -157,8 +163,10 @@ async function collectPublishPayload(
   intro: string,
   refsLabel: string,
   categories: Category[],
-  figureUrls: Record<string, string>
+  figureUrls: Record<string, string>,
+  anatomy: AnatomySection[]
 ) {
+  const nextAnatomy = structuredClone(anatomy)
   const next = pruneEmptyOutline(withFigureIds(structuredClone(categories)))
   const images: { path: string; blob: Blob }[] = []
   const uploaded = new Set<string>()
@@ -184,19 +192,27 @@ async function collectPublishPayload(
     }
   }
 
+  for (const section of nextAnatomy) {
+    for (const block of section.blocks) {
+      for (const figure of block.figures) await attach(figure)
+    }
+  }
+
   walkFigures(next, (figure) => {
     const id = figure.id
     if (id && figureUrls[id]) figure.src = liveFigurePublicSrc(id)
   })
 
   return {
-    liveJson: JSON.stringify({ intro, refsLabel, categories: next }, null, 2),
+    liveJson: JSON.stringify({ intro, refsLabel, categories: next, anatomy: nextAnatomy }, null, 2),
     categories: next,
+    anatomy: nextAnatomy,
     images,
   }
 }
 
 export function HandbookProvider({ children }: { children: ReactNode }) {
+  const [anatomy, setAnatomy] = useState<AnatomySection[]>(() => structuredClone(defaultAnatomy))
   const [editMode, setEditMode] = useState(false)
   const [intro, setIntroState] = useState(HANDBOOK_INTRO)
   const [refsLabel, setRefsLabelState] = useState(DEFAULT_REFS_LABEL)
@@ -210,6 +226,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const [hasGithubToken, setHasGithubToken] = useState(false)
   const [publishState, setPublishState] = useState<PublishState>({ status: "idle", detail: "" })
   const publishedRef = useRef<PublishedSnapshot>({
+    anatomy: structuredClone(defaultAnatomy),
     intro: HANDBOOK_INTRO,
     refsLabel: DEFAULT_REFS_LABEL,
     categories: cloneCategories(),
@@ -222,6 +239,8 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       const live = await fetchPublishedLive()
       if (cancelled) return
       if (live) {
+        const nextAnatomy = Array.isArray(live.anatomy) && live.anatomy.length ? live.anatomy : structuredClone(defaultAnatomy)
+        setAnatomy(nextAnatomy)
         if (typeof live.intro === "string") setIntroState(live.intro)
         if (typeof live.refsLabel === "string" && live.refsLabel.trim()) {
           setRefsLabelState(live.refsLabel)
@@ -234,9 +253,10 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
         if (Array.isArray(live.categories) && live.categories.length) {
           const next = pruneEmptyOutline(withFigureIds(live.categories))
           setCategories(next)
-          publishedRef.current = { intro: nextIntro, refsLabel: nextRefs, categories: next }
+          publishedRef.current = { intro: nextIntro, refsLabel: nextRefs, categories: next, anatomy: nextAnatomy }
         } else {
           publishedRef.current = {
+            anatomy: nextAnatomy,
             intro: nextIntro,
             refsLabel: nextRefs,
             categories: cloneCategories(),
@@ -251,8 +271,10 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
           const parsed = JSON.parse(draftRaw) as {
             intro?: string
             refsLabel?: string
-            categories?: Category[]
+            anatomy?: AnatomySection[]
+  categories?: Category[]
           }
+          if (Array.isArray(parsed.anatomy) && parsed.anatomy.length) setAnatomy(parsed.anatomy)
           if (typeof parsed.intro === "string") setIntroState(parsed.intro)
           if (typeof parsed.refsLabel === "string") setRefsLabelState(parsed.refsLabel)
           if (Array.isArray(parsed.categories) && parsed.categories.length) {
@@ -294,9 +316,14 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       window.localStorage.removeItem(DRAFT_KEY)
       return
     }
-    window.localStorage.setItem(DRAFT_KEY, JSON.stringify({ intro, refsLabel, categories }))
-    setHasLocalDraft(true)
-  }, [ready, textDirty, intro, refsLabel, categories])
+    window.localStorage.setItem(DRAFT_KEY, JSON.stringify({ intro, refsLabel, categories, anatomy }))
+  }, [ready, textDirty, intro, refsLabel, categories, anatomy])
+
+  const updateAnatomyBlock = useCallback((id: string, patch: Partial<AnatomyBlock>) => {
+    setAnatomy(prev => prev.map(section => ({ ...section, blocks: section.blocks.map(block => block.id === id ? { ...block, ...patch } : block) })))
+    setTextDirty(true)
+    setPublishState({ status: "idle", detail: "" })
+  }, [])
 
   const dirty = textDirty || !figuresSynced
 
@@ -515,6 +542,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       revokeAll(prev)
       return {}
     })
+    setAnatomy(structuredClone(publishedRef.current.anatomy))
     setIntroState(publishedRef.current.intro)
     setRefsLabelState(publishedRef.current.refsLabel)
     setCategories(structuredClone(publishedRef.current.categories))
@@ -543,13 +571,14 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     }
     setPublishState({ status: "saving", detail: "正在保存到 GitHub…" })
     try {
-      const payload = await collectPublishPayload(intro, refsLabel, categories, figureUrls)
+      const payload = await collectPublishPayload(intro, refsLabel, categories, figureUrls, anatomy)
       await publishHandbookFiles({
         token,
         liveJson: payload.liveJson,
         images: payload.images,
       })
-      publishedRef.current = { intro, refsLabel, categories: payload.categories }
+      publishedRef.current = { intro, refsLabel, categories: payload.categories, anatomy: payload.anatomy }
+      setAnatomy(payload.anatomy)
       setCategories(payload.categories)
       setTextDirty(false)
       setFiguresSynced(true)
@@ -566,7 +595,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       setPublishState({ status: "error", detail })
       throw error instanceof Error ? error : new Error(detail)
     }
-  }, [intro, refsLabel, categories, figureUrls])
+  }, [intro, refsLabel, categories, figureUrls, anatomy])
 
   const exportJson = useCallback(async () => {
     const figures: Record<string, string> = {}
@@ -574,7 +603,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       const blob = await fetch(url).then((response) => response.blob())
       figures[id] = await blobToDataUrl(blob)
     }
-    const payload = JSON.stringify({ intro, refsLabel, categories, figures }, null, 2)
+    const payload = JSON.stringify({ intro, refsLabel, categories, figures, anatomy }, null, 2)
     const blob = new Blob([payload], { type: "application/json" })
     const url = URL.createObjectURL(blob)
     const link = document.createElement("a")
@@ -582,15 +611,17 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     link.download = "eyelid-handbook-edits.json"
     link.click()
     URL.revokeObjectURL(url)
-  }, [intro, refsLabel, categories, figureUrls])
+  }, [intro, refsLabel, categories, figureUrls, anatomy])
 
   const importJson = useCallback(async (file: File) => {
     const parsed = JSON.parse(await file.text()) as {
       intro?: string
       refsLabel?: string
-      categories?: Category[]
+      anatomy?: AnatomySection[]
+  categories?: Category[]
       figures?: Record<string, string>
     }
+    if (Array.isArray(parsed.anatomy) && parsed.anatomy.length) setAnatomy(parsed.anatomy)
     if (typeof parsed.intro === "string") setIntroState(parsed.intro)
     if (typeof parsed.refsLabel === "string") setRefsLabelState(parsed.refsLabel)
     if (Array.isArray(parsed.categories) && parsed.categories.length) {
@@ -617,10 +648,12 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo(
     () => ({
+      anatomy,
+      updateAnatomyBlock,
       editMode,
       setEditMode,
       dirty,
-      hasLocalDraft,
+      hasLocalDraft: hasLocalDraft || textDirty,
       loadedLive,
       intro,
       setIntro,
@@ -648,9 +681,12 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       importJson,
     }),
     [
+      anatomy,
+      updateAnatomyBlock,
       editMode,
       dirty,
       hasLocalDraft,
+      textDirty,
       loadedLive,
       intro,
       setIntro,

@@ -1,0 +1,15 @@
+.anatomy-layout{max-width:1440px;margin:auto;display:grid;grid-template-columns:260px minmax(0,1fr);gap:36px;padding:0 28px}
+.anatomy-main{min-width:0;width:100%;padding:40px 0 90px}
+.anatomy-sidebar{border-right:1px solid #e0e2d7;padding:36px 22px 0 0}
+.anatomy-sidebar-sticky{position:sticky;top:150px;max-height:calc(100dvh - 175px);overflow-y:auto;padding-right:10px;scrollbar-width:thin;scrollbar-color:#c7d0c0 transparent}
+.anatomy-sidebar-sticky>p{display:flex;align-items:center;gap:8px;color:#7b8a73;font-size:11px;letter-spacing:.04em;margin-bottom:24px}
+.anatomy-toc-group{margin-bottom:24px}
+.anatomy-toc-section{font-size:14px;font-weight:600;color:#31533f;display:block;margin-bottom:10px}
+.anatomy-toc-group ul{border-left:1px solid #d9dfd1;padding-left:12px;display:grid;gap:3px}
+.anatomy-toc-group li a{display:block;padding:7px 8px;font-size:12px;line-height:1.65;color:#79846f;border-radius:6px;transition:background .2s}
+.anatomy-toc-group li a:hover,.anatomy-toc-group li a[aria-current=location]{background:#e5ebdd;color:#2d5c3b}
+.anatomy-mobile-directory{display:none}
+.anatomy-figure button>img{width:100%}
+.anatomy-intro{gap:28px}.anatomy-intro h2{font-size:clamp(28px,3vw,39px)}
+@media(max-width:1050px){.anatomy-layout{display:block;padding:0 20px}.anatomy-sidebar{display:none}.anatomy-mobile-directory{display:block;padding-top:22px}.anatomy-mobile-directory>button{display:flex;align-items:center;gap:9px;padding:11px 16px;border:1px solid #dce1d3;border-radius:9px;background:#fffdf9;font-size:12px;color:#4b6c4d}.anatomy-mobile-directory>div{padding:22px;margin-top:12px;background:#fffdf9;border:1px solid #dce1d3;border-radius:12px;max-height:55dvh;overflow:auto}.anatomy-main{padding-top:28px}}
+@media(max-width:640px){.anatomy-layout{padding:0 15px}.anatomy-intro h2{font-size:30px}.anatomy-intro{gap:25px}}

@@ -75,8 +75,8 @@ export function FigureBlock({
           <FigureImage
             src={displaySrc}
             alt={figure.paperFig}
-            width={1400}
-            height={900}
+            width={figure.width ?? 1400}
+            height={figure.height ?? 900}
             className="mx-auto h-[min(420px,56vw)] w-auto max-w-full object-contain"
           />
           <span className="absolute right-2 bottom-2 inline-flex items-center gap-1 rounded-md bg-black/70 px-2 py-1 text-xs text-white">
@@ -197,8 +197,8 @@ export function FigureBlock({
             <FigureImage
               src={displaySrc}
               alt={figure.paperFig}
-              width={1800}
-              height={1200}
+              width={figure.width ?? 1800}
+              height={figure.height ?? 1200}
               className="mt-3 h-auto max-h-[70vh] w-full object-contain"
             />
             <p className="mt-3 text-sm leading-6 text-stone-600">{figure.caption}</p>

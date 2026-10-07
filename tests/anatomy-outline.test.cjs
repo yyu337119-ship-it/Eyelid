@@ -1,0 +1,33 @@
+const fs = require('node:fs');
+const assert = require('node:assert/strict');
+const ts = require('typescript');
+function load(file) {
+  const exports = {};
+  const { outputText } = ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS } });
+  new Function('exports', outputText)(exports);
+  return exports;
+}
+const { defaultAnatomy } = load('src/data/anatomy.ts');
+const { normalizeAnatomy, anatomyTree } = load('src/lib/anatomy-outline.ts');
+const original = structuredClone(defaultAnatomy);
+const migrated = normalizeAnatomy(defaultAnatomy);
+assert.deepEqual(defaultAnatomy, original, 'Migration does not mutate input');
+assert.deepEqual(normalizeAnatomy(migrated), migrated, 'Repeated hydration does not duplicate headings');
+const figures = sections => sections.flatMap(s => s.blocks.flatMap(b => b.figures));
+assert.deepEqual(figures(migrated), figures(original), 'All figure content and order are preserved');
+const eyelid = migrated.find(s => s.id === 'anatomy-eyelid');
+const tree = anatomyTree(eyelid.blocks);
+assert.deepEqual(tree.find(n => n.block.id === 'anatomy-glands').children.map(n => n.block.id), ['anatomy-mg', 'anatomy-lacrimal', 'anatomy-zeis']);
+assert.deepEqual(tree.find(n => n.block.id === 'anatomy-support').children.find(n => n.block.id === 'anatomy-muscles').children.map(n => n.block.id), ['anatomy-orbicularis', 'anatomy-levator', 'anatomy-orbital']);
+const edited = structuredClone(original);
+edited[1].title = '自定义眼睑分类';
+edited[1].blocks.find(b => b.id === 'anatomy-mg').title = '我修改的睑板腺';
+const restored = normalizeAnatomy(JSON.parse(JSON.stringify(edited)));
+assert.equal(restored[1].title, '自定义眼睑分类');
+assert.equal(restored[1].blocks.find(b => b.id === 'anatomy-mg').title, '我修改的睑板腺');
+const saved = normalizeAnatomy(migrated);
+saved[1].blocks.find(b => b.id === 'anatomy-glands').title = '腺体分组修改';
+assert.equal(normalizeAnatomy(saved)[1].blocks.find(b => b.id === 'anatomy-glands').title, '腺体分组修改');
+saved[1].blocks.find(b => b.id === 'anatomy-mg').title = '03 · 腺体 / ① 睑板腺 MG';
+assert.equal(normalizeAnatomy(saved)[1].blocks.find(b => b.id === 'anatomy-mg').title, '03 · 腺体 / ① 睑板腺 MG', 'Once upgraded, every user title persists verbatim');
+console.log('PASS: migration, figure preservation, nested hierarchy, and persisted custom titles');

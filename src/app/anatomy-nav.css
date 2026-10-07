@@ -1,14 +1,26 @@
-.anatomy-layout{max-width:1440px;margin:auto;display:grid;grid-template-columns:260px minmax(0,1fr);gap:36px;padding:0 28px}
+.anatomy-layout{max-width:1440px;margin:auto;display:grid;grid-template-columns:300px minmax(0,1fr);gap:30px;padding:0 28px}
 .anatomy-main{min-width:0;width:100%;padding:40px 0 90px}
 .anatomy-sidebar{border-right:1px solid #e0e2d7;padding:36px 22px 0 0}
 .anatomy-sidebar-sticky{position:sticky;top:150px;max-height:calc(100dvh - 175px);overflow-y:auto;padding-right:10px;scrollbar-width:thin;scrollbar-color:#c7d0c0 transparent}
 .anatomy-sidebar-sticky>p{display:flex;align-items:center;gap:8px;color:#7b8a73;font-size:11px;letter-spacing:.04em;margin-bottom:24px}
 .anatomy-toc-group{margin-bottom:24px}
-.anatomy-toc-section{font-size:14px;font-weight:600;color:#31533f;display:block;margin-bottom:10px}
+.anatomy-toc-section{font-size:15px;font-weight:700;color:#31533f;display:block;margin-bottom:12px;padding:9px 10px;background:#e8eddf;border-radius:8px}
 .anatomy-toc-group ul{border-left:1px solid #d9dfd1;padding-left:12px;display:grid;gap:3px}
 .anatomy-toc-group li a{display:block;padding:7px 8px;font-size:12px;line-height:1.65;color:#79846f;border-radius:6px;transition:background .2s}
 .anatomy-toc-group li a:hover,.anatomy-toc-group li a[aria-current=location]{background:#e5ebdd;color:#2d5c3b}
 .anatomy-mobile-directory{display:none}
+.anatomy-toc-group .anatomy-toc-level-2{border-left:none;padding-left:0;gap:10px}
+.anatomy-toc-level-2>li>a{font-size:13px;font-weight:600;color:#3e5947}
+.anatomy-toc-group .anatomy-toc-level-3{margin:5px 0 5px 8px;padding-left:10px;border-left:1px solid #bdcdb4;gap:2px}
+.anatomy-toc-group .anatomy-toc-level-4{margin:3px 0 6px 8px;padding-left:10px;border-left:1px solid #d4dece;gap:1px}
+.anatomy-toc-level-3>li>a{font-weight:500;color:#5f735c}
+.anatomy-toc-level-4>li>a{font-size:11px;color:#78846f}
+.anatomy-toc-field{padding:3px 0;min-width:0}
+.anatomy-toc-field input,.anatomy-toc-section input{width:100%;font-size:12px;line-height:1.6;padding:6px 7px;color:#35523d}
+.anatomy-toc-help{font-size:11px;line-height:1.8;color:#6b7e62;padding:0 4px 18px}
+.anatomy-group-heading{border:0;border-radius:0;background:transparent;box-shadow:none;border-bottom:1px solid #d3ddcb}
+.anatomy-group-heading .anatomy-copy{padding:12px 0}
+.anatomy-group-heading .anatomy-copy h3{font-size:23px}
 .anatomy-figure button>img{width:100%}
 .anatomy-intro{gap:28px}.anatomy-intro h2{font-size:clamp(28px,3vw,39px)}
 @media(max-width:1050px){.anatomy-layout{display:block;padding:0 20px}.anatomy-sidebar{display:none}.anatomy-mobile-directory{display:block;padding-top:22px}.anatomy-mobile-directory>button{display:flex;align-items:center;gap:9px;padding:11px 16px;border:1px solid #dce1d3;border-radius:9px;background:#fffdf9;font-size:12px;color:#4b6c4d}.anatomy-mobile-directory>div{padding:22px;margin-top:12px;background:#fffdf9;border:1px solid #dce1d3;border-radius:12px;max-height:55dvh;overflow:auto}.anatomy-main{padding-top:28px}}

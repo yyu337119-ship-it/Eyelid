@@ -14,6 +14,7 @@ export function EditableText({
   multiline = false,
   compact = false,
   placeholder,
+  ariaLabel,
 }: {
   value: string
   onChange: (value: string) => void
@@ -21,6 +22,7 @@ export function EditableText({
   multiline?: boolean
   compact?: boolean
   placeholder?: string
+  ariaLabel?: string
 }) {
   const { editMode } = useHandbook()
   if (!editMode) {
@@ -30,6 +32,7 @@ export function EditableText({
   if (!multiline) {
     return (
       <input
+        aria-label={ariaLabel}
         value={value}
         placeholder={placeholder}
         onClick={(event) => event.stopPropagation()}
@@ -40,6 +43,7 @@ export function EditableText({
   }
   return (
     <textarea
+      aria-label={ariaLabel}
       value={value}
       placeholder={placeholder}
       rows={Math.min(8, Math.max(3, value.split("\n").length + 1))}

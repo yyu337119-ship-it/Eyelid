@@ -1,6 +1,6 @@
 import type { Figure } from "@/data/content"
-export type AnatomyBlock = { id: string; title: string; paragraphs: string[]; sources: string[]; figures: Figure[] }
-export type AnatomySection = { id: string; title: string; english: string; blocks: AnatomyBlock[] }
+export type AnatomyBlock = { id: string; title: string; parentId?: string; kind?: "group"; paragraphs: string[]; sources: string[]; figures: Figure[] }
+export type AnatomySection = { id: string; title: string; english: string; outlineVersion?: number; blocks: AnatomyBlock[] }
 export const defaultAnatomy: AnatomySection[] = [
   {
     "id": "anatomy-overview",

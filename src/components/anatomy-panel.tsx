@@ -4,6 +4,7 @@ import { useRef, useState } from "react"
 import { ArrowUpRight, BookOpen, Search, X, Languages } from "lucide-react"
 import { FigureBlock } from "@/components/figure-block"
 import { EditableText } from "@/components/editable-text"
+import { AnatomyToc } from "@/components/anatomy-toc"
 import { useHandbook } from "@/lib/handbook-store"
 
 const glossary = [
@@ -64,10 +65,10 @@ function Glossary() {
 }
 
 export function AnatomyPanel({ active }: { active: boolean }) {
-  const { anatomy, updateAnatomyBlock, editMode } = useHandbook()
+  const { anatomy, updateAnatomyBlock, updateAnatomySection, editMode } = useHandbook()
   const [directoryOpen, setDirectoryOpen] = useState(false)
   const [selected, setSelected] = useState("")
-  const directory = <nav aria-label="解剖章节目录">{anatomy.map(section => <div key={section.id} className="anatomy-toc-group"><a className="anatomy-toc-section" href={`#${section.id}`} onClick={() => { setSelected(section.id); setDirectoryOpen(false) }}>{section.title}</a><ul>{section.blocks.map(block => <li key={block.id}><a href={`#${block.id}`} aria-current={selected === block.id ? "location" : undefined} onClick={() => { setSelected(block.id); setDirectoryOpen(false) }}>{block.title}</a></li>)}</ul></div>)}</nav>
+  const directory = <AnatomyToc selected={selected} />
   return <>
     <div className="anatomy-layout" onClick={event => {
       const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#anatomy"]')
@@ -93,8 +94,8 @@ export function AnatomyPanel({ active }: { active: boolean }) {
       </section>
       <div className="anatomy-reading-note"><BookOpen size={17}/><span>图文按原文顺序排列 · 点击图片放大 · 右下角查阅缩写</span></div>
       {anatomy.map(section => <section key={section.id} id={section.id} className="anatomy-section">
-        <div className="anatomy-section-title"><div><p>{section.english}</p><h2>{section.title}</h2></div><span>{section.blocks.reduce((n,b) => n+b.figures.length,0)} 幅图</span></div>
-        <div className="anatomy-section-grid">{section.blocks.map(block => <article className={`anatomy-card ${block.figures.length ? "with-figure" : "text-only"}`} id={block.id} key={block.id}>
+        <div className="anatomy-section-title"><div><p><EditableText value={section.english} onChange={english => updateAnatomySection(section.id,{english})}/></p><h2><EditableText value={section.title} onChange={title => updateAnatomySection(section.id,{title})}/></h2></div><span>{section.blocks.reduce((n,b) => n+b.figures.length,0)} 幅图</span></div>
+        <div className="anatomy-section-grid">{section.blocks.map(block => <article className={`anatomy-card ${block.kind === "group" ? "anatomy-group-heading" : block.figures.length ? "with-figure" : "text-only"}`} id={block.id} key={block.id}>
           <div className="anatomy-copy"><h3><EditableText value={block.title} onChange={title => updateAnatomyBlock(block.id,{title})}/></h3>
             <div className="anatomy-paragraphs">{block.paragraphs.map((paragraph,i) => <p key={i}><EditableText multiline value={paragraph} onChange={value => updateAnatomyBlock(block.id,{paragraphs:block.paragraphs.map((p,n) => n===i ? value : p)})}/></p>)}</div>
           </div>

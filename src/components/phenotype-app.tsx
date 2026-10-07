@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Menu } from "lucide-react"
+import { BookOpen, Menu } from "lucide-react"
 import { AssayCard } from "@/components/assay-card"
 import { EditToolbar } from "@/components/edit-toolbar"
 import { Button } from "@/components/ui/button"
@@ -71,7 +71,7 @@ function PhenotypeAppInner() {
             <Button
               variant="outline"
               size="icon"
-              className={activeSheet === "phenotype" ? "" : "hidden"}
+              className={activeSheet === "phenotype" ? "lg:hidden" : "hidden"}
               onClick={() => setMenuOpen(true)}
               aria-label="打开目录"
             >
@@ -91,9 +91,14 @@ function PhenotypeAppInner() {
         <AnatomyPanel active={activeSheet === "anatomy"} />
       </div>
       <div id="panel-phenotype" role="tabpanel" aria-labelledby="tab-phenotype" hidden={activeSheet !== "phenotype"}>
-      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-        <details className="phenotype-directory"><summary>眼睑表型 · 展开目录</summary><div className="p-5"><TocNav /></div></details>
-        <main className="space-y-10 pb-16">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[300px_minmax(0,1fr)]">
+        <aside className="hidden lg:block" aria-label="眼睑表型目录">
+          <div className="sticky top-40 max-h-[calc(100vh-11rem)] overflow-y-auto pr-2">
+            <p className="mb-3 flex items-center gap-2 text-xs font-semibold tracking-wide text-stone-500 uppercase"><BookOpen className="size-3.5" />目录</p>
+            <TocNav />
+          </div>
+        </aside>
+        <main className="min-w-0 space-y-10 pb-16">
           <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6">
             <EditableText
               value={intro}

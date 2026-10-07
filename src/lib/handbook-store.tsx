@@ -36,6 +36,7 @@ import {
   setGithubToken,
 } from "@/lib/github-publish"
 import { defaultAnatomy, type AnatomySection, type AnatomyBlock } from "@/data/anatomy"
+import { normalizeAnatomy } from "@/lib/anatomy-outline"
 import { publicPath } from "@/lib/public-path"
 
 export const HANDBOOK_INTRO =
@@ -69,6 +70,7 @@ type PublishedSnapshot = {
 type HandbookContextValue = {
   anatomy: AnatomySection[]
   updateAnatomyBlock: (id: string, patch: Partial<AnatomyBlock>) => void
+  updateAnatomySection: (id: string, patch: Partial<Pick<AnatomySection, "title" | "english">>) => void
   editMode: boolean
   setEditMode: (value: boolean) => void
   dirty: boolean
@@ -212,7 +214,7 @@ async function collectPublishPayload(
 }
 
 export function HandbookProvider({ children }: { children: ReactNode }) {
-  const [anatomy, setAnatomy] = useState<AnatomySection[]>(() => structuredClone(defaultAnatomy))
+  const [anatomy, setAnatomy] = useState<AnatomySection[]>(() => normalizeAnatomy(defaultAnatomy))
   const [editMode, setEditMode] = useState(false)
   const [intro, setIntroState] = useState(HANDBOOK_INTRO)
   const [refsLabel, setRefsLabelState] = useState(DEFAULT_REFS_LABEL)
@@ -226,7 +228,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const [hasGithubToken, setHasGithubToken] = useState(false)
   const [publishState, setPublishState] = useState<PublishState>({ status: "idle", detail: "" })
   const publishedRef = useRef<PublishedSnapshot>({
-    anatomy: structuredClone(defaultAnatomy),
+    anatomy: normalizeAnatomy(defaultAnatomy),
     intro: HANDBOOK_INTRO,
     refsLabel: DEFAULT_REFS_LABEL,
     categories: cloneCategories(),
@@ -239,7 +241,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       const live = await fetchPublishedLive()
       if (cancelled) return
       if (live) {
-        const nextAnatomy = Array.isArray(live.anatomy) && live.anatomy.length ? live.anatomy : structuredClone(defaultAnatomy)
+        const nextAnatomy = normalizeAnatomy(Array.isArray(live.anatomy) && live.anatomy.length ? live.anatomy : defaultAnatomy)
         setAnatomy(nextAnatomy)
         if (typeof live.intro === "string") setIntroState(live.intro)
         if (typeof live.refsLabel === "string" && live.refsLabel.trim()) {
@@ -274,7 +276,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
             anatomy?: AnatomySection[]
   categories?: Category[]
           }
-          if (Array.isArray(parsed.anatomy) && parsed.anatomy.length) setAnatomy(parsed.anatomy)
+          if (Array.isArray(parsed.anatomy) && parsed.anatomy.length) setAnatomy(normalizeAnatomy(parsed.anatomy))
           if (typeof parsed.intro === "string") setIntroState(parsed.intro)
           if (typeof parsed.refsLabel === "string") setRefsLabelState(parsed.refsLabel)
           if (Array.isArray(parsed.categories) && parsed.categories.length) {
@@ -321,6 +323,12 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
 
   const updateAnatomyBlock = useCallback((id: string, patch: Partial<AnatomyBlock>) => {
     setAnatomy(prev => prev.map(section => ({ ...section, blocks: section.blocks.map(block => block.id === id ? { ...block, ...patch } : block) })))
+    setTextDirty(true)
+    setPublishState({ status: "idle", detail: "" })
+  }, [])
+
+  const updateAnatomySection = useCallback((id: string, patch: Partial<Pick<AnatomySection, "title" | "english">>) => {
+    setAnatomy(prev => prev.map(section => section.id === id ? { ...section, ...patch } : section))
     setTextDirty(true)
     setPublishState({ status: "idle", detail: "" })
   }, [])
@@ -621,7 +629,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   categories?: Category[]
       figures?: Record<string, string>
     }
-    if (Array.isArray(parsed.anatomy) && parsed.anatomy.length) setAnatomy(parsed.anatomy)
+    if (Array.isArray(parsed.anatomy) && parsed.anatomy.length) setAnatomy(normalizeAnatomy(parsed.anatomy))
     if (typeof parsed.intro === "string") setIntroState(parsed.intro)
     if (typeof parsed.refsLabel === "string") setRefsLabelState(parsed.refsLabel)
     if (Array.isArray(parsed.categories) && parsed.categories.length) {
@@ -650,6 +658,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     () => ({
       anatomy,
       updateAnatomyBlock,
+      updateAnatomySection,
       editMode,
       setEditMode,
       dirty,
@@ -683,6 +692,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     [
       anatomy,
       updateAnatomyBlock,
+      updateAnatomySection,
       editMode,
       dirty,
       hasLocalDraft,

@@ -58,8 +58,7 @@
                       "placement": "results"
                     }
                   ],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 }
               ]
             }
@@ -125,8 +124,7 @@
                       "id": "v16-conj-krt4-fig-1"
                     }
                   ],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 }
               ]
             }
@@ -184,8 +182,7 @@
                       "id": "v16-mg-stereo-close-fig-0"
                     }
                   ],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 },
                 {
                   "id": "mg-nuclei-count",
@@ -239,8 +236,7 @@
                       "id": "v16-mg-nuclei-count-fig-1"
                     }
                   ],
-                  "mark": "（2）",
-                  "referenceEntries": []
+                  "mark": "（2）"
                 },
                 {
                   "id": "mg-3d-duct",
@@ -251,7 +247,7 @@
                   ],
                   "evaluation": "中央导管扩张、脂质淤积与角化",
                   "methods": [
-                    "新鲜睑板纵切面与HE观察；Oil Red O观察脂质潴留\n完整固定眼睑经LIMPID透明化，共聚焦体积成像并拼接。FalseColor-Python虚拟染色，深度学习分割导管/腺泡，人工复核纠正后用Amira三维展示。"
+                    "新鲜睑板纵切面与HE观察；完整固定眼睑经LIMPID透明化，共聚焦体积成像并拼接。FalseColor-Python虚拟染色，深度学习分割导管/腺泡，人工复核纠正后用Amira三维展示。"
                   ],
                   "instruments": [],
                   "metrics": [
@@ -273,8 +269,7 @@
                     "文献【1】统计标记：* P<0.05，** P<0.005，*** P<0.0005；ns为未发现显著差异，不等于等效。"
                   ],
                   "references": [
-                    "【1】PDF第5、11–13页，Fig. 6A–C、7A；【2】第4页，Fig. 3D–I。",
-                    "A mouse model of meibomian gland hyperkeratinization-induced dry eye"
+                    "【1】PDF第5、11–13页，Fig. 6A–C、7A；【2】第4页，Fig. 3D–I。"
                   ],
                   "figures": [
                     {
@@ -298,22 +293,14 @@
                     {
                       "src": "/figures/revised/mg-3d-diameter.jpg",
                       "paperFig": "【1】Fig. 6C",
-                      "caption": "中央导管直径。",
+                      "caption": "最大中央导管直径，点代表导管；统计需要考虑动物内相关性。",
                       "placement": "results",
                       "width": 320,
                       "height": 270,
                       "id": "v16-mg-3d-duct-fig-2"
-                    },
-                    {
-                      "id": "8df554a5-5e4e-483d-898b-576557b62c7e",
-                      "paperFig": "Figure 2 C-E",
-                      "caption": "免疫荧光： MG导管被YFP标记的K6⁺过度角化细胞填充。\nH&E：MG导管阻塞和扩张\nOil Red O：脂质潴留\n\n",
-                      "placement": "results",
-                      "src": "/figures/live/8df554a5-5e4e-483d-898b-576557b62c7e.jpg"
                     }
                   ],
-                  "mark": "（3）",
-                  "referenceEntries": []
+                  "mark": "（3）"
                 },
                 {
                   "id": "mg-he-acini",
@@ -356,8 +343,7 @@
                       "id": "v16-mg-he-acini-fig-0"
                     }
                   ],
-                  "mark": "（4）",
-                  "referenceEntries": []
+                  "mark": "（4）"
                 },
                 {
                   "id": "mg-terminal-duct",
@@ -401,8 +387,7 @@
                       "id": "v16-mg-terminal-duct-fig-0"
                     }
                   ],
-                  "mark": "（5）",
-                  "referenceEntries": []
+                  "mark": "（5）"
                 },
                 {
                   "id": "mg-rtqpcr",
@@ -448,8 +433,7 @@
                       "id": "v16-mg-rtqpcr-fig-0"
                     }
                   ],
-                  "mark": "（6）",
-                  "referenceEntries": []
+                  "mark": "（6）"
                 },
                 {
                   "id": "mg-pparg-pcna",
@@ -511,8 +495,7 @@
                       "id": "v16-mg-pparg-pcna-fig-2"
                     }
                   ],
-                  "mark": "（7）",
-                  "referenceEntries": []
+                  "mark": "（7）"
                 }
               ]
             },
@@ -562,8 +545,7 @@
                       "id": "v16-meibum-appearance-fig-0"
                     }
                   ],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 },
                 {
                   "id": "meibum-express",
@@ -615,8 +597,7 @@
                       "id": "v16-meibum-express-fig-1"
                     }
                   ],
-                  "mark": "（2）",
-                  "referenceEntries": []
+                  "mark": "（2）"
                 },
                 {
                   "id": "meibum-lipids",
@@ -671,8 +652,7 @@
                       "id": "v16-meibum-lipids-fig-1"
                     }
                   ],
-                  "mark": "（3）",
-                  "referenceEntries": []
+                  "mark": "（3）"
                 },
                 {
                   "id": "meibum-melting",
@@ -715,8 +695,7 @@
                       "id": "v16-meibum-melting-fig-0"
                     }
                   ],
-                  "mark": "（4）",
-                  "referenceEntries": []
+                  "mark": "（4）"
                 }
               ]
             },
@@ -754,8 +733,7 @@
                     "【1】【2】未提供本项目专项证据。"
                   ],
                   "figures": [],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 }
               ]
             },
@@ -793,8 +771,7 @@
                     "【1】【2】未提供本项目专项证据。"
                   ],
                   "figures": [],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 }
               ]
             }
@@ -857,8 +834,7 @@
                       "placement": "methods"
                     }
                   ],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 },
                 {
                   "id": "muscle-masson-adult",
@@ -899,8 +875,7 @@
                       "placement": "results"
                     }
                   ],
-                  "mark": "（2）",
-                  "referenceEntries": []
+                  "mark": "（2）"
                 },
                 {
                   "id": "muscle-masson-time",
@@ -941,8 +916,7 @@
                       "placement": "results"
                     }
                   ],
-                  "mark": "（3）",
-                  "referenceEntries": []
+                  "mark": "（3）"
                 },
                 {
                   "id": "muscle-pcna-tunel",
@@ -976,8 +950,7 @@
                     "【2】PDF第6、9页，Fig. 8Ab–Ac/Bb–Bc、Fig. 9Ab–Ac/Bb–Bc。"
                   ],
                   "figures": [],
-                  "mark": "（4）",
-                  "referenceEntries": []
+                  "mark": "（4）"
                 },
                 {
                   "id": "muscle-collagen",
@@ -1020,8 +993,7 @@
                       "id": "v16-muscle-collagen-fig-0"
                     }
                   ],
-                  "mark": "（5）",
-                  "referenceEntries": []
+                  "mark": "（5）"
                 },
                 {
                   "id": "muscle-egfr",
@@ -1062,8 +1034,7 @@
                       "placement": "results"
                     }
                   ],
-                  "mark": "（6）",
-                  "referenceEntries": []
+                  "mark": "（6）"
                 }
               ]
             },
@@ -1117,8 +1088,7 @@
                       "placement": "results"
                     }
                   ],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 }
               ],
               "parentId": "phenotype-muscles"
@@ -1157,8 +1127,7 @@
                     "【1】【2】未提供本项目专项证据。"
                   ],
                   "figures": [],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 }
               ],
               "parentId": "phenotype-muscles"
@@ -1200,8 +1169,7 @@
                     "【2】PDF第5、7页；补充Fig. 1、Fig. 6。"
                   ],
                   "figures": [],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 }
               ],
               "parentId": "phenotype-muscles"
@@ -1268,8 +1236,7 @@
                       "id": "v16-cornea-fluorescein-fig-0"
                     }
                   ],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 },
                 {
                   "id": "cornea-confocal",
@@ -1312,8 +1279,7 @@
                       "id": "v16-cornea-confocal-fig-0"
                     }
                   ],
-                  "mark": "（2）",
-                  "referenceEntries": []
+                  "mark": "（2）"
                 },
                 {
                   "id": "cornea-markers",
@@ -1358,8 +1324,7 @@
                       "id": "v16-cornea-markers-fig-0"
                     }
                   ],
-                  "mark": "（3）",
-                  "referenceEntries": []
+                  "mark": "（3）"
                 }
               ]
             }
@@ -1416,8 +1381,7 @@
                       "id": "v16-conj-he-fig-0"
                     }
                   ],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 },
                 {
                   "id": "conj-mucin-pending",
@@ -1448,8 +1412,7 @@
                   ],
                   "figures": [],
                   "instruments": [],
-                  "observations": [],
-                  "referenceEntries": []
+                  "observations": []
                 }
               ]
             },
@@ -1499,8 +1462,7 @@
                       "id": "v16-conj-pas-fig-0"
                     }
                   ],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 }
               ]
             }
@@ -1557,8 +1519,7 @@
                       "id": "v16-tear-specular-fig-0"
                     }
                   ],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 },
                 {
                   "id": "tear-volume-pending",
@@ -1589,8 +1550,7 @@
                   ],
                   "figures": [],
                   "instruments": [],
-                  "observations": [],
-                  "referenceEntries": []
+                  "observations": []
                 }
               ]
             },
@@ -1641,8 +1601,7 @@
                       "id": "v16-tear-tbut-fig-0"
                     }
                   ],
-                  "mark": "（1）",
-                  "referenceEntries": []
+                  "mark": "（1）"
                 }
               ]
             }
@@ -1796,7 +1755,7 @@
               "id": "anatomy-figure-6",
               "src": "/figures/anatomy/image6.jpeg",
               "paperFig": "② 泪腺和副泪腺",
-              "caption": "眶外泪腺（Extraorbital LG）与眶内泪腺（Intraorbital LG）的解剖位置及组织形态。\n(A、B) 手术切口实拍图，用于取材切除 (A) 眶外泪腺与 (B) 体积更小的眶内泪腺。\n(C) 眶外泪腺切片显微照片：腺泡细胞周围包绕肌上皮细胞、血管及导管上皮细胞。\n(D) 眶内泪腺切片，形态特征与眶外泪腺相近。\n(E) 眶外泪腺高倍视野：可见腺泡细胞（箭头）与小叶内 / 小叶间排泄导管（星号）。\n(F) 眶内泪腺切片，可见形态相似的腺泡细胞（箭头）与排泄导管（星号）。",
+              "caption": "眶外泪腺（Extraorbital LG）与眶内泪腺（Intraorbital LG）的解剖位置及组织形态。",
               "width": 676,
               "height": 836
             }
@@ -1806,7 +1765,7 @@
         },
         {
           "id": "anatomy-zeis",
-          "title": "Zeis 腺体",
+          "title": "Zeis 腺体、Harderian Gland哈德氏腺",
           "paragraphs": [
             "睫毛与特化的大型皮脂腺（睑板腺）紧密相连，睑板腺开口沿皮肤黏膜移行缘，位于睫毛后方。睫毛毛囊附有小型皮脂腺（Zeis腺）。"
           ],
@@ -1830,7 +1789,7 @@
           "id": "anatomy-support",
           "title": "支撑结构：睑板与肌肉",
           "paragraphs": [
-            "眼睑由睑板（致密胶原构成）和眼轮匝肌（横纹肌，面神经 Ⅶ 支配）支撑；眼轮匝肌的功能为闭眼。",
+            "",
             "眼睑的支撑结构包括由致密胶原构成的睑板，以及起闭眼作用的横纹肌 —— 眼轮匝肌（受第 Ⅶ 对脑神经支配）。上睑由横纹肌上睑提肌抬起（图 1.3），该肌肉与上直肌联系紧密（见下文）³。眶内组织被一层膜状平滑肌包绕，称为眶肌。眶肌附着于上睑提肌以及眼眶骨壁。"
           ],
           "sources": [],
@@ -1937,7 +1896,7 @@
           "id": "anatomy-cornea",
           "title": "角膜",
           "paragraphs": [
-            "角膜由五层结构组成：上皮层、鲍曼层、基质层、后弹力层（德斯密膜）以及内皮层。"
+            "角膜由五层结构组成：上皮层、鲍曼层、基质层、后弹力层（德斯密膜）以及内皮层。\n角膜能够保持透明主要有四点原因：（1）全部角膜胶原纤维直径恒定、均一；（2）纤维之间间距规则，纤维束也呈规律排列，与角膜表面平行；（3）与巩膜等其他结缔组织相比，角膜处于相对脱水状态；（4）正常小鼠角膜完全无血管"
           ],
           "sources": [
             "Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods P8"
@@ -1947,7 +1906,7 @@
               "id": "anatomy-figure-11",
               "src": "/figures/anatomy/image11.png",
               "paperFig": "01 · 角膜",
-              "caption": "C正常角膜上皮（E）厚度为 5～6 层。常可观察到细胞分裂（箭头尖），分裂活动一般局限于基底层。鲍曼层（箭头）无细胞成分。角膜基质（S）的胶原呈有序板层排列，与角膜表面平行；角膜基质细胞也沿同一方向变扁平。后弹力层将基质与角膜内皮（空心箭头）分隔开。原始放大倍数 ×630。 \n\nD在角膜缘处，角膜快速移行为巩膜。角膜上皮转变为薄得多的结膜上皮（E）。上皮与巩膜之间存在一层菲薄的疏松结缔组织。对比 C 图可见，巩膜胶原排列杂乱，不同于角膜基质。角膜内无血管通道（箭头），但角膜缘处巩膜血管丰富。原始放大倍数 ×400。",
+              "caption": "C正常角膜上皮（E）厚度为 5～6 层。常可观察到细胞分裂（箭头尖），分裂活动一般局限于基底层。鲍曼层（箭头）无细胞成分。角膜基质（S）的胶原呈有序板层排列，与角膜表面平行；角膜基质细胞也沿同一方向变扁平。后弹力层将基质与角膜内皮（空心箭头）分隔开。原始放大倍数 ×630。 D在角膜缘处，角膜快速移行为巩膜。角膜上皮转变为薄得多的结膜上皮（E）。上皮与巩膜之间存在一层菲薄的疏松结缔组织。对比 C 图可见，巩膜胶原排列杂乱，不同于角膜基质。角膜内无血管通道（箭头），但角膜缘处巩膜血管丰富。原始放大倍数 ×400。",
               "width": 1507,
               "height": 529
             }
@@ -1960,7 +1919,7 @@
           "paragraphs": [
             "结膜起自黏膜皮肤交界处，睑结膜沿眼睑内表面延伸至上方、下方穹窿结膜，在此处反折（穹窿部）覆盖巩膜，一直延续至角巩膜缘，形成球结膜。",
             "结膜上皮为非角化复层鳞状上皮，主要由角质形成细胞和杯状细胞组成。结膜杯状细胞产生的黏蛋白、泪腺分泌的水样泪液以及及睑板腺分泌的脂质共同构成泪膜，保护角膜与结膜表面，避免干燥、异物造成的微小损伤以及细菌侵袭。采用阿尔辛蓝、黏卡红或过碘酸 - 希夫（PAS）染色可清晰显示杯状细胞。",
-            "结膜角质形成细胞下方为薄层疏松、富含血管的胶原结缔组织，疏松附着于深部巩膜。该区域常可见淋巴细胞、嗜酸性粒细胞与肥大细胞。"
+            "结膜角质形成细胞下方为薄层疏松、富含血管的胶原结缔组织，疏松附着于深部巩膜。\n该区域常可见淋巴细胞、嗜酸性粒细胞与肥大细胞。"
           ],
           "sources": [
             "Sundberg, J. P., Vogel, P., & Ward, J. M. (Eds.). (2021). Pathology of genetically engineered and other mutant mice. Wiley-Blackwell."
@@ -2036,6 +1995,5 @@
       "mark": "Ⅱ.",
       "outlineVersion": 1
     }
-  ],
-  "sectionReferences": []
+  ]
 }

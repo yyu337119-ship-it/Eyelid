@@ -60,56 +60,6 @@
                   ],
                   "mark": "（1）",
                   "referenceEntries": []
-                },
-                {
-                  "id": "user-assay-c0663535-b75b-4fdf-a1d4-5e2707860faa",
-                  "title": "眼睑形态",
-                  "evaluation": "眼睑形态",
-                  "mark": "（2）",
-                  "sources": [],
-                  "userAdded": true,
-                  "methods": [
-                    "大体观察"
-                  ],
-                  "metrics": [
-                    ""
-                  ],
-                  "normal": [
-                    ""
-                  ],
-                  "abnormal": [
-                    "眼睑干燥、结痂"
-                  ],
-                  "statistics": [
-                    ""
-                  ],
-                  "notes": [
-                    ""
-                  ],
-                  "references": [],
-                  "referenceEntries": [
-                    {
-                      "id": "ref-5589fe29-8705-432e-aaa7-5075234122f0",
-                      "authors": "Danielle J. Gardon a,1, Che-Jui Liu a, Natalia A. Veniaminova a, Vesa Kaartinen b, Sunny Y. Wong a,*",
-                      "title": "A mouse model of meibomian gland hyperkeratinization-induced dry eye",
-                      "source": "Developmental Biology",
-                      "year": "2026",
-                      "link": ""
-                    }
-                  ],
-                  "instruments": [],
-                  "observations": [],
-                  "figures": [
-                    {
-                      "id": "user-fig-1f2bcf4f-ddd7-4a9d-863f-050856f0997d",
-                      "paperFig": "Cre Abca12→cKO小鼠眼睑干燥和结痂 ",
-                      "caption": "",
-                      "alt": "",
-                      "placement": "results",
-                      "userAdded": true,
-                      "src": "/figures/live/user-fig-1f2bcf4f-ddd7-4a9d-863f-050856f0997d.jpg"
-                    }
-                  ]
                 }
               ]
             }
@@ -122,7 +72,7 @@
           "topics": [
             {
               "id": "phenotype-mcj",
-              "mark": "（1）",
+              "mark": "①",
               "title": "皮肤黏膜交界 · MCJ",
               "assays": [
                 {
@@ -175,7 +125,7 @@
                       "id": "v16-conj-krt4-fig-1"
                     }
                   ],
-                  "mark": "①",
+                  "mark": "（1）",
                   "referenceEntries": []
                 }
               ]
@@ -189,12 +139,12 @@
           "topics": [
             {
               "id": "mg",
-              "mark": "（1）",
-              "title": "睑板腺MG-腺体形态与组织学",
+              "mark": "①",
+              "title": "睑板腺 MG",
               "assays": [
                 {
                   "id": "mg-stereo-close",
-                  "title": "新鲜睑板纵切面大体成像联合HE",
+                  "title": "腺体整体形态与排列",
                   "sources": [
                     "paper2"
                   ],
@@ -234,7 +184,7 @@
                       "id": "v16-mg-stereo-close-fig-0"
                     }
                   ],
-                  "mark": "i",
+                  "mark": "（1）",
                   "referenceEntries": []
                 },
                 {
@@ -301,7 +251,7 @@
                   ],
                   "evaluation": "中央导管扩张、脂质淤积与角化",
                   "methods": [
-                    "新鲜睑板纵切面与HE观察；完整固定眼睑经LIMPID透明化，共聚焦体积成像并拼接。FalseColor-Python虚拟染色，深度学习分割导管/腺泡，人工复核纠正后用Amira三维展示。"
+                    "新鲜睑板纵切面与HE观察；Oil Red O观察脂质潴留\n完整固定眼睑经LIMPID透明化，共聚焦体积成像并拼接。FalseColor-Python虚拟染色，深度学习分割导管/腺泡，人工复核纠正后用Amira三维展示。"
                   ],
                   "instruments": [],
                   "metrics": [
@@ -323,7 +273,8 @@
                     "文献【1】统计标记：* P<0.05，** P<0.005，*** P<0.0005；ns为未发现显著差异，不等于等效。"
                   ],
                   "references": [
-                    "【1】PDF第5、11–13页，Fig. 6A–C、7A；【2】第4页，Fig. 3D–I。"
+                    "【1】PDF第5、11–13页，Fig. 6A–C、7A；【2】第4页，Fig. 3D–I。",
+                    "A mouse model of meibomian gland hyperkeratinization-induced dry eye"
                   ],
                   "figures": [
                     {
@@ -347,11 +298,18 @@
                     {
                       "src": "/figures/revised/mg-3d-diameter.jpg",
                       "paperFig": "【1】Fig. 6C",
-                      "caption": "最大中央导管直径，点代表导管；统计需要考虑动物内相关性。",
+                      "caption": "中央导管直径。",
                       "placement": "results",
                       "width": 320,
                       "height": 270,
                       "id": "v16-mg-3d-duct-fig-2"
+                    },
+                    {
+                      "id": "8df554a5-5e4e-483d-898b-576557b62c7e",
+                      "paperFig": "Figure 2 C-E",
+                      "caption": "免疫荧光： MG导管被YFP标记的K6⁺过度角化细胞填充。\nH&E：MG导管阻塞和扩张\nOil Red O：脂质潴留\n\n",
+                      "placement": "results",
+                      "src": "/figures/live/8df554a5-5e4e-483d-898b-576557b62c7e.jpg"
                     }
                   ],
                   "mark": "（3）",
@@ -555,37 +513,6 @@
                   ],
                   "mark": "（7）",
                   "referenceEntries": []
-                },
-                {
-                  "id": "user-assay-7969279d-ab8f-4083-a651-414404a08f23",
-                  "title": "睑板腺MG-分子标志物",
-                  "evaluation": "睑板腺MG-分子标志物",
-                  "mark": "（2）",
-                  "sources": [],
-                  "userAdded": true,
-                  "methods": [
-                    ""
-                  ],
-                  "metrics": [
-                    ""
-                  ],
-                  "normal": [
-                    ""
-                  ],
-                  "abnormal": [
-                    ""
-                  ],
-                  "statistics": [
-                    ""
-                  ],
-                  "notes": [
-                    ""
-                  ],
-                  "references": [],
-                  "referenceEntries": [],
-                  "instruments": [],
-                  "observations": [],
-                  "figures": []
                 }
               ]
             },
@@ -1760,7 +1687,7 @@
       "blocks": [
         {
           "id": "anatomy-gross",
-          "title": "1、大体解剖",
+          "title": "大体解剖",
           "paragraphs": [
             "眼睑是结构复杂的组织，由皮肤、黏膜、腺体、及其支撑结构睑板及肌肉共同构成。",
             "上睑（UL, upper eyelid;） 和下睑（LL, lower eyelid.）"
@@ -1782,7 +1709,7 @@
         },
         {
           "id": "anatomy-skin",
-          "title": "2、皮肤和黏膜",
+          "title": "皮肤和黏膜",
           "paragraphs": [
             "从眼睑走向眼球：皮肤-MCJ-睑结膜。",
             "前后睑缘 · MCJ · 睫毛"
@@ -1804,7 +1731,7 @@
         },
         {
           "id": "anatomy-mcj",
-          "title": "（1）皮肤黏膜交界 MCJ",
+          "title": "① 皮肤黏膜交界 · MCJ",
           "paragraphs": [
             "眼睑 MCJ=皮肤黏膜交界"
           ],
@@ -1827,7 +1754,7 @@
         {
           "id": "anatomy-glands",
           "mark": "3、",
-          "title": "3、腺体",
+          "title": "腺体",
           "kind": "group",
           "paragraphs": [],
           "sources": [],
@@ -1835,7 +1762,7 @@
         },
         {
           "id": "anatomy-mg",
-          "title": "（1）睑板腺 MG",
+          "title": "睑板腺 MG",
           "paragraphs": [
             "①睑板腺 MG 睑板腺开口沿睑缘分布，紧邻皮肤黏膜移行缘后方；其分泌物可润滑眼睑，并参与构成泪膜。",
             "腺泡 → 导管小管 → 中央导管 → 腺口",
@@ -1857,7 +1784,7 @@
         },
         {
           "id": "anatomy-lacrimal",
-          "title": "（2）泪腺和副泪腺",
+          "title": "泪腺和副泪腺",
           "paragraphs": [
             "小鼠具有两对泪腺，通过一条总导管开口于结膜囊。眶内泪腺体积较小，位于上睑外侧下方。眶外泪腺位于耳的前腹侧，毗邻腮腺。"
           ],
@@ -1869,7 +1796,7 @@
               "id": "anatomy-figure-6",
               "src": "/figures/anatomy/image6.jpeg",
               "paperFig": "② 泪腺和副泪腺",
-              "caption": "眶外泪腺（Extraorbital LG）与眶内泪腺（Intraorbital LG）的解剖位置及组织形态。",
+              "caption": "眶外泪腺（Extraorbital LG）与眶内泪腺（Intraorbital LG）的解剖位置及组织形态。\n(A、B) 手术切口实拍图，用于取材切除 (A) 眶外泪腺与 (B) 体积更小的眶内泪腺。\n(C) 眶外泪腺切片显微照片：腺泡细胞周围包绕肌上皮细胞、血管及导管上皮细胞。\n(D) 眶内泪腺切片，形态特征与眶外泪腺相近。\n(E) 眶外泪腺高倍视野：可见腺泡细胞（箭头）与小叶内 / 小叶间排泄导管（星号）。\n(F) 眶内泪腺切片，可见形态相似的腺泡细胞（箭头）与排泄导管（星号）。",
               "width": 676,
               "height": 836
             }
@@ -1879,7 +1806,7 @@
         },
         {
           "id": "anatomy-zeis",
-          "title": "（3）Zeis 腺体",
+          "title": "Zeis 腺体",
           "paragraphs": [
             "睫毛与特化的大型皮脂腺（睑板腺）紧密相连，睑板腺开口沿皮肤黏膜移行缘，位于睫毛后方。睫毛毛囊附有小型皮脂腺（Zeis腺）。"
           ],
@@ -1901,7 +1828,7 @@
         },
         {
           "id": "anatomy-support",
-          "title": "4、支撑结构：睑板与肌肉",
+          "title": "支撑结构：睑板与肌肉",
           "paragraphs": [
             "眼睑由睑板（致密胶原构成）和眼轮匝肌（横纹肌，面神经 Ⅶ 支配）支撑；眼轮匝肌的功能为闭眼。",
             "眼睑的支撑结构包括由致密胶原构成的睑板，以及起闭眼作用的横纹肌 —— 眼轮匝肌（受第 Ⅶ 对脑神经支配）。上睑由横纹肌上睑提肌抬起（图 1.3），该肌肉与上直肌联系紧密（见下文）³。眶内组织被一层膜状平滑肌包绕，称为眶肌。眶肌附着于上睑提肌以及眼眶骨壁。"
@@ -1912,7 +1839,7 @@
         },
         {
           "id": "anatomy-tarsal",
-          "title": "（1）睑板",
+          "title": "睑板",
           "paragraphs": [
             "Masson三色染色",
             "胶原纤维蓝色；肌纤维、细胞质红色；细胞核蓝黑色",
@@ -1937,7 +1864,7 @@
         {
           "id": "anatomy-muscles",
           "mark": "②",
-          "title": "（2）肌层",
+          "title": "肌层",
           "kind": "group",
           "paragraphs": [],
           "sources": [],
@@ -1946,7 +1873,7 @@
         },
         {
           "id": "anatomy-orbicularis",
-          "title": "①眼轮匝肌",
+          "title": "眼轮匝肌",
           "paragraphs": [
             "MG腺体位于眼轮匝肌下方、邻近结膜。"
           ],
@@ -1968,7 +1895,7 @@
         },
         {
           "id": "anatomy-levator",
-          "title": "②上睑提肌、上直肌",
+          "title": "（2）上睑提肌、上直肌",
           "paragraphs": [],
           "sources": [
             "Mouse Extraocular Muscles and the Musculotopic Organization of Their Innervation.The Anatomical Record, 302:1865–1885."
@@ -1988,7 +1915,7 @@
         },
         {
           "id": "anatomy-orbital",
-          "title": "③眶肌",
+          "title": "（3）眶肌",
           "paragraphs": [
             "眶内容物被一层膜状平滑肌包绕，即眶肌。眶肌一端附着于提上睑肌，另一端连于眼眶骨壁；其结构部分对应灵长类的眶骨膜、洛克伍德韧带、惠特纳尔韧带以及睑板肌（Müller 肌）。"
           ],
@@ -2008,7 +1935,7 @@
       "blocks": [
         {
           "id": "anatomy-cornea",
-          "title": "1、角膜",
+          "title": "角膜",
           "paragraphs": [
             "角膜由五层结构组成：上皮层、鲍曼层、基质层、后弹力层（德斯密膜）以及内皮层。"
           ],
@@ -2029,7 +1956,7 @@
         },
         {
           "id": "anatomy-conjunctiva",
-          "title": "2、结膜",
+          "title": "结膜",
           "paragraphs": [
             "结膜起自黏膜皮肤交界处，睑结膜沿眼睑内表面延伸至上方、下方穹窿结膜，在此处反折（穹窿部）覆盖巩膜，一直延续至角巩膜缘，形成球结膜。",
             "结膜上皮为非角化复层鳞状上皮，主要由角质形成细胞和杯状细胞组成。结膜杯状细胞产生的黏蛋白、泪腺分泌的水样泪液以及及睑板腺分泌的脂质共同构成泪膜，保护角膜与结膜表面，避免干燥、异物造成的微小损伤以及细菌侵袭。采用阿尔辛蓝、黏卡红或过碘酸 - 希夫（PAS）染色可清晰显示杯状细胞。",
@@ -2052,7 +1979,7 @@
         },
         {
           "id": "anatomy-goblet",
-          "title": "（1） 杯状细胞在睑结膜中的分布",
+          "title": "① 杯状细胞在睑结膜中的分布",
           "paragraphs": [],
           "sources": [
             "Henriksson 等，2013Morphologic alterations of the palpebral conjunctival epithelium in a dry eye model.Cornea, 32(4):483–490."
@@ -2072,7 +1999,7 @@
         },
         {
           "id": "anatomy-tearfilm",
-          "title": "3、泪膜",
+          "title": "泪膜",
           "paragraphs": [
             "泪膜由结膜杯状细胞产生的黏蛋白、泪腺分泌的水样泪液以及及睑板腺分泌的脂质共同构成。睁眼状态下的泪液分为三个空间：",
             "穹窿区泪液：位于结膜穹窿和睑板后方的间隙。",
@@ -2085,7 +2012,7 @@
         },
         {
           "id": "anatomy-tfbut",
-          "title": "（1）泪膜破裂时间 · TFBUT",
+          "title": "① 泪膜破裂时间 · TFBUT",
           "paragraphs": [
             "TFBUT 用于评价泪膜稳定性。采用 2 μL、0.5% 荧光素钠，记录眨眼后至荧光素染色泪膜首次出现暗斑的时间，每眼测量三次取平均。"
           ],

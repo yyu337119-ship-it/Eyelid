@@ -190,11 +190,11 @@
             {
               "id": "mg",
               "mark": "（1）",
-              "title": "睑板腺 MG",
+              "title": "睑板腺MG-腺体形态与组织学",
               "assays": [
                 {
                   "id": "mg-stereo-close",
-                  "title": "腺体整体形态与排列",
+                  "title": "新鲜睑板纵切面大体成像联合HE",
                   "sources": [
                     "paper2"
                   ],
@@ -234,7 +234,7 @@
                       "id": "v16-mg-stereo-close-fig-0"
                     }
                   ],
-                  "mark": "①",
+                  "mark": "i",
                   "referenceEntries": []
                 },
                 {
@@ -289,7 +289,7 @@
                       "id": "v16-mg-nuclei-count-fig-1"
                     }
                   ],
-                  "mark": "②",
+                  "mark": "（2）",
                   "referenceEntries": []
                 },
                 {
@@ -555,6 +555,37 @@
                   ],
                   "mark": "（7）",
                   "referenceEntries": []
+                },
+                {
+                  "id": "user-assay-7969279d-ab8f-4083-a651-414404a08f23",
+                  "title": "睑板腺MG-分子标志物",
+                  "evaluation": "睑板腺MG-分子标志物",
+                  "mark": "（2）",
+                  "sources": [],
+                  "userAdded": true,
+                  "methods": [
+                    ""
+                  ],
+                  "metrics": [
+                    ""
+                  ],
+                  "normal": [
+                    ""
+                  ],
+                  "abnormal": [
+                    ""
+                  ],
+                  "statistics": [
+                    ""
+                  ],
+                  "notes": [
+                    ""
+                  ],
+                  "references": [],
+                  "referenceEntries": [],
+                  "instruments": [],
+                  "observations": [],
+                  "figures": []
                 }
               ]
             },

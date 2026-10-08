@@ -191,8 +191,8 @@ function PhenotypeAppInner() {
                       .map((topic) => {
                       const topicIds = topicSources(topic)
                       return (
-                        <div key={topic.id} id={topic.id} className="scroll-mt-40 space-y-3">
-                          <h4 className="flex flex-wrap items-baseline gap-x-2 text-base font-semibold text-stone-800">
+                        <div key={topic.id} id={topic.id} className={`scroll-mt-40 space-y-3 ${topic.parentId ? "ml-3 border-l-2 border-stone-200 pl-3 sm:ml-6 sm:pl-5" : ""}`}>
+                          {(editMode || topic.title || topic.mark) && <h4 className="flex flex-wrap items-baseline gap-x-2 text-base font-semibold text-stone-800">
                             <span className="inline-flex min-w-0 flex-1 flex-wrap items-baseline gap-1 text-[#1f4b3a]">
                               <EditableText
                                 value={topic.mark}
@@ -213,7 +213,7 @@ function PhenotypeAppInner() {
                               ids={sameSources(topicIds, sectionIds) ? [] : topicIds}
                               className="font-normal"
                             />
-                          </h4>
+                          </h4>}
                           <div className="space-y-4">
                             {topic.assays
                               .filter((assay) => editMode || assayHasSubstance(assay))
@@ -257,7 +257,7 @@ function PhenotypeAppInner() {
               <EditableText value={refsLabel} onChange={setRefsLabel} className="font-semibold" />
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
-              本页为后续三篇文献加入前的版本。编号对应两篇核心文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。
+              编号对应两篇核心文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。
             </p>
             <Separator className="my-4" />
             <div className="grid gap-4">

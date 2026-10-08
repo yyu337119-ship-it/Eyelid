@@ -185,8 +185,8 @@ export function TocNav({ onNavigate }: { onNavigate?: () => void }) {
                         editMode || Boolean(topic.title.trim()) || topic.assays.some(assayHasSubstance)
                     )
                     .map((topic) => (
-                    <li key={topic.id}>
-                      <TocRow
+                    <li key={topic.id} className={topic.parentId ? "ml-4 border-l border-stone-200 pl-2" : undefined}>
+                      {(editMode || topic.title || topic.mark) && <TocRow
                         id={topic.id}
                         number={topic.mark}
                         title={topic.title}
@@ -205,7 +205,7 @@ export function TocNav({ onNavigate }: { onNavigate?: () => void }) {
                         numberClassName="w-8 shrink-0 text-[#1f4b3a]"
                         titleClassName="flex-1 leading-5 text-stone-600"
                         rowClassName="block w-full text-left leading-5 text-stone-600 hover:text-stone-900 hover:underline"
-                      />
+                      />}
                       <ul className="mt-1 space-y-0.5 pl-2">
                         {topic.assays
                           .filter((assay) => editMode || assayHasSubstance(assay))

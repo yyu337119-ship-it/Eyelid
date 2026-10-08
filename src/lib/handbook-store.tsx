@@ -1,5 +1,7 @@
 "use client"
 
+import phenotypeIntro from "@/data/phenotype-intro.json"
+
 import {
   createContext,
   useCallback,
@@ -39,14 +41,13 @@ import { defaultAnatomy, type AnatomySection, type AnatomyBlock } from "@/data/a
 import { normalizeAnatomy } from "@/lib/anatomy-outline"
 import { publicPath } from "@/lib/public-path"
 
-export const HANDBOOK_INTRO =
-  "按解剖部位系统评价小鼠眼表异常。目录四级：一、为一级；「1、2、」为二级；「①②」为三级；「（1）（2）」为四级检测卡片。每一级标题后直接标注【1】或【2】。每张卡片写出检测手段/仪器、分子标志物、观察结果和原文图表。"
+export const HANDBOOK_INTRO = phenotypeIntro
 
 export const PUBLIC_SITE_URL = "https://yyu337119-ship-it.github.io/Eyelid/"
 export const DEFAULT_REFS_LABEL = "参考文献"
 
 /** Unsaved in-browser draft only. Never auto-load eyelid-handbook-edits-v1…v10. */
-const DRAFT_KEY = "eyelid-handbook-unsaved-draft-v15"
+const DRAFT_KEY = "eyelid-handbook-unsaved-draft-v16"
 
 export type AssayPath = {
   categoryId: string

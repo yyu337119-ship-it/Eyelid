@@ -3,203 +3,179 @@
   "refsLabel": "参考文献",
   "categories": [
     {
-      "id": "eyelid",
+      "id": "phenotype-eyelid",
       "roman": "Ⅰ",
       "title": "眼睑",
-      "question": "眼睑外形、MCJ、腺体、睑脂与支撑结构是否按解剖部位完整评价？",
-      "summary": "按大体→皮肤黏膜→腺体（MG / 睑脂 / 泪腺 / Zeis）→睑板与肌层顺序读表型；每条卡片用八格模板，图紧跟该条。",
+      "question": "从整体外观到皮肤黏膜、腺体与支撑结构，依次评价眼睑表型。",
+      "summary": "每个评价项目依次列出方法、指标、正常/异常表型、统计建议、注意事项与文献。",
       "sections": [
         {
-          "id": "eyelid-gross",
+          "id": "phenotype-gross",
           "index": "1",
           "title": "大体解剖",
           "topics": [
             {
-              "id": "eyelid-gross-topic",
+              "id": "gross-items",
               "mark": "",
-              "title": "外形与开闭",
+              "title": "",
               "assays": [
                 {
-                  "id": "gross-open",
-                  "title": "眼睑开闭与睑外形",
-                  "mark": "（1）",
+                  "id": "eyelid-opening",
+                  "title": "开睑时机、肿胀与睑裂形态",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "生后睁眼时机、上下睑肿胀、睑裂形态",
+                  "evaluation": "开睑时机、肿胀与睑裂形态",
                   "methods": [
-                    "体视显微镜活体/离体观察",
-                    "可辅以 HE 确认开睑与睑缘肿胀（【2】Fig. 2）"
+                    "从出生后记录眼睑状态；P11体视显微镜观察，4%多聚甲醛固定过夜、5 μm石蜡HE切片确认。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "睁眼日龄（P 日）",
-                    "上下睑肿胀分级（0–3，预定义）",
-                    "睑裂宽度（mm，可选）"
+                    "对照P12–P14开睑；KR/TG约P8–P10。原文未量化肿胀或睑裂宽高，建议统一拍摄后测量。"
                   ],
                   "normal": [
-                    "对照 P11 眼睑仍闭合、外形规整（【2】Fig. 2A）"
+                    "P11对照眼睑闭合，无明显肿胀。"
                   ],
                   "abnormal": [
-                    "KR/TG 过早睁眼；上下睑肿胀，下睑更重（【2】Fig. 2B–D）"
+                    "KR/TG P11已开睑，上下睑肿胀，下睑更明显。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "睁眼日龄 t / Mann–Whitney",
-                    "肿胀分级秩和检验",
-                    "报告 n（鼠/眼）"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：开睑时间按日观察可用生存分析；宽高、厚度采用适合分布的模型。"
                   ],
                   "notes": [
-                    "区分发育性过早开睑与成年梗阻性 MGD 继发改变",
-                    "上下睑分别记录"
+                    "比较同龄动物；开睑时间是本研究对照观察，不能作为所有品系通用区间。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第2–4页，Fig. 2A–D。"
                   ],
                   "figures": [
                     {
                       "src": "/figures/paper2-fig2-eyelid.jpg",
                       "paperFig": "Fig. 2A–D",
-                      "caption": "P11。A：对照仍闭合；B：KR/TG 过早睁眼、上下睑肿胀（下睑更明显）。C/D：HE 确认开睑与肿胀。",
-                      "id": "gross-open-fig-0"
+                      "caption": "P11。A：对照眼睑仍闭合；B：KR/TG 过早睁眼，上下睑肿胀，下睑更明显。C/D：HE 确认开睑与肿胀。",
+                      "id": "v16-eyelid-opening-fig-0",
+                      "placement": "results"
                     }
                   ],
+                  "mark": "（1）",
                   "referenceEntries": []
+                },
+                {
+                  "id": "user-assay-c0663535-b75b-4fdf-a1d4-5e2707860faa",
+                  "title": "眼睑形态",
+                  "evaluation": "眼睑形态",
+                  "mark": "（2）",
+                  "sources": [],
+                  "userAdded": true,
+                  "methods": [
+                    "大体观察"
+                  ],
+                  "metrics": [
+                    ""
+                  ],
+                  "normal": [
+                    ""
+                  ],
+                  "abnormal": [
+                    "眼睑干燥、结痂"
+                  ],
+                  "statistics": [
+                    ""
+                  ],
+                  "notes": [
+                    ""
+                  ],
+                  "references": [],
+                  "referenceEntries": [
+                    {
+                      "id": "ref-5589fe29-8705-432e-aaa7-5075234122f0",
+                      "authors": "Danielle J. Gardon a,1, Che-Jui Liu a, Natalia A. Veniaminova a, Vesa Kaartinen b, Sunny Y. Wong a,*",
+                      "title": "A mouse model of meibomian gland hyperkeratinization-induced dry eye",
+                      "source": "Developmental Biology",
+                      "year": "2026",
+                      "link": ""
+                    }
+                  ],
+                  "instruments": [],
+                  "observations": [],
+                  "figures": [
+                    {
+                      "id": "user-fig-1f2bcf4f-ddd7-4a9d-863f-050856f0997d",
+                      "paperFig": "Cre Abca12→cKO小鼠眼睑干燥和结痂 ",
+                      "caption": "",
+                      "alt": "",
+                      "placement": "results",
+                      "userAdded": true,
+                      "src": "/figures/live/user-fig-1f2bcf4f-ddd7-4a9d-863f-050856f0997d.jpg"
+                    }
+                  ]
                 }
               ]
             }
           ]
         },
         {
-          "id": "eyelid-skin",
+          "id": "phenotype-skin",
           "index": "2",
           "title": "皮肤和黏膜",
           "topics": [
             {
-              "id": "eyelid-mcj",
-              "mark": "①",
+              "id": "phenotype-mcj",
+              "mark": "（1）",
               "title": "皮肤黏膜交界 · MCJ",
               "assays": [
                 {
-                  "id": "mcj-orifice",
-                  "title": "MCJ 位置与开口关系",
-                  "mark": "（1）",
+                  "id": "conj-krt4",
+                  "title": "MCJ上皮厚度与黏膜/表皮分化边界",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "MG 开口相对 MCJ 的前后位置；睑缘皮肤–黏膜移行是否清晰",
+                  "evaluation": "MCJ上皮厚度与黏膜/表皮分化边界",
                   "methods": [
-                    "眼球/睑板矢状或冠状石蜡切片 HE（【2】Fig. 3D–I）"
+                    "P15石蜡HE检查皮肤黏膜移行上皮；Krt4、Krt10免疫荧光联合定位MCJ。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "开口–MCJ 前后距离（μm）",
-                    "开口异位率（异位开口腺体数/总腺体数）"
+                    "原文未报告厚度、阳性面积或越界距离；建议记录厚度μm、Krt4阳性比例、Krt10越界范围。"
                   ],
                   "normal": [
-                    "开口位于 MCJ 前方；移行带清楚（【2】Fig. 3D、3G）"
+                    "MCJ黏膜分化区域Krt4阳性；Krt10位于表皮分化区域。"
                   ],
                   "abnormal": [
-                    "重症开口异位到皮肤侧；周围间充质堆积（【2】Fig. 3E、3H）"
+                    "移行上皮增厚；MCJ处Krt4丢失，Krt10越过MCJ进入结膜。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "距离均值±SEM",
-                    "异位率 χ² / Fisher",
-                    "按上/下睑分层"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：动物层面汇总或混合模型分析多切片；多标记比较校正多重检验。"
                   ],
                   "notes": [
-                    "切面须含睑缘全层",
-                    "勿把斜切造成的假异位当成表型"
+                    "同时查看组织边界、Krt4和Krt10；不凭单一角蛋白判定边界移动。抗体详细条件未完整报告。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第5–6页，结果3.2.4，Fig. 5C–D、G–J。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper2-fig3-mg.jpg",
-                      "paperFig": "Fig. 3D–I",
-                      "caption": "HE：对照开口在 MCJ 前方；重症导管扩张、开口皮肤侧异位、间充质堆积。",
-                      "id": "mcj-orifice-fig-0"
-                    }
-                  ],
-                  "referenceEntries": []
-                },
-                {
-                  "id": "mcj-krt",
-                  "title": "MCJ 分化身份（Krt4 / Krt10）",
-                  "mark": "（2）",
-                  "sources": [
-                    "paper2"
-                  ],
-                  "evaluation": "黏膜侧 vs 表皮侧分化边界是否错位（表皮化）",
-                  "methods": [
-                    "睑缘石蜡切片免疫荧光：Krt4（黏膜）、Krt10（表皮）（【2】Fig. 5G–J）"
-                  ],
-                  "metrics": [
-                    "MCJ 处 Krt4⁺ 长度或积分密度",
-                    "Krt10 越过 MCJ 进入结膜的距离（μm）或阳性面积"
-                  ],
-                  "normal": [
-                    "Krt4 在 MCJ 黏膜侧阳性；Krt10 限于表皮侧、不过界"
-                  ],
-                  "abnormal": [
-                    "Krt4 在 MCJ 消失；Krt10 越过 MCJ 进入结膜（【2】Fig. 5G–J）"
-                  ],
-                  "statistics": [
-                    "成对报告 Krt4↓ + Krt10 越界",
-                    "连续变量 t / Mann–Whitney"
-                  ],
-                  "notes": [
-                    "必须同一切片/相邻切片成对读"
-                  ],
-                  "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
-                  ],
-                  "figures": [
+                      "src": "/figures/revised/mcj-he.jpg",
+                      "paperFig": "【2】Fig. 5C–D",
+                      "caption": "MCJ移行上皮HE：上为KR对照，下为KR/TG。",
+                      "placement": "results",
+                      "width": 193,
+                      "height": 310,
+                      "id": "v16-conj-krt4-fig-0"
+                    },
                     {
-                      "src": "/figures/paper2-fig5-conjunctiva.jpg",
-                      "paperFig": "Fig. 5G–J",
-                      "caption": "对照 MCJ 黏膜侧 Krt4⁺；转基因 Krt4 消失，Krt10 越界入结膜。",
-                      "id": "mcj-krt-fig-0"
+                      "src": "/figures/revised/mcj-keratins.jpg",
+                      "paperFig": "【2】Fig. 5G–J",
+                      "caption": "Krt4、Krt10显示黏膜/表皮边界变化，保留原局部放大框和比例尺。",
+                      "placement": "results",
+                      "width": 495,
+                      "height": 250,
+                      "id": "v16-conj-krt4-fig-1"
                     }
                   ],
-                  "referenceEntries": []
-                },
-                {
-                  "id": "mcj-epithelium",
-                  "title": "睑缘/移行上皮厚度",
-                  "mark": "（3）",
-                  "sources": [
-                    "paper2"
-                  ],
-                  "evaluation": "结膜与皮肤黏膜移行上皮是否增厚",
-                  "methods": [
-                    "睑板上皮 HE（【2】Fig. 5A–D）"
-                  ],
-                  "metrics": [
-                    "上皮层数或最大厚度（μm），定点测量（睑缘、移行带）"
-                  ],
-                  "normal": [
-                    "移行上皮厚度均一、层次清楚"
-                  ],
-                  "abnormal": [
-                    "KR/TG 结膜与皮肤黏膜移行上皮增厚（TGFα 上皮有丝分裂原效应）"
-                  ],
-                  "statistics": [
-                    "厚度均值±SEM",
-                    "上下睑分别统计"
-                  ],
-                  "notes": [
-                    "与 MG 本身病变分开记录"
-                  ],
-                  "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
-                  ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper2-fig5-conjunctiva.jpg",
-                      "paperFig": "Fig. 5A–D",
-                      "caption": "HE：对照 vs 转基因。结膜上皮与皮肤黏膜移行上皮增厚。",
-                      "id": "mcj-epithelium-fig-0"
-                    }
-                  ],
+                  "mark": "①",
                   "referenceEntries": []
                 }
               ]
@@ -207,600 +183,690 @@
           ]
         },
         {
-          "id": "eyelid-glands",
+          "id": "phenotype-glands",
           "index": "3",
           "title": "腺体",
           "topics": [
             {
-              "id": "gland-mg",
-              "mark": "①",
-              "title": "睑板腺 MG",
+              "id": "mg",
+              "mark": "（1）",
+              "title": "睑板腺MG-腺体形态与组织学",
               "assays": [
                 {
-                  "id": "mg-stereo",
-                  "title": "结膜面大体形态与排列",
-                  "mark": "（1）",
+                  "id": "mg-stereo-close",
+                  "title": "新鲜睑板纵切面大体成像联合HE",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "MG 平行排列、完整性、弯曲/缺失；上下睑差异",
+                  "evaluation": "腺体整体形态与排列",
                   "methods": [
-                    "体视显微镜翻转眼睑，结膜面观察（【2】Fig. 3A–C）"
+                    "P15翻转眼睑暴露结膜面，体视显微镜观察离体腺体；组织以4%多聚甲醛于4 ℃固定过夜，并结合HE确认。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "可见腺体条数",
-                    "缺失/畸形/弯曲腺体占比",
-                    "下睑 vs 上睑严重度分级"
+                    "13只KR/TG小鼠：重症7/13（54%），轻症6/13（46%）。",
+                    "建议补充完整腺体数、缺损比例及畸形比例；原文未给出正常数量范围。"
                   ],
                   "normal": [
-                    "对照 MG 沿睑板平行排列、腺泡簇完整"
+                    "P15对照腺体充分发育，沿睑板平行排列，腺泡簇完整。"
                   ],
                   "abnormal": [
-                    "重症部分缺失、畸形/弯曲；下睑重于上睑；轻症大体可接近对照"
+                    "重症腺泡部分缺失、腺体畸形，下睑重于上睑；轻症大体差异小，但腺周间充质增多。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "计数/占比",
-                    "轻重分级秩和",
-                    "上下睑配对或分层"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：严重程度分布采用Fisher精确检验或有序分类模型；上下睑同时分析时处理动物内相关性。"
                   ],
                   "notes": [
-                    "轻症大体可「正常」，必须切片确认间充质堆积"
+                    "单转基因同窝对照不能统称WT；13只动物的分型样本量不能套用至每幅组织图。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第2–4页，方法2.1–2.2、结果3.2.2、Fig. 3A–C。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper2-fig3-mg.jpg",
-                      "paperFig": "Fig. 3A–C",
-                      "caption": "P15 结膜面。对照平行完整；重症部分缺失、畸形；轻症大体接近对照。",
-                      "id": "mg-stereo-fig-0"
+                      "src": "/figures/revised/mg-overview.jpg",
+                      "paperFig": "【2】Fig. 3A–C",
+                      "caption": "P15腺体大体排列：对照、重症和轻症KR/TG；保留原分图标签。",
+                      "placement": "results",
+                      "width": 675,
+                      "height": 240,
+                      "id": "v16-mg-stereo-close-fig-0"
                     }
                   ],
+                  "mark": "i",
                   "referenceEntries": []
                 },
                 {
-                  "id": "mg-gross-he",
-                  "title": "新鲜睑板纵切大体 + HE",
+                  "id": "mg-nuclei-count",
+                  "title": "腺泡结构与腺体实质保留",
+                  "sources": [
+                    "paper1",
+                    "paper2"
+                  ],
+                  "evaluation": "腺泡结构与腺体实质保留",
+                  "methods": [
+                    "冰冻切片HE：4%多聚甲醛室温5分钟；苏木精3分钟、返蓝2分钟、1%伊红6分钟，脱水透明封片。Zeiss AxioScan.Z1，20×/0.8物镜。 脱水为50%、70%、95%、100%乙醇各50秒，CitriSolv透明，Cytoseal封片。",
+                    "每只小鼠分析32张连续切片。"
+                  ],
+                  "instruments": [],
+                  "metrics": [
+                    "平均腺泡细胞核数；每组4–6只小鼠。各组精确汇总数值及误差线类型未明确报告。"
+                  ],
+                  "normal": [
+                    "WT核数高于两个Awat2缺失组；对照腺泡沿中央导管成簇。"
+                  ],
+                  "abnormal": [
+                    "DMSO组腺泡稀疏、核数少；ATR101高于DMSO（**），仍低于WT（*）。结果支持腺泡保留及退变减轻。"
+                  ],
+                  "observations": [],
+                  "statistics": [
+                    "原文：Shapiro–Wilk检查正态性后采用双侧t检验。建议：以动物为单位比较三组并校正多重比较；保留切片层数据时用嵌套模型。"
+                  ],
+                  "notes": [
+                    "实验约2月龄、基线腺泡仍完整，不能据此断言已丢失腺泡再生。32张切片不是32个独立样本；核数不等于整条腺体细胞总量。"
+                  ],
+                  "references": [
+                    "【1】PDF第3、12–13页，Fig. 7A–B；【2】第4页，Fig. 3D–I。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/revised/mg-acini.jpg",
+                      "paperFig": "【1】Fig. 7A",
+                      "caption": "HE比较DMSO与ATR101组腺泡结构；本分图没有WT。",
+                      "placement": "results",
+                      "width": 315,
+                      "height": 340,
+                      "id": "v16-mg-nuclei-count-fig-0"
+                    },
+                    {
+                      "src": "/figures/revised/mg-nuclei.jpg",
+                      "paperFig": "【1】Fig. 7B",
+                      "caption": "每只动物32张连续切片，比较平均腺泡核数；切片不作为独立动物数。",
+                      "placement": "results",
+                      "width": 365,
+                      "height": 335,
+                      "id": "v16-mg-nuclei-count-fig-1"
+                    }
+                  ],
                   "mark": "（2）",
-                  "sources": [
-                    "paper1"
-                  ],
-                  "evaluation": "中央导管扩张、开口堵塞、导管上皮角化、腺泡密度",
-                  "methods": [
-                    "Leica M205 C 等体视镜拍新鲜睑板纵切面",
-                    "同标本横切 HE（【1】Fig. 7A）"
-                  ],
-                  "metrics": [
-                    "大体导管轮廓宽度",
-                    "开口堵塞有无（二分类）",
-                    "HE 导管腔径",
-                    "周围腺泡密度（半定量）"
-                  ],
-                  "normal": [
-                    "导管规整、开口通畅、角化轻、腺泡密"
-                  ],
-                  "abnormal": [
-                    "Awat2−/−/DMSO：导管扩张、脂质淤积、开口栓、导管上皮角化、腺泡稀疏；ATR101 后减轻"
-                  ],
-                  "statistics": [
-                    "腔径/密度连续变量",
-                    "堵塞率 Fisher",
-                    "治疗前后配对或重复测量"
-                  ],
-                  "notes": [
-                    "纵切大体与横切 HE 互证",
-                    "红线/箭头标注标准统一"
-                  ],
-                  "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
-                  ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper1-fig7-mg.jpg",
-                      "paperFig": "Fig. 7A",
-                      "caption": "上排 DMSO，下排 ATR101。左列纵切大体，右列 HE。红线标中央导管，绿箭头标开口堵塞。",
-                      "id": "mg-gross-he-fig-0"
-                    }
-                  ],
                   "referenceEntries": []
                 },
                 {
-                  "id": "mg-nuclei",
-                  "title": "腺泡细胞核数（实质保留）",
+                  "id": "mg-3d-duct",
+                  "title": "中央导管扩张、脂质淤积与角化",
+                  "sources": [
+                    "paper1",
+                    "paper2"
+                  ],
+                  "evaluation": "中央导管扩张、脂质淤积与角化",
+                  "methods": [
+                    "新鲜睑板纵切面与HE观察；完整固定眼睑经LIMPID透明化，共聚焦体积成像并拼接。FalseColor-Python虚拟染色，深度学习分割导管/腺泡，人工复核纠正后用Amira三维展示。"
+                  ],
+                  "instruments": [],
+                  "metrics": [
+                    "最大直径＝中心线至导管壁外侧最大距离×2，包含管腔及管壁。平均约11根导管/眼睑。",
+                    "WT 3只/3睑；DMSO 4只/8睑；ATR101 5只/10睑。Fig. 6C每点为一根导管。"
+                  ],
+                  "normal": [
+                    "WT最大直径较小；未建立正常直径参考区间。"
+                  ],
+                  "abnormal": [
+                    "DMSO组导管扩张、淤积及上皮角化；ATR101最大直径下降但仍大于WT，两项比较均***。"
+                  ],
+                  "observations": [],
+                  "statistics": [
+                    "原文：Shapiro–Wilk检查正态性后采用双侧t检验。建议：采用导管—眼睑—动物嵌套混合模型，或先汇总至动物层面。"
+                  ],
+                  "notes": [
+                    "这是光学切片而非连续实体切片；训练样本与结果样本分开。分割交叉验证平均Dice 0.87，最终结果人工复核。",
+                    "文献【1】统计标记：* P<0.05，** P<0.005，*** P<0.0005；ns为未发现显著差异，不等于等效。"
+                  ],
+                  "references": [
+                    "【1】PDF第5、11–13页，Fig. 6A–C、7A；【2】第4页，Fig. 3D–I。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/revised/mg-3d-method.jpg",
+                      "paperFig": "【1】Fig. 6A",
+                      "caption": "LIMPID透明化体积成像后虚拟HE切面；标出不同Z深度与中央导管的位置。",
+                      "placement": "methods",
+                      "width": 670,
+                      "height": 340,
+                      "id": "v16-mg-3d-duct-fig-0"
+                    },
+                    {
+                      "src": "/figures/revised/mg-3d-result.jpg",
+                      "paperFig": "【1】Fig. 6B",
+                      "caption": "三维分割显示中央导管与腺泡结构。",
+                      "placement": "results",
+                      "width": 450,
+                      "height": 270,
+                      "id": "v16-mg-3d-duct-fig-1"
+                    },
+                    {
+                      "src": "/figures/revised/mg-3d-diameter.jpg",
+                      "paperFig": "【1】Fig. 6C",
+                      "caption": "最大中央导管直径，点代表导管；统计需要考虑动物内相关性。",
+                      "placement": "results",
+                      "width": 320,
+                      "height": 270,
+                      "id": "v16-mg-3d-duct-fig-2"
+                    }
+                  ],
                   "mark": "（3）",
-                  "sources": [
-                    "paper1"
-                  ],
-                  "evaluation": "睑板腺实质萎缩/恢复",
-                  "methods": [
-                    "连续多张睑板横切 HE",
-                    "每鼠统计多张切片腺泡细胞平均核数（【1】Fig. 7B，原文约 32 张/鼠）"
-                  ],
-                  "metrics": [
-                    "平均 meibocyte 核数/切片（或/腺体）"
-                  ],
-                  "normal": [
-                    "WT 核数最高"
-                  ],
-                  "abnormal": [
-                    "Awat2−/−/DMSO 最低；ATR101 回升但仍低于 WT"
-                  ],
-                  "statistics": [
-                    "单因素 ANOVA + 事后检验",
-                    "报告鼠数与切片数"
-                  ],
-                  "notes": [
-                    "核数↓=萎缩/丢失，不是单纯导管扩张"
-                  ],
-                  "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
-                  ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper1-fig7-mg.jpg",
-                      "paperFig": "Fig. 7B",
-                      "caption": "Average meibocyte nuclei count。Awat2−/−/DMSO < ATR101 < WT。",
-                      "id": "mg-nuclei-fig-0"
-                    }
-                  ],
                   "referenceEntries": []
                 },
                 {
-                  "id": "mg-3d",
-                  "title": "三维重建中央导管最大直径",
-                  "mark": "（4）",
-                  "sources": [
-                    "paper1"
-                  ],
-                  "evaluation": "中央导管扩张程度（容积学）",
-                  "methods": [
-                    "光学透明眼睑 3D 共聚焦/虚拟组织学",
-                    "深度学习分割导管（红）与腺泡（绿）",
-                    "结膜面为 Z=0（【1】Fig. 6）"
-                  ],
-                  "metrics": [
-                    "每根中央导管最大直径（μm）",
-                    "可报腺体级或眼睑级均值"
-                  ],
-                  "normal": [
-                    "WT 导管细"
-                  ],
-                  "abnormal": [
-                    "DMSO 导管增粗扩张；ATR101 直径显著小于溶剂对照，仍大于 WT"
-                  ],
-                  "statistics": [
-                    "箱线图",
-                    "混合效应模型（导管嵌套于眼/鼠）",
-                    "原文 n 例：WT 3 睑、DMSO 8 睑、ATR101 10 睑"
-                  ],
-                  "notes": [
-                    "分割结果须人工复核",
-                    "最大直径定义与软件测量轴一致"
-                  ],
-                  "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
-                  ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper1-fig6-3d.jpg",
-                      "paperFig": "Fig. 6A–C",
-                      "caption": "A：不同 Z 深度切片。B：三维渲染，红=导管、绿=腺泡。C：中央导管最大直径箱线图。",
-                      "id": "mg-3d-fig-0"
-                    }
-                  ],
-                  "referenceEntries": []
-                },
-                {
-                  "id": "mg-terminal",
-                  "title": "裂隙灯末端导管厚度",
-                  "mark": "（5）",
-                  "sources": [
-                    "paper1"
-                  ],
-                  "evaluation": "开口附近末端导管外观厚度（阻塞相关）",
-                  "methods": [
-                    "裂隙灯（约 40×）导出带比例尺照片",
-                    "ImageJ 垂直于导管长轴测外部可视横向宽度（导管+腔内淤积）（【1】Fig. 5）"
-                  ],
-                  "metrics": [
-                    "(Dx−Do)/Do 或绝对厚度（μm）",
-                    "Day 0/10/14"
-                  ],
-                  "normal": [
-                    "末端导管细、轮廓清晰"
-                  ],
-                  "abnormal": [
-                    "治疗前增厚；ATR101 在 Day 10、14 厚度显著下降"
-                  ],
-                  "statistics": [
-                    "重复测量 ANOVA / 线性混合模型",
-                    "双眼可校正聚类"
-                  ],
-                  "notes": [
-                    "测的是外观厚度含淤积脂质，不是纯管壁",
-                    "拍摄倍率与光照固定"
-                  ],
-                  "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
-                  ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper1-fig5-mg-duct.jpg",
-                      "paperFig": "Fig. 5B",
-                      "caption": "MG terminal duct thickness (Dx−Do)/Do。ATR101 组在 Day 10、Day 14 均低于溶剂对照。",
-                      "id": "mg-terminal-fig-0"
-                    }
-                  ],
-                  "referenceEntries": []
-                },
-                {
-                  "id": "mg-he-dev",
-                  "title": "HE：腺泡簇、导管、开口与间充质",
-                  "mark": "（6）",
+                  "id": "mg-he-acini",
+                  "title": "导管开口位置与腺周间充质",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "腺泡结构、导管扩张、开口位置、腺体周围间充质",
+                  "evaluation": "导管开口位置与腺周间充质",
                   "methods": [
-                    "眼球石蜡 HE（【2】Fig. 3D–I）"
+                    "4%多聚甲醛4 ℃固定过夜，石蜡包埋，5 μm HE切片；Nikon ECLIPSE E800观察MCJ、开口及腺周结构。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "导管最大横径",
-                    "间充质厚度/面积",
-                    "开口异位率",
-                    "腺泡簇完整性评分"
+                    "原文未量化开口距离、异位比例或细胞密度；建议记录上述指标并统一区域。"
                   ],
                   "normal": [
-                    "腺泡沿中央导管成簇；开口在 MCJ 前方"
+                    "原文将对照开口描述为MCJ前方，Fig. 3G标有MCJ和DO。"
                   ],
                   "abnormal": [
-                    "重症腺泡紊乱、导管扩张、开口皮肤侧异位、间充质大量堆积；轻症大体近对照但间充质仍增多"
+                    "重症开口移至远离MCJ的皮肤表皮侧，腺泡紊乱、导管扩张、间充质堆积；轻症仍见间充质增多。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "连续变量 + 分级评分",
-                    "轻重分层"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：异位发生率采用Fisher或二项模型；距离、密度采用适合分布的模型。"
                   ],
                   "notes": [
-                    "轻症不可只靠大体放过"
+                    "统一前后方向与切面定义；单个切面未见开口不能判为缺失。间充质与腺泡细胞分别计数。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第2、4页，方法2.2、结果3.2.2、Fig. 3D–I。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper2-fig3-mg.jpg",
-                      "paperFig": "Fig. 3D–I",
-                      "caption": "对照腺泡成簇；重症扩张/异位/间充质堆积；轻症间充质仍增多。",
-                      "id": "mg-he-dev-fig-0"
+                      "src": "/figures/revised/mg-opening.jpg",
+                      "paperFig": "【2】Fig. 3D–I",
+                      "caption": "HE定位MCJ、导管开口DO及腺周间充质。G为对照开口；H、I为模型。",
+                      "placement": "results",
+                      "width": 675,
+                      "height": 345,
+                      "id": "v16-mg-he-acini-fig-0"
                     }
                   ],
+                  "mark": "（4）",
+                  "referenceEntries": []
+                },
+                {
+                  "id": "mg-terminal-duct",
+                  "title": "末端导管外观厚度",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "evaluation": "末端导管外观厚度",
+                  "methods": [
+                    "Zeiss SL 800裂隙灯、SL Cam Compact相机，约40×采图。原文未详细报告测量软件、测量线和边界判定。"
+                  ],
+                  "instruments": [],
+                  "metrics": [
+                    "（Dx−D0）/D0；D0为清堵前基线。",
+                    "Day 10：ATR101 4只/4睑、DMSO 3只/3睑；Day 14：ATR101 6只/8睑、DMSO 5只/7睑。每点代表一根导管。"
+                  ],
+                  "normal": [
+                    "该图无WT组，未提供正常厚度范围。"
+                  ],
+                  "abnormal": [
+                    "ATR101组Day 10、14相对厚度变化均低于DMSO（***）；精确汇总数值未报告。"
+                  ],
+                  "observations": [],
+                  "statistics": [
+                    "原文：Shapiro–Wilk检查正态性后采用双侧t检验。建议：组别×时间混合模型，处理重复随访和同一动物多个导管的相关性。"
+                  ],
+                  "notes": [
+                    "不能称为导管壁厚度；两时点动物数不同，不假设完全配对。建议标准化测量线，不将其写成原文既有方法。"
+                  ],
+                  "references": [
+                    "【1】PDF第3、10页，Fig. 5A–B。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/revised/mg-terminal.jpg",
+                      "paperFig": "【1】Fig. 5B",
+                      "caption": "清堵前为D0；治疗第10、14天相对厚度变化。外观随访图见睑脂“排出与再次阻塞”。",
+                      "placement": "results",
+                      "width": 435,
+                      "height": 395,
+                      "id": "v16-mg-terminal-duct-fig-0"
+                    }
+                  ],
+                  "mark": "（5）",
                   "referenceEntries": []
                 },
                 {
                   "id": "mg-rtqpcr",
-                  "title": "分子标志物 RT-qPCR（睑板）",
-                  "mark": "（7）",
+                  "title": "MG相关基因表达",
                   "sources": [
                     "paper1"
                   ],
-                  "evaluation": "角化/修复、视黄酸信号、腺细胞分化",
+                  "evaluation": "MG相关基因表达",
                   "methods": [
-                    "睑板 mRNA RT-qPCR",
-                    "内参 Gapdh（【1】Fig. 7C）"
+                    "MG相关组织以Allprotect保存，−20 ℃储存；RNeasy Lipid Tissue Mini Kit提RNA。High-Capacity cDNA试剂，20 μL体系、最多2 μg RNA。",
+                    "Applied Biosystems 7500 Fast、TaqMan检测，Gapdh内参，采用相对标准曲线法。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "Aldh1a3、Rarb、Rbp1（RA 轴）",
-                    "Sprr1a、Krt14（角化/增殖）",
-                    "Pparg（分化/脂质合成）"
+                    "Aldh1a3、Rarb、Rbp1、Sprr1a、Pparg、Krt14相对表达。WT每基因5–9只、DMSO 5–9只、ATR101 4–7只；n为动物。"
                   ],
                   "normal": [
-                    "WT：角化轴低、Pparg 维持"
+                    "WT为相对表达参照，不能建立跨实验的通用范围。"
                   ],
                   "abnormal": [
-                    "DMSO 角化/修复轴高、Pparg 低；ATR101 后 Sprr1a/Krt14↓、Pparg↑，RA 相关基因部分回落"
+                    "ATR101后Aldh1a3、Rarb、Krt14下降，Pparg上升，与WT比较为ns。",
+                    "Rbp1两模型组均高于WT，治疗前后ns；Sprr1a虽下降，仍高于WT。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "ΔΔCt",
-                    "ANOVA",
-                    "多重比较校正"
+                    "原文：Shapiro–Wilk检查正态性后采用双侧t检验。建议：按实际标准曲线法处理表达量，必要时变换，校正多基因、多组比较。"
                   ],
                   "notes": [
-                    "形态缓解须落到分子轴解读",
-                    "Pparg↑ 与核数回升同向才支持功能恢复"
+                    "不写成2−ΔΔCt法。组织纯度与细胞组成影响结果；表达恢复不能独立证明分泌功能恢复。",
+                    "文献【1】统计标记：* P<0.05，** P<0.005，*** P<0.0005；ns为未发现显著差异，不等于等效。"
                   ],
                   "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
+                    "【1】PDF第5、12–13页，Fig. 7C。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig7-mg.jpg",
-                      "paperFig": "Fig. 7C",
-                      "caption": "睑板 RT-qPCR：Aldh1a3、Rarb、Rbp1、Sprr1a、Pparg、Krt14（相对 Gapdh）。",
-                      "id": "mg-rtqpcr-fig-0"
+                      "src": "/figures/revised/mg-genes.jpg",
+                      "paperFig": "【1】Fig. 7C",
+                      "caption": "六项基因表达，注意Rbp1治疗前后ns及Sprr1a仍高于WT。",
+                      "placement": "results",
+                      "width": 670,
+                      "height": 605,
+                      "id": "v16-mg-rtqpcr-fig-0"
                     }
                   ],
+                  "mark": "（6）",
                   "referenceEntries": []
                 },
                 {
-                  "id": "mg-pparg",
-                  "title": "腺泡分化/增殖/凋亡（PPARγ / PCNA / TUNEL）",
-                  "mark": "（8）",
+                  "id": "mg-pparg-pcna",
+                  "title": "腺泡细胞分化、增殖与凋亡",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "腺细胞本身是否失分化、过度增殖或凋亡",
+                  "evaluation": "腺泡细胞分化、增殖与凋亡",
                   "methods": [
-                    "石蜡 IF（PPARγ、PCNA）+ TUNEL",
-                    "P15 对照 vs KR/TG（【2】Fig. 8–10）"
+                    "P15眼睑5 μm石蜡切片：柠檬酸修复、2% BSA室温封闭1小时、一抗4 ℃过夜、Alexa 647二抗室温1小时、DAPI复染；Zeiss Axio Observer Z1成像。",
+                    "PPARγ：Cell Signaling 2435；PCNA：Abcam ab2426；另行TUNEL。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "PPARγ⁺ 腺泡比例",
-                    "基底层 PCNA⁺ 密度",
-                    "腺泡内 TUNEL⁺ 密度"
+                    "原文为定性分布，未报告阳性率；建议PPARγ强度/阳性率、基底层PCNA阳性率、腺泡TUNEL阳性率。"
                   ],
                   "normal": [
-                    "PPARγ 腺泡阳性；PCNA 在基底层；腺泡 TUNEL 很少"
+                    "PPARγ腺泡阳性；PCNA主要在基底层；腺泡TUNEL阳性细胞很少。"
                   ],
                   "abnormal": [
-                    "KR/TG 与对照模式相似——过量 TGFα 不直接改变 MG 细胞增殖/凋亡/分化；形态异常主要来自睑板/肌腱微环境"
+                    "KR/TG形态异常但仍保留PPARγ；PCNA分布相似，腺泡TUNEL仍少。未提供严格等效证据。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "阳性密度比较",
-                    "阴性结果也需报告样本量"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：阳性率使用二项混合模型，强度按连续数据分析；等效结论需预设界值。"
                   ],
                   "notes": [
-                    "与 CPF/TP 的 PCNA↑、TUNEL↑ 对照阅读"
+                    "原文未完整报告一抗稀释度及TUNEL试剂步骤。MG与CPF/睑板的结果不同，不能混合计数。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第2–3、9–10页，Fig. 8Aa/Ba、9Aa/Ba、10A–B。"
                   ],
                   "figures": [
                     {
+                      "src": "/figures/revised/mg-pparg.jpg",
+                      "paperFig": "【2】Fig. 10A–B",
+                      "caption": "MG腺泡PPARγ：上为KR，下为KR/TG。",
+                      "placement": "results",
+                      "width": 203,
+                      "height": 245,
+                      "id": "v16-mg-pparg-pcna-fig-0"
+                    },
+                    {
                       "src": "/figures/paper2-fig8-pcna.jpg",
-                      "paperFig": "Fig. 8Aa vs Ba",
-                      "caption": "PCNA：两组阳性细胞均在 MG 基底层，分布模式相似。",
-                      "id": "mg-pparg-fig-0"
+                      "paperFig": "【2】Fig. 8，重点Aa/Ba",
+                      "caption": "MG基底层PCNA。全图保留区室定位；CPF/睑板结果见支撑结构部分。",
+                      "placement": "results",
+                      "width": 1019,
+                      "height": 952,
+                      "id": "v16-mg-pparg-pcna-fig-1"
                     },
                     {
                       "src": "/figures/paper2-fig9-tunel.jpg",
-                      "paperFig": "Fig. 9Aa vs Ba",
-                      "caption": "TUNEL：两组腺泡内阳性细胞均很少。",
-                      "id": "mg-pparg-fig-1"
-                    },
-                    {
-                      "src": "/figures/paper2-fig10-pparg-collagen.jpg",
-                      "paperFig": "Fig. 10A–B",
-                      "caption": "PPARγ：对照与 KR/TG 腺泡均阳性。",
-                      "id": "mg-pparg-fig-2"
+                      "paperFig": "【2】Fig. 9，重点Aa/Ba",
+                      "caption": "MG腺泡TUNEL较少；旁侧CPF/睑板不混入MG计数。",
+                      "placement": "results",
+                      "width": 1025,
+                      "height": 1011,
+                      "id": "v16-mg-pparg-pcna-fig-2"
                     }
                   ],
+                  "mark": "（7）",
                   "referenceEntries": []
+                },
+                {
+                  "id": "user-assay-7969279d-ab8f-4083-a651-414404a08f23",
+                  "title": "睑板腺MG-分子标志物",
+                  "evaluation": "睑板腺MG-分子标志物",
+                  "mark": "（2）",
+                  "sources": [],
+                  "userAdded": true,
+                  "methods": [
+                    ""
+                  ],
+                  "metrics": [
+                    ""
+                  ],
+                  "normal": [
+                    ""
+                  ],
+                  "abnormal": [
+                    ""
+                  ],
+                  "statistics": [
+                    ""
+                  ],
+                  "notes": [
+                    ""
+                  ],
+                  "references": [],
+                  "referenceEntries": [],
+                  "instruments": [],
+                  "observations": [],
+                  "figures": []
                 }
               ]
             },
             {
-              "id": "gland-meibum",
+              "id": "meibum",
               "mark": "②",
               "title": "睑脂",
               "assays": [
                 {
-                  "id": "meibum-look",
-                  "title": "大体外观",
-                  "mark": "（1）",
+                  "id": "meibum-appearance",
+                  "title": "睑脂大体外观",
                   "sources": [
                     "paper1"
                   ],
-                  "evaluation": "挤出睑脂透明度、形态、黏稠外观",
+                  "evaluation": "睑脂大体外观",
                   "methods": [
-                    "裂隙灯生物显微镜约 40× 观察挤出物（【1】Fig. 2D）"
+                    "麻醉后用不锈钢睑板腺挤压镊轻压眼睑，Zeiss SL 800裂隙灯约40×采图；模型膏状物可用微刮勺收集。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "外观分级（清亮油滴 / 半透明 / 不透明蜡样 / 牙膏样）",
-                    "可选照相盲评"
+                    "原文未给出黏度或外观评分；建议盲法记录透明度、膏状/团块状分级。"
                   ],
                   "normal": [
-                    "偏流体、较透明、易与泪膜混合（WT）"
+                    "WT睑脂更具流动性，挤出后容易与泪膜混合。"
                   ],
                   "abnormal": [
-                    "Awat2−/−/DMSO：不透明、卷曲蜡样团块；ATR101：更接近半透明小滴"
+                    "DMSO组膏状、白色牙膏样或不透明团块；ATR101后透明度和流动性改善。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "等级资料秩和",
-                    "盲法评分 κ 一致性"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：等级评分采用有序分类模型，发生率采用二项模型。"
                   ],
                   "notes": [
-                    "挤压力度标准化",
-                    "室温影响性状，记录环境温度"
+                    "Fig. 2D没有WT；正常外观描述来自方法。外观不能替代实际黏度测定，统一挤压条件和温度。"
                   ],
                   "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
+                    "【1】PDF第4、6–7页，Fig. 2D。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig2-meibum.jpg",
-                      "paperFig": "Fig. 2D",
-                      "caption": "黄圈标挤出睑脂。左：DMSO 蜡样不透明；右：ATR101 后更透明、体积更小。",
-                      "id": "meibum-look-fig-0"
+                      "src": "/figures/revised/meibum-look.jpg",
+                      "paperFig": "【1】Fig. 2D",
+                      "caption": "DMSO与ATR101睑脂外观；比例尺0.25 mm，没有WT分图。",
+                      "placement": "results",
+                      "width": 313,
+                      "height": 158,
+                      "id": "v16-meibum-appearance-fig-0"
                     }
                   ],
+                  "mark": "（1）",
                   "referenceEntries": []
                 },
                 {
                   "id": "meibum-express",
-                  "title": "排出通畅性（expressibility）",
-                  "mark": "（2）",
+                  "title": "开口阻塞、排出与再次阻塞",
                   "sources": [
                     "paper1"
                   ],
-                  "evaluation": "开口栓状物与挤压后排出是否通畅",
+                  "evaluation": "开口阻塞、排出与再次阻塞",
                   "methods": [
-                    "裂隙灯观察睑缘开口",
-                    "轻压睑板比较挤压前后（【1】Fig. 5A）",
-                    "可用 expressor forceps"
+                    "约3月龄性别匹配小鼠随机分组；首次给药前两组清堵。加热装置42–45 ℃、不超过2分钟，轻压排出，最多3次、间隔2分钟；裂隙灯确认。给药期隔日观察。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "开口清晰度分级",
-                    "可排出腺体比例",
-                    "随访 Day 0/10/14"
+                    "DMSO组48小时内再堵；ATR101组最长约7天无可检测阻塞，之后渐再堵；停药约7天与未治疗组相近。未提供完整个体事件时间。"
                   ],
                   "normal": [
-                    "挤压后睑脂易出、开口清"
+                    "WT睑脂可排出并混入泪膜；此随访未建立WT评分范围。"
                   ],
                   "abnormal": [
-                    "挤压前两组可见白栓；挤压后 DMSO 开口仍糊；ATR101 开口更清晰、更易排出"
+                    "清堵后模型迅速再堵；ATR101延缓、减轻再堵，但效应可逆。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "重复测量",
-                    "等级/比例资料"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：再堵时间用区间删失生存分析；重复阻塞比例采用混合模型。"
                   ],
                   "notes": [
-                    "Day 0 可先挤出堵塞物再随访，须在方法中写明"
+                    "机械清堵与药物作用分开解释；装置温度不等于组织实测温度，原文未报告标准挤压力。"
                   ],
                   "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
+                    "【1】PDF第4、10–11页，Fig. 2A、5A。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig5-mg-duct.jpg",
-                      "paperFig": "Fig. 5A",
-                      "caption": "裂隙灯观察上睑末端导管。Day 0 先挤出堵塞物，随后随访 Day 10 / 14。",
-                      "id": "meibum-express-fig-0"
+                      "src": "/figures/revised/meibum-method.jpg",
+                      "paperFig": "【1】Fig. 2A",
+                      "caption": "清除脂栓后开始给药，原图显示清堵前后和干预时间线。",
+                      "placement": "methods",
+                      "width": 475,
+                      "height": 230,
+                      "id": "v16-meibum-express-fig-0"
+                    },
+                    {
+                      "src": "/figures/revised/meibum-followup.jpg",
+                      "paperFig": "【1】Fig. 5A",
+                      "caption": "基线、清堵后及随访的裂隙灯图，展示再次阻塞进程。",
+                      "placement": "results",
+                      "width": 325,
+                      "height": 485,
+                      "id": "v16-meibum-express-fig-1"
                     }
                   ],
+                  "mark": "（2）",
                   "referenceEntries": []
                 },
                 {
-                  "id": "meibum-comp",
-                  "title": "组分与物理性状（CE / FA / 熔点）",
-                  "mark": "（3）",
+                  "id": "meibum-lipids",
+                  "title": "睑脂脂质组成",
                   "sources": [
                     "paper1"
                   ],
-                  "evaluation": "胆固醇酯负荷、脂酰饱和度、熔融温度/流动性",
+                  "evaluation": "睑脂脂质组成",
                   "methods": [
-                    "下泪河微毛细管收集含睑脂的泪液（必要时直接刮取）→ 己烷",
-                    "LC-MS 定量 CE",
-                    "FA 链长/饱和度分析",
-                    "熔点曲线重复测定（【1】Fig. 2B、2C、2E）"
+                    "双眼按动物合并；微毛细管收集下睑泪河泪液，部分模型加入直接挤出物。己烷提取、氮气吹干、再溶解去除不溶物，称重配约0.2 mg/mL，−80 ℃保存。",
+                    "CE：Agilent 1100 HPLC–LTQ Velos，正离子APCI、Luna Silica正相柱；m/z 369.5与胆固醇-d7棕榈酸酯内标376.5定量。 柱250×4.6 mm、10 μm；乙酸乙酯/己烷1%→10%梯度15分钟，再等度15分钟，1.5 mL/min。",
+                    "FA：碱水解80 ℃30分钟、酸化提取；Hypersil Gold反相柱、负离子ESI-MS。 1 mL提取液加0.2 mL 2 N乙醇NaOH；随后加0.2 mL 2 M HCl；反相柱50×2.1 mm。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "CE 相对/绝对含量",
-                    "饱和 FA% / 单不饱和 FA%",
-                    "熔融温度（°C）"
+                    "CE：pmol/μg睑脂，WT n=4、DMSO n=16、ATR101 n=8；n为双眼合并的一只动物。",
+                    "FA每组9只；各FA峰面积占全部已检测FA峰面积比例。"
                   ],
                   "normal": [
-                    "WT：CE 较低；流动性较好；熔点较低"
+                    "WT作为CE参照；FA图无WT链长分布，未建立正常区间。"
                   ],
                   "abnormal": [
-                    "DMSO：CE 最高，熔点约 49–55 °C；ATR101：CE↓ 近 WT，饱和 FA↓、单不饱和 FA↑，熔点约 37–44 °C"
+                    "ATR101 CE低于DMSO（**），仍高于WT（*），应写趋近WT。部分>C22饱和FA下降，部分C20–C24单不饱和FA增加。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "组间 ANOVA",
-                    "熔点重复测量取均值或曲线参数"
+                    "原文：Shapiro–Wilk检查正态性后采用双侧t检验。建议：CE校正组间多重比较；FA考虑组成约束与多链长检验。"
                   ],
                   "notes": [
-                    "Awat2−/− 糊状 vs WT 流体——采样策略写清以求可比",
-                    "SOAT1 抑制是机制干预"
+                    "样本含泪液和挤出物。水解后FA不等于原始游离FA，峰面积比例不直接等于质量百分比。"
                   ],
                   "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
+                    "【1】PDF第4–7页，Fig. 2B–C。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig2-meibum.jpg",
-                      "paperFig": "Fig. 2B、2C、2E",
-                      "caption": "B：CE。C：饱和与单不饱和 FA。E：熔融温度。",
-                      "id": "meibum-comp-fig-0"
+                      "src": "/figures/revised/meibum-ce.jpg",
+                      "paperFig": "【1】Fig. 2B",
+                      "caption": "胆固醇酯CE含量；双眼合并为一只动物样本。",
+                      "placement": "results",
+                      "width": 313,
+                      "height": 230,
+                      "id": "v16-meibum-lipids-fig-0"
+                    },
+                    {
+                      "src": "/figures/revised/meibum-fa.jpg",
+                      "paperFig": "【1】Fig. 2C",
+                      "caption": "上为饱和脂肪酸，下为单不饱和脂肪酸；绿色ATR101，橙色DMSO。",
+                      "placement": "results",
+                      "width": 450,
+                      "height": 398,
+                      "id": "v16-meibum-lipids-fig-1"
                     }
                   ],
+                  "mark": "（3）",
+                  "referenceEntries": []
+                },
+                {
+                  "id": "meibum-melting",
+                  "title": "睑脂熔融特性",
+                  "sources": [
+                    "paper1"
+                  ],
+                  "evaluation": "睑脂熔融特性",
+                  "methods": [
+                    "ESP32控制热电板，25→65 ℃，0.25 ℃/秒，Leica M205 C观察；首次可见熔融为起始，整体完成相变为终点。"
+                  ],
+                  "instruments": [],
+                  "metrics": [
+                    "每组4只/8眼，每样本3次测量。正文DMSO 43.0–55.4 ℃，ATR101 36.7–49.0 ℃；Fig. 2E的DMSO起始为43.8 ℃，存在文图差异。"
+                  ],
+                  "normal": [
+                    "未报告WT熔融起止值；治疗组数值不能作为正常范围。"
+                  ],
+                  "abnormal": [
+                    "DMSO起始与终点均高于ATR101；图中起始比较*，终点***。"
+                  ],
+                  "observations": [],
+                  "statistics": [
+                    "原文：Shapiro–Wilk检查正态性后采用双侧t检验。建议：分别分析起始、终点，汇总技术重复并处理双眼相关性。"
+                  ],
+                  "notes": [
+                    "动态非平衡升温可有热滞后，不能直接称平衡熔点。这是起止参数，不是组内范围或正常参考区间。"
+                  ],
+                  "references": [
+                    "【1】PDF第4、6–7页，Fig. 2E。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/revised/meibum-melt.jpg",
+                      "paperFig": "【1】Fig. 2E",
+                      "caption": "起始与完成熔融温度；正文DMSO起始43.0 ℃与图中43.8 ℃存在差异，未擅自统一。",
+                      "placement": "results",
+                      "width": 313,
+                      "height": 238,
+                      "id": "v16-meibum-melting-fig-0"
+                    }
+                  ],
+                  "mark": "（4）",
                   "referenceEntries": []
                 }
               ]
             },
             {
-              "id": "gland-lacrimal",
+              "id": "phenotype-lacrimal",
               "mark": "③",
               "title": "泪腺和副泪腺",
               "assays": [
                 {
                   "id": "lacrimal-pending",
-                  "title": "泪腺形态与分泌（待补）",
-                  "mark": "（1）",
+                  "title": "泪腺和副泪腺专项评价",
                   "sources": [],
-                  "evaluation": "眶外/眶内泪腺体积、导管开口、分泌量对眼表的贡献",
+                  "evaluation": "泪腺和副泪腺专项评价",
                   "methods": [
-                    "待补（两篇表型 PDF 未做泪腺功能/组织学评价）",
-                    "可参照泪腺切除后角膜损伤模型（IOVS 2019）设计大体+HE+泪液量"
+                    "两篇文献未提供该部位的专项检测方案。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "腺体湿重/体积（建议）",
-                    "导管通畅",
-                    "酚红棉线或毛细管泪液量"
+                    "待补充；不从其他部位外推阈值。"
                   ],
                   "normal": [
-                    "待补"
+                    "待补充正常对照证据。"
                   ],
                   "abnormal": [
-                    "待补"
+                    "两篇文献未提供该部位的专项异常结果。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "连续变量组间比较",
-                    "性别分层"
+                    "待明确指标、研究设计与样本单位后选择。"
                   ],
                   "notes": [
-                    "本手册两篇主文献不能支撑泪腺表型结论，勿从 MG/角膜结果外推"
+                    "保留解剖目录位置；无证据不等于无异常。"
                   ],
                   "references": [
-                    "解剖条；功能评价待补"
+                    "【1】【2】未提供本项目专项证据。"
                   ],
                   "figures": [],
-                  "pending": [
-                    "泪腺/副泪腺功能与组织学量化"
-                  ],
+                  "mark": "（1）",
                   "referenceEntries": []
                 }
               ]
             },
             {
-              "id": "gland-zeis",
+              "id": "phenotype-zeis",
               "mark": "④",
               "title": "Zeis 腺体",
               "assays": [
                 {
                   "id": "zeis-pending",
-                  "title": "Zeis 腺形态（待补）",
-                  "mark": "（1）",
+                  "title": "Zeis腺体专项评价",
                   "sources": [],
-                  "evaluation": "睫毛毛囊附属小型皮脂腺形态、开口与睫毛关系",
+                  "evaluation": "Zeis腺体专项评价",
                   "methods": [
-                    "待补（【1】【2】均未量化 Zeis）",
-                    "组织学可用睑缘 HE/皮脂染色识别毛囊旁小皮脂腺"
+                    "两篇文献未提供该部位的专项检测方案。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "Zeis 腺截面面积（建议）",
-                    "与睫毛毛囊相对位置",
-                    "脂栓有无"
+                    "待补充；不从其他部位外推阈值。"
                   ],
                   "normal": [
-                    "毛囊旁小型皮脂腺存在、开口于毛囊（解剖描述）"
+                    "待补充正常对照证据。"
                   ],
                   "abnormal": [
-                    "待补"
+                    "两篇文献未提供该部位的专项异常结果。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "描述性 + 必要时组间面积比较"
+                    "待明确指标、研究设计与样本单位后选择。"
                   ],
                   "notes": [
-                    "勿与 MG（大型特化皮脂腺、开口于 MCJ 后方睑缘）混淆"
+                    "保留解剖目录位置；无证据不等于无异常。"
                   ],
                   "references": [
-                    "解剖条；表型数据待补"
+                    "【1】【2】未提供本项目专项证据。"
                   ],
                   "figures": [],
-                  "pending": [
-                    "Zeis 腺表型量化"
-                  ],
+                  "mark": "（1）",
                   "referenceEntries": []
                 }
               ]
@@ -808,576 +874,564 @@
           ]
         },
         {
-          "id": "eyelid-support",
+          "id": "phenotype-support",
           "index": "4",
           "title": "支撑结构：睑板与肌肉",
           "topics": [
             {
-              "id": "support-tarsal",
+              "id": "phenotype-tarsal",
               "mark": "①",
               "title": "睑板（含 CPF）",
               "assays": [
                 {
-                  "id": "tp-masson",
-                  "title": "马松三色：睑板细胞 vs 胶原",
-                  "mark": "（1）",
+                  "id": "muscle-lineage-trace",
+                  "title": "睑板与CPF的细胞来源",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "TP 细胞密度、胶原基质、囊肿；CPF 增厚",
+                  "evaluation": "睑板与CPF的细胞来源",
                   "methods": [
-                    "眼睑石蜡 Masson 三色（红=胞质/细胞，蓝=胶原）（【2】Fig. 4）"
+                    "KR/TG与Wnt1Cre/Rosa26mTmG杂交，P0–P15诱导；10 μm冰冻切片，DAPI 1 ng/mL孵育1小时，Zeiss Axio Observer Z1观察mG/mT。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "TP/CPF 细胞密度",
-                    "胶原面积分数",
-                    "囊肿有无/面积",
-                    "CPF 厚度（μm）"
+                    "原文主要定位观察；建议神经嵴来源细胞比例、组织厚度及细胞密度。"
                   ],
                   "normal": [
-                    "肌腱与睑板仅少量细长梭形成纤维细胞，ECM 胶原丰富"
+                    "下睑CPF与TP多数细胞mG阳性，主要来源于神经嵴；上睑肌腱的神经嵴贡献较少。"
                   ],
                   "abnormal": [
-                    "细胞显著增多、胶原↓；睑板区囊肿；高倍下致密圆形细胞"
+                    "KR/TG下睑CPF/TP显著增厚，mG细胞增多，囊肿内亦有绿色细胞。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "面积分数/厚度 ANOVA",
-                    "囊肿率 Fisher"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：以动物为单位或二项/连续混合模型分析。"
                   ],
                   "notes": [
-                    "缩写统一：TP 睑板、CPF 下睑囊筋膜、TM 睑板肌、MG、OO"
+                    "绿色表示谱系来源，不直接等于增殖；上睑肌腱来源不能替代上睑提肌或上直肌的评价。",
+                    "上睑补充Fig. 2沿用既有图件，未包含在本次提供的正文PDF中。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第3、5、7页，方法2.5、Fig. 6；上睑补充Fig. 2。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/paper2-fig6-lineage.jpg",
+                      "paperFig": "Fig. 6A–G、A′–G′",
+                      "caption": "下睑。绿=神经嵴来源。对照 CPF/TP 为绿色；KR/TG 后 CPF、TP 明显增厚，TM 相对不受累。",
+                      "id": "v16-muscle-lineage-trace-fig-0",
+                      "placement": "methods"
+                    },
+                    {
+                      "src": "/figures/paper2-suppl-fig2-upper-lid.jpg",
+                      "paperFig": "补充 Fig. 2",
+                      "caption": "上睑P15谱系示踪：绿色神经嵴来源细胞在肌腱贡献较少。沿用既有补充图；不能单凭本图建立上下睑差异的因果关系。",
+                      "id": "v16-muscle-lineage-trace-fig-1",
+                      "placement": "methods"
+                    }
+                  ],
+                  "mark": "（1）",
+                  "referenceEntries": []
+                },
+                {
+                  "id": "muscle-masson-adult",
+                  "title": "细胞堆积、胶原基质与囊肿",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "evaluation": "细胞堆积、胶原基质与囊肿",
+                  "methods": [
+                    "P15石蜡5 μm切片，Masson三色；红色细胞质、蓝色胶原。"
+                  ],
+                  "instruments": [],
+                  "metrics": [
+                    "原文未给出细胞数、胶原面积和囊肿率；建议细胞密度、蓝染面积比例、TP/CPF厚度及囊肿发生率。"
+                  ],
+                  "normal": [
+                    "少量细长梭形细胞，胶原基质丰富。"
+                  ],
+                  "abnormal": [
+                    "细胞增多且呈致密圆形，胶原减少，睑板区域形成囊肿。"
+                  ],
+                  "observations": [],
+                  "statistics": [
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：连续指标用混合模型，动物层面囊肿率用Fisher检验。"
+                  ],
+                  "notes": [
+                    "统一组织区域与切面；Masson蓝染变化应结合I/III型胶原验证。"
+                  ],
+                  "references": [
+                    "【2】PDF第2、5页，Fig. 4。"
                   ],
                   "figures": [
                     {
                       "src": "/figures/paper2-fig4-masson.jpg",
                       "paperFig": "Fig. 4",
-                      "caption": "P15。对照胶原丰富、细胞稀少；转基因细胞增多、胶原下降，睑板区可见囊肿。",
-                      "id": "tp-masson-fig-0"
+                      "caption": "P0–P15 诱导后 P15 取材。对照胶原丰富、细胞稀少；转基因细胞增多、胶原下降，睑板区可见囊肿。",
+                      "id": "v16-muscle-masson-adult-fig-0",
+                      "placement": "results"
                     }
                   ],
+                  "mark": "（2）",
                   "referenceEntries": []
                 },
                 {
-                  "id": "tp-time",
-                  "title": "马松时间序列（发育过程）",
-                  "mark": "（2）",
+                  "id": "muscle-masson-time",
+                  "title": "睑板/CPF发育时间序列",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "P0–P11 CPF/TP/MG 协同发育是否被打乱",
+                  "evaluation": "睑板/CPF发育时间序列",
                   "methods": [
-                    "P0、P5、P8、P11 Masson（【2】Fig. 7）"
+                    "P0、P5、P8、P11取材，石蜡Masson三色，对照与KR/TG按同龄配对观察。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "各时间点 CPF 厚度",
-                    "MG 延长/分支/入 TP 阶段评分",
-                    "囊肿出现日龄"
+                    "原文为时间序列定性描述；建议组织厚度、细胞密度及囊肿发生时间。"
                   ],
                   "normal": [
-                    "P0 融合薄褶皱、CPF 与 MG 原基；P5 间充质凝集成 CPF/TP，MG 延长；P8 MG 分支入 TP；P11 腺泡簇形成"
+                    "P0原基存在；P5 CPF与TP凝集形成；P8 MG分支进入睑板；P11腺泡簇形成。"
                   ],
                   "abnormal": [
-                    "P5 CPF 轻度增厚、睑尖间充质堆积、MG 内陷延长受阻；P8 细胞堆积、重症囊肿与开口异位；P11 CPF 显著增厚"
+                    "P5 CPF轻度增厚、间充质堆积、MG延长受阻；P8重症出现囊肿、开口异位；P11进一步增厚堆积。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "时间×基因型交互（重复测量/混合模型）"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：组别×年龄模型；各年龄取材是独立动物，不能作同一动物重复测量。"
                   ],
                   "notes": [
-                    "同一时间点左右对照读片，避免把发育阶段差当成病理"
+                    "MG发育改变作为支架异常的关联表现；不混淆年龄差异与病变。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第5–8页，结果3.4、Fig. 7A–G。"
                   ],
                   "figures": [
                     {
                       "src": "/figures/paper2-fig7-time.jpg",
                       "paperFig": "Fig. 7A–G",
-                      "caption": "对照 A/B/D/F，转基因 C/E/G。P0–P11 马松三色。",
-                      "id": "tp-time-fig-0"
+                      "caption": "对照 A/B/D/F，转基因 C/E/G。P0–P11 马松三色。同一时间点左右对照，避免把发育阶段差异当成表型。",
+                      "id": "v16-muscle-masson-time-fig-0",
+                      "placement": "results"
                     }
                   ],
-                  "referenceEntries": []
-                },
-                {
-                  "id": "tp-lineage",
-                  "title": "谱系：CPF/TP 神经嵴来源与扩增",
                   "mark": "（3）",
-                  "sources": [
-                    "paper2"
-                  ],
-                  "evaluation": "CPF、TP 细胞是否神经嵴来源及是否过度扩增",
-                  "methods": [
-                    "KR/TG × Wnt1Cre/Rosa26mTmG",
-                    "冰冻切片 GFP + DAPI（【2】Fig. 6）"
-                  ],
-                  "metrics": [
-                    "GFP⁺ 细胞密度/面积",
-                    "CPF、TP 厚度"
-                  ],
-                  "normal": [
-                    "下睑 CPF、TP 主要为绿色（神经嵴）；数量适中"
-                  ],
-                  "abnormal": [
-                    "TGFα 后 CPF↑、TP↑；TM 同为神经嵴来源但数量变化不明显；上睑肌腱绿色少（补 Fig. 2）→ 解释下睑更重"
-                  ],
-                  "statistics": [
-                    "GFP⁺ 密度组间比较",
-                    "上下睑分层"
-                  ],
-                  "notes": [
-                    "CPF 归本条「睑板/肌腱支撑」，不归入肌层主表型"
-                  ],
-                  "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
-                  ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper2-fig6-lineage.jpg",
-                      "paperFig": "Fig. 6A–G",
-                      "caption": "下睑。绿=神经嵴来源。KR/TG 后 CPF、TP 明显增厚，TM 相对不受累。",
-                      "id": "tp-lineage-fig-0"
-                    },
-                    {
-                      "src": "/figures/paper2-suppl-fig2-upper-lid.jpg",
-                      "paperFig": "补充 Fig. 2",
-                      "caption": "上睑 P15。神经嵴来源细胞在上睑肌腱贡献少。",
-                      "id": "tp-lineage-fig-1"
-                    }
-                  ],
                   "referenceEntries": []
                 },
                 {
-                  "id": "tp-pcna",
-                  "title": "CPF/TP 增殖与凋亡（PCNA / TUNEL）",
+                  "id": "muscle-pcna-tunel",
+                  "title": "CPF/睑板细胞增殖与凋亡",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "evaluation": "CPF/睑板细胞增殖与凋亡",
+                  "methods": [
+                    "P15石蜡切片PCNA免疫荧光及TUNEL；分开标定CPF、TP与MG区域。"
+                  ],
+                  "instruments": [],
+                  "metrics": [
+                    "原文未报告定量阳性率；建议每区域PCNA阳性率及TUNEL阳性率。"
+                  ],
+                  "normal": [
+                    "对照CPF/TP PCNA阳性细胞散在，TUNEL阳性较少。"
+                  ],
+                  "abnormal": [
+                    "KR/TG CPF/TP PCNA与TUNEL阳性细胞均增多。"
+                  ],
+                  "observations": [],
+                  "statistics": [
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：阳性率用二项混合模型，考虑多区域/视野相关性。"
+                  ],
+                  "notes": [
+                    "不能将MG基底层相似的PCNA结果套用于CPF/TP；TUNEL需结合形态。",
+                    "原图见“睑板腺 MG—腺泡细胞分化、增殖与凋亡”的Fig. 8、9；本项读取Ab–Ac/Bb–Bc区室，避免重复整图。"
+                  ],
+                  "references": [
+                    "【2】PDF第6、9页，Fig. 8Ab–Ac/Bb–Bc、Fig. 9Ab–Ac/Bb–Bc。"
+                  ],
+                  "figures": [],
                   "mark": "（4）",
-                  "sources": [
-                    "paper2"
-                  ],
-                  "evaluation": "肌腱/睑板细胞周转",
-                  "methods": [
-                    "IF-PCNA",
-                    "TUNEL（【2】Fig. 8–9，焦点 Bb/Bc vs Ab/Ac）"
-                  ],
-                  "metrics": [
-                    "CPF、TP 内 PCNA⁺、TUNEL⁺ 密度"
-                  ],
-                  "normal": [
-                    "散在 PCNA；TUNEL 少"
-                  ],
-                  "abnormal": [
-                    "过表达组 CPF、TP 两者均↑（堆积伴重塑）"
-                  ],
-                  "statistics": [
-                    "密度比较",
-                    "与 MG 基底层「不变」对照"
-                  ],
-                  "notes": [
-                    "增殖↑+凋亡↑ ≠ 单纯增生"
-                  ],
-                  "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
-                  ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper2-fig8-pcna.jpg",
-                      "paperFig": "Fig. 8Ab–Ac vs Bb–Bc",
-                      "caption": "PCNA：过表达组 CPF、TP 阳性细胞增多。",
-                      "id": "tp-pcna-fig-0"
-                    },
-                    {
-                      "src": "/figures/paper2-fig9-tunel.jpg",
-                      "paperFig": "Fig. 9Ab–Ac vs Bb–Bc",
-                      "caption": "TUNEL：过表达组 CPF、TP 凋亡增多。",
-                      "id": "tp-pcna-fig-1"
-                    }
-                  ],
                   "referenceEntries": []
                 },
                 {
-                  "id": "tp-collagen",
-                  "title": "I / III 型胶原",
+                  "id": "muscle-collagen",
+                  "title": "睑板基质形成：I/III型胶原",
+                  "sources": [
+                    "paper2"
+                  ],
+                  "evaluation": "睑板基质形成：I/III型胶原",
+                  "methods": [
+                    "P15石蜡免疫荧光；胶原I Abcam ab34710，胶原III ab7778，结合Masson。"
+                  ],
+                  "instruments": [],
+                  "metrics": [
+                    "原文未报告强度数值；建议阳性面积占比及统一曝光下的信号强度。"
+                  ],
+                  "normal": [
+                    "对照CPF/TP胞外胶原I、III丰富。"
+                  ],
+                  "abnormal": [
+                    "KR/TG眼睑基质胶原I、III信号明显减弱。"
+                  ],
+                  "observations": [],
+                  "statistics": [
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：动物层面比较或视野嵌套模型。"
+                  ],
+                  "notes": [
+                    "细胞密度增加与胶原下降共同支持基质成熟异常；信号强度不直接等于绝对胶原含量。"
+                  ],
+                  "references": [
+                    "【2】PDF第2、7、10页，Fig. 10C–F。"
+                  ],
+                  "figures": [
+                    {
+                      "src": "/figures/revised/tarsal-collagen.jpg",
+                      "paperFig": "【2】Fig. 10C–F",
+                      "caption": "胶原I、III：上为KR，下为KR/TG，注意组织区室。",
+                      "placement": "results",
+                      "width": 465,
+                      "height": 210,
+                      "id": "v16-muscle-collagen-fig-0"
+                    }
+                  ],
                   "mark": "（5）",
-                  "sources": [
-                    "paper2"
-                  ],
-                  "evaluation": "睑板/肌腱成熟 ECM 是否形成",
-                  "methods": [
-                    "胶原 I、III IF（【2】Fig. 10C–F）"
-                  ],
-                  "metrics": [
-                    "CPF/TP 胶原荧光积分密度或面积分数"
-                  ],
-                  "normal": [
-                    "胶原丰富"
-                  ],
-                  "abnormal": [
-                    "过表达组 CPF、TP 信号↓（细胞多但基质少）"
-                  ],
-                  "statistics": [
-                    "连续变量组间比较"
-                  ],
-                  "notes": [
-                    "与 Masson 蓝色胶原互证"
-                  ],
-                  "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
-                  ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper2-fig10-pparg-collagen.jpg",
-                      "paperFig": "Fig. 10C–F",
-                      "caption": "C–D 为 I 型胶原，E–F 为 III 型胶原。转基因 CPF/TP 明显减弱。",
-                      "id": "tp-collagen-fig-0"
-                    }
-                  ],
                   "referenceEntries": []
                 },
                 {
-                  "id": "tp-egfr",
-                  "title": "EGFR / β-catenin / N-cadherin（CPF）",
-                  "mark": "（6）",
+                  "id": "muscle-egfr",
+                  "title": "EGFR、β-catenin与N-cadherin",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "CPF 腱细胞增殖驱动与祖细胞黏附状态",
+                  "evaluation": "EGFR、β-catenin与N-cadherin",
                   "methods": [
-                    "IF（【2】Fig. 11）"
+                    "P15免疫荧光定位CPF/肌腱；观察EGFR、β-catenin核定位和N-cadherin。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "EGFR、β-catenin（含核转位比例）、N-cadherin 信号强度/阳性率"
+                    "原文为定性变化；建议强度、阳性率及β-catenin核/胞质比。"
                   ],
                   "normal": [
-                    "信号基线"
+                    "对照肌腱EGFR很少，N-cadherin较低。"
                   ],
                   "abnormal": [
-                    "CPF：EGFR↑、β-catenin↑并核转位、N-cadherin↑ → 停在未分化腱细胞状态并倾向囊肿"
+                    "KR/TG EGFR增强，β-catenin增强并有核转位，N-cadherin上调，提示祖细胞特征持续。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "强度/核转位比例",
-                    "焦点在 CPF 而非 MG"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：按区域进行连续/比例模型分析，校正多指标检验。"
                   ],
                   "notes": [
-                    "解释「为何 CPF 受累而 TM 不受累」的分子基础"
+                    "通路标记支持机制假设，不独立证明因果；TM与CPF反应不同。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第7、10页，结果3.6、Fig. 11A–F。"
                   ],
                   "figures": [
                     {
                       "src": "/figures/paper2-fig11-egfr.jpg",
                       "paperFig": "Fig. 11A–F",
-                      "caption": "A–B EGFR，C–D β-catenin，E–F N-cadherin。焦点在 CPF。",
-                      "id": "tp-egfr-fig-0"
+                      "caption": "A–B EGFR，C–D β-catenin，E–F N-cadherin。焦点在 CPF 而非 MG。",
+                      "id": "v16-muscle-egfr-fig-0",
+                      "placement": "results"
                     }
                   ],
+                  "mark": "（6）",
                   "referenceEntries": []
                 }
               ]
             },
             {
-              "id": "support-muscles",
+              "id": "phenotype-muscles",
               "mark": "②",
               "title": "肌层",
-              "kind": "group",
               "assays": []
             },
             {
-              "id": "muscle-oo",
+              "id": "phenotype-oo",
               "mark": "（1）",
               "title": "眼轮匝肌",
-              "parentId": "support-muscles",
               "assays": [
                 {
-                  "id": "oo-myosin",
-                  "title": "眼轮匝肌身份与连续性",
-                  "mark": "（1）",
+                  "id": "muscle-oo",
+                  "title": "眼轮匝肌身份与结构",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "OO 是否存在、纤维连续性（闭睑相关骨骼肌）",
+                  "evaluation": "眼轮匝肌身份与结构",
                   "methods": [
-                    "骨骼肌肌球蛋白 IF（【2】补 Fig. 1B）",
-                    "Masson/HE 辅助定位"
+                    "骨骼肌肌球蛋白免疫荧光；原文引用补充Fig. 1。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "肌球蛋白⁺ 面积",
-                    "纤维中断有无（二分类）"
+                    "未报告肌纤维直径、强度或闭眼功能数值；建议结构与功能分别评价。"
                   ],
                   "normal": [
-                    "OO 阳性带完整"
+                    "对照眼轮匝肌可识别、骨骼肌肌球蛋白阳性。"
                   ],
                   "abnormal": [
-                    "KR/TG 与对照总体无差异（非本模型主靶点）"
+                    "正文报告KR/TG与对照总体无明显差异。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "描述为主",
-                    "若定量则面积比较"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：形态指标动物层面比较；支持无实质差异需等效设计。"
                   ],
                   "notes": [
-                    "勿因睑肿胀误判肌萎缩",
-                    "与 CPF 囊肿占位区分"
+                    "正文结果不能代替动态闭眼功能；补充图来自既有图件，所提供正文PDF未包含补充图原页。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第5页，结果3.2.4；补充Fig. 1。"
                   ],
                   "figures": [
                     {
                       "src": "/figures/paper2-suppl-fig1-sma-myosin.jpg",
-                      "paperFig": "补充图 1B",
-                      "caption": "绿=骨骼肌肌球蛋白（OO），蓝=DAPI。KR 与 KR/TG 总体相似。",
-                      "id": "oo-myosin-fig-0"
+                      "paperFig": "补充图 1A、1B",
+                      "caption": "P15。红色α-SMA标记TM，绿色骨骼肌肌球蛋白标记OO，蓝色DAPI。OO总体相似；TM远端局部中断另见“眶肌/睑板肌”说明。沿用既有补充图。",
+                      "id": "v16-muscle-oo-fig-0",
+                      "placement": "results"
                     }
                   ],
+                  "mark": "（1）",
                   "referenceEntries": []
                 }
-              ]
+              ],
+              "parentId": "phenotype-muscles"
             },
             {
-              "id": "muscle-levator",
+              "id": "phenotype-levator",
               "mark": "（2）",
               "title": "上睑提肌、上直肌",
-              "parentId": "support-muscles",
               "assays": [
                 {
                   "id": "levator-pending",
-                  "title": "提睑相关肌（待补）",
-                  "mark": "（1）",
+                  "title": "上睑提肌、上直肌专项评价",
                   "sources": [],
-                  "evaluation": "提睑相关肌是否受累",
+                  "evaluation": "上睑提肌、上直肌专项评价",
                   "methods": [
-                    "待补（【1】【2】未评价）",
-                    "可参考解剖/神经支配文献做大体解剖+肌球蛋白 IF"
+                    "两篇文献未提供该部位的专项检测方案。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "肌腹截面积（建议）",
-                    "止点是否附着异常"
+                    "待补充；不从其他部位外推阈值。"
                   ],
                   "normal": [
-                    "待补"
+                    "待补充正常对照证据。"
                   ],
                   "abnormal": [
-                    "待补"
+                    "两篇文献未提供该部位的专项异常结果。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "待补"
+                    "待明确指标、研究设计与样本单位后选择。"
                   ],
                   "notes": [
-                    "上睑肌腱神经嵴贡献少（【2】补 Fig. 2），发育模型中上睑往往轻于下睑——记录侧别"
+                    "保留解剖目录位置；无证据不等于无异常。"
                   ],
                   "references": [
-                    "解剖条；表型待补"
+                    "【1】【2】未提供本项目专项证据。"
                   ],
                   "figures": [],
-                  "pending": [
-                    "上睑提肌、上直肌表型"
-                  ],
+                  "mark": "（1）",
                   "referenceEntries": []
                 }
-              ]
+              ],
+              "parentId": "phenotype-muscles"
             },
             {
-              "id": "muscle-orbital",
+              "id": "phenotype-orbital",
               "mark": "（3）",
               "title": "眶肌（含睑板肌 TM）",
-              "parentId": "support-muscles",
               "assays": [
                 {
-                  "id": "tm-sma",
-                  "title": "睑板肌（TM）身份与连续性",
-                  "mark": "（1）",
+                  "id": "muscle-tm",
+                  "title": "眶肌 / 睑板肌TM身份与连续性",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "TM（平滑肌）身份与连续性；是否为原发靶点",
+                  "evaluation": "眶肌 / 睑板肌TM身份与连续性",
                   "methods": [
-                    "α-SMA IF（【2】补 Fig. 1A）",
-                    "谱系示 TM 神经嵴来源但数量稳定（Fig. 6）",
-                    "EGFR 在 TM 低、在 CPF 高"
+                    "α-SMA免疫荧光定位TM，结合邻近CPF及囊肿；原文引用补充Fig. 1。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "α-SMA⁺ 连续长度/面积",
-                    "远端中断率",
-                    "与 CPF 厚度对比"
+                    "原文未报告连续性评分或阳性面积；建议TM厚度、连续性及缺损位置。"
                   ],
                   "normal": [
-                    "TM 带状 α-SMA⁺，与 CPF 并行"
+                    "对照TM α-SMA阳性，与CPF邻近、平行。"
                   ],
                   "abnormal": [
-                    "整体与对照无明显差异；远端可因囊肿局部中断（占位效应）；不是 EGFR 驱动的原发肌病变"
+                    "整体信号相近，远端局部可中断；作者认为可能与邻近囊肿有关。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "中断率 + SMA 面积",
-                    "强调与 CPF 表型分离报告"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：连续性分类用Fisher/二项模型，厚度用连续指标模型。"
                   ],
                   "notes": [
-                    "目录上 TM 挂在「眶肌」下",
-                    "机制讨论写清「神经嵴同源、EGFR 决定易感性」"
+                    "证据具体针对TM，不扩展为整个眶肌正常；囊肿占位为作者解释。补充图原页不在已提供PDF中。",
+                    "α-SMA与肌球蛋白组合补充图见上方“眼轮匝肌”；TM定位另见睑板/CPF谱系图。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第5、7页；补充Fig. 1、Fig. 6。"
                   ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper2-suppl-fig1-sma-myosin.jpg",
-                      "paperFig": "补充图 1A",
-                      "caption": "红=α-SMA（TM）。KR 与 KR/TG 总体相似；远端可因囊肿局部中断。",
-                      "id": "tm-sma-fig-0"
-                    }
-                  ],
+                  "figures": [],
+                  "mark": "（1）",
                   "referenceEntries": []
                 }
-              ]
+              ],
+              "parentId": "phenotype-muscles"
             }
           ]
         }
       ]
     },
     {
-      "id": "surface",
+      "id": "phenotype-surface",
       "roman": "Ⅱ",
       "title": "眼表",
-      "question": "角膜屏障、结膜分化与泪膜稳定性是否异常？",
-      "summary": "角膜：荧光素→共聚焦→分子标志物。结膜：上皮厚度、杯状细胞、Krt4/Krt10。泪膜：镜面反射 + TFBUT；泪量/泪河/脂质层待补。",
+      "question": "依次评价角膜、结膜和泪膜，区分组织损伤、细胞状态与泪膜功能。",
+      "summary": "正常对照值仅适用于相应实验条件；未提供的数据明确保留待补。",
       "sections": [
         {
-          "id": "surface-cornea",
+          "id": "cornea",
           "index": "1",
           "title": "角膜",
           "topics": [
             {
-              "id": "cornea-main",
+              "id": "cornea-items",
               "mark": "",
-              "title": "完整性与分化",
+              "title": "",
               "assays": [
                 {
                   "id": "cornea-fluorescein",
-                  "title": "荧光素染色 · 上皮完整性",
-                  "mark": "（1）",
+                  "title": "角膜上皮完整性",
                   "sources": [
                     "paper1"
                   ],
-                  "evaluation": "角膜上皮屏障破损范围",
+                  "evaluation": "角膜上皮完整性",
                   "methods": [
-                    "裂隙灯；荧光素着染后钴蓝光成像",
-                    "双眼 OD/OS；随访 Day 0/10/14（【1】Fig. 3C–D）"
+                    "荧光素染色，Zeiss SL 800裂隙灯蓝光采图；按基线及治疗时间比较。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "着染积分密度（integrated density）或着染面积%"
+                    "荧光素染色积分密度。WT 10只/20眼，DMSO 7只/14眼，ATR101 9只/18眼；精确汇总值未列出。"
                   ],
                   "normal": [
-                    "着染极少"
+                    "WT为上皮完整性参照；Fig. 3D仅显示两个模型组，未提供可复用的WT积分密度正常范围。"
                   ],
                   "abnormal": [
-                    "DMSO 着染面积大；ATR101 显著低于溶剂对照"
+                    "DMSO染色随时间加重；ATR101染色减少，提示上皮损伤进展减缓。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "重复测量",
-                    "双眼聚类校正"
+                    "原文：Shapiro–Wilk检查正态性后采用双侧t检验。建议：处理双眼及随访相关性，采用混合模型并校正多重比较。"
                   ],
                   "notes": [
-                    "麻醉下无自发眨眼时用镊子轻闭模拟 blink",
-                    "拍照曝光固定"
+                    "荧光强度受染液、曝光、拍摄时间影响；积分密度不是单纯损伤面积。"
                   ],
                   "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
+                    "【1】PDF第3、6、8页，Fig. 3C–D。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig3-tear-cornea.jpg",
-                      "paperFig": "Fig. 3C–D",
-                      "caption": "C：钴蓝光下荧光素着染，Day 0/10/14。D：着染积分密度，ATR101 显著低于 DMSO。",
-                      "id": "cornea-fluorescein-fig-0"
+                      "src": "/figures/revised/cornea-stain.jpg",
+                      "paperFig": "【1】Fig. 3C–D",
+                      "caption": "荧光素染色随访和积分密度；D的图示比较为DMSO与ATR101。",
+                      "placement": "results",
+                      "width": 640,
+                      "height": 266,
+                      "id": "v16-cornea-fluorescein-fig-0"
                     }
                   ],
+                  "mark": "（1）",
                   "referenceEntries": []
                 },
                 {
                   "id": "cornea-confocal",
-                  "title": "在体共聚焦 · 上皮分层形态",
-                  "mark": "（2）",
+                  "title": "角膜上皮分层细胞形态",
                   "sources": [
                     "paper1"
                   ],
-                  "evaluation": "表层/翼状/基底细胞形态、脱落、固缩核、鳞状化生",
+                  "evaluation": "角膜上皮分层细胞形态",
                   "methods": [
-                    "HRT + Rostock 角膜模块",
-                    "670 nm；凝胶耦联 TomoCap；分层采集（【1】Fig. 4A）"
+                    "HRT联合Rostock角膜模块，670 nm激光；384×384像素、约30 Hz，视野400×400 μm。约2 μm间隔、最多40层，深度约80 μm。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "固缩核计数/视野",
-                    "细胞面积（肥大）",
-                    "鳞状化生/脱落分级"
+                    "每组7只/14眼代表图。原文未量化细胞面积或固缩核；建议按表层、翼状、基底层分别计数和测量。"
                   ],
                   "normal": [
-                    "分层清楚、核形态规整"
+                    "WT分层形态较规整、基底细胞形态保持。"
                   ],
                   "abnormal": [
-                    "DMSO：表层紊乱、固缩核多、基底肥大、脱落/鳞状化生；ATR101 接近 WT，可残留少量固缩核"
+                    "DMSO表层鳞状化生/脱落、固缩核增多、基底细胞肥大；ATR101减轻基底细胞肥大并部分保留结构。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "分层分别统计",
-                    "组间比较"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：分层与组别模型，处理双眼和多视野嵌套。"
                   ],
                   "notes": [
-                    "防干燥伪影",
-                    "黄箭头=脱落/化生，红箭头=固缩核"
+                    "轴向分辨率约4 μm，邻近光学层不是完全独立样本；统一层位及耦合条件。"
                   ],
                   "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
+                    "【1】PDF第3、6、9–10页，Fig. 4A。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig4-cornea.jpg",
-                      "paperFig": "Fig. 4A",
-                      "caption": "列：表层/翼状/基底。行：WT、DMSO、ATR101。黄箭头脱落/鳞状化生，红箭头固缩核。",
-                      "id": "cornea-confocal-fig-0"
+                      "src": "/figures/revised/cornea-confocal.jpg",
+                      "paperFig": "【1】Fig. 4A",
+                      "caption": "按表层、翼状层和基底层对照观察。",
+                      "placement": "results",
+                      "width": 465,
+                      "height": 326,
+                      "id": "v16-cornea-confocal-fig-0"
                     }
                   ],
+                  "mark": "（2）",
                   "referenceEntries": []
                 },
                 {
                   "id": "cornea-markers",
-                  "title": "分子标志物（Krt14 / Krt12 / Sprr1a）",
-                  "mark": "（3）",
+                  "title": "角膜上皮分化与应激标志物",
                   "sources": [
                     "paper1"
                   ],
-                  "evaluation": "分化错位与鳞状化生分子轴",
+                  "evaluation": "角膜上皮分化与应激标志物",
                   "methods": [
-                    "角膜 IF（Krt14 红、Krt12 绿）",
-                    "RT-qPCR（Krt14、Sprr1a / Gapdh）（【1】Fig. 4B–C）"
+                    "5 μm冰冻切片Krt12/Krt14免疫荧光；RT-qPCR检测Krt14、Sprr1a，Gapdh内参、相对标准曲线法。",
+                    "免疫荧光一抗1:50、4 ℃过夜，二抗1:400至少2小时，Hoechst 1 μM 30分钟。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "浅表 Krt14 异位长度/强度",
-                    "Krt12 浅表信号",
-                    "mRNA 相对表达"
+                    "IF每组3次独立实验。qPCR：WT 5–7只，DMSO 5–6只，ATR101 7–9只；每样本为一只动物双眼角膜合并。"
                   ],
                   "normal": [
-                    "Krt12 在浅表，Krt14 限于基底"
+                    "本研究成年中央角膜对照各层Krt12阳性，Krt14少或无；Krt14随成熟更多局限于角膜缘。"
                   ],
                   "abnormal": [
-                    "损伤后 Krt12↓、Krt14↑且浅表异位；Sprr1a↑；ATR101 后 Krt14 mRNA 近 WT，Sprr1a 仍可高于 WT"
+                    "DMSO Krt14向浅表异位，Krt12减少；ATR101改善定位并下调Krt14。",
+                    "角膜Sprr1a模型组较WT超过50倍；正文称14天治疗未产生显著改变。不得套用MG中Sprr1a下降的结论。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "IF 半定量 + qPCR ANOVA"
+                    "原文：Shapiro–Wilk检查正态性后采用双侧t检验。建议：多组、多基因校正；相对表达分析遵循实际定量方法。"
                   ],
                   "notes": [
-                    "Sprr1a 残留提示鳞状化生未完全消退"
+                    "不能将“正常Krt14普遍在中央角膜基底层”作为本研究结论。区分角膜与MG同名基因结果。"
                   ],
                   "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
+                    "【1】PDF第5–10页，Fig. 4B–C。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig4-cornea.jpg",
-                      "paperFig": "Fig. 4B–C",
-                      "caption": "B：红=Krt14，绿=Krt12。C：Krt14、Sprr1a 相对 Gapdh。",
-                      "id": "cornea-markers-fig-0"
+                      "src": "/figures/revised/cornea-markers.jpg",
+                      "paperFig": "【1】Fig. 4B–C",
+                      "caption": "Krt12/Krt14定位与角膜基因表达；角膜Sprr1a治疗差异为ns。",
+                      "placement": "results",
+                      "width": 470,
+                      "height": 465,
+                      "id": "v16-cornea-markers-fig-0"
                     }
                   ],
+                  "mark": "（3）",
                   "referenceEntries": []
                 }
               ]
@@ -1385,191 +1439,140 @@
           ]
         },
         {
-          "id": "surface-conj",
+          "id": "conjunctiva",
           "index": "2",
           "title": "结膜",
           "topics": [
             {
-              "id": "conj-epithelium",
+              "id": "conjunctiva-items",
               "mark": "",
-              "title": "上皮结构",
+              "title": "",
               "assays": [
                 {
                   "id": "conj-he",
-                  "title": "上皮增厚（HE）",
-                  "mark": "（1）",
+                  "title": "结膜上皮厚度",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "结膜与皮肤黏膜移行上皮是否增厚（与 MCJ 条互通）",
+                  "evaluation": "结膜上皮厚度",
                   "methods": [
-                    "睑板上皮 HE（【2】Fig. 5A–D）"
+                    "P15眼睑5 μm石蜡HE切片，固定结膜位置进行比较。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "上皮层数或最大厚度（μm）"
+                    "原文未报告厚度数值；建议垂直基底膜测厚μm，多个标准位置取动物汇总值。"
                   ],
                   "normal": [
-                    "厚度均一、层次清楚"
+                    "同龄对照结膜上皮较薄。"
                   ],
                   "abnormal": [
-                    "KR/TG 结膜与移行上皮增厚"
+                    "KR/TG结膜上皮增厚。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "厚度均值±SEM",
-                    "上下睑分别统计"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：动物层面比较或多切片混合模型。"
                   ],
                   "notes": [
-                    "与 MG 病变分开记录；可与Ⅰ.2①（3）对照阅读"
+                    "结膜不同区域厚度不同；本项与MCJ移行上皮分开测量，避免切面倾斜误差。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第5–6页，Fig. 5A–B。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper2-fig5-conjunctiva.jpg",
-                      "paperFig": "Fig. 5A–D",
-                      "caption": "HE：对照 vs 转基因。结膜与皮肤黏膜移行上皮增厚。",
-                      "id": "conj-he-fig-0"
+                      "src": "/figures/revised/conj-he.jpg",
+                      "paperFig": "【2】Fig. 5A–B",
+                      "caption": "睑结膜HE：上为KR对照，下为KR/TG，显示上皮增厚。",
+                      "placement": "results",
+                      "width": 195,
+                      "height": 310,
+                      "id": "v16-conj-he-fig-0"
                     }
                   ],
+                  "mark": "（1）",
+                  "referenceEntries": []
+                },
+                {
+                  "id": "conj-mucin-pending",
+                  "title": "结膜充血与黏蛋白",
+                  "mark": "（2）",
+                  "sources": [],
+                  "evaluation": "结膜充血与黏蛋白",
+                  "methods": [
+                    "两篇文献未提供本项目的专项检测方案；需补充对应方法文献。"
+                  ],
+                  "metrics": [
+                    "未提供定量结果或阈值，待补充。"
+                  ],
+                  "normal": [
+                    "未建立本项目正常范围。"
+                  ],
+                  "abnormal": [
+                    "不能以PAS杯状细胞增加或环形反射变化，直接推定本项目异常。"
+                  ],
+                  "statistics": [
+                    "待确定检测指标及动物/眼/重复测量结构后制定统计方案。"
+                  ],
+                  "notes": [
+                    "保留已有待补评价项目；未检测不等于正常。"
+                  ],
+                  "references": [
+                    "【1】【2】未提供本项目专项定量证据。"
+                  ],
+                  "figures": [],
+                  "instruments": [],
+                  "observations": [],
                   "referenceEntries": []
                 }
               ]
             },
             {
-              "id": "conj-goblet",
+              "id": "phenotype-goblet",
               "mark": "①",
               "title": "杯状细胞在睑结膜中的分布",
               "assays": [
                 {
                   "id": "conj-pas",
-                  "title": "杯状细胞（PAS）",
-                  "mark": "（1）",
+                  "title": "杯状细胞分布与数量",
                   "sources": [
                     "paper2"
                   ],
-                  "evaluation": "穹窿结膜杯状细胞密度",
+                  "evaluation": "杯状细胞分布与数量",
                   "methods": [
-                    "PAS 染色，焦点穹窿（【2】Fig. 5E–F）"
+                    "P0–P15诱导后，PAS染色观察结膜穹窿，按解剖区域记录杯状细胞。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "PAS⁺ 杯状细胞数/单位上皮长度或面积"
+                    "原文描述增多，未给出密度或计数；建议PAS阳性细胞/单位上皮长度，并分别记录睑结膜与穹窿。"
                   ],
                   "normal": [
-                    "穹窿可见适量杯状细胞"
+                    "对照穹窿可见PAS阳性杯状细胞。"
                   ],
                   "abnormal": [
-                    "P0–P15 TGFα 过表达后穹窿杯状细胞增多"
+                    "KR/TG穹窿PAS阳性杯状细胞增多。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "密度组间比较"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：计数模型，以上皮长度作为暴露量；动物为独立单位。"
                   ],
                   "notes": [
-                    "增多≠炎症；提示黏液层代偿或分化重编程",
-                    "与黏蛋白分子检测（待补）分开"
+                    "本研究异常证据来自穹窿，不能据此声称睑结膜全部区域均增加；PAS数量不等于黏蛋白分泌功能或炎症。"
                   ],
                   "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
+                    "【2】PDF第5–6页，Fig. 5E–F。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper2-fig5-conjunctiva.jpg",
-                      "paperFig": "Fig. 5E–F",
-                      "caption": "PAS：对照 vs TGFα 过表达 15 天，焦点在穹窿杯状细胞密度。",
-                      "id": "conj-pas-fig-0"
+                      "src": "/figures/revised/conj-pas.jpg",
+                      "paperFig": "【2】Fig. 5E–F",
+                      "caption": "穹窿PAS：上为KR，下为KR/TG；不能外推为全部睑结膜区域的定量结果。",
+                      "placement": "results",
+                      "width": 195,
+                      "height": 310,
+                      "id": "v16-conj-pas-fig-0"
                     }
                   ],
-                  "referenceEntries": []
-                }
-              ]
-            },
-            {
-              "id": "conj-krt",
-              "mark": "",
-              "title": "黏膜 / 表皮边界",
-              "assays": [
-                {
-                  "id": "conj-krt4-10",
-                  "title": "Krt4 / Krt10 边界",
                   "mark": "（1）",
-                  "sources": [
-                    "paper2"
-                  ],
-                  "evaluation": "结膜侧是否被表皮化侵入（与 MCJ 条互通）",
-                  "methods": [
-                    "免疫荧光 Krt4、Krt10（【2】Fig. 5G–J）"
-                  ],
-                  "metrics": [
-                    "Krt4⁺ 长度/密度",
-                    "Krt10 越界距离/面积"
-                  ],
-                  "normal": [
-                    "Krt4 黏膜侧⁺；Krt10 不过界"
-                  ],
-                  "abnormal": [
-                    "Krt4 消失；Krt10 越 MCJ 入结膜"
-                  ],
-                  "statistics": [
-                    "成对报告 Krt4↓ + Krt10 越界"
-                  ],
-                  "notes": [
-                    "结膜侧读「表皮化是否侵入结膜」"
-                  ],
-                  "references": [
-                    "【2】Dong et al., Dev Biol, 2015"
-                  ],
-                  "figures": [
-                    {
-                      "src": "/figures/paper2-fig5-conjunctiva.jpg",
-                      "paperFig": "Fig. 5G–J",
-                      "caption": "Krt4 丢失与 Krt10 越界成对阅读。",
-                      "id": "conj-krt4-10-fig-0"
-                    }
-                  ],
-                  "referenceEntries": []
-                }
-              ]
-            },
-            {
-              "id": "conj-pending",
-              "mark": "",
-              "title": "充血与黏蛋白",
-              "assays": [
-                {
-                  "id": "conj-mucin-pending",
-                  "title": "结膜充血与黏蛋白监测（待补）",
-                  "mark": "（1）",
-                  "sources": [
-                    "paper2"
-                  ],
-                  "evaluation": "结膜充血；黏蛋白（如 Muc5ac）表达/分泌",
-                  "methods": [
-                    "待补（两 PDF 无评分方案）"
-                  ],
-                  "metrics": [
-                    "裂隙灯充血评分（建议）",
-                    "Muc5ac IF/ELISA/qPCR（建议）"
-                  ],
-                  "normal": [
-                    "待补"
-                  ],
-                  "abnormal": [
-                    "待补；目前可落地的是 PAS 杯状细胞"
-                  ],
-                  "statistics": [
-                    "待补"
-                  ],
-                  "notes": [
-                    "勿用 PAS 增多直接等同黏蛋白功能亢进"
-                  ],
-                  "references": [
-                    "待补；相关【2】PAS 图"
-                  ],
-                  "figures": [],
-                  "pending": [
-                    "结膜充血的活体评分或裂隙灯标准",
-                    "结膜黏蛋白的免疫组化 / ELISA / qPCR 面板"
-                  ],
                   "referenceEntries": []
                 }
               ]
@@ -1577,155 +1580,141 @@
           ]
         },
         {
-          "id": "surface-tear",
+          "id": "tearfilm",
           "index": "3",
           "title": "泪膜",
           "topics": [
             {
-              "id": "tear-integrity",
+              "id": "tearfilm-items",
               "mark": "",
-              "title": "完整性",
+              "title": "",
               "assays": [
                 {
                   "id": "tear-specular",
-                  "title": "镜面光反射 · 泪膜空间完整性",
-                  "mark": "（1）",
+                  "title": "泪膜空间完整性",
                   "sources": [
                     "paper1"
                   ],
-                  "evaluation": "泪膜表面规则性与完整性",
+                  "evaluation": "泪膜空间完整性",
                   "methods": [
-                    "体视显微镜观察圆形 LED 光环在眼表的反射（【1】Fig. 3A）"
+                    "Leica M205 C、66/80 LED环形灯、EC3相机及LAS 4.2，观察角膜表面的环形反射。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "反射环完整/扭曲/碎裂分级",
-                    "或盲评评分量表"
+                    "每组4只/8眼代表图；未报告连续度评分。建议盲法分级或定义环形连续比例。"
                   ],
                   "normal": [
-                    "平滑、连续环形反光"
+                    "较平滑、连续的环形反射。"
                   ],
                   "abnormal": [
-                    "DMSO 光环断裂、扭曲；ATR101 恢复较完整圆环"
+                    "DMSO反射扭曲、碎裂；ATR101反射更规则。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "等级资料",
-                    "与 TFBUT 联合解读"
+                    "原文主要为定性观察，未报告该指标的推断检验。建议：评分用有序分类模型，处理双眼相关性。"
                   ],
                   "notes": [
-                    "反射看空间完整性，TFBUT 看维持时间——二者互补"
+                    "反射同时受眼表形状影响；空间反射不能替代TBUT时间测量。"
                   ],
                   "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
+                    "【1】PDF第3、6、8页，Fig. 3A。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig3-tear-cornea.jpg",
-                      "paperFig": "Fig. 3A",
-                      "caption": "镜面光反射。DMSO 组环形反光碎裂、扭曲；ATR101 组恢复较完整圆环。标尺 200 μm。",
-                      "id": "tear-specular-fig-0"
+                      "src": "/figures/revised/tear-reflection.jpg",
+                      "paperFig": "【1】Fig. 3A",
+                      "caption": "环形反射观察泪膜空间完整性。",
+                      "placement": "results",
+                      "width": 312,
+                      "height": 255,
+                      "id": "v16-tear-specular-fig-0"
                     }
                   ],
+                  "mark": "（1）",
+                  "referenceEntries": []
+                },
+                {
+                  "id": "tear-volume-pending",
+                  "title": "泪液量、泪河与脂质层",
+                  "mark": "（2）",
+                  "sources": [],
+                  "evaluation": "泪液量、泪河与脂质层",
+                  "methods": [
+                    "两篇文献未提供本项目的专项检测方案；需补充对应方法文献。"
+                  ],
+                  "metrics": [
+                    "未提供定量结果或阈值，待补充。"
+                  ],
+                  "normal": [
+                    "未建立本项目正常范围。"
+                  ],
+                  "abnormal": [
+                    "不能以PAS杯状细胞增加或环形反射变化，直接推定本项目异常。"
+                  ],
+                  "statistics": [
+                    "待确定检测指标及动物/眼/重复测量结构后制定统计方案。"
+                  ],
+                  "notes": [
+                    "保留已有待补评价项目；未检测不等于正常。"
+                  ],
+                  "references": [
+                    "【1】【2】未提供本项目专项定量证据。"
+                  ],
+                  "figures": [],
+                  "instruments": [],
+                  "observations": [],
                   "referenceEntries": []
                 }
               ]
             },
             {
-              "id": "tear-tfbut",
+              "id": "phenotype-tfbut",
               "mark": "①",
-              "title": "泪膜破裂时间 · TFBUT",
+              "title": "泪膜破裂时间 · TFBUT / TBUT",
               "assays": [
                 {
                   "id": "tear-tbut",
-                  "title": "泪膜破裂时间 · TFBUT",
-                  "mark": "（1）",
+                  "title": "泪膜破裂时间 · TFBUT / TBUT",
                   "sources": [
                     "paper1"
                   ],
-                  "evaluation": "泪膜稳定性（时间维）",
+                  "evaluation": "泪膜破裂时间 · TFBUT / TBUT",
                   "methods": [
-                    "麻醉小鼠置裂隙灯",
-                    "~1 μL 1% 无菌荧光素钠",
-                    "自发眨眼或镊子轻闭模拟 blink 使染料均匀",
-                    "蓝光激发；视频记录至约 1/3 角膜不再被荧光素覆盖",
-                    "逐帧测从「完全覆盖」到「荧光素层不连续」的时间；观察期眨眼则重测（【1】Methods；Fig. 3B）"
+                    "麻醉后约1 μL 1%荧光素钠滴眼；自然眨眼或轻闭眼模拟眨眼后，用裂隙灯蓝光连续录像、逐帧分析。观察中发生眨眼则重测。"
                   ],
+                  "instruments": [],
                   "metrics": [
-                    "TFBUT（秒）",
-                    "可每眼重复取均值"
+                    "从完全荧光素覆盖至首次出现荧光层不连续的时间（秒）；录像持续至约1/3角膜不再被覆盖，但后者不是TBUT终点。",
+                    "WT n=14、DMSO n=21、ATR101 n=14，图注称个体小鼠记录；精确秒数未列表。"
                   ],
                   "normal": [
-                    "WT 最长"
+                    "WT作为稳定性参照；本研究未建立正常秒数区间。"
                   ],
                   "abnormal": [
-                    "Awat2−/−/DMSO 最短；ATR101 显著延长但仍低于 WT"
+                    "ATR101组TBUT约为DMSO的3倍，仍低于WT，说明部分改善。"
                   ],
+                  "observations": [],
                   "statistics": [
-                    "组间 ANOVA",
-                    "重复测量",
-                    "报告鼠/眼数（原文 Fig. 3A 示例 n=8 眼/4 鼠/组）"
+                    "原文：Shapiro–Wilk检查正态性后采用双侧t检验。建议：动物层面比较三组并校正多重比较；多次测量先按预设规则汇总。"
                   ],
                   "notes": [
-                    "原文为荧光素相关 TFBUT，不是 NIBUT",
-                    "泪液量、泪河高度、脂质层干涉厚度仍待补"
+                    "这是荧光素相关TBUT，不是NIBUT；滴液体积、浓度、麻醉及模拟眨眼影响结果。不套用解剖页另一研究的正常秒数。"
                   ],
                   "references": [
-                    "【1】Widjaja-Adhi et al., IOVS, 2026"
+                    "【1】PDF第3、6、8页，Fig. 3B。"
                   ],
                   "figures": [
                     {
-                      "src": "/figures/paper1-fig3-tear-cornea.jpg",
-                      "paperFig": "Fig. 3B",
-                      "caption": "Tear film break-up time。Awat2−/−/DMSO < ATR101 < WT。",
-                      "id": "tear-tbut-fig-0"
+                      "src": "/figures/revised/tear-tbut.jpg",
+                      "paperFig": "【1】Fig. 3B",
+                      "caption": "WT、DMSO及ATR101的TFBUT；治疗改善但未恢复至WT。",
+                      "placement": "results",
+                      "width": 318,
+                      "height": 257,
+                      "id": "v16-tear-tbut-fig-0"
                     }
                   ],
-                  "referenceEntries": []
-                }
-              ]
-            },
-            {
-              "id": "tear-volume",
-              "mark": "",
-              "title": "泪液量 / 泪河 / 脂质层",
-              "assays": [
-                {
-                  "id": "tear-volume-pending",
-                  "title": "泪液量 / 泪河 / 脂质层（待补）",
                   "mark": "（1）",
-                  "sources": [
-                    "paper1"
-                  ],
-                  "evaluation": "水性泪液量、泪河高度、脂质层",
-                  "methods": [
-                    "待补（【1】收集下泪河用于脂质组学，但未报告泪液量或泪河高度统计；【2】无）"
-                  ],
-                  "metrics": [
-                    "酚红棉线湿长（建议）",
-                    "泪河高度（μm）",
-                    "脂质层干涉分级"
-                  ],
-                  "normal": [
-                    "待补"
-                  ],
-                  "abnormal": [
-                    "待补"
-                  ],
-                  "statistics": [
-                    "待补"
-                  ],
-                  "notes": [
-                    "采样微毛细管会干扰后续泪膜检查：先非侵入/成像，再收集"
-                  ],
-                  "references": [
-                    "待补"
-                  ],
-                  "figures": [],
-                  "pending": [
-                    "泪液量",
-                    "泪河高度",
-                    "NIBUT",
-                    "脂质层厚度"
-                  ],
                   "referenceEntries": []
                 }
               ]

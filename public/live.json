@@ -58,7 +58,58 @@
                       "placement": "results"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
+                },
+                {
+                  "id": "user-assay-c0663535-b75b-4fdf-a1d4-5e2707860faa",
+                  "title": "眼睑形态",
+                  "evaluation": "眼睑形态",
+                  "mark": "（2）",
+                  "sources": [],
+                  "userAdded": true,
+                  "methods": [
+                    "大体观察"
+                  ],
+                  "metrics": [
+                    ""
+                  ],
+                  "normal": [
+                    ""
+                  ],
+                  "abnormal": [
+                    "眼睑干燥、结痂"
+                  ],
+                  "statistics": [
+                    ""
+                  ],
+                  "notes": [
+                    ""
+                  ],
+                  "references": [],
+                  "referenceEntries": [
+                    {
+                      "id": "ref-5589fe29-8705-432e-aaa7-5075234122f0",
+                      "authors": "Danielle J. Gardon a,1, Che-Jui Liu a, Natalia A. Veniaminova a, Vesa Kaartinen b, Sunny Y. Wong a,*",
+                      "title": "A mouse model of meibomian gland hyperkeratinization-induced dry eye",
+                      "source": "Developmental Biology",
+                      "year": "2026",
+                      "link": ""
+                    }
+                  ],
+                  "instruments": [],
+                  "observations": [],
+                  "figures": [
+                    {
+                      "id": "user-fig-1f2bcf4f-ddd7-4a9d-863f-050856f0997d",
+                      "paperFig": "Cre Abca12→cKO小鼠眼睑干燥和结痂 ",
+                      "caption": "",
+                      "alt": "",
+                      "placement": "results",
+                      "userAdded": true,
+                      "src": "/figures/live/user-fig-1f2bcf4f-ddd7-4a9d-863f-050856f0997d.jpg"
+                    }
+                  ]
                 }
               ]
             }
@@ -124,7 +175,8 @@
                       "id": "v16-conj-krt4-fig-1"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 }
               ]
             }
@@ -182,7 +234,8 @@
                       "id": "v16-mg-stereo-close-fig-0"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "mg-nuclei-count",
@@ -236,7 +289,8 @@
                       "id": "v16-mg-nuclei-count-fig-1"
                     }
                   ],
-                  "mark": "（2）"
+                  "mark": "（2）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "mg-3d-duct",
@@ -300,7 +354,8 @@
                       "id": "v16-mg-3d-duct-fig-2"
                     }
                   ],
-                  "mark": "（3）"
+                  "mark": "（3）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "mg-he-acini",
@@ -343,7 +398,8 @@
                       "id": "v16-mg-he-acini-fig-0"
                     }
                   ],
-                  "mark": "（4）"
+                  "mark": "（4）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "mg-terminal-duct",
@@ -387,7 +443,8 @@
                       "id": "v16-mg-terminal-duct-fig-0"
                     }
                   ],
-                  "mark": "（5）"
+                  "mark": "（5）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "mg-rtqpcr",
@@ -433,7 +490,8 @@
                       "id": "v16-mg-rtqpcr-fig-0"
                     }
                   ],
-                  "mark": "（6）"
+                  "mark": "（6）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "mg-pparg-pcna",
@@ -495,7 +553,8 @@
                       "id": "v16-mg-pparg-pcna-fig-2"
                     }
                   ],
-                  "mark": "（7）"
+                  "mark": "（7）",
+                  "referenceEntries": []
                 }
               ]
             },
@@ -545,7 +604,8 @@
                       "id": "v16-meibum-appearance-fig-0"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "meibum-express",
@@ -597,7 +657,8 @@
                       "id": "v16-meibum-express-fig-1"
                     }
                   ],
-                  "mark": "（2）"
+                  "mark": "（2）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "meibum-lipids",
@@ -652,7 +713,8 @@
                       "id": "v16-meibum-lipids-fig-1"
                     }
                   ],
-                  "mark": "（3）"
+                  "mark": "（3）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "meibum-melting",
@@ -695,7 +757,8 @@
                       "id": "v16-meibum-melting-fig-0"
                     }
                   ],
-                  "mark": "（4）"
+                  "mark": "（4）",
+                  "referenceEntries": []
                 }
               ]
             },
@@ -733,7 +796,8 @@
                     "【1】【2】未提供本项目专项证据。"
                   ],
                   "figures": [],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 }
               ]
             },
@@ -771,7 +835,8 @@
                     "【1】【2】未提供本项目专项证据。"
                   ],
                   "figures": [],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 }
               ]
             }
@@ -834,7 +899,8 @@
                       "placement": "methods"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "muscle-masson-adult",
@@ -875,7 +941,8 @@
                       "placement": "results"
                     }
                   ],
-                  "mark": "（2）"
+                  "mark": "（2）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "muscle-masson-time",
@@ -916,7 +983,8 @@
                       "placement": "results"
                     }
                   ],
-                  "mark": "（3）"
+                  "mark": "（3）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "muscle-pcna-tunel",
@@ -950,7 +1018,8 @@
                     "【2】PDF第6、9页，Fig. 8Ab–Ac/Bb–Bc、Fig. 9Ab–Ac/Bb–Bc。"
                   ],
                   "figures": [],
-                  "mark": "（4）"
+                  "mark": "（4）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "muscle-collagen",
@@ -993,7 +1062,8 @@
                       "id": "v16-muscle-collagen-fig-0"
                     }
                   ],
-                  "mark": "（5）"
+                  "mark": "（5）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "muscle-egfr",
@@ -1034,7 +1104,8 @@
                       "placement": "results"
                     }
                   ],
-                  "mark": "（6）"
+                  "mark": "（6）",
+                  "referenceEntries": []
                 }
               ]
             },
@@ -1088,7 +1159,8 @@
                       "placement": "results"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 }
               ],
               "parentId": "phenotype-muscles"
@@ -1127,7 +1199,8 @@
                     "【1】【2】未提供本项目专项证据。"
                   ],
                   "figures": [],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 }
               ],
               "parentId": "phenotype-muscles"
@@ -1169,7 +1242,8 @@
                     "【2】PDF第5、7页；补充Fig. 1、Fig. 6。"
                   ],
                   "figures": [],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 }
               ],
               "parentId": "phenotype-muscles"
@@ -1236,7 +1310,8 @@
                       "id": "v16-cornea-fluorescein-fig-0"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "cornea-confocal",
@@ -1279,7 +1354,8 @@
                       "id": "v16-cornea-confocal-fig-0"
                     }
                   ],
-                  "mark": "（2）"
+                  "mark": "（2）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "cornea-markers",
@@ -1324,7 +1400,8 @@
                       "id": "v16-cornea-markers-fig-0"
                     }
                   ],
-                  "mark": "（3）"
+                  "mark": "（3）",
+                  "referenceEntries": []
                 }
               ]
             }
@@ -1381,7 +1458,8 @@
                       "id": "v16-conj-he-fig-0"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "conj-mucin-pending",
@@ -1412,7 +1490,8 @@
                   ],
                   "figures": [],
                   "instruments": [],
-                  "observations": []
+                  "observations": [],
+                  "referenceEntries": []
                 }
               ]
             },
@@ -1462,7 +1541,8 @@
                       "id": "v16-conj-pas-fig-0"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 }
               ]
             }
@@ -1519,7 +1599,8 @@
                       "id": "v16-tear-specular-fig-0"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 },
                 {
                   "id": "tear-volume-pending",
@@ -1550,7 +1631,8 @@
                   ],
                   "figures": [],
                   "instruments": [],
-                  "observations": []
+                  "observations": [],
+                  "referenceEntries": []
                 }
               ]
             },
@@ -1601,7 +1683,8 @@
                       "id": "v16-tear-tbut-fig-0"
                     }
                   ],
-                  "mark": "（1）"
+                  "mark": "（1）",
+                  "referenceEntries": []
                 }
               ]
             }
@@ -1995,5 +2078,6 @@
       "mark": "Ⅱ.",
       "outlineVersion": 1
     }
-  ]
+  ],
+  "sectionReferences": []
 }

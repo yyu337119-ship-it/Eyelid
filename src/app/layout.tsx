@@ -18,9 +18,9 @@ const serif = Noto_Serif_SC({
 })
 
 export const metadata: Metadata = {
-  title: "小鼠眼睑与眼表研究手册 · 正常解剖与眼睑表型",
+  title: "小鼠眼睑与眼表研究手册 · 正常解剖、文献思路与眼睑眼表表型",
   description:
-    "按 MG、角膜与泪膜、结膜、眼睑相关肌肉四类整理检测方法、分子标志物、观察结果和原文图表。",
+    "正常解剖与生理、文献思路概览、眼睑与眼表表型及原文图表。",
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

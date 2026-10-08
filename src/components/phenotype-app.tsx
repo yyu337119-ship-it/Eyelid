@@ -22,22 +22,30 @@ import { TocNav } from "@/components/toc-nav"
 import { HandbookProvider, useHandbook } from "@/lib/handbook-store"
 
 import { AnatomyPanel } from "@/components/anatomy-panel"
+import { LiteraturePanel } from "@/components/literature-panel"
+
+const sheets = [
+  { id: "anatomy", number: "01", title: "正常解剖与生理" },
+  { id: "literature", number: "02", title: "文献思路概览" },
+  { id: "phenotype", number: "03", title: "眼睑、眼表表型" },
+] as const
+type SheetId = typeof sheets[number]["id"]
 
 function PhenotypeAppInner() {
-  const [activeSheet, setActiveSheet] = useState<"anatomy" | "phenotype">("anatomy")
+  const [activeSheet, setActiveSheet] = useState<SheetId>("anatomy")
   useEffect(() => {
     function syncHash() {
       const hash = window.location.hash.slice(1)
-      setActiveSheet(hash && !hash.startsWith("anatomy") ? "phenotype" : "anatomy")
+      setActiveSheet(hash.startsWith("literature") ? "literature" : hash && !hash.startsWith("anatomy") ? "phenotype" : "anatomy")
       if (hash) requestAnimationFrame(() => document.getElementById(hash)?.scrollIntoView({ behavior: "instant" }))
     }
     syncHash()
     window.addEventListener("hashchange", syncHash)
     return () => window.removeEventListener("hashchange", syncHash)
   }, [])
-  function switchSheet(sheet: "anatomy" | "phenotype") {
+  function switchSheet(sheet: SheetId) {
     setActiveSheet(sheet)
-    window.history.replaceState(null, "", sheet === "anatomy" ? "#anatomy" : "#phenotype")
+    window.history.replaceState(null, "", `#${sheet}`)
     window.scrollTo({ top: 0, behavior: "instant" })
   }
   const [menuOpen, setMenuOpen] = useState(false)
@@ -81,8 +89,13 @@ function PhenotypeAppInner() {
           <EditToolbar />
         </div>
         <div className="sheet-tabs" role="tablist" aria-label="手册模块">
-          <button id="tab-anatomy" role="tab" aria-selected={activeSheet === "anatomy"} aria-controls="panel-anatomy" tabIndex={activeSheet === "anatomy" ? 0 : -1} onKeyDown={e => { if (["ArrowLeft", "ArrowRight", "End"].includes(e.key)) { e.preventDefault(); switchSheet("phenotype"); document.getElementById("tab-phenotype")?.focus() } }} onClick={() => switchSheet("anatomy")}><span>01</span> 正常解剖与生理</button>
-          <button id="tab-phenotype" role="tab" aria-selected={activeSheet === "phenotype"} aria-controls="panel-phenotype" tabIndex={activeSheet === "phenotype" ? 0 : -1} onKeyDown={e => { if (["ArrowLeft", "ArrowRight", "Home"].includes(e.key)) { e.preventDefault(); switchSheet("anatomy"); document.getElementById("tab-anatomy")?.focus() } }} onClick={() => switchSheet("phenotype")}><span>02</span> 眼睑表型</button>
+          {sheets.map((sheet, index) => <button key={sheet.id} id={`tab-${sheet.id}`} role="tab" aria-selected={activeSheet === sheet.id} aria-controls={`panel-${sheet.id}`} tabIndex={activeSheet === sheet.id ? 0 : -1} onClick={() => switchSheet(sheet.id)} onKeyDown={event => {
+            const next = event.key === "ArrowRight" ? (index + 1) % sheets.length : event.key === "ArrowLeft" ? (index + sheets.length - 1) % sheets.length : event.key === "Home" ? 0 : event.key === "End" ? sheets.length - 1 : -1
+            if (next < 0) return
+            event.preventDefault()
+            switchSheet(sheets[next].id)
+            document.getElementById(`tab-${sheets[next].id}`)?.focus()
+          }}><span>{sheet.number}</span> {sheet.title}</button>)}
           <p className="sheet-status">{dirty ? "● 有未发布的修改" : "解剖 · 生理 · 表型"}</p>
         </div>
       </header>
@@ -90,9 +103,10 @@ function PhenotypeAppInner() {
       <div id="panel-anatomy" role="tabpanel" aria-labelledby="tab-anatomy" hidden={activeSheet !== "anatomy"}>
         <AnatomyPanel active={activeSheet === "anatomy"} />
       </div>
+      <div id="panel-literature" role="tabpanel" aria-labelledby="tab-literature" hidden={activeSheet !== "literature"}><LiteraturePanel /></div>
       <div id="panel-phenotype" role="tabpanel" aria-labelledby="tab-phenotype" hidden={activeSheet !== "phenotype"}>
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[300px_minmax(0,1fr)]">
-        <aside className="hidden lg:block" aria-label="眼睑表型目录">
+        <aside className="hidden lg:block" aria-label="眼睑、眼表表型目录">
           <div className="sticky top-40 max-h-[calc(100vh-11rem)] overflow-y-auto pr-2">
             <p className="mb-3 flex items-center gap-2 text-xs font-semibold tracking-wide text-stone-500 uppercase"><BookOpen className="size-3.5" />目录</p>
             <TocNav />

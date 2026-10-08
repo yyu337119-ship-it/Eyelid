@@ -33,11 +33,13 @@ export function FigureBlock({
   figure,
   onPaperFigChange,
   onCaptionChange,
+  onAltChange,
   onRemove,
 }: {
   figure: Figure
   onPaperFigChange?: (value: string) => void
   onCaptionChange?: (value: string) => void
+  onAltChange?: (value: string) => void
   onRemove?: () => void
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null)
@@ -46,6 +48,8 @@ export function FigureBlock({
   const figureId = figure.id
   const replaced = Boolean(figureId && figureUrls[figureId])
   const displaySrc = (figureId && figureUrls[figureId]) || publicPath(figure.src)
+  const alt = figure.alt?.trim() || figure.caption?.trim() || figure.paperFig.trim() || "图片"
+  const canEditFigure = editMode || Boolean(figure.userAdded)
 
   function openLightbox() {
     dialogRef.current?.showModal()
@@ -74,7 +78,7 @@ export function FigureBlock({
         >
           <FigureImage
             src={displaySrc}
-            alt={figure.paperFig}
+            alt={alt}
             width={figure.width ?? 1400}
             height={figure.height ?? 900}
             className="mx-auto h-[min(420px,56vw)] w-auto max-w-full object-contain"
@@ -109,7 +113,7 @@ export function FigureBlock({
         </div>
       )}
 
-      {editMode ? (
+      {canEditFigure ? (
         <div className="flex flex-wrap items-center gap-2 border-t border-stone-100 bg-[#f6f1e7] px-3 py-2.5">
           <button
             type="button"
@@ -117,7 +121,7 @@ export function FigureBlock({
             className="inline-flex items-center gap-1.5 rounded-md bg-[#1f4b3a] px-3 py-1.5 text-sm text-white hover:bg-[#17382c]"
           >
             <ImagePlus className="size-3.5" />
-            {displaySrc ? "替换图片" : "上传图片"}
+            {displaySrc ? "替换本地图片" : "选择本地图片"}
           </button>
           {replaced ? (
             <button
@@ -158,6 +162,9 @@ export function FigureBlock({
             <EditableText
               value={figure.paperFig}
               onChange={onPaperFigChange}
+              active={Boolean(figure.userAdded)}
+              placeholder={figure.userAdded ? "图题，留空待填" : undefined}
+              ariaLabel="图题"
               className="font-medium"
             />
           ) : (
@@ -168,12 +175,27 @@ export function FigureBlock({
           <EditableText
             value={figure.caption}
             onChange={onCaptionChange}
+            active={Boolean(figure.userAdded)}
             multiline
+            placeholder={figure.userAdded ? "图注，留空待填" : undefined}
+            ariaLabel="图注"
             className="text-sm leading-6 text-stone-600"
           />
         ) : (
           <p className="text-sm leading-6 text-stone-600">{figure.caption}</p>
         )}
+        {onAltChange && canEditFigure ? (
+          <label className="block text-xs text-stone-500">
+            替代文本
+            <input
+              value={figure.alt ?? ""}
+              placeholder="说明图中内容，供读屏使用"
+              aria-label="替代文本"
+              onChange={(event) => onAltChange(event.target.value)}
+              className="mt-1 w-full rounded-md border border-stone-300 bg-white px-2 py-1.5 text-sm text-stone-800 outline-none focus:border-[#1f4b3a]"
+            />
+          </label>
+        ) : null}
       </div>
 
       {displaySrc ? (
@@ -196,7 +218,7 @@ export function FigureBlock({
             <p className="pr-10 text-sm font-medium text-stone-800">{figure.paperFig}</p>
             <FigureImage
               src={displaySrc}
-              alt={figure.paperFig}
+              alt={alt}
               width={figure.width ?? 1800}
               height={figure.height ?? 1200}
               className="mt-3 h-auto max-h-[70vh] w-full object-contain"

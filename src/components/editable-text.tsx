@@ -15,6 +15,7 @@ export function EditableText({
   compact = false,
   placeholder,
   ariaLabel,
+  active = false,
 }: {
   value: string
   onChange: (value: string) => void
@@ -23,9 +24,11 @@ export function EditableText({
   compact?: boolean
   placeholder?: string
   ariaLabel?: string
+  /** 新加的空白框架在未进入「编辑正文」时也可以填写 */
+  active?: boolean
 }) {
   const { editMode } = useHandbook()
-  if (!editMode) {
+  if (!editMode && !active) {
     return <span className={className}>{value}</span>
   }
   const sizing = compact ? "min-w-0 px-1 py-0.5 text-[13px] leading-5" : "w-full px-2 py-1"
@@ -58,13 +61,17 @@ export function EditableList({
   items,
   onChange,
   addLabel = "添加一条",
+  active = false,
+  placeholder = "留空待填",
 }: {
   items: string[]
   onChange: (items: string[]) => void
   addLabel?: string
+  active?: boolean
+  placeholder?: string
 }) {
   const { editMode } = useHandbook()
-  if (!editMode) {
+  if (!editMode && !active) {
     if (!items.length) return null
     return (
       <ul className="list-disc space-y-1 pl-4 text-sm leading-6 text-stone-700">
@@ -80,6 +87,7 @@ export function EditableList({
         <div key={index} className="flex items-start gap-2">
           <textarea
             value={item}
+            placeholder={placeholder}
             rows={2}
             onChange={(event) => {
               const next = [...items]

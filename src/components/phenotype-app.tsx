@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react"
 import { BookOpen, Menu } from "lucide-react"
 import { AssayCard } from "@/components/assay-card"
+import { AddEntryButton, ReferenceEntryCard } from "@/components/reference-entries"
+import { scrollToId } from "@/components/toc-nav"
 import { EditToolbar } from "@/components/edit-toolbar"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -11,6 +13,7 @@ import {
   abbreviations,
   assayHasSubstance,
   assayMark,
+  collectBlockReferences,
   sameSources,
   sectionSources,
   sources,
@@ -60,8 +63,21 @@ function PhenotypeAppInner() {
     updateSection,
     updateTopic,
     updateAssay,
+    addAssay,
+    sectionReferences,
+    addSectionReference,
+    updateReferenceEntry,
+    removeReferenceEntry,
     editMode,
+    ready,
   } = useHandbook()
+  useEffect(() => {
+    if (!ready) return
+    const hash = window.location.hash.slice(1)
+    if (!hash || hash === "anatomy" || hash === "literature" || hash === "phenotype") return
+    const frame = window.requestAnimationFrame(() => scrollToId(hash))
+    return () => window.cancelAnimationFrame(frame)
+  }, [ready])
 
   return (
     <div className="min-h-screen bg-[#f6f1e7] text-stone-800">
@@ -217,11 +233,13 @@ function PhenotypeAppInner() {
                           <div className="space-y-4">
                             {topic.assays
                               .filter((assay) => editMode || assayHasSubstance(assay))
-                              .map((assay, assayIndex) => (
+                              .map((assay) => (
                               <AssayCard
                                 key={assay.id}
                                 assay={assay}
-                                headingMark={assayMark(assay, assayIndex)}
+                                headingMark={assayMark(assay, topic.assays.findIndex((item) => item.id === assay.id))}
+                                assayIndex={topic.assays.findIndex((item) => item.id === assay.id)}
+                                assayCount={topic.assays.length}
                                 onMarkChange={(mark) =>
                                   updateAssay(
                                     {
@@ -242,6 +260,14 @@ function PhenotypeAppInner() {
                                 }}
                               />
                             ))}
+                            <AddEntryButton
+                              onClick={() => {
+                                const id = addAssay(category.id, section.id, topic.id)
+                                window.setTimeout(() => scrollToId(id), 0)
+                              }}
+                            >
+                              添加评价项目
+                            </AddEntryButton>
                           </div>
                         </div>
                       )
@@ -257,7 +283,7 @@ function PhenotypeAppInner() {
               <EditableText value={refsLabel} onChange={setRefsLabel} className="font-semibold" />
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
-              编号对应两篇核心文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。
+              编号对应两篇核心文献：【1】Widjaja-Adhi 2026，【2】Dong 2015。下面这两篇是页面原有文献。再往下的条目可以随时添加，开始是空的。
             </p>
             <Separator className="my-4" />
             <div className="grid gap-4">
@@ -284,6 +310,38 @@ function PhenotypeAppInner() {
                   </article>
                 )
               })}
+            </div>
+            <div className="mt-6 space-y-3">
+              <h3 className="text-sm font-semibold text-stone-900">逐条添加的参考文献</h3>
+              <p className="text-sm leading-6 text-stone-600">
+                在某个评价项目里点「添加条目」，同一条会出现在这里。在这里删除，评价项目里的那一条也会去掉。从本节列表新加的条目只留在本节，开始同样是空的。
+              </p>
+              {collectBlockReferences(categories).map(({ entry, assayId, assayTitle }) => (
+                <ReferenceEntryCard
+                  key={entry.id}
+                  entry={entry}
+                  origin={assayId ? `来自评价项目：${assayTitle}` : undefined}
+                  onJump={assayId ? () => scrollToId(assayId) : undefined}
+                  onChange={(patch) => updateReferenceEntry(entry.id, patch)}
+                  onRemove={() => {
+                    if (!window.confirm("删除这条参考文献？评价项目和本节列表里都会去掉。")) return
+                    removeReferenceEntry(entry.id)
+                  }}
+                />
+              ))}
+              {sectionReferences.map((entry) => (
+                <ReferenceEntryCard
+                  key={entry.id}
+                  entry={entry}
+                  origin="添加于本节列表"
+                  onChange={(patch) => updateReferenceEntry(entry.id, patch)}
+                  onRemove={() => {
+                    if (!window.confirm("删除这条参考文献？")) return
+                    removeReferenceEntry(entry.id)
+                  }}
+                />
+              ))}
+              <AddEntryButton onClick={() => addSectionReference()}>添加条目</AddEntryButton>
             </div>
           </section>
         </main>

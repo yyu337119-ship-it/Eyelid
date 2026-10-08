@@ -16,7 +16,19 @@ export type Figure = {
   src?: string
   paperFig: string
   caption: string
+  /** 给读屏和没有图时的说明，不写进图注正文也可以 */
+  alt?: string
   pmcUrl?: string
+  userAdded?: boolean
+}
+
+export type ReferenceEntry = {
+  id: string
+  authors: string
+  title: string
+  source: string
+  year: string
+  link: string
 }
 
 export type Assay = {
@@ -28,6 +40,10 @@ export type Assay = {
   statistics?: string[]
   notes?: string[]
   references?: string[]
+  /** 用户逐条添加的参考文献。与本节列表是同一条记录。 */
+  referenceEntries?: ReferenceEntry[]
+  /** 用户在页面上新加的评价项目。空白时也保留在目录和正文里。 */
+  userAdded?: boolean
   id: string
   title: string
   /** 四级编号，缺省按同级顺序写成（1）（2） */
@@ -152,8 +168,10 @@ function filledList(values?: string[]) {
   return (values ?? []).some(filled)
 }
 
-/** 标题和卡片内容都空的条目，不进目录也不进正文。 */
+/** 标题和卡片内容都空的条目，不进目录也不进正文。用户新加的空白框架要留着。 */
 export function assayHasSubstance(assay: Assay) {
+  if (assay.userAdded) return true
+  if ((assay.referenceEntries ?? []).length > 0) return true
   if (filled(assay.title)) return true
   if (filledList(assay.instruments) || filledList(assay.stains) || filledList(assay.observations) || filledList(assay.pending)) {
     return true
@@ -185,6 +203,84 @@ export function pruneEmptyOutline(tree: Category[]): Category[] {
     .filter((category) => filled(category.title) || category.sections.length > 0)
 }
 
+export function sanitizeReferenceEntry(value: unknown): ReferenceEntry | null {
+  if (!value || typeof value !== "object") return null
+  const row = value as Partial<ReferenceEntry>
+  if (typeof row.id !== "string" || !row.id.trim()) return null
+  return {
+    id: row.id,
+    authors: typeof row.authors === "string" ? row.authors : "",
+    title: typeof row.title === "string" ? row.title : "",
+    source: typeof row.source === "string" ? row.source : "",
+    year: typeof row.year === "string" ? row.year : "",
+    link: typeof row.link === "string" ? row.link : "",
+  }
+}
+
+export function sanitizeReferenceEntries(values: unknown): ReferenceEntry[] {
+  if (!Array.isArray(values)) return []
+  return values.map(sanitizeReferenceEntry).filter((entry): entry is ReferenceEntry => Boolean(entry))
+}
+
+export function blankReferenceEntry(): ReferenceEntry {
+  return {
+    id: `ref-${crypto.randomUUID()}`,
+    authors: "",
+    title: "",
+    source: "",
+    year: "",
+    link: "",
+  }
+}
+
+export function blankUserAssay(): Assay {
+  return {
+    id: `user-assay-${crypto.randomUUID()}`,
+    title: "",
+    evaluation: "",
+    mark: "",
+    sources: [],
+    userAdded: true,
+    methods: [""],
+    metrics: [""],
+    normal: [""],
+    abnormal: [""],
+    statistics: [""],
+    notes: [""],
+    references: [],
+    referenceEntries: [],
+    instruments: [],
+    observations: [],
+    figures: [],
+  }
+}
+
+export type PlacedReference = {
+  entry: ReferenceEntry
+  assayId?: string
+  assayTitle?: string
+}
+
+export function collectBlockReferences(tree: Category[]): PlacedReference[] {
+  const rows: PlacedReference[] = []
+  for (const category of tree) {
+    for (const section of category.sections) {
+      for (const topic of section.topics) {
+        for (const assay of topic.assays) {
+          for (const entry of assay.referenceEntries ?? []) {
+            rows.push({
+              entry,
+              assayId: assay.id,
+              assayTitle: assay.title.trim() || assay.evaluation?.trim() || "未命名评价项目",
+            })
+          }
+        }
+      }
+    }
+  }
+  return rows
+}
+
 export function withFigureIds(tree: Category[]): Category[] {
   return tree.map((category) => ({
     ...category,
@@ -195,7 +291,10 @@ export function withFigureIds(tree: Category[]): Category[] {
         assays: topic.assays.map((assay, assayIndex) => ({
           ...assay,
           mark: assayMark(assay, assayIndex),
-          figures: assay.figures.map((figure, index) => ({
+          referenceEntries: (assay.referenceEntries ?? [])
+            .map(sanitizeReferenceEntry)
+            .filter((entry): entry is ReferenceEntry => Boolean(entry)),
+          figures: (assay.figures ?? []).map((figure, index) => ({
             ...figure,
             id: figure.id ?? `${assay.id}-fig-${index}`,
           })),

@@ -13,12 +13,16 @@ import {
   type ReactNode,
 } from "react"
 import {
+  blankReferenceEntry,
+  blankUserAssay,
   categories as defaultCategories,
   pruneEmptyOutline,
+  sanitizeReferenceEntries,
   withFigureIds,
   type Assay,
   type Category,
   type Figure,
+  type ReferenceEntry,
 } from "@/data/content"
 import {
   blobToDataUrl,
@@ -66,6 +70,7 @@ type PublishedSnapshot = {
   intro: string
   refsLabel: string
   categories: Category[]
+  sectionReferences: ReferenceEntry[]
 }
 
 type HandbookContextValue = {
@@ -109,6 +114,14 @@ type HandbookContextValue = {
   removeSection: (categoryId: string, sectionId: string) => void
   removeTopic: (categoryId: string, sectionId: string, topicId: string) => void
   removeAssay: (path: AssayPath) => void
+  addAssay: (categoryId: string, sectionId: string, topicId: string) => string
+  moveAssay: (path: AssayPath, direction: -1 | 1) => void
+  sectionReferences: ReferenceEntry[]
+  addReferenceToAssay: (path: AssayPath) => string
+  addSectionReference: () => string
+  updateReferenceEntry: (id: string, patch: Partial<ReferenceEntry>) => void
+  removeReferenceEntry: (id: string) => void
+  ready: boolean
   replaceFigure: (id: string, file: File) => Promise<void>
   restoreFigure: (id: string) => Promise<void>
   reset: () => Promise<void>
@@ -142,8 +155,9 @@ async function fetchPublishedLive(): Promise<{
   intro?: string
   refsLabel?: string
   anatomy?: AnatomySection[]
-  categories?: Category[]
-} | null> {
+    categories?: Category[]
+    sectionReferences?: ReferenceEntry[]
+    } | null> {
   const path = publicPath("/live.json")
   if (!path) return null
   try {
@@ -153,7 +167,8 @@ async function fetchPublishedLive(): Promise<{
       intro?: string
       refsLabel?: string
       anatomy?: AnatomySection[]
-  categories?: Category[]
+      categories?: Category[]
+      sectionReferences?: ReferenceEntry[]
     }
     if (!data || typeof data !== "object") return null
     return data
@@ -167,7 +182,8 @@ async function collectPublishPayload(
   refsLabel: string,
   categories: Category[],
   figureUrls: Record<string, string>,
-  anatomy: AnatomySection[]
+  anatomy: AnatomySection[],
+  sectionReferences: ReferenceEntry[]
 ) {
   const nextAnatomy = structuredClone(anatomy)
   const next = pruneEmptyOutline(withFigureIds(structuredClone(categories)))
@@ -207,7 +223,7 @@ async function collectPublishPayload(
   })
 
   return {
-    liveJson: JSON.stringify({ intro, refsLabel, categories: next, anatomy: nextAnatomy }, null, 2),
+    liveJson: JSON.stringify({ intro, refsLabel, categories: next, anatomy: nextAnatomy, sectionReferences }, null, 2),
     categories: next,
     anatomy: nextAnatomy,
     images,
@@ -220,6 +236,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
   const [intro, setIntroState] = useState(HANDBOOK_INTRO)
   const [refsLabel, setRefsLabelState] = useState(DEFAULT_REFS_LABEL)
   const [categories, setCategories] = useState<Category[]>(cloneCategories)
+  const [sectionReferences, setSectionReferences] = useState<ReferenceEntry[]>([])
   const [textDirty, setTextDirty] = useState(false)
   const [figuresSynced, setFiguresSynced] = useState(true)
   const [figureUrls, setFigureUrls] = useState<Record<string, string>>({})
@@ -233,6 +250,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     intro: HANDBOOK_INTRO,
     refsLabel: DEFAULT_REFS_LABEL,
     categories: cloneCategories(),
+    sectionReferences: [],
   })
 
   useEffect(() => {
@@ -253,16 +271,25 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
           typeof live.refsLabel === "string" && live.refsLabel.trim()
             ? live.refsLabel
             : DEFAULT_REFS_LABEL
+        const liveSectionReferences = sanitizeReferenceEntries(live.sectionReferences)
+        if (liveSectionReferences.length) setSectionReferences(liveSectionReferences)
         if (Array.isArray(live.categories) && live.categories.length) {
           const next = pruneEmptyOutline(withFigureIds(live.categories))
           setCategories(next)
-          publishedRef.current = { intro: nextIntro, refsLabel: nextRefs, categories: next, anatomy: nextAnatomy }
+          publishedRef.current = {
+            intro: nextIntro,
+            refsLabel: nextRefs,
+            categories: next,
+            anatomy: nextAnatomy,
+            sectionReferences: liveSectionReferences,
+          }
         } else {
           publishedRef.current = {
             anatomy: nextAnatomy,
             intro: nextIntro,
             refsLabel: nextRefs,
             categories: cloneCategories(),
+            sectionReferences: liveSectionReferences,
           }
         }
         setLoadedLive(true)
@@ -275,13 +302,17 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
             intro?: string
             refsLabel?: string
             anatomy?: AnatomySection[]
-  categories?: Category[]
+            categories?: Category[]
+            sectionReferences?: ReferenceEntry[]
           }
           if (Array.isArray(parsed.anatomy) && parsed.anatomy.length) setAnatomy(normalizeAnatomy(parsed.anatomy))
           if (typeof parsed.intro === "string") setIntroState(parsed.intro)
           if (typeof parsed.refsLabel === "string") setRefsLabelState(parsed.refsLabel)
           if (Array.isArray(parsed.categories) && parsed.categories.length) {
             setCategories(pruneEmptyOutline(withFigureIds(parsed.categories)))
+          }
+          if (Array.isArray(parsed.sectionReferences)) {
+            setSectionReferences(sanitizeReferenceEntries(parsed.sectionReferences))
           }
           setTextDirty(true)
           setHasLocalDraft(true)
@@ -319,8 +350,11 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       window.localStorage.removeItem(DRAFT_KEY)
       return
     }
-    window.localStorage.setItem(DRAFT_KEY, JSON.stringify({ intro, refsLabel, categories, anatomy }))
-  }, [ready, textDirty, intro, refsLabel, categories, anatomy])
+    window.localStorage.setItem(
+      DRAFT_KEY,
+      JSON.stringify({ intro, refsLabel, categories, anatomy, sectionReferences })
+    )
+  }, [ready, textDirty, intro, refsLabel, categories, anatomy, sectionReferences])
 
   const updateAnatomyBlock = useCallback((id: string, patch: Partial<AnatomyBlock>) => {
     setAnatomy(prev => prev.map(section => ({ ...section, blocks: section.blocks.map(block => block.id === id ? { ...block, ...patch } : block) })))
@@ -521,6 +555,128 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     [commit]
   )
 
+  const addAssay = useCallback((categoryId: string, sectionId: string, topicId: string) => {
+    const assay = blankUserAssay()
+    commit((prev) =>
+      prev.map((category) =>
+        category.id !== categoryId
+          ? category
+          : {
+              ...category,
+              sections: category.sections.map((section) =>
+                section.id !== sectionId
+                  ? section
+                  : {
+                      ...section,
+                      topics: section.topics.map((topic) => {
+                        if (topic.id !== topicId) return topic
+                        return {
+                          ...topic,
+                          assays: [...topic.assays, { ...assay, mark: `（${topic.assays.length + 1}）` }],
+                        }
+                      }),
+                    }
+              ),
+            }
+      )
+    )
+    return assay.id
+  }, [commit])
+
+  const moveAssay = useCallback((path: AssayPath, direction: -1 | 1) => {
+    commit((prev) =>
+      prev.map((category) =>
+        category.id !== path.categoryId
+          ? category
+          : {
+              ...category,
+              sections: category.sections.map((section) =>
+                section.id !== path.sectionId
+                  ? section
+                  : {
+                      ...section,
+                      topics: section.topics.map((topic) => {
+                        if (topic.id !== path.topicId) return topic
+                        const index = topic.assays.findIndex((assay) => assay.id === path.assayId)
+                        const nextIndex = index + direction
+                        if (index < 0 || nextIndex < 0 || nextIndex >= topic.assays.length) return topic
+                        const assays = [...topic.assays]
+                        const [item] = assays.splice(index, 1)
+                        assays.splice(nextIndex, 0, item)
+                        return {
+                          ...topic,
+                          assays: assays.map((assay, assayIndex) => ({
+                            ...assay,
+                            mark: `（${assayIndex + 1}）`,
+                          })),
+                        }
+                      }),
+                    }
+              ),
+            }
+      )
+    )
+  }, [commit])
+
+  const addReferenceToAssay = useCallback((path: AssayPath) => {
+    const entry = blankReferenceEntry()
+    updateAssay(path, (assay) => ({
+      ...assay,
+      referenceEntries: [...(assay.referenceEntries ?? []), entry],
+    }))
+    return entry.id
+  }, [updateAssay])
+
+  const updateReferenceEntry = useCallback((id: string, patch: Partial<ReferenceEntry>) => {
+    commit((prev) =>
+      prev.map((category) => ({
+        ...category,
+        sections: category.sections.map((section) => ({
+          ...section,
+          topics: section.topics.map((topic) => ({
+            ...topic,
+            assays: topic.assays.map((assay) => ({
+              ...assay,
+              referenceEntries: (assay.referenceEntries ?? []).map((entry) =>
+                entry.id === id ? { ...entry, ...patch, id: entry.id } : entry
+              ),
+            })),
+          })),
+        })),
+      }))
+    )
+    setSectionReferences((prev) =>
+      prev.map((entry) => (entry.id === id ? { ...entry, ...patch, id: entry.id } : entry))
+    )
+  }, [commit])
+
+  const removeReferenceEntry = useCallback((id: string) => {
+    commit((prev) =>
+      prev.map((category) => ({
+        ...category,
+        sections: category.sections.map((section) => ({
+          ...section,
+          topics: section.topics.map((topic) => ({
+            ...topic,
+            assays: topic.assays.map((assay) => ({
+              ...assay,
+              referenceEntries: (assay.referenceEntries ?? []).filter((entry) => entry.id !== id),
+            })),
+          })),
+        })),
+      }))
+    )
+    setSectionReferences((prev) => prev.filter((entry) => entry.id !== id))
+  }, [commit])
+
+  const addSectionReference = useCallback(() => {
+    const entry = blankReferenceEntry()
+    setSectionReferences((prev) => [...prev, entry])
+    setTextDirty(true)
+    setPublishState({ status: "idle", detail: "" })
+    return entry.id
+  }, [])
+
   const replaceFigure = useCallback(async (id: string, file: File) => {
     const blob = await fileToJpegBlob(file)
     await putFigureBlob(id, blob)
@@ -555,6 +711,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     setIntroState(publishedRef.current.intro)
     setRefsLabelState(publishedRef.current.refsLabel)
     setCategories(structuredClone(publishedRef.current.categories))
+    setSectionReferences(structuredClone(publishedRef.current.sectionReferences))
     setTextDirty(false)
     setFiguresSynced(true)
     setHasLocalDraft(false)
@@ -580,13 +737,19 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     }
     setPublishState({ status: "saving", detail: "正在保存到 GitHub…" })
     try {
-      const payload = await collectPublishPayload(intro, refsLabel, categories, figureUrls, anatomy)
+      const payload = await collectPublishPayload(intro, refsLabel, categories, figureUrls, anatomy, sectionReferences)
       await publishHandbookFiles({
         token,
         liveJson: payload.liveJson,
         images: payload.images,
       })
-      publishedRef.current = { intro, refsLabel, categories: payload.categories, anatomy: payload.anatomy }
+      publishedRef.current = {
+        intro,
+        refsLabel,
+        categories: payload.categories,
+        anatomy: payload.anatomy,
+        sectionReferences,
+      }
       setAnatomy(payload.anatomy)
       setCategories(payload.categories)
       setTextDirty(false)
@@ -604,7 +767,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       setPublishState({ status: "error", detail })
       throw error instanceof Error ? error : new Error(detail)
     }
-  }, [intro, refsLabel, categories, figureUrls, anatomy])
+  }, [intro, refsLabel, categories, figureUrls, anatomy, sectionReferences])
 
   const exportJson = useCallback(async () => {
     const figures: Record<string, string> = {}
@@ -612,7 +775,7 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       const blob = await fetch(url).then((response) => response.blob())
       figures[id] = await blobToDataUrl(blob)
     }
-    const payload = JSON.stringify({ intro, refsLabel, categories, figures, anatomy }, null, 2)
+    const payload = JSON.stringify({ intro, refsLabel, categories, figures, anatomy, sectionReferences }, null, 2)
     const blob = new Blob([payload], { type: "application/json" })
     const url = URL.createObjectURL(blob)
     const link = document.createElement("a")
@@ -620,14 +783,15 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     link.download = "eyelid-handbook-edits.json"
     link.click()
     URL.revokeObjectURL(url)
-  }, [intro, refsLabel, categories, figureUrls, anatomy])
+  }, [intro, refsLabel, categories, figureUrls, anatomy, sectionReferences])
 
   const importJson = useCallback(async (file: File) => {
     const parsed = JSON.parse(await file.text()) as {
       intro?: string
       refsLabel?: string
       anatomy?: AnatomySection[]
-  categories?: Category[]
+      categories?: Category[]
+      sectionReferences?: ReferenceEntry[]
       figures?: Record<string, string>
     }
     if (Array.isArray(parsed.anatomy) && parsed.anatomy.length) setAnatomy(normalizeAnatomy(parsed.anatomy))
@@ -635,6 +799,9 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
     if (typeof parsed.refsLabel === "string") setRefsLabelState(parsed.refsLabel)
     if (Array.isArray(parsed.categories) && parsed.categories.length) {
       setCategories(pruneEmptyOutline(withFigureIds(parsed.categories)))
+    }
+    if (Array.isArray(parsed.sectionReferences)) {
+      setSectionReferences(sanitizeReferenceEntries(parsed.sectionReferences))
     }
     setTextDirty(true)
     setHasLocalDraft(true)
@@ -670,6 +837,8 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       refsLabel,
       setRefsLabel,
       categories,
+      sectionReferences,
+      ready,
       figureUrls,
       hasGithubToken,
       publishState,
@@ -684,6 +853,12 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       removeSection,
       removeTopic,
       removeAssay,
+      addAssay,
+      moveAssay,
+      addReferenceToAssay,
+      addSectionReference,
+      updateReferenceEntry,
+      removeReferenceEntry,
       replaceFigure,
       restoreFigure,
       reset,
@@ -704,6 +879,8 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       refsLabel,
       setRefsLabel,
       categories,
+      sectionReferences,
+      ready,
       figureUrls,
       hasGithubToken,
       publishState,
@@ -717,6 +894,12 @@ export function HandbookProvider({ children }: { children: ReactNode }) {
       removeSection,
       removeTopic,
       removeAssay,
+      addAssay,
+      moveAssay,
+      addReferenceToAssay,
+      addSectionReference,
+      updateReferenceEntry,
+      removeReferenceEntry,
       replaceFigure,
       restoreFigure,
       reset,

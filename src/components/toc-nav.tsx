@@ -4,9 +4,10 @@ import type { ReactNode } from "react"
 import { CornerDownRight, Trash2 } from "lucide-react"
 import { assayHasSubstance, assayMark } from "@/data/content"
 import { EditableText } from "@/components/editable-text"
+import { AddEntryButton } from "@/components/reference-entries"
 import { useHandbook } from "@/lib/handbook-store"
 
-function scrollToId(id: string, onNavigate?: () => void) {
+export function scrollToId(id: string, onNavigate?: () => void) {
   const target = document.getElementById(id)
   if (target) {
     const header = document.querySelector("header")
@@ -55,6 +56,8 @@ function TocRow({
   onTitleChange,
   onNavigate,
   onRemove,
+  removeInReadMode = false,
+  emptyLabel,
   numberClassName,
   titleClassName,
   rowClassName,
@@ -68,22 +71,37 @@ function TocRow({
   onTitleChange: (value: string) => void
   onNavigate?: () => void
   onRemove?: () => void
+  removeInReadMode?: boolean
+  emptyLabel?: string
   numberClassName?: string
   titleClassName?: string
   rowClassName?: string
 }) {
   const { editMode } = useHandbook()
   if (!editMode) {
+    const label = title.trim() || emptyLabel || title
     return (
-      <JumpButton id={id} onNavigate={onNavigate} className={rowClassName}>
-        {showNumber ? (
-          <>
-            {number}
-            {suffix}
-          </>
+      <div className="flex items-start gap-1">
+        <JumpButton id={id} onNavigate={onNavigate} className={`${rowClassName ?? ""} min-w-0 flex-1`}>
+          {showNumber ? (
+            <>
+              {number}
+              {suffix}
+            </>
+          ) : null}
+          {label}
+        </JumpButton>
+        {onRemove && removeInReadMode ? (
+          <button
+            type="button"
+            onClick={onRemove}
+            className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded text-stone-400 hover:bg-red-50 hover:text-red-700"
+            aria-label={`删除${label}`}
+          >
+            <Trash2 className="size-3.5" />
+          </button>
         ) : null}
-        {title}
-      </JumpButton>
+      </div>
     )
   }
   return (
@@ -139,11 +157,15 @@ export function TocNav({ onNavigate }: { onNavigate?: () => void }) {
     removeSection,
     removeTopic,
     removeAssay,
+    addAssay,
     editMode,
   } = useHandbook()
 
   return (
     <nav className="space-y-5 text-sm">
+      <p className="text-xs leading-5 text-stone-500">
+        添加评价项目会同时出现在目录和正文。刷新后仍留在这个浏览器。
+      </p>
       {categories.map((category) => (
         <div key={category.id}>
           <TocRow
@@ -234,12 +256,17 @@ export function TocNav({ onNavigate }: { onNavigate?: () => void }) {
                                     topicId: topic.id,
                                     assayId: assay.id,
                                   },
-                                  (current) => ({ ...current, title })
+                                  (current) => ({
+                                    ...current,
+                                    title,
+                                    ...(current.userAdded ? { evaluation: title } : {}),
+                                  })
                                 )
                               }
                               onNavigate={onNavigate}
                               onRemove={() => {
-                                if (window.confirm(`删除「${assayMark(assay, assayIndex)}${assay.title || "空白"}」？`)) {
+                                const name = assay.title.trim() || "未命名评价项目"
+                                if (window.confirm(`删除「${name}」？目录和正文会一起去掉。`)) {
                                   removeAssay({
                                     categoryId: category.id,
                                     sectionId: section.id,
@@ -248,6 +275,8 @@ export function TocNav({ onNavigate }: { onNavigate?: () => void }) {
                                   })
                                 }
                               }}
+                              removeInReadMode
+                              emptyLabel="未命名评价项目"
                               numberClassName="w-10 shrink-0 text-stone-500"
                               titleClassName="flex-1 text-[13px] leading-5 text-stone-500"
                               rowClassName="block w-full text-left text-[13px] leading-5 text-stone-500 hover:text-stone-800 hover:underline"
@@ -255,6 +284,15 @@ export function TocNav({ onNavigate }: { onNavigate?: () => void }) {
                           </li>
                         ))}
                       </ul>
+                      <AddEntryButton
+                        onClick={() => {
+                          const id = addAssay(category.id, section.id, topic.id)
+                          onNavigate?.()
+                          window.setTimeout(() => scrollToId(id), 0)
+                        }}
+                      >
+                        添加评价项目
+                      </AddEntryButton>
                     </li>
                   ))}
                 </ul>
